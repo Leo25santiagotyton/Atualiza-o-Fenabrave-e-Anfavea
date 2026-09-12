@@ -23,5 +23,55 @@
         "href": "https://www.fenabrave.org.br/portalv2/Noticia/17484"
       }
     ]
+  },
+  "NADA Market Beat (EUA - vendas mensais)": {
+    "hash": "10df4658bbf3c34a2f37375bf366ffcdec472cc4eb0e73cfe16e66c77b743529",
+    "items": [
+      {
+        "text": "NADA Market Beat",
+        "href": "https://www.nada.org/index.php/nada/market-beat"
+      },
+      {
+        "text": "NADA Market Beat",
+        "href": "https://www.nada.org/nada/market-beat"
+      },
+      {
+        "text": "September 4, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle Sales SAAR Hits 16.8 Million Units in August 2026",
+        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-saar-hits-168-million-units-august"
+      },
+      {
+        "text": "July 31, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle SAAR Hits 16.3 Million Units in July 2026",
+        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-saar-hits-163-million-units-july-2026"
+      },
+      {
+        "text": "June 30, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle Sales Hit 16.5 Million Unit SAAR in June 2026",
+        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-hit-165-million-unit-saar-june-2026"
+      }
+    ]
+  },
+  "Alliance for Automotive Innovation - Market Reports (EUA)": {
+    "hash": "ef2c1331eb24edbaf3a0443cad24286f037f27dd33c1cd560f87c7aead43db73",
+    "items": [
+      {
+        "text": "Market Reports",
+        "href": "https://www.autosinnovate.org/resources/market-reports"
+      },
+      {
+        "text": "Prior Economic Impact Reports",
+        "href": "https://www.autosinnovate.org/EconomicImpactReport"
+      },
+      {
+        "text": "view the report",
+        "href": "https://www.autosinnovate.org/resources/market-reports/data-driven"
+      },
+      {
+        "text": "Papers ReportsSeptember 4, 2026Reading the Meter: State of the Industry Report | 9-4-2026",
+        "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-9-4-2026"
+      },
+      {
+        "text": "Papers ReportsAugust 25, 2026Reading the Meter: State of the Industry Report | 8-25-2026",
+        "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-8-25-2026"
+      }
+    ]
   }
 }
