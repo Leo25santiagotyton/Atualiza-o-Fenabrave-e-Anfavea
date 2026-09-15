@@ -25,12 +25,8 @@
     ]
   },
   "NADA Market Beat (EUA - vendas mensais)": {
-    "hash": "10df4658bbf3c34a2f37375bf366ffcdec472cc4eb0e73cfe16e66c77b743529",
+    "hash": "11defaed6105d1a2c0731d65d974e776402cee9e5c361f8f7ca9b8653018a4cd",
     "items": [
-      {
-        "text": "NADA Market Beat",
-        "href": "https://www.nada.org/index.php/nada/market-beat"
-      },
       {
         "text": "NADA Market Beat",
         "href": "https://www.nada.org/nada/market-beat"
@@ -46,6 +42,10 @@
       {
         "text": "June 30, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle Sales Hit 16.5 Million Unit SAAR in June 2026",
         "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-hit-165-million-unit-saar-june-2026"
+      },
+      {
+        "text": "May 31, 2026NADA Market BeatNADA Market Beat: New Light Vehicle SAAR Hits 16.1 Million in May",
+        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-saar-hits-161-million-may"
       }
     ]
   },
