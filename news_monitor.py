@@ -248,5 +248,31 @@ def main():
     save_state(state)
 
 
+def send_test():
+    """Envia um e-mail de teste no formato do monitor, com as notícias
+    relevantes dos últimos 7 dias (sem alterar o news_state.json)."""
+    items = dedupe_by_title(fetch_news())
+    items.sort(key=lambda it: it["published"], reverse=True)
+    items = items[:10]
+    print(f"[TESTE] {len(items)} notícia(s) relevante(s) nos últimos {QUERY_WINDOW}.")
+    if not items:
+        items = [{
+            "title": "(Exemplo) OHI Group announces leadership transition at Omni Táxi Aéreo",
+            "link": "https://verticalmag.com/press-releases/ohi-group-announces-leadership-transition-at-omni-taxi-aereo/",
+            "source": "Vertical Mag - nenhuma notícia nova nos últimos 7 dias, este é só um exemplo",
+            "published": "",
+        }]
+    plain, html_body = build_email(items)
+    send_email(
+        subject="[Teste] Monitor de notícias OHI Group",
+        body="E-MAIL DE TESTE\n\n" + plain,
+        html_body="<p><b>E-MAIL DE TESTE</b></p>" + html_body,
+    )
+    print("[TESTE] E-mail de teste enviado com sucesso.")
+
+
 if __name__ == "__main__":
-    main()
+    if "--teste" in sys.argv:
+        send_test()
+    else:
+        main()
