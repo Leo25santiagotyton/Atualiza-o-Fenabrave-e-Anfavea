@@ -25,8 +25,12 @@
     ]
   },
   "NADA Market Beat (EUA - vendas mensais)": {
-    "hash": "11defaed6105d1a2c0731d65d974e776402cee9e5c361f8f7ca9b8653018a4cd",
+    "hash": "10df4658bbf3c34a2f37375bf366ffcdec472cc4eb0e73cfe16e66c77b743529",
     "items": [
+      {
+        "text": "NADA Market Beat",
+        "href": "https://www.nada.org/index.php/nada/market-beat"
+      },
       {
         "text": "NADA Market Beat",
         "href": "https://www.nada.org/nada/market-beat"
@@ -42,15 +46,11 @@
       {
         "text": "June 30, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle Sales Hit 16.5 Million Unit SAAR in June 2026",
         "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-hit-165-million-unit-saar-june-2026"
-      },
-      {
-        "text": "May 31, 2026NADA Market BeatNADA Market Beat: New Light Vehicle SAAR Hits 16.1 Million in May",
-        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-saar-hits-161-million-may"
       }
     ]
   },
   "Alliance for Automotive Innovation - Market Reports (EUA)": {
-    "hash": "057af35d3ef7b134f882622f09b3d394e703d61057cd82c9e1b75d4ca6b8fa5b",
+    "hash": "3e914dadf595f85edf891b69a828ab78259ab9ecad8fe83b7c2848d3470481ab",
     "items": [
       {
         "text": "Market Reports",
@@ -65,12 +65,12 @@
         "href": "https://www.autosinnovate.org/resources/market-reports/data-driven"
       },
       {
-        "text": "Papers ReportsSeptember 22, 2026Stay Connected: EV Monthly Recharge, September 2026",
-        "href": "https://www.autosinnovate.org/posts/papers-reports/stay-connected-9-2026"
+        "text": "Papers ReportsSeptember 28, 2026Reading the Meter: State of the Industry Report | 9-28-2026",
+        "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-9-28-2026"
       },
       {
-        "text": "Papers ReportsSeptember 18, 2026Get Connected: Electric Vehicle Quarterly Report 2026 (Q2)",
-        "href": "https://www.autosinnovate.org/posts/papers-reports/get-connected-ev-quarterly-report-q2-2026"
+        "text": "Papers ReportsSeptember 22, 2026Stay Connected: EV Monthly Recharge, September 2026",
+        "href": "https://www.autosinnovate.org/posts/papers-reports/stay-connected-9-2026"
       }
     ]
   }
