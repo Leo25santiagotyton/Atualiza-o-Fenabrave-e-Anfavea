@@ -15,6 +15,7 @@ import json
 import os
 import smtplib
 import sys
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
 
@@ -121,7 +122,7 @@ def hash_items(items):
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def send_email(subject: str, body: str):
+def send_email(subject: str, body: str, html_body: str = None):
     smtp_host = os.environ["SMTP_HOST"]
     smtp_port = int(os.environ.get("SMTP_PORT", "587"))
     smtp_user = os.environ["SMTP_USER"]
@@ -129,7 +130,12 @@ def send_email(subject: str, body: str):
     email_from = os.environ.get("EMAIL_FROM", smtp_user)
     email_to = os.environ["EMAIL_TO"]
 
-    msg = MIMEText(body, "plain", "utf-8")
+    if html_body:
+        msg = MIMEMultipart("alternative")
+        msg.attach(MIMEText(body, "plain", "utf-8"))
+        msg.attach(MIMEText(html_body, "html", "utf-8"))
+    else:
+        msg = MIMEText(body, "plain", "utf-8")
     msg["Subject"] = subject
     msg["From"] = email_from
     msg["To"] = email_to
