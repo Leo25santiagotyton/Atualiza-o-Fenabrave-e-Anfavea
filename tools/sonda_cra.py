@@ -4,45 +4,43 @@ import re
 
 import requests
 
-H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
-     "Accept": "application/json, text/plain, */*", "Origin": "https://data.anbima.com.br", "Referer": "https://data.anbima.com.br/"}
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36"
+H = {"User-Agent": UA, "Accept": "application/json, text/plain, */*", "Origin": "https://data.anbima.com.br", "Referer": "https://data.anbima.com.br/"}
 s = requests.Session()
 s.headers.update(H)
 
-r = s.get("https://data.anbima.com.br/certificado-de-recebiveis/CRA023000MC/caracteristicas", timeout=30)
-print("PAGE", r.status_code, len(r.content), dict(r.cookies))
-scripts = sorted(set(re.findall(r'src="(/_next/static/[^"]+\.js)"', r.text)))
-print("SCRIPTS", len(scripts))
-seen = set()
-for src in scripts:
-    js = s.get("https://data.anbima.com.br" + src, timeout=40).text
-    for pat in (r"web-bff", r"[Tt]oken", r"access_token", r"client_id", r"x-api", r"Authorization", r"recaptcha", r"TaxasCriCra", r"downloadExterno"):
-        for m in list(re.finditer(pat, js))[:12]:
-            frag = js[max(0, m.start() - 220):m.end() + 220].replace("\n", " ")
-            k = frag[180:260]
-            if k in seen:
-                continue
-            seen.add(k)
-            print(f"HIT[{pat}] {src.split('/')[-1]}: {frag}")
-
-for u in ["https://www.anbima.com.br/pt_br/informar/precos-e-indices/precos/taxas-de-cri-e-cra.htm",
-          "https://www.anbima.com.br/pt_br/informar/taxas-de-cri-e-cra.htm",
-          "https://www.anbima.com.br/informacoes/cri-cra/default.asp"]:
+r = s.get("https://data.anbima.com.br/certificado-de-recebiveis/CRA023000MC/caracteristicas", headers={"Accept": "text/html"}, timeout=30)
+print("PAGE", r.status_code, r.headers.get("content-type"))
+print(r.text[:5000])
+srcs = sorted(set(re.findall(r'(?:src|href)="([^"]+\.(?:js|json)[^"]*)"', r.text)))
+print("SRCS", srcs)
+for src in srcs:
+    u = src if src.startswith("http") else "https://data.anbima.com.br" + ("" if src.startswith("/") else "/") + src
     try:
-        r = requests.get(u, headers={"User-Agent": H["User-Agent"]}, timeout=30)
-        links = sorted(set(re.findall(r'(?:href|src|action)="([^"]*(?:cri|cra|CRI|CRA)[^"]*)"', r.text)))
-        print("WWW", u, r.status_code, len(r.content), links[:40])
+        js = s.get(u, timeout=40).text
     except Exception as e:
-        print("WWW", u, "ERRO", e)
+        print("JS ERRO", u, e)
+        continue
+    print("JS", u, len(js))
+    for pat in (r"web-bff", r"[Tt]oken", r"client_id", r"Authorization", r"recaptcha", r"access_token", r"x-api-key", r"apiKey"):
+        for m in list(re.finditer(pat, js))[:8]:
+            print(f"  HIT[{pat}]: {js[max(0, m.start() - 200):m.end() + 200]!r}")
+    for sub in sorted(set(re.findall(r'["\'](/?(?:assets|static|_next)/[^"\']+\.js)["\']', js)))[:60]:
+        u2 = "https://data.anbima.com.br/" + sub.lstrip("/")
+        try:
+            js2 = s.get(u2, timeout=40).text
+        except Exception:
+            continue
+        for pat in (r"web-bff", r"token", r"Authorization", r"recaptcha"):
+            for m in list(re.finditer(pat, js2))[:5]:
+                print(f"  SUB {sub} HIT[{pat}]: {js2[max(0, m.start() - 200):m.end() + 200]!r}")
 
-base = "https://data-api.prd.anbima.com.br"
-for path in ["/web-bff/v1/certificado-recebiveis?page=0&size=5",
-             "/web-bff/v1/certificado-recebiveis/CRA023000MC",
-             "/web-bff/v1/certificado-recebiveis/CRA023000MC/caracteristicas",
-             "/web-bff/v1/certificado-recebiveis/precos?page=0&size=5",
-             "/web-bff/v1/TaxasCriCraExport/downloadExterno"]:
-    try:
-        r = s.get(base + path, timeout=30)
-        print("API", path, r.status_code, r.headers.get("content-type"), r.text[:300].replace("\n", " "))
-    except Exception as e:
-        print("API", path, "ERRO", e)
+r = requests.get("https://www.anbima.com.br/pt_br/informar/taxas-de-cri-e-cra.htm", headers={"User-Agent": UA}, timeout=30)
+for m in re.finditer(r'(?:href|src|action|data-url)="([^"]+)"', r.text):
+    u = m.group(1)
+    if re.search(r"download|\.xls|\.csv|\.txt|iframe|cri|cra|CRI|CRA|merc-sec|arqs|informacoes", u) and "lumis" not in u:
+        print("LINK", u)
+for m in re.finditer(r"<iframe[^>]+>", r.text):
+    print("IFRAME", m.group(0)[:300])
+i = r.text.find("CRA")
+print("TRECHO", r.text[max(0, i - 1500):i + 3000] if i >= 0 else "sem CRA")
