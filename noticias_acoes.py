@@ -88,8 +88,8 @@ CATEGORIES = [
                    r"sucess[aã]o", r"deixa o cargo", r"assume (a|o) (presid|comando|cargo)"]),
     ("Regulatório / jurídico", 4, [r"\bcade\b", r"\bcvm\b", r"investiga", r"\bprocesso\b", r"\bmulta\b", r"\btcu\b",
                                    r"justica", r"liminar", r"\bstf\b", r"\bstj\b", r"receita federal", r"autua"]),
-    ("Analistas", 2, [r"recomenda", r"preco.?alvo", r"rebaix", r"\beleva\b", r"inicia cobertura", r"\bcompra\b.*(btg|xp|itau|bradesco|safra|goldman|jpmorgan|morgan|ubs|citi|santander|bofa)",
-                      r"(btg|xp|itau bba|bradesco bbi|safra|goldman|jpmorgan|morgan stanley|ubs|citi|santander|bofa)"]),
+    ("Analistas", 2, [r"recomenda", r"preco.?alvo", r"rebaix", r"\beleva\b", r"inicia cobertura", r"\bcompra\b.*\b(btg|xp|itau|bradesco|safra|goldman|jpmorgan|morgan|ubs|citi|santander|bofa)\b",
+                      r"\b(btg|xp|itau bba|bradesco bbi|safra|goldman|jpmorgan|morgan stanley|ubs|citi|santander|bofa)\b"]),
     ("Operacional", 2, [r"contrato", r"frota", r"concess[aã]o", r"licita", r"investimento de", r"expans[aã]o",
                         r"nova fabrica", r"demiss", r"greve", r"recall", r"parceria"]),
     ("Mercado", 1, [r"dispara", r"despenca", r"desaba", r"salta", r"derrete", r"maior alta", r"maior queda",
@@ -106,7 +106,7 @@ POSITIVE = [r"(corta|reduz|diminui) (a )?divida", r"desalavanc", r"\bsobe", r"\b
             r"aprova", r"recompra", r"dividend", r"\bjcp\b", r"melhora", r"recorde", r"upgrade", r"compra\b"]
 NEGATIVE = [r"\bcai\b", r"\bcaem\b", r"despenca", r"desaba", r"derrete", r"prejuizo", r"rebaix", r"\bcorta (?!(a )?divida)",
             r"investiga", r"\bmulta", r"renuncia", r"recuperac[aã]o judicial", r"piora", r"frustra", r"abaixo",
-            r"downgrade", r"queda", r"venda\b.*(btg|xp|itau|goldman|jpmorgan|ubs)"]
+            r"downgrade", r"queda(?! d(os|a) (juros|selic))", r"venda\b.*\b(btg|xp|itau|goldman|jpmorgan|ubs)\b"]
 
 MARKET = [("^BVSP", "Ibovespa", 0), ("BRL=X", "Dólar (R$)", 4)]
 
@@ -126,6 +126,41 @@ def mentions(company, title):
 def is_material(company, title):
     cat, score, _ = classify(title)
     return mentions(company, title) and bool(cat) and score >= 2
+
+
+STOPWORDS = {"sobre", "para", "com", "apos", "pela", "pelo", "mais", "veja", "data", "acoes", "milhoes", "bilhoes",
+             "anuncia", "confirma", "pagamento", "empresa", "companhia"}
+
+
+def tokens(title):
+    return {w for w in re.findall(r"[a-z0-9]+", norm(title))
+            if (len(w) > 3 or (w.isdigit() and len(w) >= 3)) and w not in STOPWORDS}
+
+
+def same_fact(a, b):
+    if a["company"] != b["company"]:
+        return False
+    ta, tb = tokens(a["title"]), tokens(b["title"])
+    if len(ta & tb) / max(1, len(ta | tb)) >= 0.3:
+        return True
+    # mesma categoria e mesmo valor citado (ex.: "R$ 421 milhões") é o mesmo fato
+    nums = {w for w in ta & tb if w.isdigit()}
+    return bool(nums) and a["category"] == b["category"]
+
+
+def dedupe(items):
+    """Junta manchetes da mesma empresa sobre o mesmo fato (fontes diferentes, redação parecida)."""
+    ranked = sorted(items, key=lambda i: (i["importance"] != "alta", -i["score"], i["published"]))
+    kept = []
+    for it in ranked:
+        dup = next((k for k in kept if same_fact(k, it)), None)
+        if dup:
+            dup.setdefault("alsoIn", [])
+            if it["source"] not in dup["alsoIn"] and it["source"] != dup["source"]:
+                dup["alsoIn"].append(it["source"])
+            continue
+        kept.append(it)
+    return kept
 
 
 def classify(title):
@@ -230,7 +265,7 @@ def build_email(edition, now, new_items, market):
           <span style="margin-left:4px;color:{tone_color[i['tone']]};font-size:11px;font-weight:700">{tone_arrow[i['tone']]} {i['tone']}</span>
         </div>
         <a href="{html.escape(i['link'])}" style="color:#1f2328;text-decoration:none;font-size:15px;line-height:1.35">{html.escape(i['title'])}</a>
-        <div style="font-size:12px;color:#5d6570;margin-top:2px">{html.escape(i['source'])}</div>
+        <div style="font-size:12px;color:#5d6570;margin-top:2px">{html.escape(i['source'])}{f" · também em {len(i['alsoIn'])} outra(s) fonte(s)" if i.get('alsoIn') else ""}</div>
       </td></tr>"""
 
     body_items = "".join(item_html(i) for i in new_items) if new_items else (
@@ -321,6 +356,7 @@ def main():
         print("[ERRO] Nenhuma busca de notícias funcionou.")
         sys.exit(1)
 
+    found = {i["id"]: i for i in dedupe(list(found.values()))}
     fresh = [i for i in found.values() if datetime.fromisoformat(i["published"]) >= since]
     # alta relevância primeiro; dentro de cada grupo, mais recentes primeiro
     new_items = sorted((i for i in fresh if i["id"] not in state["seen"]),
@@ -339,9 +375,13 @@ def main():
     # revalida o histórico com as regras atuais (remove o que deixou de passar no filtro)
     by_name = {c["name"]: c for c in COMPANIES}
     old = [i for i in old if i.get("company") in by_name and is_material(by_name[i["company"]], i["title"])]
+    for i in old:
+        cat, score, cats = classify(i["title"])
+        i.update(category=cat, categories=cats, score=score, tone=tone_of(i["title"]),
+                 importance="alta" if score >= 4 else "média")
     merged = {i["id"]: i for i in old}
     merged.update({i["id"]: i for i in found.values()})
-    items = sorted(merged.values(), key=lambda i: i["published"], reverse=True)[:KEEP_ITEMS]
+    items = sorted(dedupe(list(merged.values())), key=lambda i: i["published"], reverse=True)[:KEEP_ITEMS]
     NEWS_FILE.write_text(json.dumps({
         "updatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "edition": edition, "market": market, "items": items,
