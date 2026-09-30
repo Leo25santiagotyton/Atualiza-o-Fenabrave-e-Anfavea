@@ -170,7 +170,7 @@ def interp(points, x):
     return points[-1][1]
 
 
-def swap_ipca(rate, duration_du, ntnb_ref, tit, di, ettj=None):
+def swap_ipca(rate, duration_du, ntnb_ref, tit, di, ettj=None, b3=None):
     """(NTN-B + equivalente em %, CDI + equivalente em %) para um papel IPCA + rate."""
     if rate is None or duration_du is None or not tit or not tit["ntnb"]:
         return None, None
@@ -183,13 +183,23 @@ def swap_ipca(rate, duration_du, ntnb_ref, tit, di, ettj=None):
         ref = interp(ntnb_curve, duration_du)
     spread_ntnb = ((1 + rate / 100) / (1 + ref / 100) - 1) * 100 if ref is not None else None
 
-    return spread_ntnb, cdi_equivalente(rate, duration_du, tit, di, ettj)
+    return spread_ntnb, cdi_equivalente(rate, duration_du, tit, di, ettj, b3)
 
 
-def cdi_equivalente(rate, duration_du, tit=None, di=None, ettj=None):
-    """CDI + equivalente (%) de uma taxa IPCA + rate com duration em dias úteis."""
+def cdi_equivalente(rate, duration_du, tit=None, di=None, ettj=None, b3=None):
+    """CDI + equivalente (%) de uma taxa IPCA + rate com duration em dias úteis.
+
+    Preferência: swap DI x IPCA da B3 (curvas PRE e DIC do TaxaSwap), que é o CDI + de mercado;
+    na falta dele, a ETTJ ANBIMA (que torna o CDI + praticamente igual ao NTN-B +)."""
     if rate is None or duration_du is None:
         return None
+    if b3 and b3.get("PRE") and b3.get("DIC"):
+        pre = interp(b3["PRE"], duration_du)
+        cupom = interp(b3["DIC"], duration_du)
+        if pre is not None and cupom is not None:
+            infl = (1 + pre / 100) / (1 + cupom / 100) - 1
+            nominal = (1 + rate / 100) * (1 + infl) - 1
+            return ((1 + nominal) / (1 + pre / 100) - 1) * 100
     if ettj:
         infl = interp([(e[0], e[3]) for e in ettj], duration_du)
         pre = interp([(e[0], e[2]) for e in ettj], duration_du)
