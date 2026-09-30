@@ -20,6 +20,7 @@ Uso:
 
 import argparse
 import json
+import math
 import os
 import random
 import smtplib
@@ -79,13 +80,19 @@ def fetch_quote(session, ticker):
     points = [[t, round(c, 4)] for t, c in zip(ts, q.get("close") or []) if c is not None]
     opens = [o for o in (q.get("open") or []) if o is not None]
 
-    month = []
-    try:
-        m = fetch_chart(session, ticker, "1mo", "1d")
-        mq = (m.get("indicators", {}).get("quote") or [{}])[0]
-        month = [[t, round(c, 4)] for t, c in zip(m.get("timestamp") or [], mq.get("close") or []) if c is not None]
-    except Exception as e:
-        print(f"[AVISO] {e}")
+    def series(rng, interval):
+        try:
+            m = fetch_chart(session, ticker, rng, interval)
+            mq = (m.get("indicators", {}).get("quote") or [{}])[0]
+            return [[t, round(c, 2)] for t, c in zip(m.get("timestamp") or [], mq.get("close") or []) if c is not None]
+        except Exception as e:
+            print(f"[AVISO] {e}")
+            return []
+
+    # históricos para as abas do painel: 5 dias (15 min), 1 mês e 1 ano (diário)
+    week = series("5d", "15m")
+    month = series("1mo", "1d")
+    year = series("1y", "1d")
 
     return {
         "symbol": ticker,
@@ -98,7 +105,9 @@ def fetch_quote(session, ticker):
         "volume": meta.get("regularMarketVolume"),
         "marketTime": meta.get("regularMarketTime"),
         "points": points,
+        "week": week,
         "month": month,
+        "year": year,
     }
 
 
@@ -116,7 +125,9 @@ def demo_quote(ticker):
         "symbol": ticker, "name": f"{ticker} (simulado)", "price": price, "previousClose": prev,
         "open": points[0][1], "dayHigh": max(c for _, c in points), "dayLow": min(c for _, c in points),
         "volume": rnd.randint(500_000, 9_000_000), "marketTime": now, "points": points,
+        "week": [[now - (130 - i) * 900, round(prev * (1 + rnd.gauss(0, 0.01)), 2)] for i in range(130)],
         "month": [[now - (22 - i) * 86400, round(prev * (1 + rnd.gauss(0, 0.03)), 2)] for i in range(22)],
+        "year": [[now - (250 - i) * 86400, round(prev * (1 + 0.15 * math.sin(i / 30) + rnd.gauss(0, 0.02)), 2)] for i in range(250)],
     }
 
 
