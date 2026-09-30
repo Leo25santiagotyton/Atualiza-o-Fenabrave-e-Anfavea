@@ -47,3 +47,40 @@ def fetch_trades(session, d, d2=None, ativo=""):
             "puMin": _num(cells[6]), "puAvg": _num(cells[7]), "puMax": _num(cells[8]), "pctCurve": _num(cells[9]),
         })
     return out
+
+
+REG_URL = ("https://www.debentures.com.br/exploreosnd/consultaadados/emissoesdedebentures/"
+           "caracteristicas_r.asp?tip_deb=publicas&op_exc=False")
+PUH_URL = ("https://www.debentures.com.br/exploreosnd/consultaadados/emissoesdedebentures/"
+           "puhistorico_r.asp?op_exc=False&ativo={ativo}&dt_ini={a:%d/%m/%Y}&dt_fim={b:%d/%m/%Y}")
+
+
+def fetch_registered(session):
+    """Todas as debêntures registradas no SND: [{code, issuer, status}]."""
+    r = session.get(REG_URL, timeout=90)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.content, "html.parser")
+    out = []
+    for tr in soup.find_all("tr"):
+        cells = [c.get_text(" ", strip=True) for c in tr.find_all("td")]
+        cells = [c for c in cells if c]
+        if len(cells) >= 3 and re.fullmatch(r"[A-Z]{3,5}[A-Z0-9]?\d{1,2}", cells[0]):
+            out.append({"code": cells[0], "issuer": _norm(cells[1]), "status": cells[2]})
+    return out
+
+
+def fetch_pu_historico(session, ativo, a, b):
+    """PU da curva do SND por dia: [[iso, pu]] em ordem crescente."""
+    r = session.get(PUH_URL.format(ativo=ativo, a=a, b=b), timeout=60)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.content, "html.parser")
+    out = []
+    for tr in soup.find_all("tr"):
+        cells = [c.get_text(" ", strip=True) for c in tr.find_all("td")]
+        cells = [c for c in cells if c]
+        if len(cells) >= 6 and re.fullmatch(r"\d{2}/\d{2}/\d{4}", cells[0]) and cells[1] == ativo:
+            dd, mm, yy = cells[0].split("/")
+            pu = _num(cells[5])
+            if pu is not None:
+                out.append([f"{yy}-{mm}-{dd}", pu])
+    return sorted(out)

@@ -24,8 +24,8 @@ from pathlib import Path
 import requests
 
 from alerta_acoes import BRT, HEADERS
-from curvas_anbima import fetch_di_pre, fetch_titulos, swap_ipca
-from negocios_snd import fetch_trades
+from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, swap_ipca
+from negocios_snd import fetch_pu_historico, fetch_registered, fetch_trades
 
 OUT_DIR = Path(__file__).parent / "alerts"
 DEB_FILE = OUT_DIR / "debentures.json"
@@ -235,7 +235,7 @@ def main():
     # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
     curves = db.get("curves", {})
     need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
-                   for s in p["series"] if len(s) < 8 or s[6] is None})
+                   for s in p["series"] if len(s) < 8 or s[6] is None or s[7] is None})
     for iso in need[-60:]:
         d = date.fromisoformat(iso)
         try:
@@ -243,14 +243,15 @@ def main():
         except Exception as e:
             print(f"[ERRO] títulos públicos {iso}: {e}")
             tit = None
+        di = []  # a curva DI x Pré da B3 saiu da página antiga; usa a ETTJ prefixada da ANBIMA
         try:
-            di = fetch_di_pre(session, d)
+            ettj = fetch_ettj(session, d)
         except Exception as e:
-            print(f"[ERRO] DI x Pré {iso}: {e}")
-            di = []
+            print(f"[ERRO] ETTJ {iso}: {e}")
+            ettj = []
         if not tit:
             continue
-        curves[iso] = {"ntnb": tit["ntnb"], "di1y": next((t for dc, t in di if dc >= 365), None) if di else None}
+        curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj}
         n = 0
         for p in db["papers"].values():
             if not is_ipca(p):
@@ -260,11 +261,53 @@ def main():
                     continue
                 while len(srow) < 8:
                     srow.append(None)
-                sp, cdi = swap_ipca(srow[1], srow[3], p.get("ntnbRef"), tit, di)
+                sp, cdi = swap_ipca(srow[1], srow[3], p.get("ntnbRef"), tit, di, ettj)
                 srow[6] = round(sp, 4) if sp is not None else None
                 srow[7] = round(cdi, 4) if cdi is not None else None
                 n += srow[6] is not None
-        print(f"[INFO] {iso}: {len(tit['ntnb'])} NTN-B, {len(tit['pre'])} pré, DI x Pré {len(di)} vértices; {n} papéis IPCA+ trocados.")
+        print(f"[INFO] {iso}: {len(tit['ntnb'])} NTN-B, {len(tit['pre'])} pré, ETTJ {len(ettj)} vértices; {n} papéis IPCA+ trocados.")
+
+    last_iso = sorted(have)[-1]
+    if last_iso not in curves or not curves[last_iso].get("ettj"):
+        try:
+            d = date.fromisoformat(last_iso)
+            tit = fetch_titulos(session, d)
+            curves[last_iso] = {"ntnb": tit["ntnb"] if tit else [], "ettj": fetch_ettj(session, d)}
+        except Exception as e:
+            print(f"[ERRO] curva do último dia: {e}")
+
+    # todos os papéis registrados dos emissores (SND), mesmo sem ANBIMA nem negócio
+    try:
+        regs = fetch_registered(session)
+    except Exception as e:
+        print(f"[ERRO] lista de emissões SND: {e}")
+        regs = []
+    n_new = 0
+    for rg in regs:
+        ticker, label = group_of({"name": rg["issuer"]})
+        if not ticker:
+            continue
+        if rg["code"] not in db["papers"]:
+            n_new += 1
+        pp = db["papers"].setdefault(rg["code"], {"code": rg["code"], "series": [], "trades": [], "index": "", "maturity": ""})
+        pp.setdefault("name", rg["issuer"])
+        pp["ticker"], pp["issuer"] = ticker, label
+        pp["status"] = rg["status"]
+    print(f"[INFO] SND: {len(regs)} emissões registradas; {n_new} papéis dos emissores sem ANBIMA/negócio adicionados.")
+
+    # PU da curva (SND) para papéis sem taxa ANBIMA: dá um gráfico mesmo sem mercado
+    start = (datetime.now(BRT).date() - timedelta(days=90))
+    for pp in db["papers"].values():
+        if pp.get("series") and any(x[1] is not None for x in pp["series"]):
+            continue
+        if not pp.get("ticker") or (pp.get("status") and not pp["status"].upper().startswith("REG")):
+            continue
+        try:
+            hist = fetch_pu_historico(session, pp["code"], start, datetime.now(BRT).date())
+        except Exception as e:
+            print(f"[AVISO] PU histórico {pp['code']}: {e}")
+            continue
+        pp["puCurve"] = hist[-90:]
 
     # favoritos sempre aparecem, mesmo sem taxa ANBIMA nem negócio no período
     for f in FAVORITES:
@@ -280,7 +323,7 @@ def main():
         p["series"] = [s for s in p["series"] if s[0] >= cutoff]
         p["trades"] = [t for t in p.get("trades", []) if t[0] >= cutoff]
         p["anbima"] = bool(p["series"])
-        if p["series"] or p["trades"] or p["code"] in FAVORITES:
+        if p["series"] or p["trades"] or p.get("puCurve") or p.get("status") or p["code"] in FAVORITES:
             papers.append(p)
     papers.sort(key=lambda p: (p.get("issuer") or "", p["code"]))
     dates = sorted(d for d in have if d >= cutoff)
@@ -292,6 +335,7 @@ def main():
         "dates": dates,
         "favoritesDefault": FAVORITES,
         "curves": {k: v for k, v in curves.items() if k >= cutoff},
+        "curveLatest": {"date": last_iso, **curves.get(last_iso, {})},
         "tradeDays": sorted(d for d in db.get("tradeDays", []) if d >= cutoff),
         "papers": papers,
     }, ensure_ascii=False))
