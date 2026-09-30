@@ -132,21 +132,15 @@ def group_of(row):
 
 
 def send_new_issues(codes, papers):
-    rows = "".join(
-        f"<tr><td style='padding:6px 10px;border-bottom:1px solid #e2e6eb'><b>{c}</b></td>"
-        f"<td style='padding:6px 10px;border-bottom:1px solid #e2e6eb'>{papers.get(c, {}).get('issuer') or ''}</td>"
-        f"<td style='padding:6px 10px;border-bottom:1px solid #e2e6eb;color:#5d6570;font-size:12px'>"
-        + " · ".join(f"{k}: {v}" for k, v in list((papers.get(c, {}).get('details') or {}).items())[:6]) + "</td></tr>"
-        for c in codes)
-    html_body = f"""<!doctype html><html><body style="font-family:Roboto,Arial,sans-serif;background:#f5f7fa;margin:0">
-  <div style="max-width:640px;margin:0 auto;padding:20px 12px">
-    <div style="background:#0f1216;color:#fff;border-radius:12px 12px 0 0;padding:14px 18px">
-      <div style="color:#f5a623;font-size:12px;font-weight:700;letter-spacing:.08em">NOVA EMISSÃO DE DEBÊNTURE</div>
-      <div style="font-size:18px;margin-top:4px">{len(codes)} papel(éis) novo(s) dos emissores acompanhados</div></div>
-    <div style="background:#fff;border:1px solid #e2e6eb;border-top:0;border-radius:0 0 12px 12px">
-      <table style="width:100%;border-collapse:collapse;font-size:13px">{rows}</table>
-      <div style="padding:14px 16px"><a href="{DASHBOARD_URL}" style="background:#1a5fd1;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px">Abrir aba Dívida</a></div>
-    </div></div></body></html>"""
+    from email_layout import MUTED, data_table, button, page, esc
+    rows = [[f"<b>{esc(c)}</b>", esc(papers.get(c, {}).get("issuer") or ""),
+             f'<span style="font-size:12px;color:{MUTED}">'
+             + esc(" · ".join(f"{k}: {v}" for k, v in list((papers.get(c, {}).get("details") or {}).items())[:6]) or "ficha ainda não disponível")
+             + "</span>"] for c in codes]
+    html_body = page("NOVA EMISSÃO DE DEBÊNTURE", f"{len(codes)} papel(éis) novo(s) dos emissores acompanhados",
+                     "Detectado na lista de emissões registradas do SND",
+                     data_table(["Papel", "Emissor", "Ficha"], rows, ["left", "left", "left"]) + button(DASHBOARD_URL, "Abrir aba Dívida"),
+                     "Aviso automático: o papel apareceu hoje na lista de debêntures registradas do SND (debentures.com.br).")
     text = "Nova emissão de debênture: " + ", ".join(codes) + f"\nPainel: {DASHBOARD_URL}"
     send_email(f"[Crédito] Nova emissão: {', '.join(codes)}", text, html_body)
     print("[INFO] e-mail de nova emissão enviado.")

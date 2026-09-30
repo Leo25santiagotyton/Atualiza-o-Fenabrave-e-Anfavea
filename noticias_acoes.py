@@ -235,62 +235,40 @@ def build_email(edition, now, new_items, market):
                + (f"{len(new_items)} notícias materiais" if new_items else "sem notícias materiais novas")
                + (f" ({len(alta)} de alta relevância)" if alta else ""))
 
-    tone_color = {"positivo": "#137333", "negativo": "#c5221f", "neutro": "#5d6570"}
-    tone_arrow = {"positivo": "▲", "negativo": "▼", "neutro": "■"}
+    from email_layout import UP, DOWN, INK, MUTED, FONT, data_table, section_title, row, button, page, esc, color_for
+    arrow = {"positivo": ("▲", UP), "negativo": ("▼", DOWN), "neutro": ("■", MUTED)}
 
-    def mk_row(m):
-        if m["pct"] is None:
-            return ""
-        up = m["pct"] >= 0
-        return (f'<td style="padding:6px 10px;white-space:nowrap;border-bottom:1px solid #2a2f36">'
-                f'<span style="color:#f5a623;font-weight:700">{m["symbol"]}</span> '
-                f'<span style="color:#e8eaed">{br(m["price"], m["decimals"]) if m["decimals"] else br(m["price"], 0)}</span> '
-                f'<span style="color:{"#5fd38d" if up else "#ff6b6b"}">{"+" if up else "−"}{br(abs(m["pct"]))}%</span></td>')
+    mk = [m for m in market if m["pct"] is not None]
+    mrows = [[f"<b>{esc(m['symbol'])}</b>",
+              f"<b>{br(m['price'], m['decimals']) if m['decimals'] else br(m['price'], 0)}</b>",
+              f'<b style="color:{color_for(m["pct"])}">{"+" if m["pct"] >= 0 else "−"}{br(abs(m["pct"]))}%</b>'] for m in mk]
+    # duas colunas lado a lado para caber em pouco espaço
+    half = (len(mrows) + 1) // 2
+    left, right = mrows[:half], mrows[half:] + [["", "", ""]] * (half - len(mrows[half:]))
+    market_tbl = data_table(["Ativo", "Último", "Dia", "Ativo", "Último", "Dia"],
+                            [l + r for l, r in zip(left, right)], ["left", "right", "right", "left", "right", "right"])
 
-    cells = [mk_row(m) for m in market if m["pct"] is not None]
-    grid = "".join("<tr>" + "".join(cells[i:i + 3]) + "</tr>" for i in range(0, len(cells), 3))
-
-    def item_html(i):
-        tag_bg = "#fdf1d8" if i["importance"] == "alta" else "#eef1f5"
-        tag_fg = "#8a5a00" if i["importance"] == "alta" else "#5d6570"
+    items_html = ""
+    for i in new_items:
+        sym, col = arrow[i["tone"]]
         when = datetime.fromisoformat(i["published"]).astimezone(BRT).strftime("%d/%m %H:%M")
-        return f"""
-      <tr><td style="padding:12px 16px;border-bottom:1px solid #e2e6eb">
-        <div style="font-size:12px;margin-bottom:3px">
-          <b style="color:#1a5fd1">{' · '.join(i['tickers'])}</b>
-          <span style="color:#5d6570"> · {i['company']} · {when}</span>
-          <span style="margin-left:6px;padding:1px 6px;border-radius:5px;background:{tag_bg};color:{tag_fg};font-weight:700;font-size:11px">{i['category']}</span>
-          <span style="margin-left:4px;color:{tone_color[i['tone']]};font-size:11px;font-weight:700">{tone_arrow[i['tone']]} {i['tone']}</span>
-        </div>
-        <a href="{html.escape(i['link'])}" style="color:#1f2328;text-decoration:none;font-size:15px;line-height:1.35">{html.escape(i['title'])}</a>
-        <div style="font-size:12px;color:#5d6570;margin-top:2px">{html.escape(i['source'])}{f" · também em {len(i['alsoIn'])} outra(s) fonte(s)" if i.get('alsoIn') else ""}</div>
-      </td></tr>"""
+        tag_bg = "#fde68a" if i["importance"] == "alta" else "#e5e7eb"
+        extra = f" · também em {len(i['alsoIn'])} outra(s) fonte(s)" if i.get("alsoIn") else ""
+        items_html += row(
+            f'<div style="font:12px {FONT};color:{MUTED}"><b style="color:#1d4ed8">{esc(" · ".join(i["tickers"]))}</b> · {esc(i["company"])} · {when} '
+            f'<span style="background:{tag_bg};color:{INK};padding:1px 6px;font-weight:700">{esc(i["category"])}</span> '
+            f'<b style="color:{col}">{sym} {esc(i["tone"])}</b></div>'
+            f'<div style="margin-top:4px"><a href="{esc(i["link"])}" style="font:600 15px {FONT};color:{INK};text-decoration:none">{esc(i["title"])}</a></div>'
+            f'<div style="font:12px {FONT};color:{MUTED};margin-top:2px">{esc(i["source"])}{extra}</div>')
+    if not new_items:
+        items_html = row(f'<span style="color:{MUTED}">Nenhuma notícia material nova desde o último boletim. O painel mostra as anteriores.</span>')
 
-    body_items = "".join(item_html(i) for i in new_items) if new_items else (
-        '<tr><td style="padding:18px 16px;color:#5d6570">Nenhuma notícia material nova desde o último boletim. '
-        'O painel mostra as notícias anteriores.</td></tr>')
-
-    html_body = f"""<!doctype html><html><body style="margin:0;background:#f5f7fa;font-family:Roboto,Arial,sans-serif;color:#1f2328">
-  <div style="max-width:680px;margin:0 auto;padding:20px 12px">
-    <div style="background:#0f1216;border-radius:12px 12px 0 0;padding:16px 18px">
-      <div style="color:#f5a623;font-size:12px;font-weight:700;letter-spacing:.08em">BOLETIM B3 · MOBILIDADE E LOGÍSTICA</div>
-      <div style="color:#ffffff;font-size:20px;margin-top:4px">Edição da {edition} · {hora}</div>
-      <table style="border-collapse:collapse;margin-top:10px;font-size:13px;font-family:'Roboto Mono',Consolas,monospace">{grid}</table>
-    </div>
-    <div style="background:#ffffff;border:1px solid #e2e6eb;border-top:0;border-radius:0 0 12px 12px;overflow:hidden">
-      <div style="padding:12px 16px;font-size:12px;color:#5d6570;border-bottom:1px solid #e2e6eb;text-transform:uppercase;letter-spacing:.06em">
-        Notícias materiais {'desde o último boletim' if new_items else ''}</div>
-      <table style="width:100%;border-collapse:collapse">{body_items}</table>
-      <div style="padding:14px 16px"><a href="{DASHBOARD_URL}" style="display:inline-block;padding:8px 16px;border-radius:8px;
-        background:#1a5fd1;color:#ffffff;text-decoration:none;font-size:13px;font-weight:500">Abrir painel com gráficos e notícias</a></div>
-    </div>
-    <p style="font-size:11px;color:#5d6570;line-height:1.5;margin:12px 4px 0">
-      Seleção automática de notícias do Google News que mencionam as empresas e tratam de resultado, M&amp;A, dívida e rating,
-      proventos, gestão, regulatório, recomendações de analistas ou contratos relevantes. O sinal ▲/▼ é uma leitura automática
-      do título, não uma recomendação. Cotações do Yahoo Finance com atraso de até 15 min.
-    </p>
-  </div>
-</body></html>"""
+    html_body = page("BOLETIM B3 · MOBILIDADE E LOGÍSTICA", f"Edição da {edition} · {hora}", "Mercado e notícias materiais desde o último boletim",
+                     section_title("Mercado") + market_tbl + section_title("Notícias materiais") + items_html
+                     + button(DASHBOARD_URL, "Abrir painel com gráficos e notícias"),
+                     "Seleção automática de notícias do Google News que mencionam as empresas e tratam de resultado, M&amp;A, dívida e rating, "
+                     "proventos, gestão, regulatório, analistas ou contratos relevantes. O sinal ▲/▼ é uma leitura automática do título, não uma "
+                     "recomendação. Cotações do Yahoo Finance com atraso de até 15 min.")
 
     lines = [f"Boletim B3 · edição da {edition} · {hora}", ""]
     lines += [f"{m['symbol']}: {'+' if m['pct'] >= 0 else '−'}{br(abs(m['pct']))}%" for m in market if m["pct"] is not None]

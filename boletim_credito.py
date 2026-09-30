@@ -67,37 +67,30 @@ def delta_txt(m):
 
 
 def table(title, rows, color):
+    from email_layout import MUTED, FONT, data_table, row, esc
+    head = row(f'<b style="font:700 14px {FONT};color:{color}">{esc(title)}</b>', "10px 16px 4px")
     if not rows:
-        return f'<div style="padding:10px 16px;color:#5d6570;font-size:13px">{html.escape(title)}: sem papéis com variação.</div>'
-    trs = "".join(f"""
-      <tr>
-        <td style="padding:7px 10px;border-bottom:1px solid #e2e6eb"><b>{html.escape(m['p']['code'])}</b>
-          <div style="font-size:11px;color:#5d6570">{html.escape(m['p'].get('issuer') or '')} · {html.escape(m['p'].get('index') or '')}</div></td>
-        <td style="padding:7px 10px;border-bottom:1px solid #e2e6eb;text-align:right">{rate_txt(m['p'], m['rate'])}</td>
-        <td style="padding:7px 10px;border-bottom:1px solid #e2e6eb;text-align:right;color:{color};font-weight:700">{delta_txt(m)}</td>
-        <td style="padding:7px 10px;border-bottom:1px solid #e2e6eb;text-align:right;font-size:12px">{'NTN-B + ' + br(m['ntnb']) + '%' if m['ntnb'] is not None else '—'}
-          <div style="color:#5d6570">{'CDI + ' + br(m['cdi']) + '%' if m['cdi'] is not None else ''}</div></td>
-        <td style="padding:7px 10px;border-bottom:1px solid #e2e6eb;text-align:right;font-size:12px">{'R$ ' + br(m['vol'] / 1e6) + ' mi' if m['vol'] else '—'}</td>
-      </tr>""" for m in rows)
-    return f"""
-    <div style="padding:10px 16px 2px;font-size:13px;font-weight:700;color:{color}">{html.escape(title)}</div>
-    <table style="width:100%;border-collapse:collapse;font-size:13px">
-      <tr style="color:#5d6570;font-size:11px"><th style="text-align:left;padding:4px 10px;font-weight:500">Papel</th>
-        <th style="text-align:right;padding:4px 10px;font-weight:500">Taxa ANBIMA</th><th style="text-align:right;padding:4px 10px;font-weight:500">No dia</th>
-        <th style="text-align:right;padding:4px 10px;font-weight:500">Swap</th><th style="text-align:right;padding:4px 10px;font-weight:500">Volume SND</th></tr>
-      {trs}
-    </table>"""
+        return head + row(f'<span style="color:{MUTED}">Sem papéis com variação.</span>')
+    body = [[f'<b>{esc(m["p"]["code"])}</b><div style="font-size:12px;color:{MUTED}">{esc(m["p"].get("issuer") or "")} · {esc(m["p"].get("index") or "")}</div>',
+             f'<b>{rate_txt(m["p"], m["rate"])}</b>',
+             f'<b style="color:{color}">{delta_txt(m)}</b>',
+             (f'NTN-B + <b>{br(m["ntnb"])}%</b>' if m["ntnb"] is not None else "—")
+             + (f'<div style="font-size:12px;color:{MUTED}">CDI + {br(m["cdi"])}%</div>' if m["cdi"] is not None else ""),
+             f'R$ {br(m["vol"] / 1e6)} mi' if m["vol"] else "—"] for m in rows]
+    return head + data_table(["Papel", "Taxa ANBIMA", "No dia", "Swap", "Volume SND"], body)
 
 
 def section(label, ms):
+    from email_layout import UP, DOWN, section_title
     closed = sorted([m for m in ms if m["bps"] < 0], key=lambda m: m["bps"])[:TOP]
     opened = sorted([m for m in ms if m["bps"] > 0], key=lambda m: -m["bps"])[:TOP]
-    body = table(f"Top {TOP} que mais fecharam (taxa caiu)", closed, "#137333") + table(f"Top {TOP} que mais abriram (taxa subiu)", opened, "#c5221f")
-    head = f"""<div style="padding:14px 16px 4px;border-top:1px solid #e2e6eb;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5d6570">{html.escape(label)} · {len(ms)} papéis com taxa</div>"""
+    body = (section_title(f"{label} · {len(ms)} papéis com taxa")
+            + table(f"Top {TOP} que mais fecharam (taxa caiu, papel valorizou)", closed, UP)
+            + table(f"Top {TOP} que mais abriram (taxa subiu, papel desvalorizou)", opened, DOWN))
     lines = [f"{label}:"]
     lines += [f"  fechou {m['p']['code']}: {rate_txt(m['p'], m['rate'])} ({delta_txt(m)})" for m in closed]
     lines += [f"  abriu  {m['p']['code']}: {rate_txt(m['p'], m['rate'])} ({delta_txt(m)})" for m in opened]
-    return head + body, "\n".join(lines), closed, opened
+    return body, "\n".join(lines), closed, opened
 
 
 def main():
@@ -121,26 +114,14 @@ def main():
     top_line = ", ".join(f"{m['p']['code']} {delta_txt(m)}" for m in (ac[:2] + ao[:2]))
     subject = f"[Crédito] Fechamento ANBIMA {dd} · {top_line}" if top_line else f"[Crédito] Fechamento ANBIMA {dd}"
 
-    miss_html = (f'<div style="padding:6px 16px;color:#5d6570;font-size:12px">Sem taxa ANBIMA no dia: {html.escape(", ".join(missing))}.</div>'
-                 if missing else "")
-    html_body = f"""<!doctype html><html><body style="margin:0;background:#f5f7fa;font-family:Roboto,Arial,sans-serif;color:#1f2328">
-  <div style="max-width:720px;margin:0 auto;padding:20px 12px">
-    <div style="background:#0f1216;border-radius:12px 12px 0 0;padding:16px 18px">
-      <div style="color:#f5a623;font-size:12px;font-weight:700;letter-spacing:.08em">CRÉDITO · DEBÊNTURES NO SECUNDÁRIO</div>
-      <div style="color:#ffffff;font-size:20px;margin-top:4px">Fechamento ANBIMA de {dd}</div>
-      <div style="color:#8b939c;font-size:12px;margin-top:4px">Variação da taxa indicativa contra o dia útil anterior. Fechar = taxa cai (papel valoriza); abrir = taxa sobe.</div>
-    </div>
-    <div style="background:#ffffff;border:1px solid #e2e6eb;border-top:0;border-radius:0 0 12px 12px;overflow:hidden">
-      {fav_html}{miss_html}{all_html}
-      <div style="padding:14px 16px"><a href="{DASHBOARD_URL}" style="display:inline-block;padding:8px 16px;border-radius:8px;
-        background:#1a5fd1;color:#ffffff;text-decoration:none;font-size:13px;font-weight:500">Abrir aba Dívida no painel</a></div>
-    </div>
-    <p style="font-size:11px;color:#5d6570;line-height:1.5;margin:12px 4px 0">
-      Fonte: taxas indicativas ANBIMA e negócios do SND. NTN-B + = (1 + taxa) / (1 + NTN-B de referência) − 1.
-      CDI + usa a inflação implícita e a curva prefixada da ETTJ ANBIMA (aproximação da curva DI).
-    </p>
-  </div>
-</body></html>"""
+    from email_layout import MUTED, row, button, page, esc
+    miss_html = row(f'<span style="color:{MUTED}">Favoritos sem taxa ANBIMA no dia: {esc(", ".join(missing))}.</span>') if missing else ""
+    html_body = page("CRÉDITO · DEBÊNTURES NO SECUNDÁRIO", f"Fechamento ANBIMA de {dd}",
+                     "Variação da taxa indicativa contra o dia útil anterior",
+                     fav_html + miss_html + all_html + button(DASHBOARD_URL, "Abrir aba Dívida no painel"),
+                     "Fonte: taxas indicativas ANBIMA e negócios do SND. Fechar = taxa cai (papel valoriza); abrir = taxa sobe. "
+                     "NTN-B + = (1 + taxa) / (1 + NTN-B de referência) − 1. CDI + usa a inflação implícita e a curva prefixada "
+                     "da ETTJ ANBIMA (aproximação da curva DI).")
     text = "\n\n".join([f"Fechamento ANBIMA {dd}", fav_txt, all_txt, f"Painel: {DASHBOARD_URL}"])
     print(subject)
     print(text)
