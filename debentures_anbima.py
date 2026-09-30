@@ -35,6 +35,7 @@ DEB_FILE = OUT_DIR / "debentures.json"
 URL = "https://www.anbima.com.br/informacoes/merc-sec-debentures/arqs/db{d:%y%m%d}.txt"
 KEEP_DAYS = 400
 FAVORITES = ["VAMO33", "VAMO34", "VAMO19"]
+B3_VERSION = 2  # mude para forçar o recálculo das curvas da B3 já gravadas
 
 # emissor (nome no arquivo, sem acento e em maiúsculas) -> ticker da ação do grupo
 ISSUERS = [
@@ -257,7 +258,7 @@ def main():
     curves = db.get("curves", {})
     need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
                    for s in p["series"] if len(s) < 8 or s[6] is None or s[7] is None
-                   or not (curves.get(s[0], {}).get("b3") or {}).get("PRE")})
+                   or curves.get(s[0], {}).get("b3v") != B3_VERSION})
     for iso in need[-60:]:
         d = date.fromisoformat(iso)
         try:
@@ -281,7 +282,7 @@ def main():
         if b3:
             print(f"[INFO] B3 {iso}: curvas {sorted(b3)}; PRE 252du={interp(b3.get('PRE', []), 252)} 756du={interp(b3.get('PRE', []), 756)}; "
                   f"DIC 252du={interp(b3.get('DIC', []), 252)} 756du={interp(b3.get('DIC', []), 756)}")
-        curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj, "b3": {k: b3[k] for k in ("PRE", "DIC") if k in b3}}
+        curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj, "b3": {k: b3[k] for k in ("PRE", "DIC") if k in b3}, "b3v": B3_VERSION}
         n = 0
         for p in db["papers"].values():
             if not is_ipca(p):
@@ -302,7 +303,7 @@ def main():
     for d in sorted(business_days_back(4)):
         iso = d.isoformat()
         cur = curves.get(iso) or {}
-        if cur.get("ntnb") and cur.get("ettj") and (cur.get("b3") or {}).get("PRE"):
+        if cur.get("ntnb") and cur.get("ettj") and cur.get("b3v") == B3_VERSION and (cur.get("b3") or {}).get("PRE"):
             continue
         try:
             tit = fetch_titulos(session, d)
@@ -312,12 +313,12 @@ def main():
             continue
         if tit and tit.get("ntnb") and ettj:
             b3 = (curves.get(iso) or {}).get("b3") or {}
-            if not b3:
+            if not b3 or (curves.get(iso) or {}).get("b3v") != B3_VERSION:
                 try:
                     b3 = {k: v for k, v in fetch_taxa_swap(session, d).items() if k in ("PRE", "DIC")}
                 except Exception as e:
                     print(f"[AVISO] TaxaSwap {iso}: {e}")
-            curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj, "b3": b3}
+            curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj, "b3": b3, "b3v": B3_VERSION}
             print(f"[INFO] curva {iso}: {len(tit['ntnb'])} NTN-B e {len(ettj)} vértices ETTJ.")
         else:
             print(f"[INFO] curva {iso}: ainda não publicada pela ANBIMA.")
