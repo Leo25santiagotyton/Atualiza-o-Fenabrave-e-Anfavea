@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotações B3 · Mobilidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff; --panel: #f6f8fb; --fg: #202124; --muted: #5f6368;
+    --line: #e3e6ea; --up: #137333; --up-bg: #e6f4ea; --down: #c5221f; --down-bg: #fce8e6;
+    --accent: #1a73e8; --sel: #e8f0fe;
+    --font: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #17191c; --panel: #1f2226; --fg: #e8eaed; --muted: #9aa0a6;
+      --line: #33373c; --up: #81c995; --up-bg: #1f3325; --down: #f28b82; --down-bg: #3b2322;
+      --accent: #8ab4f8; --sel: #26324a; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 var(--font); }
+  .num { font-variant-numeric: tabular-nums; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    padding: 14px 24px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 18px; font-weight: 500; margin: 0; }
+  .status { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 12px; flex-wrap: wrap; }
+  .pill { padding: 3px 10px; border-radius: 999px; font-weight: 500; font-size: 12px; background: var(--panel); }
+  .pill.open { background: var(--up-bg); color: var(--up); }
+  .pill.demo { background: var(--down-bg); color: var(--down); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--up); display: inline-block; margin-right: 6px; }
+  .dot.pulse { animation: pulse 1s ease-out; }
+  @keyframes pulse { from { box-shadow: 0 0 0 0 var(--up); } to { box-shadow: 0 0 0 8px transparent; } }
+
+  .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: calc(100vh - 57px); }
+  aside { border-right: 1px solid var(--line); padding: 8px 0; overflow-y: auto; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 10px 20px; cursor: pointer;
+    border: 0; background: none; width: 100%; text-align: left; color: inherit; font: inherit; border-left: 3px solid transparent; }
+  .row:hover { background: var(--panel); }
+  .row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .row.sel { background: var(--sel); border-left-color: var(--accent); }
+  .row .tk { font-weight: 700; }
+  .row .nm { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .px { text-align: right; font-weight: 500; }
+  .chg { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 12px; font-weight: 500; text-align: right; justify-self: end; }
+  .chg.up { background: var(--up-bg); color: var(--up); }
+  .chg.down { background: var(--down-bg); color: var(--down); }
+  .flash-up { animation: fu 1.2s; } .flash-down { animation: fd 1.2s; }
+  @keyframes fu { from { background: var(--up-bg); } } @keyframes fd { from { background: var(--down-bg); } }
+
+  main { padding: 24px 32px; min-width: 0; }
+  .crumb { color: var(--muted); font-size: 13px; }
+  .name { font-size: 22px; margin: 2px 0 10px; font-weight: 400; }
+  .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .price .big { font-size: 40px; font-weight: 400; letter-spacing: -0.5px; }
+  .price .cur { color: var(--muted); font-size: 18px; }
+  .delta { font-size: 16px; font-weight: 500; margin-top: 2px; }
+  .delta.up { color: var(--up); } .delta.down { color: var(--down); }
+  .delta small { color: var(--muted); font-weight: 400; }
+  .when { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+  .tabs { display: flex; gap: 4px; margin: 18px 0 6px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .tabs button { border: 0; background: none; color: var(--muted); font: 500 13px var(--font); padding: 8px 14px;
+    cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  .tabs button:focus-visible { outline: 2px solid var(--accent); }
+  .chart-wrap { position: relative; height: 340px; }
+  .chart-msg { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0 32px; margin-top: 18px; }
+  .stat { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .stat span:first-child { color: var(--muted); }
+
+  .err { color: var(--down); font-size: 12px; }
+
+  /* visão "Todos": grade compacta com o gráfico de cada ação */
+  .views { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
+  .views button { border: 0; background: none; color: var(--muted); font: 500 12px var(--font); padding: 4px 12px;
+    border-radius: 999px; cursor: pointer; }
+  .views button[aria-pressed="true"] { background: var(--sel); color: var(--accent); }
+  .views button:focus-visible { outline: 2px solid var(--accent); }
+  #gridView { padding: 12px 24px 24px; }
+  #gridView .tabs { margin: 0 0 14px; }
+  .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .mini { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 6px; cursor: pointer; background: var(--bg);
+    color: inherit; font: inherit; text-align: left; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .mini:hover { border-color: var(--accent); }
+  .mini:focus-visible { outline: 2px solid var(--accent); }
+  .mini .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .mini .tk { font-weight: 700; }
+  .mini .nm { color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .mini .p { font-size: 18px; }
+  .mini .ch { font-size: 12px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+  .mini .ch.up { color: var(--up); } .mini .ch.down { color: var(--down); }
+  .mini .box { position: relative; height: 120px; margin-top: 4px; }
+  .mini .msg { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+  .back { border: 0; background: none; color: var(--accent); font: 500 13px var(--font); cursor: pointer; padding: 0; margin-bottom: 8px; }
+
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 0; }
+    .row { min-width: 150px; border-left: 0; border-bottom: 3px solid transparent; }
+    .row.sel { border-bottom-color: var(--accent); }
+    main { padding: 18px 16px; }
+    #gridView { padding: 12px 16px 20px; }
+    .mini-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mini { padding: 8px 8px 4px; }
+    .mini .box { height: 90px; }
+    .mini .p { font-size: 15px; }
+    header { padding: 12px 16px; }
+    .price .big { font-size: 32px; }
+    .chart-wrap { height: 260px; }
+  }
+  @media (max-width: 360px) {
+    .mini-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Cotações B3 · Mobilidade e Logística</h1>
+  <div class="status">
+    <span class="views" role="group" aria-label="Visualização">
+      <button id="vAll" aria-pressed="true">Todos</button><button id="vOne" aria-pressed="false">Detalhe</button>
+    </span>
+    <span id="demoPill" class="pill demo" hidden>Dados simulados</span>
+    <span id="mkt" class="pill">—</span>
+    <span><i id="dot" class="dot"></i><span id="updated">Carregando…</span></span>
+  </div>
+</header>
+<section id="gridView">
+  <div class="tabs" role="tablist" id="gtabs">
+      <button role="tab" data-r="1d" aria-selected="true">1D</button>
+      <button role="tab" data-r="5d">5D</button>
+      <button role="tab" data-r="1mo">1M</button>
+      <button role="tab" data-r="6mo">6M</button>
+      <button role="tab" data-r="ytd">No ano</button>
+      <button role="tab" data-r="1y">1A</button>
+      <button role="tab" data-r="5y">5A</button>
+  </div>
+  <div class="mini-grid" id="mini"></div>
+</section>
+<div class="layout" id="detailView" hidden>
+  <aside id="list" aria-label="Lista de ações"></aside>
+  <main>
+    <button class="back" id="back">← Ver todos</button>
+    <div class="crumb" id="crumb">BVMF</div>
+    <div class="name" id="name">—</div>
+    <div class="price"><span class="big num" id="price">—</span><span class="cur">BRL</span></div>
+    <div class="delta num" id="delta"></div>
+    <div class="when" id="when"></div>
+
+    <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-r="1d" aria-selected="true">1D</button>
+      <button role="tab" data-r="5d">5D</button>
+      <button role="tab" data-r="1mo">1M</button>
+      <button role="tab" data-r="6mo">6M</button>
+      <button role="tab" data-r="ytd">No ano</button>
+      <button role="tab" data-r="1y">1A</button>
+      <button role="tab" data-r="5y">5A</button>
+    </div>
+    <div class="chart-wrap"><canvas id="chart"></canvas><div class="chart-msg" id="chartMsg" hidden></div></div>
+
+    <div class="stats" id="stats"></div>
+  </main>
+</div>
+
+<script>
+const TICKERS = ["MOVI3","SIMH3","VAMO3","JSLG3","AMOB3","RAPT3","RAPT4","RENT3","FRAS3","ARML3","MILL3","PRNR3"];
+const QUOTE_EVERY = 15000;
+const RANGE_LABEL = { "1d": "hoje", "5d": "5 dias", "1mo": "1 mês", "6mo": "6 meses", ytd: "no ano", "1y": "1 ano", "5y": "5 anos" };
+
+const brl = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const pct = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const compact = new Intl.NumberFormat("pt-BR", { notation: "compact", maximumFractionDigits: 2 });
+const tz = "America/Sao_Paulo";
+const fmtTime = (t, opts) => new Intl.DateTimeFormat("pt-BR", { timeZone: tz, ...opts }).format(new Date(t * 1000));
+const f = v => v == null ? "—" : brl.format(v);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+let quotes = {};
+let selected = (() => { try { return localStorage.getItem("b3sel") || "MOVI3"; } catch { return "MOVI3"; } })();
+if (!TICKERS.includes(selected)) selected = "MOVI3";
+let range = "1d";
+let chart;
+let chartReq = 0;
+
+function change(price, prev) {
+  if (price == null || !prev) return null;
+  const d = price - prev;
+  return { d, p: d / prev * 100, up: d >= 0 };
+}
+const sign = x => (x > 0 ? "+" : x < 0 ? "−" : "");
+const chgText = c => `${sign(c.d)}${pct.format(Math.abs(c.p))}%`;
+
+function marketState() {
+  const now = new Date();
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: tz, weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false })
+    .formatToParts(now).map(p => [p.type, p.value]));
+  const mins = (+parts.hour % 24) * 60 + +parts.minute;
+  const weekend = parts.weekday === "Sat" || parts.weekday === "Sun";
+  const open = !weekend && mins >= 600 && mins < 1020; // 10:00–17:00 BRT
+  const el = document.getElementById("mkt");
+  el.textContent = open ? "Pregão aberto" : "Pregão fechado";
+  el.className = "pill" + (open ? " open" : "");
+  return open;
+}
+
+/* ---------- lista lateral e grade "Todos" ---------- */
+function buildShell() {
+  const list = document.getElementById("list"), mini = document.getElementById("mini");
+  for (const t of TICKERS) {
+    const r = document.createElement("button");
+    r.className = "row"; r.id = "row-" + t; r.dataset.t = t;
+    r.innerHTML = `<span class="tk">${t}</span><span class="px num">—</span><span class="nm">&nbsp;</span><span class="chg num">—</span>`;
+    r.onclick = () => select(t);
+    list.appendChild(r);
+
+    const c = document.createElement("button");
+    c.className = "mini"; c.id = "mini-" + t; c.dataset.t = t;
+    c.innerHTML = `<div class="top"><span class="tk">${t}</span><span class="p num">—</span></div>
+      <div class="top"><span class="nm">&nbsp;</span><span class="ch num"></span></div>
+      <div class="box"><canvas></canvas><div class="msg">Carregando…</div></div>`;
+    c.onclick = () => { setView("one"); select(t); window.scrollTo({ top: 0 }); };
+    mini.appendChild(c);
+  }
+}
+
+function paintRow(q) {
+  const row = document.getElementById("row-" + q.symbol);
+  const old = quotes[q.symbol];
+  if (q.error) { row.querySelector(".nm").innerHTML = `<span class="err">sem dados</span>`; return; }
+  const c = change(q.price, q.previousClose);
+  row.querySelector(".px").textContent = f(q.price);
+  row.querySelector(".nm").textContent = q.name;
+  const rc = row.querySelector(".chg");
+  rc.textContent = c ? chgText(c) : "—";
+  rc.className = "chg num" + (c ? (c.up ? " up" : " down") : "");
+  if (old && old.price != null && q.price !== old.price) {
+    const cls = q.price > old.price ? "flash-up" : "flash-down";
+    for (const el of [row, document.getElementById("mini-" + q.symbol)]) {
+      el.classList.remove("flash-up", "flash-down"); void el.offsetWidth; el.classList.add(cls);
+    }
+  }
+}
+
+let gridRange = "1d";
+const gridData = {};   // dados do período atual da grade, por ticker
+const miniCharts = {};
+
+function paintMini(t) {
+  const card = document.getElementById("mini-" + t);
+  const q = quotes[t], data = gridRange === "1d" ? q : gridData[t];
+  const msg = card.querySelector(".msg");
+  if (q) { card.querySelector(".p").textContent = f(q.price); card.querySelector(".nm").textContent = q.name; }
+  if (!data || data.error || !data.points?.length) {
+    msg.hidden = false; msg.textContent = data?.error ? "Sem dados" : "Carregando…";
+    if (miniCharts[t]) { miniCharts[t].destroy(); delete miniCharts[t]; }
+    card.querySelector(".ch").textContent = "";
+    return;
+  }
+  msg.hidden = true;
+  const pts = data.points;
+  const price = q?.price ?? pts[pts.length - 1][1];
+  const base = gridRange === "1d" ? data.previousClose : (data.previousClose ?? pts[0][1]);
+  const c = change(price, base);
+  const ch = card.querySelector(".ch");
+  ch.textContent = c ? `${sign(c.d)}${brl.format(Math.abs(c.d))} (${chgText(c)})` : "";
+  ch.className = "ch num" + (c ? (c.up ? " up" : " down") : "");
+  if (!window.Chart) return;
+
+  const color = css(c && !c.up ? "--down" : "--up");
+  const canvas = card.querySelector("canvas"), ctx = canvas.getContext("2d");
+  const grad = ctx.createLinearGradient(0, 0, 0, 120);
+  grad.addColorStop(0, color + "33"); grad.addColorStop(1, color + "00");
+  const labelOpts = gridRange === "1d" ? { hour: "2-digit", minute: "2-digit" }
+    : ["5d", "1mo"].includes(gridRange) ? { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }
+    : { day: "2-digit", month: "short", year: "numeric" };
+  const values = pts.map(p => p[1]);
+  const datasets = [{ data: values, borderColor: color, backgroundColor: grad, fill: true, borderWidth: 1.5,
+    pointRadius: 0, pointHoverRadius: 3, pointHoverBackgroundColor: color, tension: 0.1 }];
+  if (gridRange === "1d" && base) datasets.push({ data: values.map(() => base), borderColor: css("--muted"),
+    borderDash: [2, 3], borderWidth: 1, pointRadius: 0, pointHoverRadius: 0, fill: false });
+  const muted = css("--muted");
+  const cfg = {
+    type: "line",
+    data: { labels: pts.map(p => fmtTime(p[0], labelOpts)), datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: { legend: { display: false },
+        tooltip: { filter: i => i.datasetIndex === 0, displayColors: false, titleFont: { size: 11 }, bodyFont: { size: 11 },
+          callbacks: { label: i => `${brl.format(i.parsed.y)} BRL` } } },
+      scales: {
+        x: { display: false },
+        y: { position: "right", grid: { color: css("--line") }, border: { display: false },
+          ticks: { color: muted, font: { size: 10 }, maxTicksLimit: 3, callback: v => brl.format(v) } },
+      },
+    },
+  };
+  if (miniCharts[t]) { miniCharts[t].data = cfg.data; miniCharts[t].options = cfg.options; miniCharts[t].update("none"); }
+  else miniCharts[t] = new Chart(ctx, cfg);
+}
+
+let gridReq = 0;
+async function loadGrid() {
+  if (gridRange === "1d") { TICKERS.forEach(paintMini); return; }
+  const id = ++gridReq, rng = gridRange;
+  await Promise.all(TICKERS.map(async t => {
+    try {
+      const r = await fetch(`/api/chart?symbol=${t}&range=${rng}`, { cache: "no-store" });
+      const j = await r.json();
+      if (id !== gridReq) return;
+      gridData[t] = j;
+    } catch { if (id === gridReq) gridData[t] = { error: "falha" }; }
+    if (id === gridReq) paintMini(t);
+  }));
+}
+
+let view = (() => { try { return localStorage.getItem("b3view") || "all"; } catch { return "all"; } })();
+function setView(v) {
+  view = v;
+  try { localStorage.setItem("b3view", v); } catch {}
+  document.getElementById("gridView").hidden = v !== "all";
+  document.getElementById("detailView").hidden = v === "all";
+  document.getElementById("vAll").setAttribute("aria-pressed", v === "all");
+  document.getElementById("vOne").setAttribute("aria-pressed", v !== "all");
+  if (v === "all") TICKERS.forEach(paintMini);
+  else if (chart) chart.resize();
+}
+
+/* ---------- painel principal ---------- */
+function paintHeader(q, rangeData) {
+  if (!q || q.error) return;
+  document.getElementById("crumb").textContent = `BVMF: ${q.symbol}`;
+  document.getElementById("name").textContent = q.name;
+  document.getElementById("price").textContent = f(q.price);
+
+  // no 1D a variação é contra o fechamento anterior; nos demais, contra o início do período
+  let base = q.previousClose;
+  if (range !== "1d" && rangeData && rangeData.points?.length) base = rangeData.previousClose ?? rangeData.points[0][1];
+  const c = change(q.price, base);
+  const d = document.getElementById("delta");
+  if (c) {
+    d.className = "delta num " + (c.up ? "up" : "down");
+    d.innerHTML = `${sign(c.d)}${brl.format(Math.abs(c.d))} (${pct.format(Math.abs(c.p))}%) ${c.up ? "▲" : "▼"} <small>${RANGE_LABEL[range]}</small>`;
+  } else d.textContent = "";
+  document.getElementById("when").textContent = q.marketTime
+    ? `${fmtTime(q.marketTime, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })} BRT · Dados com atraso de até 15 min`
+    : "";
+
+  const stats = [
+    ["Abertura", f(q.open)], ["Máxima", f(q.dayHigh)], ["Mínima", f(q.dayLow)],
+    ["Fech. anterior", f(q.previousClose)], ["Volume", q.volume ? compact.format(q.volume) : "—"],
+    ["Máx. 52 sem.", f(q.high52)], ["Mín. 52 sem.", f(q.low52)],
+  ];
+  document.getElementById("stats").innerHTML = stats.map(([k, v]) => `<div class="stat"><span>${k}</span><span class="num">${v}</span></div>`).join("");
+}
+
+function drawChart(data) {
+  const msg = document.getElementById("chartMsg");
+  if (!window.Chart) { msg.hidden = false; msg.textContent = "Não foi possível carregar a biblioteca de gráficos."; return; }
+  if (!data || data.error || !data.points?.length) {
+    msg.hidden = false; msg.textContent = data?.error ? "Sem dados para este período." : "Carregando…";
+    if (chart) chart.data.datasets.forEach(ds => ds.data = []), chart.update("none");
+    return;
+  }
+  msg.hidden = true;
+  const pts = data.points;
+  const base = range === "1d" ? data.previousClose : (data.previousClose ?? pts[0][1]);
+  const up = pts[pts.length - 1][1] >= (base ?? pts[0][1]);
+  const color = css(up ? "--up" : "--down");
+  const intraday = range === "1d" || range === "5d";
+  const labelOpts = range === "1d" ? { hour: "2-digit", minute: "2-digit" }
+    : intraday || range === "1mo" ? { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }
+    : { day: "2-digit", month: "short", year: "numeric" };
+  const labels = pts.map(p => fmtTime(p[0], labelOpts));
+  const values = pts.map(p => p[1]);
+  const ctx = document.getElementById("chart").getContext("2d");
+  const grad = ctx.createLinearGradient(0, 0, 0, 340);
+  grad.addColorStop(0, color + "33"); grad.addColorStop(1, color + "00");
+
+  const datasets = [{ data: values, borderColor: color, backgroundColor: grad, fill: true, borderWidth: 2,
+    pointRadius: 0, pointHoverRadius: 4, pointHoverBackgroundColor: color, tension: 0.1 }];
+  if (range === "1d" && base) datasets.push({ data: values.map(() => base), borderColor: css("--muted"), borderDash: [3, 4],
+    borderWidth: 1, pointRadius: 0, pointHoverRadius: 0, fill: false, label: "Fech. anterior" });
+
+  const muted = css("--muted"), grid = css("--line");
+  const cfg = {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { filter: i => i.datasetIndex === 0, displayColors: false,
+          callbacks: { label: i => `${brl.format(i.parsed.y)} BRL` } },
+      },
+      scales: {
+        x: { ticks: { color: muted, maxTicksLimit: 6, maxRotation: 0 }, grid: { display: false }, border: { color: grid } },
+        y: { position: "right", ticks: { color: muted, callback: v => brl.format(v), maxTicksLimit: 6 }, grid: { color: grid }, border: { display: false } },
+      },
+    },
+  };
+  if (chart) { chart.data = cfg.data; chart.options = cfg.options; chart.update("none"); }
+  else chart = new Chart(ctx, cfg);
+}
+
+/* ---------- dados ---------- */
+async function loadQuotes() {
+  try {
+    const r = await fetch("/api/quotes", { cache: "no-store" });
+    const j = await r.json();
+    document.getElementById("demoPill").hidden = !j.demo;
+    for (const q of j.quotes) { paintRow(q); if (!q.error) quotes[q.symbol] = q; }
+    if (view === "all") TICKERS.forEach(paintMini);
+    const ok = j.quotes.filter(q => !q.error).length;
+    document.getElementById("updated").textContent =
+      `Atualizado às ${new Date().toLocaleTimeString("pt-BR")}` + (ok < j.quotes.length ? ` · ${j.quotes.length - ok} sem dados` : "");
+    const dot = document.getElementById("dot"); dot.classList.remove("pulse"); void dot.offsetWidth; dot.classList.add("pulse");
+    if (range === "1d") { paintHeader(quotes[selected]); drawChart(quotes[selected]); }
+    else paintHeader(quotes[selected], lastRangeData);
+  } catch (e) {
+    document.getElementById("updated").textContent = "Sem conexão com o servidor — tentando de novo…";
+  }
+  marketState();
+}
+
+let lastRangeData = null;
+async function loadRange() {
+  const id = ++chartReq;
+  if (range === "1d") { lastRangeData = null; paintHeader(quotes[selected]); drawChart(quotes[selected]); return; }
+  drawChart(null);
+  try {
+    const r = await fetch(`/api/chart?symbol=${selected}&range=${range}`, { cache: "no-store" });
+    const j = await r.json();
+    if (id !== chartReq) return;
+    lastRangeData = j;
+    paintHeader(quotes[selected], j);
+    drawChart(j);
+  } catch { if (id === chartReq) drawChart({ error: "falha" }); }
+}
+
+function select(t) {
+  selected = t;
+  try { localStorage.setItem("b3sel", t); } catch {}
+  document.querySelectorAll(".row").forEach(r => r.classList.toggle("sel", r.dataset.t === t));
+  document.title = `${t} · Cotações B3`;
+  paintHeader(quotes[t]);
+  loadRange();
+}
+
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-r]"); if (!b) return;
+  range = b.dataset.r;
+  document.querySelectorAll("#tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+  loadRange();
+});
+
+document.getElementById("gtabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-r]"); if (!b) return;
+  gridRange = b.dataset.r;
+  document.querySelectorAll("#gtabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+  loadGrid();
+});
+document.getElementById("vAll").onclick = () => setView("all");
+document.getElementById("vOne").onclick = () => { setView("one"); select(selected); };
+document.getElementById("back").onclick = () => setView("all");
+
+buildShell();
+setView(view);
+select(selected);
+loadQuotes().then(() => select(selected));
+setInterval(loadQuotes, QUOTE_EVERY);
+setInterval(() => { if (range !== "1d") loadRange(); if (view === "all" && gridRange !== "1d") loadGrid(); }, 120000);
+</script>
+</body>
+</html>
