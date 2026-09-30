@@ -25,6 +25,7 @@ import requests
 
 from alerta_acoes import BRT, HEADERS
 from curvas_anbima import fetch_di_pre, fetch_titulos, swap_ipca
+from negocios_snd import fetch_trades
 
 OUT_DIR = Path(__file__).parent / "alerts"
 DEB_FILE = OUT_DIR / "debentures.json"
@@ -155,6 +156,7 @@ def main():
             db["papers"] = {p["code"]: p for p in old.get("papers", [])}
             db["dates"] = old.get("dates", [])
             db["curves"] = old.get("curves", {})
+            db["tradeDays"] = old.get("tradeDays", [])
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
@@ -199,6 +201,37 @@ def main():
         print("[ERRO] Nenhum arquivo da ANBIMA foi obtido.")
         sys.exit(1)
 
+    # negócios do SND: volume, número de negócios e PU médio por papel e dia.
+    # Também inclui papéis dos emissores que não têm taxa indicativa na ANBIMA.
+    traded_days = set(db.get("tradeDays", []))
+    for d in sorted(business_days_back(args.dias if len(traded_days) < 5 else 7)):
+        iso = d.isoformat()
+        if iso in traded_days and iso != sorted(have)[-1]:
+            continue
+        try:
+            trades = fetch_trades(session, d)
+        except Exception as e:
+            print(f"[ERRO] negócios SND {iso}: {e}")
+            continue
+        if not trades:
+            continue
+        n = 0
+        for t in trades:
+            ticker, label = group_of({"name": t["issuer"]})
+            if not ticker and t["code"] not in FAVORITES:
+                continue
+            p = db["papers"].setdefault(t["code"], {"code": t["code"], "series": [], "name": t["issuer"],
+                                                   "issuer": label or t["issuer"], "ticker": ticker, "index": "", "maturity": ""})
+            p.setdefault("trades", [])
+            p["trades"] = [x for x in p["trades"] if x[0] != iso]
+            p["trades"].append([iso, t["qty"], t["deals"], t["puMin"], t["puAvg"], t["puMax"], t["pctCurve"]])
+            p["trades"].sort()
+            p["isin"] = t["isin"]
+            n += 1
+        traded_days.add(iso)
+        print(f"[INFO] negócios {iso}: {len(trades)} linhas no SND, {n} dos emissores acompanhados.")
+    db["tradeDays"] = sorted(traded_days)
+
     # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
     curves = db.get("curves", {})
     need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
@@ -233,11 +266,21 @@ def main():
                 n += srow[6] is not None
         print(f"[INFO] {iso}: {len(tit['ntnb'])} NTN-B, {len(tit['pre'])} pré, DI x Pré {len(di)} vértices; {n} papéis IPCA+ trocados.")
 
+    # favoritos sempre aparecem, mesmo sem taxa ANBIMA nem negócio no período
+    for f in FAVORITES:
+        db["papers"].setdefault(f, {"code": f, "series": [], "trades": [], "name": "", "index": "", "maturity": "",
+                                    "issuer": next((pp.get("issuer") for pp in db["papers"].values()
+                                                    if pp["code"][:4] == f[:4] and pp.get("issuer")), f[:4]),
+                                    "ticker": next((pp.get("ticker") for pp in db["papers"].values()
+                                                    if pp["code"][:4] == f[:4] and pp.get("ticker")), None)})
+
     cutoff = (datetime.now(BRT).date() - timedelta(days=KEEP_DAYS)).isoformat()
     papers = []
     for p in db["papers"].values():
         p["series"] = [s for s in p["series"] if s[0] >= cutoff]
-        if p["series"]:
+        p["trades"] = [t for t in p.get("trades", []) if t[0] >= cutoff]
+        p["anbima"] = bool(p["series"])
+        if p["series"] or p["trades"] or p["code"] in FAVORITES:
             papers.append(p)
     papers.sort(key=lambda p: (p.get("issuer") or "", p["code"]))
     dates = sorted(d for d in have if d >= cutoff)
@@ -249,6 +292,7 @@ def main():
         "dates": dates,
         "favoritesDefault": FAVORITES,
         "curves": {k: v for k, v in curves.items() if k >= cutoff},
+        "tradeDays": sorted(d for d in db.get("tradeDays", []) if d >= cutoff),
         "papers": papers,
     }, ensure_ascii=False))
     print(f"[INFO] {len(papers)} papéis salvos; {fetched} arquivo(s) novo(s); último dia {dates[-1] if dates else '-'}.")
