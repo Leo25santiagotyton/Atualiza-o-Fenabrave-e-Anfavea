@@ -6,8 +6,9 @@ Curvas de referência para trocar (swapar) taxas IPCA+ em NTN-B + e CDI +
 - Curva DI x Pré: taxas referenciais da B3 (dias corridos, base 252).
 
 Conversão de um papel IPCA + r com duration D (dias úteis):
-  NTN-B +  = r − taxa da NTN-B de referência (a que a ANBIMA indica para o papel;
-             se não houver, a curva de NTN-B interpolada na duration)
+  NTN-B +  = (1 + r) / (1 + taxa indicativa da NTN-B de referência) − 1
+             (a NTN-B que a ANBIMA indica para o papel; se não houver, a curva
+             de NTN-B interpolada na duration)
   CDI +    = inflação implícita π = (1 + pré(D)) / (1 + NTN-B(D)) − 1
              taxa nominal = (1 + r)(1 + π) − 1
              CDI + = (1 + nominal) / (1 + DI x Pré(D)) − 1
@@ -142,7 +143,7 @@ def interp(points, x):
 
 
 def swap_ipca(rate, duration_du, ntnb_ref, tit, di):
-    """(spread sobre NTN-B em p.p., CDI + equivalente em %) para um papel IPCA + rate."""
+    """(NTN-B + equivalente em %, CDI + equivalente em %) para um papel IPCA + rate."""
     if rate is None or duration_du is None or not tit or not tit["ntnb"]:
         return None, None
     ntnb_curve = [(du, t) for _, du, t in tit["ntnb"] if du > 0]
@@ -152,7 +153,7 @@ def swap_ipca(rate, duration_du, ntnb_ref, tit, di):
         ref = next((t for v, _, t in tit["ntnb"] if v == ref_date.isoformat()), None)
     if ref is None:
         ref = interp(ntnb_curve, duration_du)
-    spread_ntnb = rate - ref if ref is not None else None
+    spread_ntnb = ((1 + rate / 100) / (1 + ref / 100) - 1) * 100 if ref is not None else None
 
     cdi = None
     pre = interp([(du, t) for _, du, t in tit["pre"] if du > 0], duration_du)

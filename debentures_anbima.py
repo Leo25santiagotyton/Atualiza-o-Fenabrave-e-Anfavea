@@ -199,7 +199,7 @@ def main():
         print("[ERRO] Nenhum arquivo da ANBIMA foi obtido.")
         sys.exit(1)
 
-    # IPCA+: taxa trocada em NTN-B + (spread, p.p.) e CDI + (equivalente, %), posições 6 e 7 da série
+    # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
     curves = db.get("curves", {})
     need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
                    for s in p["series"] if len(s) < 8 or s[6] is None})
