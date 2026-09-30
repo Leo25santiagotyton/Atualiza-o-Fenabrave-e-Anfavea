@@ -173,6 +173,7 @@ def main():
             db["papers"] = {p["code"]: p for p in old.get("papers", [])}
             db["dates"] = old.get("dates", [])
             db["curves"] = old.get("curves", {})
+            db["curveLatestOld"] = old.get("curveLatest", {})
             db["tradeDays"] = old.get("tradeDays", [])
             db["knownCodes"] = old.get("knownCodes", [])
             db["newIssues"] = old.get("newIssues", [])
@@ -286,14 +287,27 @@ def main():
                 n += srow[6] is not None
         print(f"[INFO] {iso}: {len(tit['ntnb'])} NTN-B, {len(tit['pre'])} pré, ETTJ {len(ettj)} vértices; {n} papéis IPCA+ trocados.")
 
-    last_iso = sorted(have)[-1]
-    if last_iso not in curves or not curves[last_iso].get("ettj"):
+    # curva NTN-B/ETTJ: tenta o dia de hoje e os últimos dias úteis; só troca a curva
+    # quando vem completa (se a ANBIMA ainda não publicou, fica a última boa)
+    for d in sorted(business_days_back(4)):
+        iso = d.isoformat()
+        cur = curves.get(iso) or {}
+        if cur.get("ntnb") and cur.get("ettj"):
+            continue
         try:
-            d = date.fromisoformat(last_iso)
             tit = fetch_titulos(session, d)
-            curves[last_iso] = {"ntnb": tit["ntnb"] if tit else [], "ettj": fetch_ettj(session, d)}
+            ettj = fetch_ettj(session, d) if tit and tit.get("ntnb") else []
         except Exception as e:
-            print(f"[ERRO] curva do último dia: {e}")
+            print(f"[AVISO] curva {iso}: {e}")
+            continue
+        if tit and tit.get("ntnb") and ettj:
+            curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj}
+            print(f"[INFO] curva {iso}: {len(tit['ntnb'])} NTN-B e {len(ettj)} vértices ETTJ.")
+        else:
+            print(f"[INFO] curva {iso}: ainda não publicada pela ANBIMA.")
+    good = sorted(k for k, v in curves.items() if v.get("ntnb") and v.get("ettj"))
+    curve_day = good[-1] if good else None
+    prev_day = good[-2] if len(good) > 1 else None
 
     # todos os papéis registrados dos emissores (SND), mesmo sem ANBIMA nem negócio
     try:
@@ -394,7 +408,9 @@ def main():
         "dates": dates,
         "favoritesDefault": FAVORITES,
         "curves": {k: v for k, v in curves.items() if k >= cutoff},
-        "curveLatest": {"date": last_iso, **curves.get(last_iso, {})},
+        "curveLatest": ({"date": curve_day, **curves[curve_day],
+                         "prevDate": prev_day, "prevNtnb": curves[prev_day]["ntnb"] if prev_day else []}
+                        if curve_day else (old_latest if (old_latest := (db.get("curveLatestOld") or {})) else {})),
         "tradeDays": sorted(d for d in db.get("tradeDays", []) if d >= cutoff),
         "knownCodes": db.get("knownCodes", []),
         "newIssues": db.get("newIssues", []),
