@@ -359,7 +359,8 @@ def main():
 
     # ficha (emissão, vencimento, valor nominal, remuneração) e agenda de juros/amortizações
     n_det = 0
-    for pp in db["papers"].values():
+    # ficha/agenda do SND pausada: o endereço atual responde erro 500 para todos os papéis
+    for pp in (db["papers"].values() if os.environ.get("SND_FICHA") == "1" else []):
         if not pp.get("ticker"):
             continue
         refresh_agenda = pp.get("agendaAt", "") < (datetime.now(BRT).date() - timedelta(days=7)).isoformat()
