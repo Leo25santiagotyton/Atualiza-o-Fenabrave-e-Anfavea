@@ -3,7 +3,7 @@
 ## Dashboard de cotações B3
 
 Painel em tempo real (estilo card do Google) para MOVI3, SIMH3, VAMO3, JSLG3,
-AMOB3, RAPT3, RAPT4, RENT3, FRAS3, ARML3 e PRNR3.
+AMOB3, RAPT3, RAPT4, RENT3, FRAS3, ARML3, PRNR3 e TUPY3.
 
 ```bash
 pip install -r requirements.txt

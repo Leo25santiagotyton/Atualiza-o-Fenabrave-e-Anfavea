@@ -3,7 +3,7 @@ Debêntures no mercado secundário (ANBIMA)
 -----------------------------------------
 Baixa o arquivo diário de taxas indicativas de debêntures da ANBIMA, filtra os
 papéis dos emissores acompanhados (Simpar, JSL, Movida, Vamos, Automob,
-Localiza, Randoncorp, Frasle, Armac, Priner) e mantém o histórico dia a dia em
+Localiza, Randoncorp, Frasle, Armac, Priner, Tupy) e mantém o histórico dia a dia em
 alerts/debentures.json, que alimenta a aba "Crédito" do painel.
 
 Na primeira execução, busca também os últimos ~2 meses para já ter histórico.
@@ -49,6 +49,7 @@ ISSUERS = [
     (r"\bFRAS.?LE\b|\bFRASLE\b", "FRAS3", "Frasle"),
     (r"\bARMAC\b", "ARML3", "Armac"),
     (r"\bPRINER\b", "PRNR3", "Priner"),
+    (r"\bTUPY\b", "TUPY3", "Tupy"),
 ]
 
 CODE_RE = re.compile(r"^[A-Z]{3,5}[A-Z0-9]?\d{1,2}$")

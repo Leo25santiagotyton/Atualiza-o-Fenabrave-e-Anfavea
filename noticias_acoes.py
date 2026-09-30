@@ -67,6 +67,8 @@ COMPANIES = [
      "query": "Armac OR ARML3", "match": r"\bArmac\b|ARML3"},
     {"tickers": ["PRNR3"], "name": "Priner",
      "query": "Priner OR PRNR3", "match": r"\bPriner\b|PRNR3"},
+    {"tickers": ["TUPY3"], "name": "Tupy",
+     "query": "Tupy OR TUPY3", "match": r"\bTupy\b|TUPY3"},
 ]
 
 # categorias de notícia material: (rótulo, peso, padrões no título sem acento)

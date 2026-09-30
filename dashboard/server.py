@@ -31,7 +31,7 @@ import requests
 
 TICKERS = [
     "MOVI3", "SIMH3", "VAMO3", "JSLG3", "AMOB3", "RAPT3",
-    "RAPT4", "RENT3", "FRAS3", "ARML3", "PRNR3",
+    "RAPT4", "RENT3", "FRAS3", "ARML3", "PRNR3", "TUPY3",
 ]
 
 # range -> intervalo de candle aceito pelo Yahoo
@@ -145,7 +145,7 @@ def get_all_quotes():
 DEMO_BASE = {
     "MOVI3": 7.8, "SIMH3": 6.2, "VAMO3": 4.9, "JSLG3": 8.4, "AMOB3": 2.1,
     "RAPT3": 7.1, "RAPT4": 7.6, "RENT3": 44.3, "FRAS3": 21.5,
-    "ARML3": 5.3, "PRNR3": 13.2,
+    "ARML3": 5.3, "PRNR3": 13.2, "TUPY3": 17.5,
 }
 
 
