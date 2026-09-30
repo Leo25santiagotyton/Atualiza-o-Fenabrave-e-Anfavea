@@ -4,6 +4,8 @@ Curvas de swap da B3 ("Taxas de Mercado para Swaps", arquivo TaxaSwap)
 Publicado todo dia útil na Pesquisa por Pregão da B3. Dele usamos:
   PRE  – curva DI x Pré (taxa ao ano, base 252)
   DIC  – cupom de IPCA do swap DI x IPCA (juro real do mercado de derivativos)
+  DOC  – cupom cambial limpo DI x Dólar (formado pelos FRC), linear 360 por dias corridos
+  DOL  – cupom cambial sujo (DDI) · LIB – juros em USD
 
 Com elas o CDI + de um papel IPCA + r na duration D fica
   π(D)   = (1 + PRE(D)) / (1 + DIC(D)) − 1           (inflação implícita do swap)
@@ -121,7 +123,18 @@ def fetch_taxa_swap(session, d):
             if factor != 1:
                 curves = {k: [(dc, du, v * factor) for dc, du, v in pts] for k, pts in curves.items()}
             print(f"[INFO] TaxaSwap {d}: fator de escala {factor}; PRE 1º vértice {curves['PRE'][0]}; DIC 1º vértice {(curves.get('DIC') or [None])[0]}")
-            return {k: [(du, v) for _, du, v in curves[k] if du > 0] for k in ("PRE", "DIC") if k in curves}
+            out = {k: [(du, v) for _, du, v in curves[k] if du > 0] for k in ("PRE", "DIC") if k in curves}
+            # dólar: cupom cambial limpo (DOC, formado pelos FRC), cupom sujo (DOL) e juros em USD (LIB);
+            # taxas lineares base 360 por dias corridos. Guarda também os dias úteis do vértice.
+            usd = {}
+            for want, key in (("DOC", "DOC|"), ("DOL", "DOL|"), ("LIB", "LIB|")):
+                k = next((c for c in curves if c.startswith(key)), None)
+                if k:
+                    usd[want] = [(dc, du, v) for dc, du, v in curves[k] if dc > 0 and -5 <= v <= 30]
+            if usd:
+                out["usd"] = usd
+                print(f"[INFO] TaxaSwap {d}: dólar {{{', '.join(f'{k}: {len(v)} vértices, 1 ano={next((x[2] for x in v if x[0] >= 365), None)}' for k, v in usd.items())}}}")
+            return out
         except Exception as e:
             last = str(e)
     print(f"[AVISO] TaxaSwap B3 {d}: {last}")

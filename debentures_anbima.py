@@ -177,7 +177,8 @@ def write_panel_file():
         cl = full.get("curveLatest") or {}
         panel = {k: full.get(k) for k in ("updatedAt", "source", "lastDate", "favoritesDefault", "newIssues")}
         panel["papers"] = papers
-        panel["curveLatest"] = {**cl, "b3": {k: [[du, _r(v, 4)] for du, v in pts] for k, pts in (cl.get("b3") or {}).items()}}
+        panel["curveLatest"] = {**cl, "b3": {k: [[du, _r(v, 4)] for du, v in pts] for k, pts in (cl.get("b3") or {}).items()},
+                                "usd": {k: [[dc, du, _r(v, 4)] for dc, du, v in pts] for k, pts in (cl.get("usd") or {}).items()}}
         text = json.dumps(panel, ensure_ascii=False, separators=(",", ":"))
         if len(text.encode()) <= PANEL_LIMIT:
             break
@@ -361,6 +362,12 @@ def main():
             print(f"[INFO] curva {iso}: ainda não publicada pela ANBIMA.")
     good = sorted(k for k, v in curves.items() if v.get("ntnb") and v.get("ettj"))
     curve_day = good[-1] if good else None
+    # curvas de dólar (cupom cambial limpo dos FRC) do último dia com curva, para a aba Swap Dólar +
+    if curve_day and not curves[curve_day].get("usd"):
+        try:
+            curves[curve_day]["usd"] = fetch_taxa_swap(session, date.fromisoformat(curve_day)).get("usd") or {}
+        except Exception as e:
+            print(f"[AVISO] TaxaSwap dólar {curve_day}: {e}")
     prev_day = good[-2] if len(good) > 1 else None
 
     # todos os papéis registrados dos emissores (SND), mesmo sem ANBIMA nem negócio
@@ -462,7 +469,7 @@ def main():
         "lastDate": dates[-1] if dates else None,
         "dates": dates,
         "favoritesDefault": FAVORITES,
-        "curves": {k: v for k, v in curves.items() if k >= cutoff},
+        "curves": {k: (v if k == curve_day else {kk: vv for kk, vv in v.items() if kk != "usd"}) for k, v in curves.items() if k >= cutoff},
         "curveLatest": ({"date": curve_day, **curves[curve_day],
                          "prevDate": prev_day, "prevNtnb": curves[prev_day]["ntnb"] if prev_day else []}
                         if curve_day else (old_latest if (old_latest := (db.get("curveLatestOld") or {})) else {})),
