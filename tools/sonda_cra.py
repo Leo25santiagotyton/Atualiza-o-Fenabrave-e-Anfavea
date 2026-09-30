@@ -1,4 +1,4 @@
-"""Sonda: descobre os endpoints de CRI/CRA do portal data.anbima.com.br."""
+"""Sonda: descobre como o portal data.anbima.com.br autentica a API de CRI/CRA e onde há arquivo público."""
 
 import re
 
@@ -9,38 +9,40 @@ H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 s = requests.Session()
 s.headers.update(H)
 
-pages = ["https://data.anbima.com.br/certificado-de-recebiveis/CRA023000MC/caracteristicas",
-         "https://data.anbima.com.br/certificado-de-recebiveis/CRA023000MC",
-         "https://data.anbima.com.br/certificado-de-recebiveis"]
-scripts = set()
-for u in pages:
-    r = s.get(u, timeout=30)
-    print("PAGE", u, r.status_code, len(r.content))
-    scripts |= set(re.findall(r'src="(/_next/static/[^"]+\.js)"', r.text))
-    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', r.text, re.S)
-    if m:
-        print("NEXT_DATA", m.group(1)[:1500])
-
-hits = set()
-for src in sorted(scripts):
-    js = s.get("https://data.anbima.com.br" + src, timeout=40).text
-    for m in re.finditer(r"certificado|cri-cra|/cra|/cri|recebiveis", js, re.I):
-        a, b = max(0, m.start() - 160), m.end() + 160
-        frag = js[a:b].replace("\n", " ")
-        if "http" in frag or "/api" in frag or "fetch" in frag or "`" in frag:
-            hits.add(frag)
-    for m in re.finditer(r'["\'`](/[a-z0-9\-/]*(?:cri|cra|certificad|receb)[a-z0-9\-/${}.]*)["\'`]', js, re.I):
-        hits.add("PATH " + m.group(1))
+r = s.get("https://data.anbima.com.br/certificado-de-recebiveis/CRA023000MC/caracteristicas", timeout=30)
+print("PAGE", r.status_code, len(r.content), dict(r.cookies))
+scripts = sorted(set(re.findall(r'src="(/_next/static/[^"]+\.js)"', r.text)))
 print("SCRIPTS", len(scripts))
-for h in sorted(hits)[:80]:
-    print("HIT", h[:360])
+seen = set()
+for src in scripts:
+    js = s.get("https://data.anbima.com.br" + src, timeout=40).text
+    for pat in (r"web-bff", r"[Tt]oken", r"access_token", r"client_id", r"x-api", r"Authorization", r"recaptcha", r"TaxasCriCra", r"downloadExterno"):
+        for m in list(re.finditer(pat, js))[:12]:
+            frag = js[max(0, m.start() - 220):m.end() + 220].replace("\n", " ")
+            k = frag[180:260]
+            if k in seen:
+                continue
+            seen.add(k)
+            print(f"HIT[{pat}] {src.split('/')[-1]}: {frag}")
+
+for u in ["https://www.anbima.com.br/pt_br/informar/precos-e-indices/precos/taxas-de-cri-e-cra.htm",
+          "https://www.anbima.com.br/pt_br/informar/taxas-de-cri-e-cra.htm",
+          "https://www.anbima.com.br/informacoes/cri-cra/default.asp"]:
+    try:
+        r = requests.get(u, headers={"User-Agent": H["User-Agent"]}, timeout=30)
+        links = sorted(set(re.findall(r'(?:href|src|action)="([^"]*(?:cri|cra|CRI|CRA)[^"]*)"', r.text)))
+        print("WWW", u, r.status_code, len(r.content), links[:40])
+    except Exception as e:
+        print("WWW", u, "ERRO", e)
 
 base = "https://data-api.prd.anbima.com.br"
-for path in ["/web-bff/v1/certificados-recebiveis/CRA023000MC", "/web-bff/v1/cri-cra/CRA023000MC",
-             "/web-bff/v1/certificado-de-recebiveis/CRA023000MC/precos", "/data-api/v1/cri-cra/precos?codigo=CRA023000MC",
-             "/web-bff/v1/cri-cra/precos?page=0&size=5"]:
+for path in ["/web-bff/v1/certificado-recebiveis?page=0&size=5",
+             "/web-bff/v1/certificado-recebiveis/CRA023000MC",
+             "/web-bff/v1/certificado-recebiveis/CRA023000MC/caracteristicas",
+             "/web-bff/v1/certificado-recebiveis/precos?page=0&size=5",
+             "/web-bff/v1/TaxasCriCraExport/downloadExterno"]:
     try:
         r = s.get(base + path, timeout=30)
-        print("API", path, r.status_code, r.headers.get("content-type"), r.text[:400].replace("\n", " "))
+        print("API", path, r.status_code, r.headers.get("content-type"), r.text[:300].replace("\n", " "))
     except Exception as e:
         print("API", path, "ERRO", e)
