@@ -15,6 +15,7 @@ E-mail via as mesmas variáveis do monitor:
 Uso:
   python noticias_acoes.py              # busca, grava e envia
   python noticias_acoes.py --dry-run    # não envia; salva alerts/news_preview.html
+  python noticias_acoes.py --no-email   # só atualiza as notícias do painel
 """
 
 import argparse
@@ -306,6 +307,7 @@ def build_email(edition, now, new_items, market):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--no-email", action="store_true", help="só atualiza alerts/news.json (para o painel)")
     args = ap.parse_args()
 
     now = datetime.now(BRT)
@@ -383,6 +385,10 @@ def main():
         "updatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "edition": edition, "market": market, "items": items,
     }, ensure_ascii=False))
+
+    if args.no_email:
+        print(f"[INFO] Painel atualizado com {len(items)} notícias ({len(new_items)} novas desde o último boletim); sem e-mail.")
+        return
 
     subject, text, html_body = build_email(edition, now, new_items, market)
     print(subject)

@@ -15,6 +15,7 @@ Uso:
   python alerta_acoes.py                 # busca, grava a foto e envia se houver alerta
   python alerta_acoes.py --dry-run       # não envia; salva o e-mail em alerts/preview.html
   python alerta_acoes.py --demo --dry-run  # dados simulados, para ver o modelo do e-mail
+  python alerta_acoes.py --no-email      # só atualiza a foto de preços do painel
 """
 
 import argparse
@@ -223,6 +224,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="não envia; salva alerts/preview.html")
     ap.add_argument("--demo", action="store_true", help="usa dados simulados")
+    ap.add_argument("--no-email", action="store_true", help="só atualiza alerts/prices.json (para o painel)")
     args = ap.parse_args()
 
     now = datetime.now(BRT)
@@ -247,6 +249,10 @@ def main():
         "source": "Yahoo Finance",
         "quotes": quotes,
     }, ensure_ascii=False))
+
+    if args.no_email:
+        print(f"[INFO] Foto de preços atualizada ({len(quotes)} ações); sem e-mail nesta execução.")
+        return
 
     # feriado / dia sem pregão: a última cotação não é de hoje
     today = now.date()

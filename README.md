@@ -23,7 +23,8 @@ python dashboard/server.py --demo   # dados simulados, sem internet
 ## Alerta de ações por e-mail
 
 `alerta_acoes.py` roda pelo workflow **Alerta de ações B3** a cada 2 horas no
-pregão (11h, 13h, 15h e 17h, seg a sex). Se alguma ação estiver com alta ou
+pregão (11h, 13h, 15h e 17h, seg a sex). A cada 15 min no pregão ele também
+atualiza só a foto de preços do painel, sem e-mail. Se alguma ação estiver com alta ou
 queda de **2%, 4% ou 8% ou mais** no dia, envia um e-mail de lembrete usando
 os mesmos segredos SMTP do monitor. Também grava `alerts/prices.json`, que
 alimenta o painel publicado em https://claude.ai/artifact/UHYqgM4PcixNRmxt7AFBhk.
@@ -34,7 +35,7 @@ Para ver o modelo do e-mail sem enviar: `python alerta_acoes.py --demo --dry-run
 ## Boletim de notícias materiais
 
 `noticias_acoes.py` roda pelo workflow **Boletim de notícias B3** todo dia às
-8h30 e às 18h30. Busca no Google News as notícias das 11 empresas, mantém só as
+8h30 e às 18h30 (e-mail) e de hora em hora só para atualizar o painel. Busca no Google News as notícias das 11 empresas, mantém só as
 materiais (fato relevante, resultado, M&A, dívida e rating, proventos, gestão,
 regulatório, analistas e contratos relevantes), descarta listas genéricas e
 conteúdo de "dicas", e envia um e-mail com as novidades desde o último boletim e
