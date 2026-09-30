@@ -26,6 +26,7 @@ import requests
 
 from alerta_acoes import BRT, HEADERS
 from curva_b3 import fetch_taxa_swap
+import cra_anbima
 from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, interp, swap_ipca
 from negocios_snd import fetch_agenda, fetch_details, fetch_pu_historico, fetch_registered, fetch_trades
 from alerta_acoes import DASHBOARD_URL, send_email
@@ -164,7 +165,7 @@ def write_panel_file():
     for keep_trades, keep_pu in ((60, 60), (40, 40), (25, 25), (15, 15)):
         papers = []
         for p in full["papers"]:
-            q = {k: p[k] for k in ("code", "name", "issuer", "ticker", "index", "section", "maturity", "ntnbRef", "anbima", "status")
+            q = {k: p[k] for k in ("code", "name", "issuer", "ticker", "index", "section", "maturity", "ntnbRef", "anbima", "status", "kind", "devedor", "securitizadora")
                  if k in p}
             q["series"] = [[s[0]] + [_r(x, 4) for x in s[1:]] for s in p.get("series", [])]
             q["trades"] = [[t[0]] + [_r(x, 2) for x in t[1:]] for t in p.get("trades", [])][-keep_trades:]
@@ -217,6 +218,7 @@ def main():
             db["tradeDays"] = old.get("tradeDays", [])
             db["knownCodes"] = old.get("knownCodes", [])
             db["newIssues"] = old.get("newIssues", [])
+            db["craDates"] = old.get("craDates", [])
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
@@ -256,6 +258,38 @@ def main():
         print(f"[INFO] {d}: {len(rows)} papéis no arquivo, {n_match} dos emissores acompanhados.")
         if n_match == 0 and rows:  # noqa
             print("[AVISO] Nenhum emissor reconhecido. Exemplos de nomes:", sorted({r['name'] for r in rows})[:15])
+
+    # CRI/CRA (API oficial da ANBIMA): ligados ao grupo pelo devedor; mesmo formato de série das debêntures
+    cra_have = set(db.get("craDates", []))
+    if cra_anbima.enabled():
+        for d in sorted(days):
+            iso = d.isoformat()
+            if iso in cra_have:
+                continue
+            try:
+                rows = cra_anbima.fetch_cras(session, d)
+            except Exception as e:
+                print(f"[ERRO] CRI/CRA {iso}: {e}")
+                break
+            if rows is None:
+                continue
+            n = 0
+            for row in rows:
+                ticker, label = cra_anbima.matches(row, group_of)
+                if not ticker:
+                    continue
+                n += 1
+                p = db["papers"].setdefault(row["code"], {"code": row["code"], "series": []})
+                p.update({k: row[k] for k in ("name", "maturity", "index", "section", "ntnbRef", "kind", "devedor", "securitizadora")})
+                p["ticker"], p["issuer"] = ticker, label
+                p["series"] = [x for x in p["series"] if x[0] != iso]
+                p["series"].append([iso, row["rate"], row["pu"], row["duration"], row["rateMin"], row["rateMax"]])
+                p["series"].sort()
+            cra_have.add(iso)
+            print(f"[INFO] CRI/CRA {iso}: {len(rows)} papéis, {n} com devedor acompanhado.")
+    else:
+        print("[INFO] CRI/CRA: sem ANBIMA_CLIENT_ID/ANBIMA_CLIENT_SECRET, pulando.")
+    db["craDates"] = sorted(cra_have)[-400:]
 
     if not have:
         print("[ERRO] Nenhum arquivo da ANBIMA foi obtido.")
@@ -475,6 +509,7 @@ def main():
                         if curve_day else (old_latest if (old_latest := (db.get("curveLatestOld") or {})) else {})),
         "tradeDays": sorted(d for d in db.get("tradeDays", []) if d >= cutoff),
         "knownCodes": db.get("knownCodes", []),
+        "craDates": db.get("craDates", []),
         "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
