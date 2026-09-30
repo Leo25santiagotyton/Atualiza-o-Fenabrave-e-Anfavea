@@ -33,6 +33,10 @@ jobs:
       - name: Baixar taxas da ANBIMA
         run: python debentures_anbima.py
 
+      - name: Sondar fontes de negócios e CRI/CRA (temporário)
+        continue-on-error: true
+        run: python sondar_fontes.py
+
       - name: Salvar histórico no repositório
         run: |
           git config user.name "monitor-bot"

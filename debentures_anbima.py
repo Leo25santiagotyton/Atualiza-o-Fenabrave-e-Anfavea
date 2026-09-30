@@ -24,6 +24,7 @@ from pathlib import Path
 import requests
 
 from alerta_acoes import BRT, HEADERS
+from curvas_anbima import fetch_di_pre, fetch_titulos, swap_ipca
 
 OUT_DIR = Path(__file__).parent / "alerts"
 DEB_FILE = OUT_DIR / "debentures.json"
@@ -127,6 +128,10 @@ def group_of(row):
     return None, None
 
 
+def is_ipca(p):
+    return (p.get("index") or "").strip().upper().startswith("IPCA")
+
+
 def business_days_back(n):
     d = datetime.now(BRT).date()
     out = []
@@ -149,6 +154,7 @@ def main():
             old = json.loads(DEB_FILE.read_text())
             db["papers"] = {p["code"]: p for p in old.get("papers", [])}
             db["dates"] = old.get("dates", [])
+            db["curves"] = old.get("curves", {})
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
@@ -186,12 +192,46 @@ def main():
             p["series"].sort()
         have.add(iso)
         print(f"[INFO] {d}: {len(rows)} papéis no arquivo, {n_match} dos emissores acompanhados.")
-        if n_match == 0 and rows:
+        if n_match == 0 and rows:  # noqa
             print("[AVISO] Nenhum emissor reconhecido. Exemplos de nomes:", sorted({r['name'] for r in rows})[:15])
 
     if not have:
         print("[ERRO] Nenhum arquivo da ANBIMA foi obtido.")
         sys.exit(1)
+
+    # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
+    curves = db.get("curves", {})
+    need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
+                   for s in p["series"] if len(s) < 8 or s[6] is None})
+    for iso in need[-60:]:
+        d = date.fromisoformat(iso)
+        try:
+            tit = fetch_titulos(session, d)
+        except Exception as e:
+            print(f"[ERRO] títulos públicos {iso}: {e}")
+            tit = None
+        try:
+            di = fetch_di_pre(session, d)
+        except Exception as e:
+            print(f"[ERRO] DI x Pré {iso}: {e}")
+            di = []
+        if not tit:
+            continue
+        curves[iso] = {"ntnb": tit["ntnb"], "di1y": next((t for dc, t in di if dc >= 365), None) if di else None}
+        n = 0
+        for p in db["papers"].values():
+            if not is_ipca(p):
+                continue
+            for srow in p["series"]:
+                if srow[0] != iso:
+                    continue
+                while len(srow) < 8:
+                    srow.append(None)
+                sp, cdi = swap_ipca(srow[1], srow[3], p.get("ntnbRef"), tit, di)
+                srow[6] = round(sp, 4) if sp is not None else None
+                srow[7] = round(cdi, 4) if cdi is not None else None
+                n += srow[6] is not None
+        print(f"[INFO] {iso}: {len(tit['ntnb'])} NTN-B, {len(tit['pre'])} pré, DI x Pré {len(di)} vértices; {n} papéis IPCA+ trocados.")
 
     cutoff = (datetime.now(BRT).date() - timedelta(days=KEEP_DAYS)).isoformat()
     papers = []
@@ -208,6 +248,7 @@ def main():
         "lastDate": dates[-1] if dates else None,
         "dates": dates,
         "favoritesDefault": FAVORITES,
+        "curves": {k: v for k, v in curves.items() if k >= cutoff},
         "papers": papers,
     }, ensure_ascii=False))
     print(f"[INFO] {len(papers)} papéis salvos; {fetched} arquivo(s) novo(s); último dia {dates[-1] if dates else '-'}.")
