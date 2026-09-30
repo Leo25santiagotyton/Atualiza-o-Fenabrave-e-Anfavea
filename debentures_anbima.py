@@ -15,6 +15,7 @@ Uso:
 
 import argparse
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -25,7 +26,8 @@ import requests
 
 from alerta_acoes import BRT, HEADERS
 from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, swap_ipca
-from negocios_snd import fetch_pu_historico, fetch_registered, fetch_trades
+from negocios_snd import fetch_agenda, fetch_details, fetch_pu_historico, fetch_registered, fetch_trades
+from alerta_acoes import DASHBOARD_URL, send_email
 
 OUT_DIR = Path(__file__).parent / "alerts"
 DEB_FILE = OUT_DIR / "debentures.json"
@@ -129,6 +131,27 @@ def group_of(row):
     return None, None
 
 
+def send_new_issues(codes, papers):
+    rows = "".join(
+        f"<tr><td style='padding:6px 10px;border-bottom:1px solid #e2e6eb'><b>{c}</b></td>"
+        f"<td style='padding:6px 10px;border-bottom:1px solid #e2e6eb'>{papers.get(c, {}).get('issuer') or ''}</td>"
+        f"<td style='padding:6px 10px;border-bottom:1px solid #e2e6eb;color:#5d6570;font-size:12px'>"
+        + " · ".join(f"{k}: {v}" for k, v in list((papers.get(c, {}).get('details') or {}).items())[:6]) + "</td></tr>"
+        for c in codes)
+    html_body = f"""<!doctype html><html><body style="font-family:Roboto,Arial,sans-serif;background:#f5f7fa;margin:0">
+  <div style="max-width:640px;margin:0 auto;padding:20px 12px">
+    <div style="background:#0f1216;color:#fff;border-radius:12px 12px 0 0;padding:14px 18px">
+      <div style="color:#f5a623;font-size:12px;font-weight:700;letter-spacing:.08em">NOVA EMISSÃO DE DEBÊNTURE</div>
+      <div style="font-size:18px;margin-top:4px">{len(codes)} papel(éis) novo(s) dos emissores acompanhados</div></div>
+    <div style="background:#fff;border:1px solid #e2e6eb;border-top:0;border-radius:0 0 12px 12px">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">{rows}</table>
+      <div style="padding:14px 16px"><a href="{DASHBOARD_URL}" style="background:#1a5fd1;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px">Abrir aba Dívida</a></div>
+    </div></div></body></html>"""
+    text = "Nova emissão de debênture: " + ", ".join(codes) + f"\nPainel: {DASHBOARD_URL}"
+    send_email(f"[Crédito] Nova emissão: {', '.join(codes)}", text, html_body)
+    print("[INFO] e-mail de nova emissão enviado.")
+
+
 def is_ipca(p):
     return (p.get("index") or "").strip().upper().startswith("IPCA")
 
@@ -157,6 +180,8 @@ def main():
             db["dates"] = old.get("dates", [])
             db["curves"] = old.get("curves", {})
             db["tradeDays"] = old.get("tradeDays", [])
+            db["knownCodes"] = old.get("knownCodes", [])
+            db["newIssues"] = old.get("newIssues", [])
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
@@ -295,6 +320,46 @@ def main():
         pp["status"] = rg["status"]
     print(f"[INFO] SND: {len(regs)} emissões registradas; {n_new} papéis dos emissores sem ANBIMA/negócio adicionados.")
 
+    # nova emissão: papel dos emissores que não estava na lista conhecida
+    ours = sorted({rg["code"] for rg in regs if group_of({"name": rg["issuer"]})[0]})
+    known = set(db.get("knownCodes", []))
+    fresh = [c for c in ours if c not in known] if known else []  # 1ª execução só grava a base
+    today_iso = datetime.now(BRT).date().isoformat()
+    if fresh:
+        for c in fresh:
+            pp = db["papers"].get(c, {})
+            db["newIssues"].append({"code": c, "issuer": pp.get("issuer"), "ticker": pp.get("ticker"), "detectedAt": today_iso})
+        print(f"[INFO] NOVAS EMISSÕES: {', '.join(fresh)}")
+    db["knownCodes"] = sorted(known | set(ours))
+    db["newIssues"] = [x for x in db["newIssues"] if x["detectedAt"] >= (datetime.now(BRT).date() - timedelta(days=30)).isoformat()]
+
+    # ficha (emissão, vencimento, valor nominal, remuneração) e agenda de juros/amortizações
+    n_det = 0
+    for pp in db["papers"].values():
+        if not pp.get("ticker"):
+            continue
+        refresh_agenda = pp.get("agendaAt", "") < (datetime.now(BRT).date() - timedelta(days=7)).isoformat()
+        if pp.get("details") and not refresh_agenda:
+            continue
+        try:
+            if not pp.get("details"):
+                pp["details"] = fetch_details(session, pp["code"])
+            pp["agenda"] = fetch_agenda(session, pp["code"])
+            pp["agendaAt"] = today_iso
+            n_det += 1
+        except Exception as e:
+            print(f"[AVISO] ficha/agenda {pp['code']}: {e}")
+    print(f"[INFO] fichas/agendas atualizadas: {n_det}")
+    sample = db["papers"].get("VAMO33", {})
+    print("[INFO] exemplo ficha VAMO33:", dict(list((sample.get("details") or {}).items())[:25]))
+    print("[INFO] exemplo agenda VAMO33:", (sample.get("agenda") or [])[:8])
+
+    if fresh and os.environ.get("SMTP_HOST"):
+        try:
+            send_new_issues(fresh, db["papers"])
+        except Exception as e:
+            print(f"[ERRO] e-mail de nova emissão: {e}")
+
     # PU da curva (SND) para papéis sem taxa ANBIMA: dá um gráfico mesmo sem mercado
     start = (datetime.now(BRT).date() - timedelta(days=90))
     for pp in db["papers"].values():
@@ -337,6 +402,8 @@ def main():
         "curves": {k: v for k, v in curves.items() if k >= cutoff},
         "curveLatest": {"date": last_iso, **curves.get(last_iso, {})},
         "tradeDays": sorted(d for d in db.get("tradeDays", []) if d >= cutoff),
+        "knownCodes": db.get("knownCodes", []),
+        "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
     print(f"[INFO] {len(papers)} papéis salvos; {fetched} arquivo(s) novo(s); último dia {dates[-1] if dates else '-'}.")

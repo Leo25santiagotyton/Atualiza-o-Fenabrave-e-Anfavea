@@ -84,3 +84,41 @@ def fetch_pu_historico(session, ativo, a, b):
             if pu is not None:
                 out.append([f"{yy}-{mm}-{dd}", pu])
     return sorted(out)
+
+
+DET_URL = ("https://www.debentures.com.br/exploreosnd/consultaadados/emissoesdedebentures/"
+           "caracteristicas_d.asp?tip_deb=publicas&op_exc=False&ativo={ativo}")
+AGENDA_URL = ("https://www.debentures.com.br/exploreosnd/consultaadados/eventosfinanceiros/"
+              "agenda_r.asp?op_exc=False&ativo={ativo}&dt_ini=01/01/2000&dt_fim=31/12/2070")
+
+
+def fetch_details(session, ativo):
+    """Ficha do papel no SND como pares rótulo → valor (emissão, vencimento, valor nominal, remuneração...)."""
+    r = session.get(DET_URL.format(ativo=ativo), timeout=60)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.content, "html.parser")
+    out = {}
+    for tr in soup.find_all("tr"):
+        cells = [c.get_text(" ", strip=True) for c in tr.find_all("td")]
+        cells = [c for c in cells if c]
+        for i in range(0, len(cells) - 1, 2):
+            k, v = cells[i].rstrip(":").strip(), cells[i + 1].strip()
+            if 2 <= len(k) <= 60 and v and len(v) <= 300 and not re.fullmatch(r"[\d.,/ -]+", k):
+                out.setdefault(k, v)
+    return out
+
+
+def fetch_agenda(session, ativo):
+    """Agenda de eventos (juros, amortização, vencimento): [[iso, evento, taxa/percentual, situação]]."""
+    r = session.get(AGENDA_URL.format(ativo=ativo), timeout=60)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.content, "html.parser")
+    out = []
+    for tr in soup.find_all("tr"):
+        cells = [c.get_text(" ", strip=True) for c in tr.find_all("td")]
+        cells = [c for c in cells if c]
+        if len(cells) >= 3 and re.fullmatch(r"\d{2}/\d{2}/\d{4}", cells[0]):
+            dd, mm, yy = cells[0].split("/")
+            rest = [c for c in cells[1:] if c != ativo]
+            out.append([f"{yy}-{mm}-{dd}"] + rest[:4])
+    return out
