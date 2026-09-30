@@ -1,11 +1,10 @@
-name: Debêntures ANBIMA
+name: Boletim de crédito
 
-# Taxas indicativas da ANBIMA, publicadas no fim da tarde dos dias úteis.
-# 19h30 de Brasília (22h30 UTC) e, se o arquivo atrasar, de novo às 8h do dia seguinte.
+# Dias úteis às 8h50 (Brasília). Agendado às 8h40 (11h40 UTC) porque o GitHub
+# costuma atrasar o início. Atualiza a ANBIMA antes de montar o e-mail.
 on:
   schedule:
-    - cron: "30 22 * * 1-5"
-    - cron: "0 11 * * 2-6"
+    - cron: "40 11 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
@@ -16,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  anbima:
+  credito:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -30,7 +29,7 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: Baixar taxas da ANBIMA
+      - name: Atualizar taxas da ANBIMA e negócios
         run: python debentures_anbima.py
 
       - name: Salvar histórico no repositório
@@ -38,6 +37,15 @@ jobs:
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
           git add alerts/debentures.json
-          git diff --quiet --cached && exit 0
-          git commit -m "Atualiza debêntures ANBIMA [skip ci]"
+          git diff --quiet --cached || git commit -m "Atualiza debêntures ANBIMA [skip ci]"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
+
+      - name: Enviar boletim de crédito
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python boletim_credito.py

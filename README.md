@@ -51,3 +51,17 @@ Prévia sem enviar: `python noticias_acoes.py --dry-run` (gera `alerts/news_prev
 indicativas de debêntures da ANBIMA, filtra os papéis dos emissores
 acompanhados e guarda o histórico em `alerts/debentures.json`, que alimenta a
 aba **Dívida** do painel. Favoritos iniciais: VAMO33, VAMO34 e VAMO19.
+
+Os papéis IPCA+ ganham **NTN-B +** = (1 + taxa) / (1 + NTN-B de referência da
+ANBIMA) − 1 e **CDI +** pela inflação implícita e curva prefixada da ETTJ ANBIMA
+(aproximação da curva DI). Negócios (quantidade, número de negócios, PU
+mínimo/médio/máximo) vêm do SND (debentures.com.br), que também fornece a lista
+de todos os papéis registrados dos emissores e o PU da curva dos que não têm
+taxa ANBIMA.
+
+## Boletim de crédito
+
+`boletim_credito.py` roda pelo workflow **Boletim de crédito** nos dias úteis às
+8h50: atualiza a ANBIMA e envia por e-mail as 5 debêntures que mais fecharam e
+as 5 que mais abriram, entre os favoritos e no geral dos emissores.
+Prévia: `python boletim_credito.py --dry-run`.
