@@ -257,7 +257,7 @@ def main():
     curves = db.get("curves", {})
     need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
                    for s in p["series"] if len(s) < 8 or s[6] is None or s[7] is None
-                   or "b3" not in curves.get(s[0], {})})
+                   or not (curves.get(s[0], {}).get("b3") or {}).get("PRE")})
     for iso in need[-60:]:
         d = date.fromisoformat(iso)
         try:
