@@ -40,35 +40,35 @@ STATE_FILE = OUT_DIR / "news_state.json"
 KEEP_ITEMS = 150          # quantas notícias o painel guarda
 SEEN_DAYS = 10            # por quanto tempo lembrar o que já foi enviado
 
-# ticker(s) -> empresa, busca no Google News e padrão que confirma a menção no título
+# ticker(s) -> empresa, busca no Google News e padrão que confirma a menção no título.
+# O padrão diferencia maiúsculas para não confundir o nome com palavras comuns
+# ("localiza", "movida", "vamos").
 COMPANIES = [
     {"tickers": ["MOVI3"], "name": "Movida",
      "query": '"Movida" (locadora OR MOVI3 OR ações OR aluguel OR carros) OR MOVI3',
-     "match": r"\bmovida\b|\bmovi3\b"},
+     "match": r"\bMovida\b|MOVI3"},
     {"tickers": ["SIMH3"], "name": "Simpar",
-     "query": "Simpar OR SIMH3", "match": r"\bsimpar\b|\bsimh3\b"},
+     "query": "Simpar OR SIMH3", "match": r"\bSimpar\b|\bSIMPAR\b|SIMH3"},
     {"tickers": ["VAMO3"], "name": "Vamos",
-     "query": '"Grupo Vamos" OR "Vamos Locação" OR VAMO3 OR "Vamos (VAMO3)"',
-     "match": r"grupo vamos|vamos loca|\bvamo3\b|vamos \(vamo3\)"},
+     "query": '"Grupo Vamos" OR "Vamos Locação" OR VAMO3',
+     "match": r"Grupo Vamos|Vamos Loca|VAMO3"},
     {"tickers": ["JSLG3"], "name": "JSL",
-     "query": 'JSLG3 OR "JSL" logística OR "JSL S.A."',
-     "match": r"\bjsl\b|\bjslg3\b"},
+     "query": 'JSLG3 OR "JSL" logística OR "JSL S.A."', "match": r"\bJSL\b|JSLG3"},
     {"tickers": ["AMOB3"], "name": "Automob",
-     "query": "Automob OR AMOB3", "match": r"\bautomob\b|\bamob3\b"},
+     "query": "Automob OR AMOB3", "match": r"\bAutomob\b|AMOB3"},
     {"tickers": ["RAPT3", "RAPT4"], "name": "Randoncorp",
-     "query": "Randoncorp OR Randon OR RAPT4 OR RAPT3",
-     "match": r"\brandon(corp)?\b|\brapt[34]\b"},
+     "query": "Randoncorp OR Randon OR RAPT4 OR RAPT3", "match": r"\bRandon(corp)?\b|RAPT[34]"},
     {"tickers": ["RENT3"], "name": "Localiza",
-     "query": "Localiza OR RENT3", "match": r"\blocaliza\b|\brent3\b"},
+     "query": "Localiza OR RENT3", "match": r"\bLocaliza\b|RENT3"},
     {"tickers": ["FRAS3"], "name": "Frasle Mobility",
-     "query": 'Frasle OR "Fras-le" OR FRAS3', "match": r"\bfras-?le\b|\bfrasle\b|\bfras3\b"},
+     "query": 'Frasle OR "Fras-le" OR FRAS3', "match": r"\bFras-?le\b|\bFrasle\b|FRAS3"},
     {"tickers": ["ARML3"], "name": "Armac",
-     "query": "Armac OR ARML3", "match": r"\barmac\b|\barml3\b"},
+     "query": "Armac OR ARML3", "match": r"\bArmac\b|ARML3"},
     {"tickers": ["MILS3"], "name": "Mills",
-     "query": 'MILS3 OR "Mills" (locação OR ações OR plataformas OR MILS3)',
-     "match": r"\bmills\b|\bmils3\b"},
+     "query": 'MILS3 OR "Mills Locação" OR "Mills Estruturas" OR "Mills (MILS3)"',
+     "match": r"\bMills\b|MILS3", "exclude": r"General Mills"},
     {"tickers": ["PRNR3"], "name": "Priner",
-     "query": "Priner OR PRNR3", "match": r"\bpriner\b|\bprnr3\b"},
+     "query": "Priner OR PRNR3", "match": r"\bPriner\b|PRNR3"},
 ]
 
 # categorias de notícia material: (rótulo, peso, padrões no título sem acento)
@@ -102,9 +102,9 @@ NOISE = [r"acoes para (comprar|investir)", r"carteira recomendada", r"vale a pen
          r"agenda de dividendos da semana", r"^ibovespa hoje", r"o que (esperar|abre|fecha)",
          r"vagas de emprego", r"estagio"]
 
-POSITIVE = [r"\bsobe", r"\balta de", r"cresce", r"dispara", r"salta", r"lucro (cresce|sobe|avanca|dispara|recorde)", r"supera", r"\beleva\b",
+POSITIVE = [r"(corta|reduz|diminui) (a )?divida", r"desalavanc", r"\bsobe", r"\balta de", r"cresce", r"dispara", r"salta", r"lucro (cresce|sobe|avanca|dispara|recorde)", r"supera", r"\beleva\b",
             r"aprova", r"recompra", r"dividend", r"\bjcp\b", r"melhora", r"recorde", r"upgrade", r"compra\b"]
-NEGATIVE = [r"\bcai\b", r"\bcaem\b", r"despenca", r"desaba", r"derrete", r"prejuizo", r"rebaix", r"\bcorta",
+NEGATIVE = [r"\bcai\b", r"\bcaem\b", r"despenca", r"desaba", r"derrete", r"prejuizo", r"rebaix", r"\bcorta (?!(a )?divida)",
             r"investiga", r"\bmulta", r"renuncia", r"recuperac[aã]o judicial", r"piora", r"frustra", r"abaixo",
             r"downgrade", r"queda", r"venda\b.*(btg|xp|itau|goldman|jpmorgan|ubs)"]
 
@@ -114,6 +114,18 @@ MARKET = [("^BVSP", "Ibovespa", 0), ("BRL=X", "Dólar (R$)", 4)]
 def norm(s):
     s = unicodedata.normalize("NFKD", s.lower())
     return "".join(c for c in s if not unicodedata.combining(c))
+
+
+def mentions(company, title):
+    """O título cita a empresa (nome com maiúscula ou ticker) e não é homônimo."""
+    if not re.search(company["match"], title):
+        return False
+    return not (company.get("exclude") and re.search(company["exclude"], title))
+
+
+def is_material(company, title):
+    cat, score, _ = classify(title)
+    return mentions(company, title) and bool(cat) and score >= 2
 
 
 def classify(title):
@@ -292,11 +304,9 @@ def main():
             print(f"[ERRO] notícias {c['name']}: {e}")
             continue
         for n in items:
-            if not re.search(c["match"], norm(n["title"])):
+            if not is_material(c, n["title"]):
                 continue
             cat, score, cats = classify(n["title"])
-            if not cat or score < 2:
-                continue
             key = hashlib.sha1(norm(re.sub(r"\W+", " ", n["title"]))[:90].encode()).hexdigest()[:12]
             if key in found:  # mesma manchete em outra empresa ou fonte
                 found[key]["tickers"] = sorted(set(found[key]["tickers"]) | set(c["tickers"]))
@@ -326,6 +336,9 @@ def main():
             old = json.loads(NEWS_FILE.read_text()).get("items", [])
         except json.JSONDecodeError:
             old = []
+    # revalida o histórico com as regras atuais (remove o que deixou de passar no filtro)
+    by_name = {c["name"]: c for c in COMPANIES}
+    old = [i for i in old if i.get("company") in by_name and is_material(by_name[i["company"]], i["title"])]
     merged = {i["id"]: i for i in old}
     merged.update({i["id"]: i for i in found.values()})
     items = sorted(merged.values(), key=lambda i: i["published"], reverse=True)[:KEEP_ITEMS]
