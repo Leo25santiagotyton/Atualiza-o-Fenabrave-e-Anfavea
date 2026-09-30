@@ -298,8 +298,9 @@ def main():
     print(f"[INFO] {len(papers)} papéis salvos; {fetched} arquivo(s) novo(s); último dia {dates[-1] if dates else '-'}.")
     for f in FAVORITES:
         p = db["papers"].get(f)
-        last = p["series"][-1] if p else None
-        print(f"[INFO] favorito {f}: {'sem dados' if not last else f'{last[0]} taxa {last[1]} PU {last[2]}'}")
+        last = p["series"][-1] if p and p["series"] else None
+        ntr = len(p.get("trades", [])) if p else 0
+        print(f"[INFO] favorito {f}: {'sem taxa ANBIMA' if not last else f'{last[0]} taxa {last[1]} PU {last[2]}'}; {ntr} dia(s) com negócio")
 
 
 if __name__ == "__main__":
