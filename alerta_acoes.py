@@ -164,55 +164,27 @@ def build_email(hits, quotes, now, new_symbols):
               "Dados do Yahoo Finance, com atraso de até 15 min.", "", f"Painel: {DASHBOARD_URL}"]
     text = "\n".join(lines)
 
-    def row(h):
+    from email_layout import UP, DOWN, INK, MUTED, FONT, data_table, section_title, row, button, page, esc
+    rows = []
+    for h in hits:
         up = h["pct"] >= 0
-        color, bg = ("#137333", "#e6f4ea") if up else ("#c5221f", "#fce8e6")
-        seta = "▲" if up else "▼"
-        novo = ('<span style="margin-left:6px;padding:1px 6px;border-radius:6px;background:#fdf1d8;'
-                'color:#8a5a00;font-size:11px;font-weight:700">NOVO</span>') if h["symbol"] in new_symbols else ""
-        return f"""
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e6eb;font-weight:700">{h['symbol']}{novo}
-            <div style="font-weight:400;color:#5d6570;font-size:12px">{h['name']}</div></td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e6eb;text-align:right">R$ {br(h['price'])}</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e6eb;text-align:right;color:{color};font-weight:700">
-            {seta} {'+' if up else '−'}{br(abs(h['pct']))}%</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e6eb;text-align:center">
-            <span style="display:inline-block;padding:2px 8px;border-radius:6px;background:{bg};color:{color};
-              font-weight:700;font-size:12px">{'+' if up else '−'}{h['level']}%</span></td>
-        </tr>"""
-
+        col = UP if up else DOWN
+        novo = ' <span style="background:#fde68a;color:#111827;padding:1px 6px;font-size:11px;font-weight:700">NOVO</span>' if h["symbol"] in new_symbols else ""
+        rows.append([f'<b>{esc(h["symbol"])}</b>{novo}<div style="font-size:12px;color:{MUTED}">{esc(h["name"])}</div>',
+                     f'<b>R$ {br(h["price"])}</b>',
+                     f'<b style="color:{col}">{"▲" if up else "▼"} {"+" if up else "−"}{br(abs(h["pct"]))}%</b>',
+                     f'<b style="color:{col}">{"+" if up else "−"}{h["level"]}%</b>'])
     quiet = [q for q in quotes if q["symbol"] not in {h["symbol"] for h in hits} and day_change(q) is not None]
-    quiet_txt = " · ".join(
-        f"{q['symbol']} {'+' if day_change(q) >= 0 else '−'}{br(abs(day_change(q)))}%" for q in quiet
-    )
-
-    html = f"""<!doctype html><html><body style="margin:0;background:#f5f7fa;font-family:Roboto,Arial,sans-serif;color:#1f2328">
-  <div style="max-width:620px;margin:0 auto;padding:24px 16px">
-    <div style="background:#ffffff;border:1px solid #e2e6eb;border-radius:12px;overflow:hidden">
-      <div style="padding:18px 20px;border-bottom:1px solid #e2e6eb">
-        <div style="font-size:12px;color:#5d6570;text-transform:uppercase;letter-spacing:.06em">Lembrete de variação · B3</div>
-        <div style="font-size:20px;margin-top:4px">{len(hits)} {'ação passou' if len(hits) == 1 else 'ações passaram'} dos níveis de alerta hoje</div>
-        <div style="font-size:13px;color:#5d6570;margin-top:4px">{hora} (Brasília) · variação contra o fechamento anterior</div>
-      </div>
-      <table style="width:100%;border-collapse:collapse;font-size:14px">
-        <tr style="background:#f5f7fa;color:#5d6570;font-size:12px">
-          <th style="padding:8px 12px;text-align:left;font-weight:500">Ação</th>
-          <th style="padding:8px 12px;text-align:right;font-weight:500">Preço</th>
-          <th style="padding:8px 12px;text-align:right;font-weight:500">Dia</th>
-          <th style="padding:8px 12px;text-align:center;font-weight:500">Nível</th>
-        </tr>{''.join(row(h) for h in hits)}
-      </table>
-      {f'<div style="padding:14px 20px;font-size:12px;color:#5d6570"><b style="color:#1f2328">Demais ações:</b> {quiet_txt}</div>' if quiet_txt else ''}
-      <div style="padding:0 20px 18px"><a href="{DASHBOARD_URL}" style="display:inline-block;padding:8px 16px;border-radius:8px;
-        background:#1a5fd1;color:#ffffff;text-decoration:none;font-size:13px;font-weight:500">Abrir painel com os gráficos</a></div>
-    </div>
-    <p style="font-size:11px;color:#5d6570;line-height:1.5;margin:14px 4px 0">
-      Níveis de alerta: ±2%, ±4% e ±8%. <b>NOVO</b> marca a ação que subiu de nível desde o último lembrete.
-      Enviado a cada 2 horas durante o pregão enquanto houver ação acima de ±2%. Dados do Yahoo Finance, com atraso de até 15 min.
-    </p>
-  </div>
-</body></html>"""
+    quiet_txt = " · ".join(f'<b>{esc(q["symbol"])}</b> <span style="color:{UP if day_change(q) >= 0 else DOWN}">'
+                           f'{"+" if day_change(q) >= 0 else "−"}{br(abs(day_change(q)))}%</span>' for q in quiet)
+    html = page("LEMBRETE DE VARIAÇÃO · B3",
+                f"{len(hits)} {'ação passou' if len(hits) == 1 else 'ações passaram'} dos níveis de alerta hoje",
+                f"{hora} (Brasília) · variação contra o fechamento anterior",
+                data_table(["Ação", "Preço", "Dia", "Nível"], rows, ["left", "right", "right", "center"])
+                + (section_title("Demais ações") + row(quiet_txt) if quiet_txt else "")
+                + button(DASHBOARD_URL, "Abrir painel com os gráficos"),
+                "Níveis de alerta: ±2%, ±4% e ±8%. <b>NOVO</b> marca a ação que subiu de nível desde o último lembrete. "
+                "Enviado a cada 2 horas durante o pregão enquanto houver ação acima de ±2%. Dados do Yahoo Finance, com atraso de até 15 min.")
     return subject, text, html
 
 
