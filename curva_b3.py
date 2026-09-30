@@ -62,7 +62,7 @@ def parse_taxa_swap(text):
             continue
         if line[51] == "-":
             val = -val
-        key = desc.split()[0].upper() if desc else code
+        key = f"{code}|{desc}"
         names[key] = f"{code} {desc}"
         out.setdefault(key, []).append((dc, du, val))
     for k in out:
@@ -90,19 +90,26 @@ def fetch_taxa_swap(session, d):
                 resumo = {k: f"{parse_taxa_swap.names.get(k)} · {len(v)} vértices · 1º {v[0][1]}du={v[0][2]}"
                           for k, v in curves.items()}
                 print(f"[INFO] TaxaSwap {d}: curvas encontradas {resumo}")
-            # nomes usados no arquivo: DI x Pré aparece como "DIXPRE"; DI x IPCA como "DIXIPCA"/"IPCA..."
-            keys = sorted(curves)
-            print(f"[INFO] TaxaSwap {d}: {len(keys)} curvas: {keys}")
-            pre_k = next((k for k in ("PRE", "DIXPRE") if k in curves), None)
-            dic_k = next((k for k in ("DIC", "DIXIPCA", "DIXIPC", "IPCA") if k in curves), None) or \
-                next((k for k in keys if "IPCA" in k and k.startswith("DI")), None) or next((k for k in keys if "IPCA" in k), None)
+            # identifica as curvas pela descrição completa (código|descrição)
+            def med(pts):
+                v = sorted(x[2] for x in pts)
+                return v[len(v) // 2] if v else None
+
+            def pick(cond, lo, hi):
+                cands = [(k, med(v)) for k, v in curves.items() if cond(k.upper())]
+                ok = [k for k, m in cands if m is not None and lo <= m <= hi]
+                return ok[0] if ok else None, cands
+
+            pre_k, pre_c = pick(lambda k: "DIXPRE" in k.replace(" ", "") or k.split("|")[0] == "PRE", 3, 40)
+            dic_k, dic_c = pick(lambda k: ("IPCA" in k and "SINT" not in k) or k.split("|")[0] == "DIC", 1, 20)
+            print(f"[INFO] TaxaSwap {d}: candidatas DI x Pré {pre_c}; candidatas DI x IPCA {dic_c}")
+            print(f"[INFO] TaxaSwap {d}: PRE ← {pre_k}; DIC ← {dic_k}")
             if pre_k:
                 curves["PRE"] = curves[pre_k]
             if dic_k:
                 curves["DIC"] = curves[dic_k]
-            print(f"[INFO] TaxaSwap {d}: PRE ← {pre_k} ({parse_taxa_swap.names.get(pre_k)}); DIC ← {dic_k} ({parse_taxa_swap.names.get(dic_k)})")
             if not curves.get("PRE"):
-                last = f"sem curva DI x Pré; curvas: {keys}"
+                last = f"sem curva DI x Pré; curvas: {sorted(curves)}"
                 continue
             # escala da taxa: a PRE tem de ficar entre 5% e 30% a.a.
             vals = sorted(v for _, _, v in curves["PRE"])
