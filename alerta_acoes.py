@@ -34,7 +34,7 @@ import requests
 
 TICKERS = [
     "MOVI3", "SIMH3", "VAMO3", "JSLG3", "AMOB3", "RAPT3",
-    "RAPT4", "RENT3", "FRAS3", "ARML3", "MILL3", "PRNR3",
+    "RAPT4", "RENT3", "FRAS3", "ARML3", "MILS3", "PRNR3",
 ]
 LEVELS = [8, 4, 2]  # do maior para o menor
 BRT = ZoneInfo("America/Sao_Paulo")
