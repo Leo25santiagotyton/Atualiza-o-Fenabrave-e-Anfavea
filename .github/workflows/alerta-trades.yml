@@ -1,0 +1,41 @@
+name: Alerta de negócios nos favoritos
+
+# A cada 2 horas nos dias úteis, das 10h15 às 20h15 de Brasília.
+on:
+  schedule:
+    - cron: "15 13,15,17,19,21,23 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alerta-trades
+  cancel-in-progress: false
+
+jobs:
+  trades:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Verificar negócios acima de R$ 1 milhão
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python alerta_trades.py
+      - name: Salvar o que já foi avisado
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "monitor-bot@users.noreply.github.com"
+          git add alerts/trades_state.json 2>/dev/null || true
+          git diff --quiet --cached && exit 0
+          git commit -m "Atualiza alertas de negócios [skip ci]"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
