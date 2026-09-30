@@ -90,8 +90,19 @@ def fetch_taxa_swap(session, d):
                 resumo = {k: f"{parse_taxa_swap.names.get(k)} · {len(v)} vértices · 1º {v[0][1]}du={v[0][2]}"
                           for k, v in curves.items()}
                 print(f"[INFO] TaxaSwap {d}: curvas encontradas {resumo}")
+            # nomes usados no arquivo: DI x Pré aparece como "DIXPRE"; DI x IPCA como "DIXIPCA"/"IPCA..."
+            keys = sorted(curves)
+            print(f"[INFO] TaxaSwap {d}: {len(keys)} curvas: {keys}")
+            pre_k = next((k for k in ("PRE", "DIXPRE") if k in curves), None)
+            dic_k = next((k for k in ("DIC", "DIXIPCA", "DIXIPC", "IPCA") if k in curves), None) or \
+                next((k for k in keys if "IPCA" in k and k.startswith("DI")), None) or next((k for k in keys if "IPCA" in k), None)
+            if pre_k:
+                curves["PRE"] = curves[pre_k]
+            if dic_k:
+                curves["DIC"] = curves[dic_k]
+            print(f"[INFO] TaxaSwap {d}: PRE ← {pre_k} ({parse_taxa_swap.names.get(pre_k)}); DIC ← {dic_k} ({parse_taxa_swap.names.get(dic_k)})")
             if not curves.get("PRE"):
-                last = f"sem curva PRE; curvas: {sorted(curves)[:30]}"
+                last = f"sem curva DI x Pré; curvas: {keys}"
                 continue
             # escala da taxa: a PRE tem de ficar entre 5% e 30% a.a.
             vals = sorted(v for _, _, v in curves["PRE"])
@@ -103,7 +114,7 @@ def fetch_taxa_swap(session, d):
             if factor != 1:
                 curves = {k: [(dc, du, v * factor) for dc, du, v in pts] for k, pts in curves.items()}
             print(f"[INFO] TaxaSwap {d}: fator de escala {factor}; PRE 1º vértice {curves['PRE'][0]}; DIC 1º vértice {(curves.get('DIC') or [None])[0]}")
-            return {k: [(du, v) for _, du, v in pts if du > 0] for k, pts in curves.items()}
+            return {k: [(du, v) for _, du, v in curves[k] if du > 0] for k in ("PRE", "DIC") if k in curves}
         except Exception as e:
             last = str(e)
     print(f"[AVISO] TaxaSwap B3 {d}: {last}")
