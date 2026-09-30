@@ -25,7 +25,8 @@ from pathlib import Path
 import requests
 
 from alerta_acoes import BRT, HEADERS
-from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, swap_ipca
+from curva_b3 import fetch_taxa_swap
+from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, interp, swap_ipca
 from negocios_snd import fetch_agenda, fetch_details, fetch_pu_historico, fetch_registered, fetch_trades
 from alerta_acoes import DASHBOARD_URL, send_email
 
@@ -255,7 +256,8 @@ def main():
     # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
     curves = db.get("curves", {})
     need = sorted({s[0] for p in db["papers"].values() if is_ipca(p)
-                   for s in p["series"] if len(s) < 8 or s[6] is None or s[7] is None})
+                   for s in p["series"] if len(s) < 8 or s[6] is None or s[7] is None
+                   or "b3" not in curves.get(s[0], {})})
     for iso in need[-60:]:
         d = date.fromisoformat(iso)
         try:
@@ -271,7 +273,15 @@ def main():
             ettj = []
         if not tit:
             continue
-        curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj}
+        try:
+            b3 = fetch_taxa_swap(session, d)
+        except Exception as e:
+            print(f"[AVISO] TaxaSwap {iso}: {e}")
+            b3 = {}
+        if b3:
+            print(f"[INFO] B3 {iso}: curvas {sorted(b3)}; PRE 252du={interp(b3.get('PRE', []), 252)} 756du={interp(b3.get('PRE', []), 756)}; "
+                  f"DIC 252du={interp(b3.get('DIC', []), 252)} 756du={interp(b3.get('DIC', []), 756)}")
+        curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj, "b3": {k: b3[k] for k in ("PRE", "DIC") if k in b3}}
         n = 0
         for p in db["papers"].values():
             if not is_ipca(p):
@@ -281,7 +291,7 @@ def main():
                     continue
                 while len(srow) < 8:
                     srow.append(None)
-                sp, cdi = swap_ipca(srow[1], srow[3], p.get("ntnbRef"), tit, di, ettj)
+                sp, cdi = swap_ipca(srow[1], srow[3], p.get("ntnbRef"), tit, di, ettj, curves[iso]["b3"])
                 srow[6] = round(sp, 4) if sp is not None else None
                 srow[7] = round(cdi, 4) if cdi is not None else None
                 n += srow[6] is not None
@@ -292,7 +302,7 @@ def main():
     for d in sorted(business_days_back(4)):
         iso = d.isoformat()
         cur = curves.get(iso) or {}
-        if cur.get("ntnb") and cur.get("ettj"):
+        if cur.get("ntnb") and cur.get("ettj") and (cur.get("b3") or {}).get("PRE"):
             continue
         try:
             tit = fetch_titulos(session, d)
@@ -301,7 +311,13 @@ def main():
             print(f"[AVISO] curva {iso}: {e}")
             continue
         if tit and tit.get("ntnb") and ettj:
-            curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj}
+            b3 = (curves.get(iso) or {}).get("b3") or {}
+            if not b3:
+                try:
+                    b3 = {k: v for k, v in fetch_taxa_swap(session, d).items() if k in ("PRE", "DIC")}
+                except Exception as e:
+                    print(f"[AVISO] TaxaSwap {iso}: {e}")
+            curves[iso] = {"ntnb": tit["ntnb"], "ettj": ettj, "b3": b3}
             print(f"[INFO] curva {iso}: {len(tit['ntnb'])} NTN-B e {len(ettj)} vértices ETTJ.")
         else:
             print(f"[INFO] curva {iso}: ainda não publicada pela ANBIMA.")
