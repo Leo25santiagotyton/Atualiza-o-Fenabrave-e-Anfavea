@@ -3,7 +3,7 @@
 ## Dashboard de cotações B3
 
 Painel em tempo real (estilo card do Google) para MOVI3, SIMH3, VAMO3, JSLG3,
-AMOB3, RAPT3, RAPT4, RENT3, FRAS3, ARML3, MILL3 e PRNR3.
+AMOB3, RAPT3, RAPT4, RENT3, FRAS3, ARML3, MILS3 e PRNR3.
 
 ```bash
 pip install -r requirements.txt
@@ -30,3 +30,15 @@ alimenta o painel publicado em https://claude.ai/artifact/UHYqgM4PcixNRmxt7AFBhk
 
 Para ver o modelo do e-mail sem enviar: `python alerta_acoes.py --demo --dry-run`
 (gera `alerts/preview.html`).
+
+## Boletim de notícias materiais
+
+`noticias_acoes.py` roda pelo workflow **Boletim de notícias B3** todo dia às
+8h30 e às 18h30. Busca no Google News as notícias das 12 empresas, mantém só as
+materiais (fato relevante, resultado, M&A, dívida e rating, proventos, gestão,
+regulatório, analistas e contratos relevantes), descarta listas genéricas e
+conteúdo de "dicas", e envia um e-mail com as novidades desde o último boletim e
+um resumo do mercado (Ibovespa, dólar e as ações). Grava `alerts/news.json`,
+que alimenta a faixa de notícias do painel.
+
+Prévia sem enviar: `python noticias_acoes.py --dry-run` (gera `alerts/news_preview.html`).
