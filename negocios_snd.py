@@ -87,9 +87,16 @@ def fetch_pu_historico(session, ativo, a, b):
 
 
 DET_URL = ("https://www.debentures.com.br/exploreosnd/consultaadados/emissoesdedebentures/"
-           "caracteristicas_d.asp?tip_deb=publicas&op_exc=False&ativo={ativo}")
-AGENDA_URL = ("https://www.debentures.com.br/exploreosnd/consultaadados/eventosfinanceiros/"
-              "agenda_r.asp?op_exc=False&ativo={ativo}&dt_ini=01/01/2000&dt_fim=31/12/2070")
+           "caracteristicas_d.asp?tip_deb=publicas&selecao={ativo}")
+AGENDA_BASE = "https://www.debentures.com.br/exploreosnd/consultaadados/eventosfinanceiros/"
+AGENDA_URLS = [AGENDA_BASE + "agenda_r.asp?tip_deb=publicas&selecao={ativo}",
+               AGENDA_BASE + "agenda_r.asp?op_exc=False&selecao={ativo}&dt_ini=01/01/2000&dt_fim=31/12/2070",
+               AGENDA_BASE + "agenda_r.asp?op_exc=False&ativo={ativo}&dt_ini=01/01/2000&dt_fim=31/12/2070"]
+DETAIL_LABELS = ["Série/Emissão", "ISIN", "Situação", "Registro CVM da Emissão", "Deb. Incent. (Lei 12.431)", "Garantia/Espécie",
+                 "Emissão", "Vencimento", "Data do Novo Vencimento", "Início de Rentabilidade", "Atos Societários", "Emitida",
+                 "Mercado", "Resgatada", "Nominal na Emissão", "Coordenador Líder", "Agente Fiduciário", "Tipo de Remuneração",
+                 "% Multiplicador/Rentabilidade", "Juros/Spread", "Taxa de Juros", "Prêmio", "Amortização", "Periodicidade",
+                 "Tipo de Amortização", "Carência", "Pagamento de Juros"]
 
 
 def fetch_details(session, ativo):
@@ -98,6 +105,19 @@ def fetch_details(session, ativo):
     r.raise_for_status()
     soup = BeautifulSoup(r.content, "html.parser")
     out = {}
+    # 1) células que terminam em ':' seguidas do valor
+    cells = [c.get_text(" ", strip=True) for c in soup.find_all("td")]
+    cells = [c for c in cells if c]
+    for i, c in enumerate(cells[:-1]):
+        if c.endswith(":") and 2 <= len(c) <= 61 and not cells[i + 1].endswith(":"):
+            out.setdefault(re.sub(r"\s+", " ", c.rstrip(":").strip()), re.sub(r"\s+", " ", cells[i + 1]).strip(" :"))
+    # 2) texto corrido "Rótulo: valor Rótulo: valor" para os rótulos conhecidos
+    text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+    alts = "|".join(re.escape(x) for x in sorted(DETAIL_LABELS, key=len, reverse=True))
+    for m in re.finditer(rf"(?<![\w/])({alts}):\s*:?\s*(.*?)(?=\s(?:{alts}|IPO|ISIN|[A-ZÀ-Ú][a-zà-ú][A-Za-zÀ-ú.()/% -]{{0,40}}|Artigo \d+º|Nominal em [\d/]+):|$)", text):
+        v = m.group(2).strip()
+        if v and len(v) <= 200:
+            out.setdefault(m.group(1), v)
     for tr in soup.find_all("tr"):
         cells = [c.get_text(" ", strip=True) for c in tr.find_all("td")]
         cells = [c for c in cells if c]
@@ -110,7 +130,11 @@ def fetch_details(session, ativo):
 
 def fetch_agenda(session, ativo):
     """Agenda de eventos (juros, amortização, vencimento): [[iso, evento, taxa/percentual, situação]]."""
-    r = session.get(AGENDA_URL.format(ativo=ativo), timeout=60)
+    r = None
+    for u in AGENDA_URLS:
+        r = session.get(u.format(ativo=ativo), timeout=60)
+        if r.status_code == 200:
+            break
     r.raise_for_status()
     soup = BeautifulSoup(r.content, "html.parser")
     out = []
