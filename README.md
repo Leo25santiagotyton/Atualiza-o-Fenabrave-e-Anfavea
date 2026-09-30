@@ -43,3 +43,11 @@ um resumo do mercado (Ibovespa, dólar e as ações). Grava `alerts/news.json`,
 que alimenta a faixa de notícias do painel.
 
 Prévia sem enviar: `python noticias_acoes.py --dry-run` (gera `alerts/news_preview.html`).
+
+## Debêntures (ANBIMA)
+
+`debentures_anbima.py` roda pelo workflow **Debêntures ANBIMA** nos dias úteis
+às 19h30 (e às 8h do dia seguinte, caso o arquivo atrase). Baixa as taxas
+indicativas de debêntures da ANBIMA, filtra os papéis dos emissores
+acompanhados e guarda o histórico em `alerts/debentures.json`, que alimenta a
+aba **Dívida** do painel. Favoritos iniciais: VAMO33, VAMO34 e VAMO19.
