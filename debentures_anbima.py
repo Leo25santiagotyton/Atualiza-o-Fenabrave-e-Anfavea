@@ -148,6 +148,42 @@ def send_new_issues(codes, papers):
     print("[INFO] e-mail de nova emissão enviado.")
 
 
+PANEL_FILE = OUT_DIR / "debentures_painel.json"
+PANEL_LIMIT = 250_000  # o banco do painel aceita até 256 KB por documento
+
+
+def _r(v, n):
+    return round(v, n) if isinstance(v, float) else v
+
+
+def write_panel_file():
+    """Versão enxuta de debentures.json para o painel: sem o histórico de curvas, com números arredondados
+    e, se ainda passar do limite, menos dias de negócios e de PU da curva."""
+    full = json.loads(DEB_FILE.read_text())
+    for keep_trades, keep_pu in ((60, 60), (40, 40), (25, 25), (15, 15)):
+        papers = []
+        for p in full["papers"]:
+            q = {k: p[k] for k in ("code", "name", "issuer", "ticker", "index", "section", "maturity", "ntnbRef", "anbima", "status")
+                 if k in p}
+            q["series"] = [[s[0]] + [_r(x, 4) for x in s[1:]] for s in p.get("series", [])]
+            q["trades"] = [[t[0]] + [_r(x, 2) for x in t[1:]] for t in p.get("trades", [])][-keep_trades:]
+            q["puCurve"] = [[x[0], _r(x[1], 2)] for x in p.get("puCurve", [])][-keep_pu:]
+            if p.get("details"):
+                q["details"] = p["details"]
+            if p.get("agenda"):
+                q["agenda"] = p["agenda"]
+            papers.append(q)
+        cl = full.get("curveLatest") or {}
+        panel = {k: full.get(k) for k in ("updatedAt", "source", "lastDate", "favoritesDefault", "newIssues")}
+        panel["papers"] = papers
+        panel["curveLatest"] = {**cl, "b3": {k: [[du, _r(v, 4)] for du, v in pts] for k, pts in (cl.get("b3") or {}).items()}}
+        text = json.dumps(panel, ensure_ascii=False, separators=(",", ":"))
+        if len(text.encode()) <= PANEL_LIMIT:
+            break
+    PANEL_FILE.write_text(text)
+    print(f"[INFO] painel: {len(text.encode()) // 1024} KB ({keep_trades} dias de negócios por papel).")
+
+
 def is_ipca(p):
     return (p.get("index") or "").strip().upper().startswith("IPCA")
 
@@ -434,6 +470,7 @@ def main():
         "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
+    write_panel_file()
     print(f"[INFO] {len(papers)} papéis salvos; {fetched} arquivo(s) novo(s); último dia {dates[-1] if dates else '-'}.")
     for f in FAVORITES:
         p = db["papers"].get(f)
