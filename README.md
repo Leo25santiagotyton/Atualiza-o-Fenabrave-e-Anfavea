@@ -65,3 +65,11 @@ taxa ANBIMA.
 8h50: atualiza a ANBIMA e envia por e-mail as 5 debêntures que mais fecharam e
 as 5 que mais abriram, entre os favoritos e no geral dos emissores.
 Prévia: `python boletim_credito.py --dry-run`.
+
+## Alerta de negócios nos favoritos
+
+`alerta_trades.py` roda pelo workflow **Alerta de negócios nos favoritos** a cada
+2 horas nos dias úteis (10h15 às 20h15). Consulta os negócios do dia no SND e
+envia e-mail quando um favorito (VAMO33, VAMO34, VAMO19) negociou mais de
+R$ 1 milhão, com PU médio e taxa média aproximada contra a ANBIMA. Cada papel
+e dia é avisado uma vez (de novo se o volume do dia mudar).
