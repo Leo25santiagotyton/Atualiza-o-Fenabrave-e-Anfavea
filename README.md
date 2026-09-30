@@ -73,3 +73,30 @@ Prévia: `python boletim_credito.py --dry-run`.
 envia e-mail quando um favorito (VAMO33, VAMO34, VAMO19) negociou mais de
 R$ 1 milhão, com PU médio e taxa média aproximada contra a ANBIMA. Cada papel
 e dia é avisado uma vez (de novo se o volume do dia mudar).
+
+## Swap Dólar + (bonds em US$ → CDI +)
+
+Aba do painel para converter o yield de um bond em dólar em CDI + e pré:
+
+- Curva de cupom cambial limpo da B3 (DOC, formada pelos FRC), cupom sujo (DOL) e juros em US$ (LIB),
+  do arquivo TaxaSwap (`curva_b3.py`).
+- Ajustes de dólar futuro (DOL) e de FRC do Boletim de Preços da B3 (`b3_derivativos.py`, arquivo PR/BVBG.086).
+- Ambos entram na coleta das 8h (`debentures_anbima.py`) e vão para `curveLatest.usd` e `curveLatest.usdMkt`.
+- CDI + = ((1 + y)^(dc/360) / (1 + cupom limpo × dc/360))^(252/du) − 1.
+
+## CRI/CRA (por devedor)
+
+`cra_anbima.py` usa a API oficial da ANBIMA (Preços e Índices – CRI/CRA). O portal data.anbima.com.br
+protege a API com reCAPTCHA, então é preciso cadastro gratuito em developers.anbima.com.br e os secrets
+`ANBIMA_CLIENT_ID` e `ANBIMA_CLIENT_SECRET` (opcional: variável `ANBIMA_API_BASE` para o sandbox).
+Os papéis são ligados ao grupo pelo devedor (originador do crédito), não pela securitizadora.
+
+## Nova emissão
+
+O e-mail de nova emissão traz emissão/série, volume (quantidade × valor nominal), remuneração, vencimento e prazo,
+bullet ou amortização (agenda do SND) e manchetes recentes sobre o uso dos recursos.
+
+## Atualização do painel
+
+Preços a cada 15 min no pregão (GitHub Actions) e foto de fechamento às 18h05/18h20. O painel sincroniza
+por rotinas às :05, :20, :35 e :50 (10h–17h), e às 18h20/18h35 para o fechamento.
