@@ -29,7 +29,7 @@ from curva_b3 import fetch_taxa_swap
 import cra_anbima
 from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, interp, swap_ipca
 from negocios_snd import fetch_agenda, fetch_details, fetch_pu_historico, fetch_registered, fetch_trades
-from alerta_acoes import DASHBOARD_URL, send_email
+from alerta_acoes import DASHBOARD_URL, br, send_email
 
 OUT_DIR = Path(__file__).parent / "alerts"
 DEB_FILE = OUT_DIR / "debentures.json"
@@ -135,22 +135,99 @@ def group_of(row):
     return None, None
 
 
-def send_new_issues(codes, papers):
-    from email_layout import MUTED, data_table, button, page, esc
-    rows = [[f"<b>{esc(c)}</b>", esc(papers.get(c, {}).get("issuer") or ""),
-             f'<span style="font-size:12px;color:{MUTED}">'
-             + esc(" · ".join(f"{k}: {v}" for k, v in list((papers.get(c, {}).get("details") or {}).items())[:6]) or "ficha ainda não disponível")
-             + "</span>"] for c in codes]
+def _brnum(v):
+    try:
+        return float(str(v).replace("R$", "").replace(".", "").replace(",", ".").strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def issue_summary(p):
+    """Resumo da emissão para o e-mail: número/série, volume, remuneração, prazo e amortização."""
+    det = p.get("details") or {}
+    qty, vn = _brnum(det.get("Emitida")), _brnum(det.get("Nominal na Emissão"))
+    vol = qty * vn if qty and vn else None
+    tipo = det.get("Tipo de Remuneração") or p.get("index") or ""
+    spread = next((det.get(k) for k in ("Juros/Spread", "Taxa de Juros", "% Multiplicador/Rentabilidade")
+                   if det.get(k) and det.get(k) not in ("-", "0")), None)
+    rate = lastv = None
+    s = [x for x in p.get("series", []) if x[1] is not None]
+    if s:
+        lastv = s[-1][1]
+    remu = " ".join(x for x in (tipo, f"+ {spread}%" if spread and "%" not in spread and tipo.upper().startswith(("IPCA", "DI")) else spread) if x)
+    if lastv is not None:
+        remu += f" (ANBIMA hoje: {br(lastv)}%)"
+    em, venc = det.get("Emissão"), det.get("Data do Novo Vencimento") or det.get("Vencimento") or p.get("maturity")
+    prazo = None
+    try:
+        a, b = datetime.strptime(em, "%d/%m/%Y"), datetime.strptime(venc, "%d/%m/%Y")
+        prazo = (b - a).days / 365.25
+    except (TypeError, ValueError):
+        pass
+    amort = [e for e in p.get("agenda", []) if any("AMORTIZ" in norm(str(x)) for x in e[1:])]
+    if not p.get("agenda"):
+        amort_txt = "a confirmar (agenda ainda não publicada no SND)"
+    elif len(amort) <= 1:
+        amort_txt = "Bullet (amortização no vencimento)"
+    else:
+        amort_txt = f"Amortização em {len(amort)} parcelas, a partir de {datetime.fromisoformat(amort[0][0]).strftime('%d/%m/%Y')}"
+    return {"serie": det.get("Série/Emissão") or "—", "vol": vol, "remu": remu or "a confirmar",
+            "venc": venc or "—", "prazo": prazo, "amort": amort_txt,
+            "incent": det.get("Deb. Incent. (Lei 12.431)"), "coord": det.get("Coordenador Líder")}
+
+
+def use_of_proceeds(session, issuer):
+    """Manchetes recentes sobre a emissão e a destinação dos recursos (Google News)."""
+    from urllib.parse import quote_plus
+    import xml.etree.ElementTree as ET
+    q = f'"{issuer}" (debêntures OR debênture OR emissão) (recursos OR destinação OR "uso dos recursos" OR refinanciamento OR captação) when:30d'
+    try:
+        r = session.get("https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=pt-BR&gl=BR&ceid=BR:pt-419", timeout=20)
+        r.raise_for_status()
+        items = [(it.findtext("title") or "", it.findtext("link") or "") for it in ET.fromstring(r.content).iter("item")]
+    except Exception as e:
+        print(f"[AVISO] notícias da emissão {issuer}: {e}")
+        return []
+    return items[:3]
+
+
+def send_new_issues(codes, papers, session=None):
+    from email_layout import MUTED, data_table, button, page, esc, row
+    rows, text = [], []
+    for c in codes:
+        p = papers.get(c, {})
+        x = issue_summary(p)
+        news = use_of_proceeds(session, p.get("issuer") or p.get("name") or c) if session else []
+        uop = "<br>".join(f'<a href="{esc(l)}" style="color:#1a73e8">{esc(t)}</a>' for t, l in news) or \
+            f'<span style="color:{MUTED}">Sem notícia sobre a destinação ainda; ver escritura/anúncio de início na CVM.</span>'
+        rows.append([f"<b>{esc(c)}</b><div style='font-size:12px;color:{MUTED}'>{esc(p.get('issuer') or '')}</div>",
+                     esc(x["serie"]),
+                     f"R$ {br(x['vol'] / 1e6)} mi" if x["vol"] else "a confirmar",
+                     esc(x["remu"]),
+                     esc(x["venc"]) + (f"<div style='font-size:12px;color:{MUTED}'>{br(x['prazo'], 1)} anos</div>" if x["prazo"] else ""),
+                     esc(x["amort"]) + (f"<div style='font-size:12px;color:{MUTED}'>Lei 12.431: {esc(x['incent'])}</div>" if x["incent"] else ""),
+                     uop])
+        text.append(f"{c} ({p.get('issuer')}): emissão/série {x['serie']}, volume "
+                    + (f"R$ {br(x['vol'] / 1e6)} mi" if x["vol"] else "a confirmar")
+                    + f", remuneração {x['remu']}, vencimento {x['venc']}"
+                    + (f" ({br(x['prazo'], 1)} anos)" if x["prazo"] else "") + f", {x['amort']}"
+                    + "".join(f"\n  - {t}: {l}" for t, l in news))
     html_body = page("NOVA EMISSÃO DE DEBÊNTURE", f"{len(codes)} papel(éis) novo(s) dos emissores acompanhados",
                      "Detectado na lista de emissões registradas do SND",
-                     data_table(["Papel", "Emissor", "Ficha"], rows, ["left", "left", "left"]) + button(DASHBOARD_URL, "Abrir aba Dívida"),
+                     data_table(["Papel", "Emissão/série", "Volume", "Remuneração", "Vencimento", "Amortização", "Uso dos recursos (notícias)"],
+                                rows, ["left"] * 7)
+                     + row(f'<span style="color:{MUTED};font-size:12px">Volume = quantidade emitida × valor nominal na emissão (ficha do SND). '
+                           f'Bullet/amortização pela agenda de eventos do SND. O uso dos recursos vem de notícias recentes; a fonte oficial é a escritura.</span>')
+                     + button(DASHBOARD_URL, "Abrir aba Dívida"),
                      "Aviso automático: o papel apareceu hoje na lista de debêntures registradas do SND (debentures.com.br).")
-    text = "Nova emissão de debênture: " + ", ".join(codes) + f"\nPainel: {DASHBOARD_URL}"
-    send_email(f"[Crédito] Nova emissão: {', '.join(codes)}", text, html_body)
+    send_email(f"[Crédito] Nova emissão: {', '.join(codes)}", "Nova emissão de debênture\n\n" + "\n\n".join(text) + f"\n\nPainel: {DASHBOARD_URL}", html_body)
     print("[INFO] e-mail de nova emissão enviado.")
 
 
 PANEL_FILE = OUT_DIR / "debentures_painel.json"
+PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do Novo Vencimento", "Emitida", "Nominal na Emissão",
+                 "Tipo de Remuneração", "% Multiplicador/Rentabilidade", "Juros/Spread", "Taxa de Juros", "Garantia/Espécie",
+                 "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização"}
 PANEL_LIMIT = 250_000  # o banco do painel aceita até 256 KB por documento
 
 
@@ -171,7 +248,7 @@ def write_panel_file():
             q["trades"] = [[t[0]] + [_r(x, 2) for x in t[1:]] for t in p.get("trades", [])][-keep_trades:]
             q["puCurve"] = [[x[0], _r(x[1], 2)] for x in p.get("puCurve", [])][-keep_pu:]
             if p.get("details"):
-                q["details"] = p["details"]
+                q["details"] = {k: v for k, v in p["details"].items() if k in PANEL_DETAILS}
             if p.get("agenda"):
                 q["agenda"] = p["agenda"]
             papers.append(q)
@@ -438,21 +515,31 @@ def main():
 
     # ficha (emissão, vencimento, valor nominal, remuneração) e agenda de juros/amortizações
     n_det = 0
-    # ficha/agenda do SND pausada: o endereço atual responde erro 500 para todos os papéis
-    for pp in (db["papers"].values() if os.environ.get("SND_FICHA") == "1" else []):
-        if not pp.get("ticker"):
+    # ficha (SND, parâmetro selecao=) e agenda: favoritos e emissões novas primeiro, até 40 por execução
+    fresh_set = set(fresh) | {x["code"] for x in db.get("newIssues", [])[-20:]}
+    order = sorted(db["papers"].values(), key=lambda q: (q["code"] not in FAVORITES, q["code"] not in fresh_set, q["code"]))
+    budget = 40
+    for pp in order:
+        if not pp.get("ticker") or pp.get("section") in ("CRA", "CRI"):
             continue
+        if budget <= 0:
+            break
         refresh_agenda = pp.get("agendaAt", "") < (datetime.now(BRT).date() - timedelta(days=7)).isoformat()
-        if pp.get("details") and not refresh_agenda:
+        if pp.get("details") and pp.get("detailsV") == 2 and not refresh_agenda:
             continue
         try:
-            if not pp.get("details"):
+            budget -= 1
+            if not pp.get("details") or pp.get("detailsV") != 2:
                 pp["details"] = fetch_details(session, pp["code"])
-            pp["agenda"] = fetch_agenda(session, pp["code"])
-            pp["agendaAt"] = today_iso
+                pp["detailsV"] = 2
             n_det += 1
         except Exception as e:
-            print(f"[AVISO] ficha/agenda {pp['code']}: {e}")
+            print(f"[AVISO] ficha {pp['code']}: {e}")
+        try:
+            pp["agenda"] = fetch_agenda(session, pp["code"])
+        except Exception as e:
+            print(f"[AVISO] agenda {pp['code']}: {e}")
+        pp["agendaAt"] = today_iso
     print(f"[INFO] fichas/agendas atualizadas: {n_det}")
     sample = db["papers"].get("VAMO33", {})
     print("[INFO] exemplo ficha VAMO33:", dict(list((sample.get("details") or {}).items())[:25]))
@@ -460,7 +547,7 @@ def main():
 
     if fresh and os.environ.get("SMTP_HOST"):
         try:
-            send_new_issues(fresh, db["papers"])
+            send_new_issues(fresh, db["papers"], session)
         except Exception as e:
             print(f"[ERRO] e-mail de nova emissão: {e}")
 
