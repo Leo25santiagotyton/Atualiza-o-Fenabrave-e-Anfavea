@@ -64,9 +64,6 @@ COMPANIES = [
      "query": 'Frasle OR "Fras-le" OR FRAS3', "match": r"\bFras-?le\b|\bFrasle\b|FRAS3"},
     {"tickers": ["ARML3"], "name": "Armac",
      "query": "Armac OR ARML3", "match": r"\bArmac\b|ARML3"},
-    {"tickers": ["MILS3"], "name": "Mills",
-     "query": 'MILS3 OR "Mills Locação" OR "Mills Estruturas" OR "Mills (MILS3)"',
-     "match": r"\bMills\b|MILS3", "exclude": r"General Mills"},
     {"tickers": ["PRNR3"], "name": "Priner",
      "query": "Priner OR PRNR3", "match": r"\bPriner\b|PRNR3"},
 ]

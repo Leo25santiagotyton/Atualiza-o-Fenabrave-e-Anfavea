@@ -3,7 +3,7 @@
 ## Dashboard de cotações B3
 
 Painel em tempo real (estilo card do Google) para MOVI3, SIMH3, VAMO3, JSLG3,
-AMOB3, RAPT3, RAPT4, RENT3, FRAS3, ARML3, MILS3 e PRNR3.
+AMOB3, RAPT3, RAPT4, RENT3, FRAS3, ARML3 e PRNR3.
 
 ```bash
 pip install -r requirements.txt
@@ -12,7 +12,7 @@ python dashboard/server.py --demo   # dados simulados, sem internet
 ```
 
 - Atualiza as cotações a cada 15 s (fonte: Yahoo Finance, atraso de até 15 min).
-- Abre na visão **Todos**: uma grade compacta com o gráfico das 12 ações ao
+- Abre na visão **Todos**: uma grade compacta com o gráfico das 11 ações ao
   mesmo tempo, com um seletor de período (1D, 5D, 1M, 6M, No ano, 1A, 5A)
   que vale para todos.
 - Clique numa ação (ou em **Detalhe**) para ver o gráfico 1D / 5D / 1M / 6M / No ano / 1A / 5A,
@@ -34,7 +34,7 @@ Para ver o modelo do e-mail sem enviar: `python alerta_acoes.py --demo --dry-run
 ## Boletim de notícias materiais
 
 `noticias_acoes.py` roda pelo workflow **Boletim de notícias B3** todo dia às
-8h30 e às 18h30. Busca no Google News as notícias das 12 empresas, mantém só as
+8h30 e às 18h30. Busca no Google News as notícias das 11 empresas, mantém só as
 materiais (fato relevante, resultado, M&A, dívida e rating, proventos, gestão,
 regulatório, analistas e contratos relevantes), descarta listas genéricas e
 conteúdo de "dicas", e envia um e-mail com as novidades desde o último boletim e
