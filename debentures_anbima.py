@@ -27,6 +27,7 @@ import requests
 from alerta_acoes import BRT, HEADERS
 from curva_b3 import fetch_taxa_swap
 import cra_anbima
+from b3_derivativos import fetch_usd_market
 from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, interp, swap_ipca
 from negocios_snd import fetch_agenda, fetch_details, fetch_pu_historico, fetch_registered, fetch_trades
 from alerta_acoes import DASHBOARD_URL, br, send_email
@@ -491,6 +492,12 @@ def main():
             curves[curve_day]["usd"] = fetch_taxa_swap(session, date.fromisoformat(curve_day)).get("usd") or {}
         except Exception as e:
             print(f"[AVISO] TaxaSwap dólar {curve_day}: {e}")
+    # ajustes de DOL e FRC do Boletim de Preços da B3 (mesmo dia da curva)
+    if curve_day and not (curves[curve_day].get("usdMkt") or {}).get("DOL"):
+        try:
+            curves[curve_day]["usdMkt"] = fetch_usd_market(session, date.fromisoformat(curve_day))
+        except Exception as e:
+            print(f"[AVISO] DOL/FRC B3 {curve_day}: {e}")
     prev_day = good[-2] if len(good) > 1 else None
 
     # todos os papéis registrados dos emissores (SND), mesmo sem ANBIMA nem negócio
@@ -602,7 +609,7 @@ def main():
         "lastDate": dates[-1] if dates else None,
         "dates": dates,
         "favoritesDefault": FAVORITES,
-        "curves": {k: (v if k == curve_day else {kk: vv for kk, vv in v.items() if kk != "usd"}) for k, v in curves.items() if k >= cutoff},
+        "curves": {k: (v if k == curve_day else {kk: vv for kk, vv in v.items() if kk not in ("usd", "usdMkt")}) for k, v in curves.items() if k >= cutoff},
         "curveLatest": ({"date": curve_day, **curves[curve_day],
                          "prevDate": prev_day, "prevNtnb": curves[prev_day]["ntnb"] if prev_day else []}
                         if curve_day else (old_latest if (old_latest := (db.get("curveLatestOld") or {})) else {})),
