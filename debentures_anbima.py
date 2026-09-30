@@ -296,19 +296,31 @@ def main():
             db["knownCodes"] = old.get("knownCodes", [])
             db["newIssues"] = old.get("newIssues", [])
             db["craDates"] = old.get("craDates", [])
+            db["issuersKey"] = old.get("issuersKey")
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
+    # emissor novo na lista (ex.: Tupy): relê os arquivos já baixados para trazer o histórico dele
+    issuers_key = ",".join(t for _, t, _ in ISSUERS)
+    if db.get("issuersKey") != issuers_key and have:
+        print(f"[INFO] lista de emissores mudou; relendo o histórico da ANBIMA e do SND.")
+        refetch = {x for x in have if x >= (datetime.now(BRT).date() - timedelta(days=120)).isoformat()}
+        db["tradeDays"] = [x for x in db.get("tradeDays", []) if x not in refetch]
+    else:
+        refetch = set()
+    db["issuersKey"] = issuers_key
 
     session = requests.Session()
     session.headers.update({**HEADERS, "Accept": "text/plain,*/*"})
 
     # na primeira vez preenche o histórico; depois só os dias que faltam
     days = business_days_back(args.dias if len(have) < 5 else 7)
+    if refetch:
+        days = sorted(set(days) | {date.fromisoformat(x) for x in refetch})
     fetched, errors = 0, 0
     for d in sorted(days):
         iso = d.isoformat()
-        if iso in have:
+        if iso in have and iso not in refetch:
             continue
         try:
             rows = fetch_day(session, d)
@@ -375,7 +387,7 @@ def main():
     # negócios do SND: volume, número de negócios e PU médio por papel e dia.
     # Também inclui papéis dos emissores que não têm taxa indicativa na ANBIMA.
     traded_days = set(db.get("tradeDays", []))
-    for d in sorted(business_days_back(args.dias if len(traded_days) < 5 else 7)):
+    for d in sorted(set(business_days_back(args.dias if len(traded_days) < 5 else 7)) | {date.fromisoformat(x) for x in refetch}):
         iso = d.isoformat()
         if iso in traded_days and iso != sorted(have)[-1]:
             continue
@@ -597,6 +609,7 @@ def main():
         "tradeDays": sorted(d for d in db.get("tradeDays", []) if d >= cutoff),
         "knownCodes": db.get("knownCodes", []),
         "craDates": db.get("craDates", []),
+        "issuersKey": db.get("issuersKey"),
         "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
