@@ -12,7 +12,10 @@ python dashboard/server.py --demo   # dados simulados, sem internet
 ```
 
 - Atualiza as cotações a cada 15 s (fonte: Yahoo Finance, atraso de até 15 min).
-- Clique numa ação para ver o gráfico 1D / 5D / 1M / 6M / No ano / 1A / 5A,
+- Abre na visão **Todos**: uma grade compacta com o gráfico das 12 ações ao
+  mesmo tempo, com um seletor de período (1D, 5D, 1M, 6M, No ano, 1A, 5A)
+  que vale para todos.
+- Clique numa ação (ou em **Detalhe**) para ver o gráfico 1D / 5D / 1M / 6M / No ano / 1A / 5A,
   abertura, máxima, mínima, fechamento anterior, volume e faixa de 52 semanas.
 - Para mudar a lista de ações, edite `TICKERS` em `dashboard/server.py` e em
   `dashboard/index.html`.
