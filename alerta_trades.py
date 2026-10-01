@@ -24,6 +24,7 @@ from alerta_acoes import BRT, DASHBOARD_URL, HEADERS, br, send_email
 from debentures_anbima import FAVORITES
 from email_layout import DOWN, MUTED, UP, button, data_table, esc, page, row
 from negocios_snd import fetch_trades
+from b3_bdi import fetch_bdi_trades
 
 OUT = Path(__file__).parent / "alerts"
 DEB_FILE = OUT / "debentures.json"
@@ -88,6 +89,28 @@ def main():
             rate, bps = implied(p, t)
             hits.append({"t": t, "vol": vol, "key": key, "paper": p, "rate": rate, "bps": bps})
         print(f"[INFO] SND {d}: {len(trades)} linhas lidas.")
+
+    # CRAs da Vamos (e favoritos) pelo negócio a negócio da B3, que sai durante o pregão
+    cra_codes = [c for c, p in papers.items() if p.get("section") in ("CRA", "CRI") and p.get("issuer") == "Vamos"]
+    try:
+        got = fetch_bdi_trades(s, today, set(cra_codes) | set(favs)) or {}
+    except Exception as e:
+        print(f"[ERRO] BDI {today}: {e}")
+        got = {}
+    for code, ticks in got.items():
+        vol = sum(t[4] or 0 for t in ticks)
+        if vol < MIN_VOLUME:
+            continue
+        key = f"{code}|{today.isoformat()}|B3|{len(ticks)}"
+        if key in state["sent"]:
+            continue
+        rate = (sum(t[5] * t[4] for t in ticks if t[5] is not None and t[4]) / sum(t[4] for t in ticks if t[5] is not None and t[4])) if any(t[5] is not None and t[4] for t in ticks) else None
+        qty = sum(t[2] or 0 for t in ticks)
+        p = papers.get(code, {})
+        last = [x for x in p.get("series", []) if x[1] is not None]
+        bps = (rate - last[-1][1]) * 100 if rate is not None and last else None
+        hits.append({"t": {"code": code, "issuer": p.get("issuer") or "", "date": today.isoformat(), "qty": qty, "deals": len(ticks),
+                           "puAvg": (vol / qty) if qty else None}, "vol": vol, "key": key, "paper": p, "rate": rate, "bps": bps})
 
     if not hits:
         print("[INFO] Nenhum negócio novo acima de R$ 1 milhão nos favoritos.")
