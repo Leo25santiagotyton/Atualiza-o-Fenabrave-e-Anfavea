@@ -231,6 +231,7 @@ def send_new_issues(codes, papers, session=None):
 
 PANEL_FILE = OUT_DIR / "debentures_painel.json"
 CRA_LIST = OUT_DIR / "cras_lista.json"
+FICHAS_FILE = OUT_DIR / "debentures_fichas.json"
 PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do Novo Vencimento", "Emitida", "Nominal na Emissão",
                  "Tipo de Remuneração", "% Multiplicador/Rentabilidade", "Juros/Spread", "Taxa de Juros", "Garantia/Espécie",
                  "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização",
@@ -257,7 +258,34 @@ def write_panel_file():
         fut = [r for r in rows if r[0] >= today]
         return ([r for r in rows if r[0] < today][-2:] + fut)[:n]
 
-    for keep_trades, keep_pu, keep_ag in ((60, 60, 40), (40, 40, 30), (25, 25, 24), (15, 15, 16), (10, 10, 10), (5, 5, 0)):
+    fichas = {}
+    for p in full["papers"]:
+        if p.get("section") in ("CRA", "CRI"):
+            continue
+        f = {}
+        if p.get("details"):
+            det = {k: str(v)[:70] for k, v in p["details"].items() if k in PANEL_DETAILS}
+            if det.get("Data do Novo Vencimento") == det.get("Vencimento"):
+                det.pop("Data do Novo Vencimento", None)
+            f["details"] = det
+        if p.get("agenda"):
+            f["agenda"] = slim_agenda(p["agenda"], 40)
+        if f:
+            fichas[p["code"]] = f
+    ftext = json.dumps({"updatedAt": full.get("updatedAt"), "fichas": fichas}, ensure_ascii=False, separators=(",", ":"))
+    if len(ftext.encode()) > PANEL_LIMIT:  # corta agendas até caber
+        for n in (24, 12, 6, 0):
+            for f in fichas.values():
+                if "agenda" in f:
+                    f["agenda"] = f["agenda"][:n]
+            ftext = json.dumps({"updatedAt": full.get("updatedAt"), "fichas": fichas}, ensure_ascii=False, separators=(",", ":"))
+            if len(ftext.encode()) <= PANEL_LIMIT:
+                break
+    if len(ftext.encode()) <= PANEL_LIMIT:
+        FICHAS_FILE.write_text(ftext)
+        print(f"[INFO] fichas do painel: {len(ftext.encode()) // 1024} KB ({len(fichas)} papéis).")
+
+    for keep_trades, keep_pu in ((60, 60), (40, 40), (25, 25), (15, 15), (10, 10), (5, 5)):
         papers = []
         for p in full["papers"]:
             q = {k: p[k] for k in ("code", "name", "issuer", "ticker", "index", "section", "maturity", "ntnbRef", "anbima", "status", "kind", "devedor", "securitizadora")
@@ -265,11 +293,10 @@ def write_panel_file():
             q["series"] = [[s[0]] + [_r(x, 4) for x in s[1:]] for s in p.get("series", [])]
             q["trades"] = [[t[0]] + [_r(x, 2) for x in t[1:]] for t in p.get("trades", [])][-keep_trades:]
             q["puCurve"] = [[x[0], _r(x[1], 2)] for x in p.get("puCurve", [])][-keep_pu:]
-            if p.get("details"):
+            # CRI/CRA levam a ficha no arquivo principal (a taxa de emissão é usada nas abas);
+            # as fichas e agendas das debêntures vão para debentures_fichas.json
+            if p.get("details") and p.get("section") in ("CRA", "CRI"):
                 q["details"] = {k: v for k, v in p["details"].items() if k in PANEL_DETAILS}
-            if p.get("agenda"):
-                if keep_ag:
-                    q["agenda"] = slim_agenda(p["agenda"], keep_ag)
             papers.append(q)
         cl = full.get("curveLatest") or {}
         panel = {k: full.get(k) for k in ("updatedAt", "source", "lastDate", "favoritesDefault", "newIssues")}
