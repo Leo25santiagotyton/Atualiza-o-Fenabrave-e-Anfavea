@@ -86,6 +86,19 @@ BOND_ISSUERS = [
 BOND_KEEP = 150
 
 
+def translate_pt(session, text):
+    """Tradução en → pt da manchete (serviço gratuito do Google Tradutor); devolve None se falhar."""
+    try:
+        r = session.get("https://translate.googleapis.com/translate_a/single",
+                        params={"client": "gtx", "sl": "auto", "tl": "pt", "dt": "t", "q": text}, timeout=15)
+        r.raise_for_status()
+        out = "".join(part[0] for part in r.json()[0] if part and part[0])
+        return out.strip() or None
+    except Exception as e:
+        print(f"[AVISO] tradução: {e}")
+        return None
+
+
 def fetch_bond_news(session, old):
     """Notícias dos emissores de bonds (pt e en), juntas com o histórico já salvo; mais recentes primeiro."""
     found = {i["id"]: i for i in old}
@@ -107,7 +120,17 @@ def fetch_bond_news(session, old):
                               "link": n["link"], "published": n["published"].isoformat(timespec="seconds"), "lang": lang,
                               "category": cat, "categories": cats, "score": score,
                               "importance": "alta" if score >= 4 else "média", "tone": tone_of(n["title"])}
-    return sorted(dedupe(list(found.values())), key=lambda i: i["published"], reverse=True)[:BOND_KEEP]
+    items = sorted(dedupe(list(found.values())), key=lambda i: i["published"], reverse=True)[:BOND_KEEP]
+    # manchetes em inglês: traduz para o português e guarda o original
+    n_tr = 0
+    for i in items:
+        if i.get("lang") == "en" and not i.get("titleOrig"):
+            pt = translate_pt(session, i["title"])
+            if pt:
+                i["titleOrig"], i["title"] = i["title"], pt
+                n_tr += 1
+    print(f"[INFO] notícias de bonds: {n_tr} manchetes traduzidas")
+    return items
 
 
 # categorias de notícia material: (rótulo, peso, padrões no título sem acento)
