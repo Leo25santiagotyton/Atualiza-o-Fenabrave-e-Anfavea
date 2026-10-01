@@ -488,6 +488,9 @@ def main():
         p["details"] = {**det, **{k: v for k, v in (p.get("details") or {}).items() if k not in det}}
         p["detailsV"] = 2
         n_list += 1
+    listed = {c.get("code") for c in (json.loads(CRA_LIST.read_text()) if CRA_LIST.exists() else [])}
+    for code in [k for k, v in db["papers"].items() if v.get("section") in ("CRA", "CRI") and k not in listed and not v.get("series")]:
+        db["papers"].pop(code)  # saiu da lista (resgatado) e não tem taxa ANBIMA
     print(f"[INFO] CRI/CRA da lista por devedor: {n_list}")
 
     if not have:
