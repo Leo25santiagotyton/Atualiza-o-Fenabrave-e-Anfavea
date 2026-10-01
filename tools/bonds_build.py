@@ -24,9 +24,14 @@ for line in open("valores.tsv", encoding="utf-8"):
                   "rating": None if c[21].startswith("#") else c[21].strip(), "lastUpdate": c[22].strip()})
 hist = {}
 for line in open("hist.tsv", encoding="utf-8"):
-    d, isin, px, y = line.rstrip("\n").split("\t")
+    c = line.rstrip("\n").split("\t")
+    d, isin, px, y = c[:4]
+    vol = num(c[4]) if len(c) > 4 else None  # volume (TRACE), se a planilha trouxer
     dd, mm, yy = d.split("/")
-    hist.setdefault(isin, []).append([f"{yy}-{mm}-{dd}", round(num(px), 3), round(num(y), 3)])
+    row = [f"{yy}-{mm}-{dd}", round(num(px), 3), round(num(y), 3)]
+    if vol is not None:
+        row.append(vol)
+    hist.setdefault(isin, []).append(row)
 doc = {"updatedAt": datetime.strptime(updated, "%d/%m/%Y %H:%M").strftime("%Y-%m-%dT%H:%M:00-03:00"), "updatedLabel": updated,
        "source": "Planilha Monitor_Bonds_Resumido_BDP (Bloomberg BDP/BDH) · SharePoint Tyton", "bonds": bonds, "history": hist}
 json.dump(doc, open("bonds.json", "w"), ensure_ascii=False)
