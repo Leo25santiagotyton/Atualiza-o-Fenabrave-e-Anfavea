@@ -82,6 +82,7 @@ BOND_ISSUERS = [
     {"name": "Foresea", "bond": "Foresea 2030", "query": f'(Foresea OR "Foresea Holding") {BOND_TERMS}', "match": r"\bForesea\b"},
     {"name": "Constellation", "bond": "Constellation 2033", "query": f'("Constellation Oil" OR "Constellation Oil Services" OR "Constellation Serviços") {BOND_TERMS}', "match": r"Constellation"},
     {"name": "Tupy", "bond": "Tupy Overseas 2031", "query": f'(Tupy OR "Tupy Overseas") {BOND_TERMS}', "match": r"\bTupy\b"},
+    {"name": "CHC Group", "bond": "CHC 2030", "query": f'("CHC Group" OR "CHC Helicopter") {BOND_TERMS}', "match": r"\bCHC\b"},
 ]
 BOND_KEEP = 150
 
