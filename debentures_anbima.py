@@ -230,9 +230,11 @@ def send_new_issues(codes, papers, session=None):
 
 
 PANEL_FILE = OUT_DIR / "debentures_painel.json"
+CRA_LIST = OUT_DIR / "cras_lista.json"
 PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do Novo Vencimento", "Emitida", "Nominal na Emissão",
                  "Tipo de Remuneração", "% Multiplicador/Rentabilidade", "Juros/Spread", "Taxa de Juros", "Garantia/Espécie",
-                 "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização"}
+                 "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização",
+                 "Securitizadora", "Remuneração na emissão", "Volume", "Fonte"}
 PANEL_LIMIT = 250_000  # o banco do painel aceita até 256 KB por documento
 
 
@@ -391,6 +393,36 @@ def main():
     else:
         print("[INFO] CRI/CRA: sem ANBIMA_CLIENT_ID/ANBIMA_CLIENT_SECRET, pulando.")
     db["craDates"] = sorted(cra_have)[-400:]
+
+    # lista de CRI/CRA por devedor (alerts/cras_lista.json, levantada nas páginas da ANBIMA Data):
+    # entram na aba Dívida mesmo sem taxa diária; a taxa chega quando a API da ANBIMA estiver ligada
+    n_list = 0
+    for c in (json.loads(CRA_LIST.read_text()) if CRA_LIST.exists() else []):
+        group = next(((t, l) for _, t, l in ISSUERS if l.lower() == (c.get("group") or "").lower()), None)
+        if not group:
+            group = group_of({"name": c.get("devedor") or ""})
+        if not group or not group[0] or not c.get("code"):
+            continue
+        p = db["papers"].setdefault(c["code"], {"code": c["code"], "series": []})
+        kind = (c.get("kind") or c["code"][:3]).upper()
+        p.update({"ticker": group[0], "issuer": group[1], "section": kind, "kind": kind,
+                  "name": c.get("devedor") or p.get("name") or "", "devedor": c.get("devedor"),
+                  "securitizadora": c.get("securitizadora")})
+        if not p.get("index"):
+            idx = (c.get("indexador") or "").upper()
+            p["index"] = "IPCA +" if idx.startswith("IPCA") else "% DI" if "%" in idx else "DI +" if idx.startswith("DI") else idx
+        if not p.get("maturity") and c.get("vencimento"):
+            p["maturity"] = c["vencimento"]
+        p["status"] = p.get("status") or ("CRA" if kind == "CRA" else "CRI") + " (devedor)"
+        det = {k: v for k, v in {"Securitizadora": c.get("securitizadora"),
+                                 "Série/Emissão": " / ".join(x for x in (c.get("serie"), c.get("emissao")) if x) or None,
+                                 "Emissão": c.get("dataEmissao"), "Vencimento": c.get("vencimento"),
+                                 "Remuneração na emissão": c.get("remuneracao"), "Volume": c.get("volume"),
+                                 "ISIN": c.get("isin"), "Fonte": c.get("fonte")}.items() if v}
+        p["details"] = {**det, **{k: v for k, v in (p.get("details") or {}).items() if k not in det}}
+        p["detailsV"] = 2
+        n_list += 1
+    print(f"[INFO] CRI/CRA da lista por devedor: {n_list}")
 
     if not have:
         print("[ERRO] Nenhum arquivo da ANBIMA foi obtido.")
