@@ -28,6 +28,7 @@ from alerta_acoes import BRT, HEADERS
 from curva_b3 import fetch_taxa_swap
 import cra_anbima
 from b3_derivativos import fetch_usd_market
+from b3_bdi import fetch_bdi_trades
 from curvas_anbima import fetch_di_pre, fetch_ettj, fetch_titulos, interp, swap_ipca
 from negocios_snd import fetch_agenda, fetch_details, fetch_pu_historico, fetch_registered, fetch_trades
 from alerta_acoes import DASHBOARD_URL, br, send_email
@@ -264,22 +265,25 @@ def write_panel_file():
     HIST_DIR.mkdir(exist_ok=True)
     groups = {}
     for p in full["papers"]:
-        if not p.get("trades"):
+        if not p.get("trades") and not p.get("ticks"):
             continue
         anb = {x[0]: x for x in p.get("series", []) if x[1] is not None}
         rows = []
-        for t in p["trades"]:
+        for t in p.get("trades", []):
             a = anb.get(t[0])
             rows.append([t[0]] + [_r(x, 2) for x in t[1:7]] + ([_r(a[1], 4), _r(a[2], 2), a[3]] if a else [None, None, None]))
+        ticks = [[t[0], t[1], _r(t[2], 0), _r(t[3], 4), _r(t[4], 2), _r(t[5], 4), t[6], t[7]] for t in p.get("ticks", [])]
         groups.setdefault(p.get("ticker") or "OUTROS", {})[p["code"]] = {
-            "issuer": p.get("issuer"), "index": p.get("index"), "maturity": p.get("maturity"), "section": p.get("section"), "rows": rows}
+            "issuer": p.get("issuer"), "index": p.get("index"), "maturity": p.get("maturity"), "section": p.get("section"),
+            "rows": rows, "ticks": ticks}
     for tk, papers_h in groups.items():
         doc = {"updatedAt": full.get("updatedAt"), "ticker": tk, "papers": papers_h}
         txt = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
         while len(txt.encode()) > PANEL_LIMIT:  # corta os dias mais antigos até caber
-            oldest = min(r[0] for v in papers_h.values() for r in v["rows"])
+            oldest = min([r[0] for v in papers_h.values() for r in v["rows"]] + [t[0] for v in papers_h.values() for t in v["ticks"]])
             for v in papers_h.values():
                 v["rows"] = [r for r in v["rows"] if r[0] > oldest]
+                v["ticks"] = [t for t in v["ticks"] if t[0] > oldest]
             txt = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
         (HIST_DIR / f"{tk}.json").write_text(txt)
     print(f"[INFO] histórico de negócios: {', '.join(f'{k} {len(v)} papéis' for k, v in sorted(groups.items()))}")
@@ -376,6 +380,7 @@ def main():
             db["newIssues"] = old.get("newIssues", [])
             db["craDates"] = old.get("craDates", [])
             db["issuersKey"] = old.get("issuersKey")
+            db["bdiDays"] = old.get("bdiDays", [])
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
@@ -534,6 +539,27 @@ def main():
         traded_days.add(iso)
         print(f"[INFO] negócios {iso}: {len(trades)} linhas no SND, {n} dos emissores acompanhados.")
     db["tradeDays"] = sorted(traded_days)
+
+    # negócio a negócio da B3 (Boletim Diário, tabela Trade): debêntures e CRI/CRA, com horário, preço e taxa
+    bdi_days = set(db.get("bdiDays", []))
+    codes = set(db["papers"])
+    for d in sorted(business_days_back(20 if len(bdi_days) < 5 else 5)):
+        iso = d.isoformat()
+        if iso in bdi_days and iso != sorted(business_days_back(2))[0]:
+            continue
+        try:
+            got = fetch_bdi_trades(session, d, codes)
+        except Exception as e:
+            print(f"[AVISO] BDI {iso}: {e}")
+            continue
+        if got is None:
+            continue
+        for code, ticks in got.items():
+            p = db["papers"][code]
+            old = [t for t in p.get("ticks", []) if t[0] != iso]
+            p["ticks"] = sorted(old + ticks, key=lambda t: (t[0], t[1]))[-600:]
+        bdi_days.add(iso)
+    db["bdiDays"] = sorted(bdi_days)[-60:]
 
     # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
     curves = db.get("curves", {})
@@ -736,6 +762,7 @@ def main():
         "knownCodes": db.get("knownCodes", []),
         "craDates": db.get("craDates", []),
         "issuersKey": db.get("issuersKey"),
+        "bdiDays": db.get("bdiDays", []),
         "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
