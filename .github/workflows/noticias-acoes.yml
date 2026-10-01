@@ -1,11 +1,12 @@
-name: Boletim de notícias B3
+name: Boletim de notícias B3 e bonds
 
-# E-mail todo dia às 8h30 e às 18h30 (horário de Brasília). Agendado 5 min antes
-# (11h25 e 21h25 UTC) porque o GitHub costuma atrasar o início.
+# Dois e-mails todo dia às 8h30 e às 19h (horário de Brasília): ações na B3 e bonds em US$.
+# Agendado 5 min antes (11h25 e 21h55 UTC) porque o GitHub costuma atrasar o início.
 # De hora em hora (minuto 5) só atualiza as notícias do painel, sem e-mail.
 on:
   schedule:
-    - cron: "25 11,21 * * *"
+    - cron: "25 11 * * *"
+    - cron: "55 21 * * *"
     - cron: "5 * * * *"
   workflow_dispatch: {}
 
@@ -31,7 +32,7 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: Buscar notícias e enviar boletim
+      - name: Buscar notícias e enviar boletins
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
