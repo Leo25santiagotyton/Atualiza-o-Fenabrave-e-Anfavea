@@ -1,13 +1,17 @@
 """
 Boletim de notícias materiais das ações B3
 ------------------------------------------
-Roda todo dia às 8h30 e às 18h30 (via GitHub Actions). Busca notícias das
+Roda todo dia às 8h30 e às 19h (via GitHub Actions). Busca notícias das
 empresas no Google News, mantém só as que podem mexer com a ação (resultado,
 M&A, dívida e rating, proventos, gestão, regulatório, recomendação de
 analistas, contratos relevantes), monta um resumo do mercado e envia por e-mail.
 
 Também grava alerts/news.json, que alimenta a faixa de notícias do painel
 publicado no claude.ai.
+
+São dois e-mails por horário: um das ações na B3 e outro dos bonds em US$. No de bonds
+só entram os emissores sem ação na B3 (OHI, Borr, Foresea, Constellation, CHC); as
+notícias de bonds de Movida, Simpar, Vamos e Tupy vão para o e-mail das ações.
 
 E-mail via as mesmas variáveis do monitor:
   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM, EMAIL_TO
@@ -85,6 +89,12 @@ BOND_ISSUERS = [
     {"name": "CHC Group", "bond": "CHC 2030", "query": f'("CHC Group" OR "CHC Helicopter") {BOND_TERMS}', "match": r"\bCHC\b"},
 ]
 BOND_KEEP = 150
+# páginas de cotação e cadastros financeiros que o Google News devolve como notícia
+BOND_NOISE = re.compile(r"stock price|price, news|quote & history|cota[cç][aã]o e hist[oó]rico|balance sheet|balan[cç]o patrimonial|"
+                        r"income statement|cash flow statement|depository receipts|\bshs\b|market cap|share price today", re.I)
+# emissores com ação na B3: notícias de bond vão para o e-mail das ações, não para o de bonds
+BOND_LISTED = {"Simpar": ["SIMH3"], "Movida": ["MOVI3"], "Vamos": ["VAMO3"], "Tupy": ["TUPY3"]}
+BONDS_FILE = OUT_DIR / "bonds.json"
 
 
 def translate_pt(session, text):
@@ -121,7 +131,7 @@ def fetch_bond_news(session, old):
                 print(f"[AVISO] notícias de bond {c['name']} ({lang}): {e}")
                 continue
             for n in items:
-                if not re.search(c["match"], n["title"], re.I):
+                if not re.search(c["match"], n["title"], re.I) or BOND_NOISE.search(n["title"]):
                     continue
                 key = hashlib.sha1(norm(re.sub(r"\W+", " ", n["title"]))[:90].encode()).hexdigest()[:12]
                 if key in found:
@@ -131,6 +141,7 @@ def fetch_bond_news(session, old):
                               "link": n["link"], "published": n["published"].isoformat(timespec="seconds"), "lang": lang,
                               "category": cat, "categories": cats, "score": score,
                               "importance": "alta" if score >= 4 else "média", "tone": tone_of(n["title"])}
+    found = {k: i for k, i in found.items() if not BOND_NOISE.search(i.get("titleOrig") or i["title"])}
     items = sorted(dedupe(list(found.values())), key=lambda i: i["published"], reverse=True)[:BOND_KEEP]
     # manchetes em inglês: traduz para o português e guarda o original
     n_tr = 0
@@ -331,7 +342,7 @@ def build_email(edition, now, new_items, market):
         extra = f" · também em {len(i['alsoIn'])} outra(s) fonte(s)" if i.get("alsoIn") else ""
         items_html += row(
             f'<div style="font:12px {FONT};color:{MUTED}"><b style="color:#1d4ed8">{esc(" · ".join(i["tickers"]))}</b> · {esc(i["company"])} · {when} '
-            f'<span style="background:{tag_bg};color:{INK};padding:1px 6px;font-weight:700">{esc(i["category"])}</span> '
+            + (f'<span style="background:{tag_bg};color:{INK};padding:1px 6px;font-weight:700">{esc(i["category"])}</span> ' if i.get("category") else "") +
             f'<b style="color:{col}">{sym} {esc(i["tone"])}</b></div>'
             f'<div style="margin-top:4px"><a href="{esc(i["link"])}" style="font:600 15px {FONT};color:{INK};text-decoration:none">{esc(i["title"])}</a></div>'
             f'<div style="font:12px {FONT};color:{MUTED};margin-top:2px">{esc(i["source"])}{extra}</div>')
@@ -352,6 +363,65 @@ def build_email(edition, now, new_items, market):
         lines.append(f"[{'/'.join(i['tickers'])}] {i['category']} ({i['tone']}): {i['title']} — {i['source']}\n  {i['link']}")
     if not new_items:
         lines.append("Nenhuma notícia material nova desde o último boletim.")
+    lines += ["", f"Painel: {DASHBOARD_URL}"]
+    return subject, "\n".join(lines), html_body
+
+
+def build_bond_email(edition, now, new_items):
+    """E-mail das notícias dos bonds em US$ (só emissores sem ação na B3), com preço e YTM do monitor Bloomberg."""
+    hora = now.strftime("%d/%m/%Y")
+    alta = [i for i in new_items if i["importance"] == "alta"]
+    subject = (f"[Notícias Bonds] {edition.capitalize()} {now.strftime('%d/%m')} · "
+               + (f"{len(new_items)} notícias" if new_items else "sem notícias novas")
+               + (f" ({len(alta)} de alta relevância)" if alta else ""))
+    from email_layout import UP, DOWN, INK, MUTED, FONT, data_table, section_title, row, button, page, esc, color_for
+    arrow = {"positivo": ("▲", UP), "negativo": ("▼", DOWN), "neutro": ("■", MUTED)}
+
+    mon, upd = [], ""
+    try:
+        bd = json.loads(BONDS_FILE.read_text())
+        upd = bd.get("updatedLabel") or ""
+        mon = [b for b in bd.get("bonds", []) if not any(b["issuer"].startswith(n) for n in BOND_LISTED)]
+    except (OSError, json.JSONDecodeError):
+        pass
+    def bps(v):
+        return "—" if v is None else f'<b style="color:{color_for(v, invert=True)}">{"+" if v > 0 else ""}{round(v)}</b>'
+    mon_html = ""
+    if mon:
+        mon_html = section_title(f"Monitor Bloomberg · {upd}" if upd else "Monitor Bloomberg") + data_table(
+            ["Emissor", "Bond", "Preço", "YTM", "Δ 1D (bps)", "Δ 1S (bps)"],
+            [[f"<b>{esc(b['issuer'])}</b>", esc(b.get("bond")), br(b.get("px")) if b.get("px") is not None else "—",
+              (br(b["ytm"]) + "%") if b.get("ytm") is not None else "—", bps(b.get("d1")), bps(b.get("d1w"))] for b in mon])
+
+    items_html = ""
+    for i in new_items:
+        sym, col = arrow[i["tone"]]
+        when = datetime.fromisoformat(i["published"]).astimezone(BRT).strftime("%d/%m %H:%M")
+        tag_bg = "#fde68a" if i["importance"] == "alta" else "#e5e7eb"
+        orig = (f'<div style="font:12px {FONT};color:{MUTED};margin-top:2px">Original: {esc(i["titleOrig"])}</div>'
+                if i.get("titleOrig") else "")
+        items_html += row(
+            f'<div style="font:12px {FONT};color:{MUTED}"><b style="color:#1d4ed8">{esc(i["company"])}</b> · {esc(i.get("bond") or "")} · {when} '
+            + (f'<span style="background:{tag_bg};color:{INK};padding:1px 6px;font-weight:700">{esc(i["category"])}</span> ' if i.get("category") else "") +
+            f'<b style="color:{col}">{sym} {esc(i["tone"])}</b></div>'
+            f'<div style="margin-top:4px"><a href="{esc(i["link"])}" style="font:600 15px {FONT};color:{INK};text-decoration:none">{esc(i["title"])}</a></div>'
+            f'{orig}<div style="font:12px {FONT};color:{MUTED};margin-top:2px">{esc(i["source"])}</div>')
+    if not new_items:
+        items_html = row(f'<span style="color:{MUTED}">Nenhuma notícia nova dos emissores desde o último boletim. A aba Bond do painel mostra as anteriores.</span>')
+
+    issuers = ", ".join(c["name"] for c in BOND_ISSUERS if c["name"] not in BOND_LISTED)
+    html_body = page("BOLETIM DE BONDS · US$", f"Edição da {edition} · {hora}", f"Notícias de {issuers}",
+                     mon_html + section_title("Notícias") + items_html + button(DASHBOARD_URL, "Abrir a aba Bond do painel"),
+                     "Notícias do Google News (português e inglês, manchetes em inglês traduzidas) sobre dívida, rating, resultado e "
+                     "eventos de crédito dos emissores. Movida, Simpar, Vamos e Tupy têm ação na B3 e entram no boletim das ações. "
+                     "Preços e YTM da planilha Monitor_Bonds_Resumido_BDP (Bloomberg). O sinal ▲/▼ é uma leitura automática do título.")
+    lines = [f"Boletim de bonds · edição da {edition} · {hora}", ""]
+    lines += [f"{b['issuer']} {b.get('bond')}: YTM {br(b['ytm'])}%" for b in mon if b.get("ytm") is not None]
+    lines.append("")
+    for i in new_items:
+        lines.append(f"[{i['company']}] {i['category']} ({i['tone']}): {i['title']} — {i['source']}\n  {i['link']}")
+    if not new_items:
+        lines.append("Nenhuma notícia nova dos emissores desde o último boletim.")
     lines += ["", f"Painel: {DASHBOARD_URL}"]
     return subject, "\n".join(lines), html_body
 
@@ -446,20 +516,35 @@ def main():
         print(f"[INFO] Painel atualizado com {len(items)} notícias ({len(new_items)} novas desde o último boletim); sem e-mail.")
         return
 
+    # notícias de bond: das empresas com ação na B3 vão para o e-mail das ações; das demais, para o e-mail de bonds
+    fresh_b = [i for i in bond_items if datetime.fromisoformat(i["published"]) >= since and i["id"] not in state["seen"]]
+    local_extra = [dict(i, tickers=BOND_LISTED[i["company"]]) for i in fresh_b if i["company"] in BOND_LISTED]
+    local_extra = [i for i in local_extra if i["id"] not in {x["id"] for x in new_items}
+                   and not any(same_fact(i, x) for x in new_items)]
+    new_items = sorted(new_items + local_extra,
+                       key=lambda i: (i["importance"] != "alta", -datetime.fromisoformat(i["published"]).timestamp()))
+    new_bonds = sorted((i for i in fresh_b if i["company"] not in BOND_LISTED),
+                       key=lambda i: (i["importance"] != "alta", -datetime.fromisoformat(i["published"]).timestamp()))
+
     subject, text, html_body = build_email(edition, now, new_items, market)
+    b_subject, b_text, b_html = build_bond_email(edition, now, new_bonds)
     print(subject)
     print(text)
+    print(b_subject)
+    print(b_text)
     if args.dry_run:
         (OUT_DIR / "news_preview.html").write_text(html_body)
-        print("[INFO] Prévia salva em alerts/news_preview.html (nada enviado).")
+        (OUT_DIR / "news_bonds_preview.html").write_text(b_html)
+        print("[INFO] Prévias salvas em alerts/news_preview.html e alerts/news_bonds_preview.html (nada enviado).")
         return
 
     send_email(subject, text, html_body)
-    for i in new_items:
+    send_email(b_subject, b_text, b_html)
+    for i in new_items + new_bonds:
         state["seen"][i["id"]] = i["published"]
     state["lastRun"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     STATE_FILE.write_text(json.dumps(state, indent=1))
-    print("[INFO] E-mail enviado.")
+    print("[INFO] E-mails enviados (ações e bonds).")
 
 
 if __name__ == "__main__":
