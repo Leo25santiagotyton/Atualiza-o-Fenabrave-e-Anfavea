@@ -234,7 +234,7 @@ CRA_LIST = OUT_DIR / "cras_lista.json"
 PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do Novo Vencimento", "Emitida", "Nominal na Emissão",
                  "Tipo de Remuneração", "% Multiplicador/Rentabilidade", "Juros/Spread", "Taxa de Juros", "Garantia/Espécie",
                  "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização",
-                 "Securitizadora", "Remuneração na emissão", "Volume", "Fonte"}
+                 "Securitizadora", "Remuneração na emissão", "Volume", "Fonte", "Confiança do levantamento"}
 PANEL_LIMIT = 250_000  # o banco do painel aceita até 256 KB por documento
 
 
@@ -418,7 +418,8 @@ def main():
                                  "Série/Emissão": " / ".join(x for x in (c.get("serie"), c.get("emissao")) if x) or None,
                                  "Emissão": c.get("dataEmissao"), "Vencimento": c.get("vencimento"),
                                  "Remuneração na emissão": c.get("remuneracao"), "Volume": c.get("volume"),
-                                 "ISIN": c.get("isin"), "Fonte": c.get("fonte")}.items() if v}
+                                 "ISIN": c.get("isin"), "Fonte": c.get("fonte"),
+                                 "Confiança do levantamento": c.get("confianca")}.items() if v}
         p["details"] = {**det, **{k: v for k, v in (p.get("details") or {}).items() if k not in det}}
         p["detailsV"] = 2
         n_list += 1
