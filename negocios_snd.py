@@ -141,8 +141,9 @@ def fetch_agenda(session, ativo):
     for tr in soup.find_all("tr"):
         cells = [c.get_text(" ", strip=True) for c in tr.find_all("td")]
         cells = [c for c in cells if c]
-        if len(cells) >= 3 and re.fullmatch(r"\d{2}/\d{2}/\d{4}", cells[0]):
+        # só linhas do próprio papel (algumas URLs devolvem a agenda de todo o mercado)
+        if len(cells) >= 3 and re.fullmatch(r"\d{2}/\d{2}/\d{4}", cells[0]) and ativo in [c.strip() for c in cells]:
             dd, mm, yy = cells[0].split("/")
-            rest = [c for c in cells[1:] if c != ativo]
-            out.append([f"{yy}-{mm}-{dd}"] + rest[:4])
-    return out
+            rest = [c for c in cells[1:] if c.strip() != ativo]
+            out.append([f"{yy}-{mm}-{dd}"] + [c[:60] for c in rest[:4]])
+    return out[:400]

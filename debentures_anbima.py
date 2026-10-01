@@ -251,7 +251,7 @@ def write_panel_file():
             if p.get("details"):
                 q["details"] = {k: v for k, v in p["details"].items() if k in PANEL_DETAILS}
             if p.get("agenda"):
-                q["agenda"] = p["agenda"]
+                q["agenda"] = p["agenda"][:120]
             papers.append(q)
         cl = full.get("curveLatest") or {}
         panel = {k: full.get(k) for k in ("updatedAt", "source", "lastDate", "favoritesDefault", "newIssues")}
@@ -261,6 +261,9 @@ def write_panel_file():
         text = json.dumps(panel, ensure_ascii=False, separators=(",", ":"))
         if len(text.encode()) <= PANEL_LIMIT:
             break
+    if len(text.encode()) > PANEL_LIMIT:
+        print(f"[ERRO] painel com {len(text.encode()) // 1024} KB passa do limite; mantendo o arquivo anterior.")
+        return
     PANEL_FILE.write_text(text)
     print(f"[INFO] painel: {len(text.encode()) // 1024} KB ({keep_trades} dias de negócios por papel).")
 
@@ -286,10 +289,14 @@ def main():
     OUT_DIR.mkdir(exist_ok=True)
 
     db = {"papers": {}, "dates": []}
+    _orig_deb = DEB_FILE.read_bytes() if DEB_FILE.exists() else None
     if DEB_FILE.exists():
         try:
             old = json.loads(DEB_FILE.read_text())
             db["papers"] = {p["code"]: p for p in old.get("papers", [])}
+            for q in db["papers"].values():  # limpa agendas antigas inchadas
+                if len(q.get("agenda") or []) > 400:
+                    q.pop("agenda", None); q.pop("agendaAt", None)
             db["dates"] = old.get("dates", [])
             db["curves"] = old.get("curves", {})
             db["curveLatestOld"] = old.get("curveLatest", {})
@@ -620,6 +627,11 @@ def main():
         "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
+    if DEB_FILE.stat().st_size > 50_000_000:  # proteção: arquivo inchado não vai para o repositório
+        print(f"[ERRO] debentures.json com {DEB_FILE.stat().st_size // 1_000_000} MB; restaurando a versão anterior.")
+        if _orig_deb is not None:
+            DEB_FILE.write_bytes(_orig_deb)
+        sys.exit(1)
     write_panel_file()
     print(f"[INFO] {len(papers)} papéis salvos; {fetched} arquivo(s) novo(s); último dia {dates[-1] if dates else '-'}.")
     for f in FAVORITES:
