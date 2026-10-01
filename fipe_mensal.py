@@ -186,21 +186,32 @@ class Fipe:
         self.s.headers.update(HEADERS)
         self.calls = 0
         self.reserva_calls = 0
+        self.falhas_seguidas = 0
+        self.fipe_fora = False
 
-    def _post(self, endpoint, data, tentativas=5):
+    def _post(self, endpoint, data, tentativas=3):
+        """Consulta o site da FIPE. Depois de várias falhas seguidas (bloqueio por excesso
+        de consultas) desiste do site e passa a usar só o espelho parallelum."""
+        if self.fipe_fora:
+            return None
         espera = 2
         for i in range(tentativas):
             time.sleep(DELAY)
             self.calls += 1
             try:
-                r = self.s.post(self.BASE + endpoint, data=data, timeout=30)
+                r = self.s.post(self.BASE + endpoint, data=data, timeout=20)
                 if r.status_code == 200:
+                    self.falhas_seguidas = 0
                     return r.json()
-                print(f"[AVISO] FIPE {endpoint} HTTP {r.status_code} (tentativa {i + 1})")
+                print(f"[AVISO] FIPE {endpoint} HTTP {r.status_code} (tentativa {i + 1})", flush=True)
             except (requests.RequestException, ValueError) as exc:
-                print(f"[AVISO] FIPE {endpoint}: {exc} (tentativa {i + 1})")
+                print(f"[AVISO] FIPE {endpoint}: {exc} (tentativa {i + 1})", flush=True)
             time.sleep(espera)
-            espera = min(espera * 2, 60)
+            espera *= 2
+        self.falhas_seguidas += 1
+        if self.falhas_seguidas >= 5:
+            print("[AVISO] Site da FIPE não está respondendo; usando só o espelho parallelum.", flush=True)
+            self.fipe_fora = True
         return None
 
     def _get_reserva(self, path, params=None):
@@ -214,9 +225,9 @@ class Fipe:
                     return r.json()
                 if r.status_code == 404:
                     return None
-                print(f"[AVISO] parallelum {path} HTTP {r.status_code}")
+                print(f"[AVISO] parallelum {path} HTTP {r.status_code}", flush=True)
             except (requests.RequestException, ValueError) as exc:
-                print(f"[AVISO] parallelum {path}: {exc}")
+                print(f"[AVISO] parallelum {path}: {exc}", flush=True)
             time.sleep(3 * (i + 1))
         return None
 
@@ -323,7 +334,7 @@ def montar_cesta(fipe, ref, ref_label):
                 itens.append({"id": f"{tipo}-{marca}-{cod}-{ano}-{comb}", "segmento": seg, "grupo": nome,
                               "tipo": tipo, "marca": marca, "marca_nome": marca_nome, "modelo": cod,
                               "versao": label, "ano": ano, "comb": comb, "ano_label": alabel})
-        print(f"[INFO] Cesta {nome}: {sum(1 for i in itens if i['grupo'] == nome)} itens")
+        print(f"[INFO] Cesta {nome}: {sum(1 for i in itens if i['grupo'] == nome)} itens", flush=True)
     return {"criada_em": datetime.now(BRT).isoformat(timespec="seconds"), "ref": ref,
             "ref_label": ref_label, "itens": itens}
 
