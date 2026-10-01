@@ -120,7 +120,10 @@ def fetch_usd_market(session, d):
         else:
             last = _num(f.get("LastPric"))
         qty = _num(f.get("FinInstrmQty") or f.get("RglrTxsQty") or f.get("OpnIntrst"))
-        out.setdefault(sym, []).append([tck, maturity(m, yy).isoformat(), adj, last, qty])
+        venc = maturity(m, yy)
+        if venc < d or adj is None:  # ETF (ex.: DOLX11) ou contrato sem ajuste
+            continue
+        out.setdefault(sym, []).append([tck, venc.isoformat(), adj, last, qty])
     for sym in ("DOL", "FRC", "DDI"):
         if sym in out:
             out[sym].sort(key=lambda x: x[1])

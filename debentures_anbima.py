@@ -151,6 +151,9 @@ def issue_summary(p):
     tipo = det.get("Tipo de Remuneração") or p.get("index") or ""
     spread = next((det.get(k) for k in ("Juros/Spread", "Taxa de Juros", "% Multiplicador/Rentabilidade")
                    if det.get(k) and det.get(k) not in ("-", "0")), None)
+    if spread:  # o SND traz "6,3605 252 6 MES 15/12/2021": fica só a taxa
+        m = re.match(r"\s*(\d+(?:,\d+)?)", spread)
+        spread = m.group(1) if m else spread
     rate = lastv = None
     s = [x for x in p.get("series", []) if x[1] is not None]
     if s:
@@ -168,10 +171,11 @@ def issue_summary(p):
     amort = [e for e in p.get("agenda", []) if any("AMORTIZ" in norm(str(x)) for x in e[1:])]
     if not p.get("agenda"):
         amort_txt = "a confirmar (agenda ainda não publicada no SND)"
-    elif len(amort) <= 1:
+    elif not amort:
         amort_txt = "Bullet (amortização no vencimento)"
     else:
-        amort_txt = f"Amortização em {len(amort)} parcelas, a partir de {datetime.fromisoformat(amort[0][0]).strftime('%d/%m/%Y')}"
+        n_parc = len({e[0] for e in amort}) + (1 if any("VENCIMENTO" in norm(str(x)) for e in p["agenda"] for x in e[1:]) else 0)
+        amort_txt = f"Amortização em {n_parc} parcelas, a partir de {datetime.fromisoformat(amort[0][0]).strftime('%d/%m/%Y')}"
     return {"serie": det.get("Série/Emissão") or "—", "vol": vol, "remu": remu or "a confirmar",
             "venc": venc or "—", "prazo": prazo, "amort": amort_txt,
             "incent": det.get("Deb. Incent. (Lei 12.431)"), "coord": det.get("Coordenador Líder")}
