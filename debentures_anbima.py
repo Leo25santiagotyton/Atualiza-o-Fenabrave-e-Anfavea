@@ -232,6 +232,7 @@ def send_new_issues(codes, papers, session=None):
 PANEL_FILE = OUT_DIR / "debentures_painel.json"
 CRA_LIST = OUT_DIR / "cras_lista.json"
 FICHAS_FILE = OUT_DIR / "debentures_fichas.json"
+HIST_DIR = OUT_DIR / "historico"
 PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do Novo Vencimento", "Emitida", "Nominal na Emissão",
                  "Tipo de Remuneração", "% Multiplicador/Rentabilidade", "Juros/Spread", "Taxa de Juros", "Garantia/Espécie",
                  "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização",
@@ -257,6 +258,31 @@ def write_panel_file():
             rows.append([e[0]] + [str(x)[:30] for x in rest[:2]])
         fut = [r for r in rows if r[0] >= today]
         return ([r for r in rows if r[0] < today][-2:] + fut)[:n]
+
+    # histórico de negócios por grupo (alerts/historico/<TICKER>.json → debentures/hist_<TICKER> no painel),
+    # com a taxa, o PU e a duration da ANBIMA no dia de cada negócio
+    HIST_DIR.mkdir(exist_ok=True)
+    groups = {}
+    for p in full["papers"]:
+        if not p.get("trades"):
+            continue
+        anb = {x[0]: x for x in p.get("series", []) if x[1] is not None}
+        rows = []
+        for t in p["trades"]:
+            a = anb.get(t[0])
+            rows.append([t[0]] + [_r(x, 2) for x in t[1:7]] + ([_r(a[1], 4), _r(a[2], 2), a[3]] if a else [None, None, None]))
+        groups.setdefault(p.get("ticker") or "OUTROS", {})[p["code"]] = {
+            "issuer": p.get("issuer"), "index": p.get("index"), "maturity": p.get("maturity"), "section": p.get("section"), "rows": rows}
+    for tk, papers_h in groups.items():
+        doc = {"updatedAt": full.get("updatedAt"), "ticker": tk, "papers": papers_h}
+        txt = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
+        while len(txt.encode()) > PANEL_LIMIT:  # corta os dias mais antigos até caber
+            oldest = min(r[0] for v in papers_h.values() for r in v["rows"])
+            for v in papers_h.values():
+                v["rows"] = [r for r in v["rows"] if r[0] > oldest]
+            txt = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
+        (HIST_DIR / f"{tk}.json").write_text(txt)
+    print(f"[INFO] histórico de negócios: {', '.join(f'{k} {len(v)} papéis' for k, v in sorted(groups.items()))}")
 
     fichas = {}
     for p in full["papers"]:
