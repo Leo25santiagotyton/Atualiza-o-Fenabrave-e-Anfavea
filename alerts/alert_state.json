@@ -1,9 +1,10 @@
 {
   "date": "2026-10-01",
   "levels": {
-    "SIMH3": 2,
-    "VAMO3": 2,
+    "SIMH3": 4,
+    "VAMO3": 4,
     "AMOB3": 2,
-    "PRNR3": 2
+    "PRNR3": 2,
+    "ARML3": 2
   }
 }
