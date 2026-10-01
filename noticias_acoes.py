@@ -71,6 +71,45 @@ COMPANIES = [
      "query": "Tupy OR TUPY3", "match": r"\bTupy\b|TUPY3"},
 ]
 
+# emissores de bonds em US$ (aba Bond do painel): notícias de dívida, rating, resultado e eventos de crédito
+BOND_TERMS = '(bond OR bonds OR notes OR "senior notes" OR rating OR Fitch OR Moody\'s OR "S&P" OR dívida OR debt OR tender OR recompra OR resultado OR earnings OR refinanciamento OR refinancing)'
+BOND_ISSUERS = [
+    {"name": "Simpar", "bond": "Simpar Europe 2031", "query": f'(Simpar OR "Simpar Europe") {BOND_TERMS}', "match": r"\bSimpar\b"},
+    {"name": "Movida", "bond": "Movida Europe 2029/2031/2033", "query": f'(Movida OR "Movida Europe") {BOND_TERMS}', "match": r"\bMovida\b"},
+    {"name": "Vamos", "bond": "Vamos Europe 2031", "query": f'("Grupo Vamos" OR "Vamos Locação" OR "Vamos Europe" OR VAMO3) {BOND_TERMS}', "match": r"Grupo Vamos|Vamos Loca|Vamos Europe|VAMO3|\bVamos\b.*(bond|rating|notes|dívida)"},
+    {"name": "OHI Group", "bond": "OHI 2029", "query": f'("OHI Group" OR "OHI S.A.") {BOND_TERMS}', "match": r"\bOHI\b"},
+    {"name": "Borr Drilling", "bond": "Borr IHC 2032", "query": f'("Borr Drilling" OR "Borr IHC") {BOND_TERMS}', "match": r"\bBorr\b"},
+    {"name": "Foresea", "bond": "Foresea 2030", "query": f'(Foresea OR "Foresea Holding") {BOND_TERMS}', "match": r"\bForesea\b"},
+    {"name": "Constellation", "bond": "Constellation 2033", "query": f'("Constellation Oil" OR "Constellation Oil Services" OR "Constellation Serviços") {BOND_TERMS}', "match": r"Constellation"},
+    {"name": "Tupy", "bond": "Tupy Overseas 2031", "query": f'(Tupy OR "Tupy Overseas") {BOND_TERMS}', "match": r"\bTupy\b"},
+]
+BOND_KEEP = 150
+
+
+def fetch_bond_news(session, old):
+    """Notícias dos emissores de bonds (pt e en), juntas com o histórico já salvo; mais recentes primeiro."""
+    found = {i["id"]: i for i in old}
+    for c in BOND_ISSUERS:
+        for lang in ("pt", "en"):
+            try:
+                items = fetch_news(session, c, lang, "7d")
+            except Exception as e:
+                print(f"[AVISO] notícias de bond {c['name']} ({lang}): {e}")
+                continue
+            for n in items:
+                if not re.search(c["match"], n["title"], re.I):
+                    continue
+                key = hashlib.sha1(norm(re.sub(r"\W+", " ", n["title"]))[:90].encode()).hexdigest()[:12]
+                if key in found:
+                    continue
+                cat, score, cats = classify(n["title"])
+                found[key] = {"id": key, "company": c["name"], "bond": c["bond"], "title": n["title"], "source": n["source"],
+                              "link": n["link"], "published": n["published"].isoformat(timespec="seconds"), "lang": lang,
+                              "category": cat, "categories": cats, "score": score,
+                              "importance": "alta" if score >= 4 else "média", "tone": tone_of(n["title"])}
+    return sorted(dedupe(list(found.values())), key=lambda i: i["published"], reverse=True)[:BOND_KEEP]
+
+
 # categorias de notícia material: (rótulo, peso, padrões no título sem acento)
 CATEGORIES = [
     ("Fato relevante", 5, [r"fato relevante", r"comunicado ao mercado"]),
@@ -182,9 +221,9 @@ def tone_of(title):
     return "positivo" if pos > neg else "negativo" if neg > pos else "neutro"
 
 
-def fetch_news(session, company):
-    url = ("https://news.google.com/rss/search?q=" + quote_plus(company["query"] + " when:2d")
-           + "&hl=pt-BR&gl=BR&ceid=BR:pt-419")
+def fetch_news(session, company, lang="pt", window="2d"):
+    loc = "&hl=pt-BR&gl=BR&ceid=BR:pt-419" if lang == "pt" else "&hl=en-US&gl=US&ceid=US:en"
+    url = "https://news.google.com/rss/search?q=" + quote_plus(company["query"] + f" when:{window}") + loc
     r = session.get(url, timeout=20)
     r.raise_for_status()
     root = ET.fromstring(r.content)
@@ -345,12 +384,15 @@ def main():
     market = market_snapshot(session, tickers)
 
     # histórico para o painel: junta com o que já havia, mais recentes primeiro
-    old = []
+    old, old_bonds = [], []
     if NEWS_FILE.exists():
         try:
-            old = json.loads(NEWS_FILE.read_text()).get("items", [])
+            _prev = json.loads(NEWS_FILE.read_text())
+            old, old_bonds = _prev.get("items", []), _prev.get("bondItems", [])
         except json.JSONDecodeError:
             old = []
+    bond_items = fetch_bond_news(session, old_bonds)
+    print(f"[INFO] notícias de bonds: {len(bond_items)} no histórico")
     # revalida o histórico com as regras atuais (remove o que deixou de passar no filtro)
     by_name = {c["name"]: c for c in COMPANIES}
     old = [i for i in old if i.get("company") in by_name and is_material(by_name[i["company"]], i["title"])]
@@ -363,7 +405,7 @@ def main():
     items = sorted(dedupe(list(merged.values())), key=lambda i: i["published"], reverse=True)[:KEEP_ITEMS]
     NEWS_FILE.write_text(json.dumps({
         "updatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "edition": edition, "market": market, "items": items,
+        "edition": edition, "market": market, "items": items, "bondItems": bond_items,
     }, ensure_ascii=False))
 
     if args.no_email:

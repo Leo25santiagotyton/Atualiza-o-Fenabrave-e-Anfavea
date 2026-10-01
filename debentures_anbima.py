@@ -396,6 +396,13 @@ def main():
     days = business_days_back(args.dias if len(have) < 5 else 7)
     if refetch:
         days = sorted(set(days) | {date.fromisoformat(x) for x in refetch})
+    # completa a ANBIMA para trás até o 1º negócio guardado (para a taxa implícita e a linha ANBIMA do histórico)
+    first_trade = min((t[0] for p in db["papers"].values() for t in p.get("trades", [])), default=None)
+    if first_trade and have and first_trade < min(have):
+        d0, d1 = date.fromisoformat(first_trade), date.fromisoformat(min(have))
+        back = [d0 + timedelta(days=i) for i in range((d1 - d0).days) if (d0 + timedelta(days=i)).weekday() < 5]
+        print(f"[INFO] completando a ANBIMA de {first_trade} a {min(have)} ({len(back)} dias úteis)")
+        days = sorted(set(days) | set(back))
     fetched, errors = 0, 0
     for d in sorted(days):
         iso = d.isoformat()
