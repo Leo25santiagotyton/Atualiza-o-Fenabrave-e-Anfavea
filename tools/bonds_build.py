@@ -28,9 +28,10 @@ for line in open("hist.tsv", encoding="utf-8"):
     d, isin, px, y = c[:4]
     vol = num(c[4]) if len(c) > 4 else None  # volume (TRACE), se a planilha trouxer
     dd, mm, yy = d.split("/")
+    last = num(c[5]) if len(c) > 5 else None  # último negócio no TRACE
     row = [f"{yy}-{mm}-{dd}", round(num(px), 3), round(num(y), 3)]
-    if vol is not None:
-        row.append(vol)
+    if vol is not None or last is not None:
+        row += [vol, last]
     hist.setdefault(isin, []).append(row)
 doc = {"updatedAt": datetime.strptime(updated, "%d/%m/%Y %H:%M").strftime("%Y-%m-%dT%H:%M:00-03:00"), "updatedLabel": updated,
        "source": "Planilha Monitor_Bonds_Resumido_BDP (Bloomberg BDP/BDH) · SharePoint Tyton", "bonds": bonds, "history": hist}
