@@ -246,7 +246,18 @@ def write_panel_file():
     """Versão enxuta de debentures.json para o painel: sem o histórico de curvas, com números arredondados
     e, se ainda passar do limite, menos dias de negócios e de PU da curva."""
     full = json.loads(DEB_FILE.read_text())
-    for keep_trades, keep_pu in ((60, 60), (40, 40), (25, 25), (15, 15)):
+    today = datetime.now(BRT).date().isoformat()
+
+    def slim_agenda(ag, n):
+        """[data, evento, detalhe] sem a data repetida nem o nome do emissor; eventos futuros primeiro."""
+        rows = []
+        for e in ag:
+            rest = [x for x in e[1:] if not re.fullmatch(r"\d{2}/\d{2}/\d{4}", str(x)) and not (len(str(x)) > 25 and str(x).isupper())]
+            rows.append([e[0]] + [str(x)[:30] for x in rest[:2]])
+        fut = [r for r in rows if r[0] >= today]
+        return ([r for r in rows if r[0] < today][-2:] + fut)[:n]
+
+    for keep_trades, keep_pu, keep_ag in ((60, 60, 40), (40, 40, 30), (25, 25, 24), (15, 15, 16), (10, 10, 10), (5, 5, 0)):
         papers = []
         for p in full["papers"]:
             q = {k: p[k] for k in ("code", "name", "issuer", "ticker", "index", "section", "maturity", "ntnbRef", "anbima", "status", "kind", "devedor", "securitizadora")
@@ -257,7 +268,8 @@ def write_panel_file():
             if p.get("details"):
                 q["details"] = {k: v for k, v in p["details"].items() if k in PANEL_DETAILS}
             if p.get("agenda"):
-                q["agenda"] = p["agenda"][:120]
+                if keep_ag:
+                    q["agenda"] = slim_agenda(p["agenda"], keep_ag)
             papers.append(q)
         cl = full.get("curveLatest") or {}
         panel = {k: full.get(k) for k in ("updatedAt", "source", "lastDate", "favoritesDefault", "newIssues")}
