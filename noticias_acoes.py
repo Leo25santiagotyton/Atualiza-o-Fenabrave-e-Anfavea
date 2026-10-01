@@ -87,16 +87,26 @@ BOND_KEEP = 150
 
 
 def translate_pt(session, text):
-    """Tradução en → pt da manchete (serviço gratuito do Google Tradutor); devolve None se falhar."""
+    """Tradução en → pt da manchete: Google Tradutor (gratuito) e, se bloquear, MyMemory; None se ambos falharem."""
     try:
         r = session.get("https://translate.googleapis.com/translate_a/single",
-                        params={"client": "gtx", "sl": "auto", "tl": "pt", "dt": "t", "q": text}, timeout=15)
-        r.raise_for_status()
-        out = "".join(part[0] for part in r.json()[0] if part and part[0])
-        return out.strip() or None
+                        params={"client": "gtx", "sl": "en", "tl": "pt", "dt": "t", "q": text}, timeout=15)
+        if r.ok and r.headers.get("content-type", "").startswith(("application/json", "text/javascript")):
+            out = "".join(part[0] for part in r.json()[0] if part and part[0]).strip()
+            if out:
+                return out
+    except Exception:
+        pass
+    try:
+        r = session.get("https://api.mymemory.translated.net/get", params={"q": text[:480], "langpair": "en|pt-BR"}, timeout=20)
+        j = r.json()
+        out = html.unescape((j.get("responseData") or {}).get("translatedText") or "").strip()
+        if out and j.get("responseStatus") == 200 and "MYMEMORY WARNING" not in out.upper():
+            return out
+        print(f"[AVISO] tradução MyMemory: {j.get('responseStatus')} {str(j.get('responseDetails'))[:120]}")
     except Exception as e:
         print(f"[AVISO] tradução: {e}")
-        return None
+    return None
 
 
 def fetch_bond_news(session, old):
