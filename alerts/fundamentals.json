@@ -1,1 +1,146 @@
-{}
+{
+ "AMOB3": {
+  "at": "2026-10-02T20:47:01+00:00",
+  "ebitda": 434654000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 37886057.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 240308000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 4381522000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "ARML3": {
+  "at": "2026-10-02T20:47:02+00:00",
+  "ebitda": 854625000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 346033945.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 900615000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 3298130000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "FRAS3": {
+  "at": "2026-10-02T20:47:02+00:00",
+  "ebitda": 908204000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 277335091.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 1349214000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 2843698000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "JSLG3": {
+  "at": "2026-10-02T20:47:01+00:00",
+  "ebitda": 1824892000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 285368917.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 1490705000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 7711863000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "MOVI3": {
+  "at": "2026-10-02T20:47:01+00:00",
+  "ebitda": 5697461000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 404162922.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 3464793000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 23810644000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "PRNR3": {
+  "at": "2026-10-02T20:47:02+00:00",
+  "ebitda": 310747000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 56987156.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 313387000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 966242000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "RAPT3": {
+  "at": "2026-10-02T20:47:01+00:00",
+  "ebitda": 1627813000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 348687771.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 4018005000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 9666078000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "RAPT4": {
+  "at": "2026-10-02T20:47:02+00:00",
+  "ebitda": 1627813000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 348687771.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 4018005000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 9666078000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "RENT3": {
+  "at": "2026-10-02T20:47:02+00:00",
+  "ebitda": 16540900000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 1104614922.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 10149360000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 45932260000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "SIMH3": {
+  "at": "2026-10-02T20:47:01+00:00",
+  "ebitda": 13229783000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 583759291.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 13884297000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 59448920000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "TUPY3": {
+  "at": "2026-10-02T20:47:02+00:00",
+  "ebitda": 141215000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 131081186.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 2036771000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 3941316000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ },
+ "VAMO3": {
+  "at": "2026-10-02T20:47:01+00:00",
+  "ebitda": 3891072000.0,
+  "ebitdaDate": "2026-06-30",
+  "shares": 1221740534.0,
+  "sharesDate": "2026-06-30",
+  "totalCash": 4407007000.0,
+  "totalCashDate": "2026-06-30",
+  "totalDebt": 15677572000.0,
+  "totalDebtDate": "2026-06-30",
+  "via": "timeseries"
+ }
+}
