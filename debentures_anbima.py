@@ -118,6 +118,19 @@ def parse_file(text):
 
 
 MARKET_FILE = OUT_DIR / "debentures_mercado.json"
+MARKET_VERSION = 2  # mude para regravar a foto do mercado com o formato novo
+
+
+def market_kind(r):
+    """Tipo de remuneração pelo índice do papel: di (DI +), ipca (IPCA +), pct (% do DI) ou o próprio índice."""
+    sec, idx = (r.get("section") or "").upper(), norm(r.get("index") or "")
+    if "PERCENTUAL" in sec or ("%" in idx and "DI" in idx and "+" not in idx):
+        return "pct"
+    if "IPCA" in sec or idx.startswith("IPCA"):
+        return "ipca"
+    if "DI" in sec or idx.startswith("DI"):
+        return "di"
+    return idx[:12].lower() or "outro"
 
 
 def write_market_file(iso, rows):
@@ -128,11 +141,11 @@ def write_market_file(iso, rows):
         if r["rate"] is None or r["duration"] is None:
             continue
         ticker, _ = group_of(r)
-        out.append([r["code"], (r["name"] or "")[:40], r["section"] or "", round(r["rate"], 4),
+        out.append([r["code"], (r["name"] or "")[:40], market_kind(r), round(r["rate"], 4),
                     round(r["duration"] / 252, 3), ticker, r["maturity"] or ""])
     out.sort()
-    MARKET_FILE.write_text(json.dumps({"updatedAt": datetime.now(BRT).isoformat(timespec="seconds"), "date": iso,
-                                       "cols": ["code", "name", "section", "rate", "durYears", "ticker", "maturity"],
+    MARKET_FILE.write_text(json.dumps({"updatedAt": datetime.now(BRT).isoformat(timespec="seconds"), "date": iso, "v": MARKET_VERSION,
+                                       "cols": ["code", "name", "kind", "rate", "durYears", "ticker", "maturity"],
                                        "papers": out}, ensure_ascii=False, separators=(",", ":")))
     print(f"[INFO] mercado {iso}: {len(out)} debêntures com taxa e duration em {MARKET_FILE.name}.")
 
@@ -464,7 +477,8 @@ def main():
 
     # foto do mercado inteiro: do dia mais recente; se esse dia já estava guardado, baixa de novo só ele
     last_day = max(have) if have else None
-    old_market = json.loads(MARKET_FILE.read_text()).get("date") if MARKET_FILE.exists() else None
+    old = json.loads(MARKET_FILE.read_text()) if MARKET_FILE.exists() else {}
+    old_market = old.get("date") if old.get("v") == MARKET_VERSION else None
     if last_day and (market is None or market[0] < last_day) and old_market != last_day:
         try:
             rows = fetch_day(session, date.fromisoformat(last_day))
