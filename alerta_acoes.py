@@ -127,13 +127,15 @@ def _raw(d, *keys):
 
 def yahoo_crumb(session):
     """O quoteSummary do Yahoo pede um cookie de sessão e um 'crumb'."""
-    try:
-        session.get("https://fc.yahoo.com", timeout=15, allow_redirects=True)
-    except Exception:
-        pass
+    nav = {"Accept": "text/html,application/xhtml+xml,*/*;q=0.8", "Accept-Language": "en-US,en;q=0.9"}
+    for url in ("https://fc.yahoo.com", "https://finance.yahoo.com/quote/VAMO3.SA"):
+        try:
+            session.get(url, timeout=15, allow_redirects=True, headers=nav)
+        except Exception:
+            pass
     for host in ("query2.finance.yahoo.com", "query1.finance.yahoo.com"):
         try:
-            r = session.get(f"https://{host}/v1/test/getcrumb", timeout=15)
+            r = session.get(f"https://{host}/v1/test/getcrumb", timeout=15, headers={"Accept": "*/*"})
             if r.ok and r.text and "<" not in r.text:
                 return r.text.strip()
         except Exception:
@@ -141,8 +143,66 @@ def yahoo_crumb(session):
     return None
 
 
+TS_TYPES = {  # campo nosso → séries do Yahoo (a primeira que vier com valor)
+    "ebitda": ["trailingEBITDA", "trailingNormalizedEBITDA", "annualEBITDA"],
+    "totalDebt": ["quarterlyTotalDebt", "annualTotalDebt"],
+    "totalCash": ["quarterlyCashCashEquivalentsAndShortTermInvestments", "quarterlyCashAndCashEquivalents", "annualCashCashEquivalentsAndShortTermInvestments"],
+    "shares": ["quarterlyOrdinarySharesNumber", "quarterlyShareIssued", "annualOrdinarySharesNumber"],
+}
+
+
+def fetch_timeseries(session, ticker):
+    """Balanço e DRE pelo endpoint de séries de fundamentos do Yahoo (não pede crumb)."""
+    types = sorted({t for v in TS_TYPES.values() for t in v})
+    now = int(time.time())
+    last = None
+    for host in ("query2.finance.yahoo.com", "query1.finance.yahoo.com"):
+        try:
+            r = session.get(f"https://{host}/ws/fundamentals-timeseries/v1/finance/timeseries/{ticker}.SA",
+                            params={"symbol": f"{ticker}.SA", "type": ",".join(types), "period1": now - 3 * 365 * 86400, "period2": now},
+                            timeout=20)
+            r.raise_for_status()
+            series = {}
+            for item in (r.json().get("timeseries") or {}).get("result") or []:
+                for t in (item.get("meta") or {}).get("type") or []:
+                    pts = [p for p in item.get(t) or [] if p and (p.get("reportedValue") or {}).get("raw") is not None]
+                    if pts:
+                        pts.sort(key=lambda p: p.get("asOfDate") or "")
+                        series[t] = (pts[-1]["reportedValue"]["raw"], pts[-1].get("asOfDate"))
+            out = {}
+            for k, names in TS_TYPES.items():
+                hit = next((series[n] for n in names if n in series), None)
+                if hit:
+                    out[k], out[k + "Date"] = hit
+            if not out:
+                raise RuntimeError("séries vazias")
+            return out
+        except Exception as e:
+            last = e
+    raise RuntimeError(f"séries {ticker}: {last}")
+
+
 def fetch_fundamentals(session, ticker, crumb):
-    """Ações, market cap, dívida, caixa e EBITDA (12 meses) do Yahoo Finance."""
+    """Ações, dívida, caixa e EBITDA (12 meses) do Yahoo Finance: séries de fundamentos e, se faltar algo, o quoteSummary."""
+    ts = {}
+    try:
+        ts = fetch_timeseries(session, ticker)
+    except Exception as e:
+        print(f"[AVISO] {e}")
+    stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    if all(ts.get(k) is not None for k in ("ebitda", "totalDebt", "totalCash", "shares")):
+        return {**ts, "at": stamp, "via": "timeseries"}
+    try:
+        qs = fetch_quotesummary(session, ticker, crumb)
+    except Exception:
+        if ts:
+            return {**ts, "at": stamp, "via": "timeseries"}
+        raise
+    return {**qs, **{k: v for k, v in ts.items() if v is not None}, "via": "timeseries+quoteSummary" if ts else "quoteSummary"}
+
+
+def fetch_quotesummary(session, ticker, crumb):
+    """Ações, market cap, dívida, caixa e EBITDA (12 meses) pelo quoteSummary do Yahoo (pede cookie + crumb)."""
     params = {"modules": "price,defaultKeyStatistics,financialData,summaryDetail"}
     if crumb:
         params["crumb"] = crumb
