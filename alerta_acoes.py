@@ -249,11 +249,18 @@ def load_fundamentals(session, tickers):
     return cache
 
 
-def attach_fundamentals(q, f):
+# empresas com duas classes de ação: o Yahoo dá o total de ações da companhia, então o valor de mercado
+# usa o preço da classe mais líquida e vale igual para as duas
+COMPANY_PRICE = {"RAPT3": "RAPT4"}
+
+
+def attach_fundamentals(q, f, prices=None):
     """Market cap pelo preço de agora; EV = market cap + dívida bruta − caixa; EV/EBITDA dos últimos 12 meses."""
     if not f:
         return
-    price = q.get("price")
+    ref = COMPANY_PRICE.get(q.get("symbol"))
+    price = (prices or {}).get(ref) if ref else q.get("price")
+    price = price or q.get("price")
     shares = f.get("shares")
     mcap = price * shares if price and shares else f.get("marketCap")
     ev = mcap + (f.get("totalDebt") or 0) - (f.get("totalCash") or 0) if mcap and f.get("totalDebt") is not None else f.get("enterpriseValue")
@@ -262,7 +269,8 @@ def attach_fundamentals(q, f):
         "netDebt": (f.get("totalDebt") - (f.get("totalCash") or 0)) if f.get("totalDebt") is not None else None,
         "ev": ev, "ebitda": f.get("ebitda"),
         "evEbitda": round(ev / f["ebitda"], 2) if ev and f.get("ebitda") and f["ebitda"] > 0 else None,
-        "at": f.get("at"), "source": "Yahoo Finance",
+        "at": f.get("at"), "asOf": f.get("ebitdaDate") or f.get("totalDebtDate"), "source": "Yahoo Finance",
+        "priceRef": ref,
     }
 
 
@@ -384,8 +392,9 @@ def main():
     if not args.demo:
         try:
             funds = load_fundamentals(session, [q["symbol"] for q in quotes])
+            prices = {q["symbol"]: q.get("price") for q in quotes}
             for q in quotes:
-                attach_fundamentals(q, funds.get(q["symbol"]))
+                attach_fundamentals(q, funds.get(q["symbol"]), prices)
         except Exception as e:
             print(f"[AVISO] fundamentos: {e}")
 
