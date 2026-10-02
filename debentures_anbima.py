@@ -117,6 +117,26 @@ def parse_file(text):
     return rows
 
 
+MARKET_FILE = OUT_DIR / "debentures_mercado.json"
+
+
+def write_market_file(iso, rows):
+    """Foto do mercado inteiro de debêntures da ANBIMA (último dia) para os gráficos do painel:
+    [código, emissor, seção, taxa, duration em anos, ticker acompanhado ou null, vencimento]."""
+    out = []
+    for r in rows:
+        if r["rate"] is None or r["duration"] is None:
+            continue
+        ticker, _ = group_of(r)
+        out.append([r["code"], (r["name"] or "")[:40], r["section"] or "", round(r["rate"], 4),
+                    round(r["duration"] / 252, 3), ticker, r["maturity"] or ""])
+    out.sort()
+    MARKET_FILE.write_text(json.dumps({"updatedAt": datetime.now(BRT).isoformat(timespec="seconds"), "date": iso,
+                                       "cols": ["code", "name", "section", "rate", "durYears", "ticker", "maturity"],
+                                       "papers": out}, ensure_ascii=False, separators=(",", ":")))
+    print(f"[INFO] mercado {iso}: {len(out)} debêntures com taxa e duration em {MARKET_FILE.name}.")
+
+
 def fetch_day(session, d):
     r = session.get(URL.format(d=d), timeout=30)
     if r.status_code == 404:
@@ -409,6 +429,7 @@ def main():
         print(f"[INFO] completando a ANBIMA de {first_trade} a {min(have)} ({len(back)} dias úteis)")
         days = sorted(set(days) | set(back))
     fetched, errors = 0, 0
+    market = None  # (data, linhas) do dia mais recente baixado, para a foto do mercado
     for d in sorted(days):
         iso = d.isoformat()
         if iso in have and iso not in refetch:
@@ -422,6 +443,8 @@ def main():
         if rows is None:
             continue  # feriado ou arquivo ainda não publicado
         fetched += 1
+        if market is None or iso > market[0]:
+            market = (iso, rows)
         n_match = 0
         for row in rows:
             ticker, label = group_of(row)
@@ -438,6 +461,19 @@ def main():
         print(f"[INFO] {d}: {len(rows)} papéis no arquivo, {n_match} dos emissores acompanhados.")
         if n_match == 0 and rows:  # noqa
             print("[AVISO] Nenhum emissor reconhecido. Exemplos de nomes:", sorted({r['name'] for r in rows})[:15])
+
+    # foto do mercado inteiro: do dia mais recente; se esse dia já estava guardado, baixa de novo só ele
+    last_day = max(have) if have else None
+    old_market = json.loads(MARKET_FILE.read_text()).get("date") if MARKET_FILE.exists() else None
+    if last_day and (market is None or market[0] < last_day) and old_market != last_day:
+        try:
+            rows = fetch_day(session, date.fromisoformat(last_day))
+            if rows:
+                market = (last_day, rows)
+        except Exception as e:
+            print(f"[AVISO] mercado {last_day}: {e}")
+    if market and market[0] != old_market:
+        write_market_file(*market)
 
     # CRI/CRA (API oficial da ANBIMA): ligados ao grupo pelo devedor; mesmo formato de série das debêntures
     cra_have = set(db.get("craDates", []))
