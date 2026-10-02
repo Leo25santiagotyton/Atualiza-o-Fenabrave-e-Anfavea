@@ -2,7 +2,8 @@
 Boletim de notícias materiais das ações B3
 ------------------------------------------
 Roda todo dia às 8h30 e às 19h (via GitHub Actions). Busca notícias das
-empresas no Google News, mantém só as que podem mexer com a ação (resultado,
+empresas no Google News e os documentos entregues à CVM (fato relevante, comunicado
+ao mercado, aviso aos acionistas), mantém só as que podem mexer com a ação (resultado,
 M&A, dívida e rating, proventos, gestão, regulatório, recomendação de
 analistas, contratos relevantes), monta um resumo do mercado e envia por e-mail.
 
@@ -49,29 +50,29 @@ SEEN_DAYS = 10            # por quanto tempo lembrar o que já foi enviado
 # O padrão diferencia maiúsculas para não confundir o nome com palavras comuns
 # ("localiza", "movida", "vamos").
 COMPANIES = [
-    {"tickers": ["MOVI3"], "name": "Movida",
+    {"tickers": ["MOVI3"], "name": "Movida", "cvm": r"^MOVIDA",
      "query": '"Movida" (locadora OR MOVI3 OR ações OR aluguel OR carros) OR MOVI3',
      "match": r"\bMovida\b|MOVI3"},
-    {"tickers": ["SIMH3"], "name": "Simpar",
+    {"tickers": ["SIMH3"], "name": "Simpar", "cvm": r"^SIMPAR",
      "query": "Simpar OR SIMH3", "match": r"\bSimpar\b|\bSIMPAR\b|SIMH3"},
-    {"tickers": ["VAMO3"], "name": "Vamos",
+    {"tickers": ["VAMO3"], "name": "Vamos", "cvm": r"^VAMOS LOCA",
      "query": '"Grupo Vamos" OR "Vamos Locação" OR VAMO3',
      "match": r"Grupo Vamos|Vamos Loca|VAMO3"},
-    {"tickers": ["JSLG3"], "name": "JSL",
+    {"tickers": ["JSLG3"], "name": "JSL", "cvm": r"^JSL\b",
      "query": 'JSLG3 OR "JSL" logística OR "JSL S.A."', "match": r"\bJSL\b|JSLG3"},
-    {"tickers": ["AMOB3"], "name": "Automob",
+    {"tickers": ["AMOB3"], "name": "Automob", "cvm": r"^AUTOMOB",
      "query": "Automob OR AMOB3", "match": r"\bAutomob\b|AMOB3"},
-    {"tickers": ["RAPT3", "RAPT4"], "name": "Randoncorp",
+    {"tickers": ["RAPT3", "RAPT4"], "name": "Randoncorp", "cvm": r"^RANDON",
      "query": "Randoncorp OR Randon OR RAPT4 OR RAPT3", "match": r"\bRandon(corp)?\b|RAPT[34]"},
-    {"tickers": ["RENT3"], "name": "Localiza",
+    {"tickers": ["RENT3"], "name": "Localiza", "cvm": r"^LOCALIZA RENT",
      "query": "Localiza OR RENT3", "match": r"\bLocaliza\b|RENT3"},
-    {"tickers": ["FRAS3"], "name": "Frasle Mobility",
+    {"tickers": ["FRAS3"], "name": "Frasle Mobility", "cvm": r"^FRAS.?LE",
      "query": 'Frasle OR "Fras-le" OR FRAS3', "match": r"\bFras-?le\b|\bFrasle\b|FRAS3"},
-    {"tickers": ["ARML3"], "name": "Armac",
+    {"tickers": ["ARML3"], "name": "Armac", "cvm": r"^ARMAC",
      "query": "Armac OR ARML3", "match": r"\bArmac\b|ARML3"},
-    {"tickers": ["PRNR3"], "name": "Priner",
+    {"tickers": ["PRNR3"], "name": "Priner", "cvm": r"^PRINER",
      "query": "Priner OR PRNR3", "match": r"\bPriner\b|PRNR3"},
-    {"tickers": ["TUPY3"], "name": "Tupy",
+    {"tickers": ["TUPY3"], "name": "Tupy", "cvm": r"^TUPY",
      "query": "Tupy OR TUPY3", "match": r"\bTupy\b|TUPY3"},
 ]
 
@@ -287,6 +288,52 @@ def fetch_news(session, company, lang="pt", window="2d"):
     return out
 
 
+# documentos entregues à CVM (RAD): fato relevante, comunicado ao mercado e aviso aos acionistas.
+# Saem muitas vezes à noite e nem sempre viram notícia no Google News.
+CVM_URL = "https://www.rad.cvm.gov.br/ENET/frmConsultaExternaCVM.aspx"
+CVM_KEEP = ("Fato Relevante", "Comunicado ao Mercado", "Aviso aos Acionistas")
+
+
+def fetch_cvm_filings(session, days=3):
+    hoje = datetime.now(BRT)
+    body = {"dataDe": (hoje - timedelta(days=days)).strftime("%d/%m/%Y"), "dataAte": hoje.strftime("%d/%m/%Y"),
+            "empresa": "", "setorAtividade": "-1", "categoriaEmissor": "-1", "situacaoEmissor": "-1",
+            "tipoParticipante": "-1", "dataReferencia": "", "categoria": "IPE_-1_-1_-1", "periodo": "2",
+            "horaIni": "", "horaFim": "", "palavraChave": "", "ultimaDtRef": "false", "tipoEmpresa": "0",
+            "token": "", "versaoCaptcha": ""}
+    session.get(CVM_URL, timeout=30)
+    r = session.post(CVM_URL + "/ListarDocumentos", data=json.dumps(body), timeout=60,
+                     headers={"Content-Type": "application/json; charset=utf-8", "X-Requested-With": "XMLHttpRequest",
+                              "Referer": CVM_URL})
+    r.raise_for_status()
+    d = r.json()["d"]
+    if d.get("temErro"):
+        raise RuntimeError(d.get("msgErro"))
+    out = []
+    for row in (d.get("dados") or "").split("&*"):
+        f = row.split("$&")
+        if len(f) < 11:
+            continue
+        clean = [re.sub(r"<spanOrder>.*?</spanOrder>|<[^>]+>", "", x).strip() for x in f]
+        name, categoria, tipo, especie, entrega = clean[1], clean[2], clean[3], clean[4], clean[6]
+        if categoria not in CVM_KEEP:
+            continue
+        company = next((c for c in COMPANIES if c.get("cvm") and re.search(c["cvm"], norm(name).upper())), None)
+        if not company:
+            continue
+        prot = re.search(r"NumeroProtocoloEntrega=(\d+)", f[10])
+        try:
+            pub = datetime.strptime(entrega, "%d/%m/%Y %H:%M").replace(tzinfo=BRT)
+        except ValueError:
+            continue
+        detalhe = especie if especie and especie != "-" else (tipo if tipo and tipo != "-" else "")
+        title = f"{company['name']} · {categoria}" + (f": {detalhe}" if detalhe else "")
+        out.append({"company": company, "title": title, "categoria": categoria, "published": pub.astimezone(timezone.utc),
+                    "link": f"https://www.rad.cvm.gov.br/ENET/frmExibirArquivoIPEExterno.aspx?NumeroProtocoloEntrega={prot.group(1)}"
+                            if prot else CVM_URL})
+    return out
+
+
 def market_snapshot(session, tickers):
     rows = []
     for sym, label, casas in MARKET + [(t + ".SA", t, 2) for t in tickers]:
@@ -314,6 +361,12 @@ def fetch_chart_meta(session, sym):
 
 
 # ---------------------------------------------------------------- e-mail
+def off_hours(item):
+    """Saiu fora do horário comercial (19h às 8h de Brasília, ou no fim de semana)."""
+    t = datetime.fromisoformat(item["published"]).astimezone(BRT)
+    return t.weekday() >= 5 or t.hour >= 19 or t.hour < 8
+
+
 def build_email(edition, now, new_items, market):
     hora = now.strftime("%d/%m/%Y")
     alta = [i for i in new_items if i["importance"] == "alta"]
@@ -322,6 +375,9 @@ def build_email(edition, now, new_items, market):
                + (f" ({len(alta)} de alta relevância)" if alta else ""))
 
     from email_layout import UP, DOWN, INK, MUTED, FONT, data_table, section_title, row, button, page, esc, color_for
+    noite = sum(1 for i in new_items if off_hours(i))
+    if noite and edition == "manhã":
+        subject += f" · {noite} saíram à noite"
     arrow = {"positivo": ("▲", UP), "negativo": ("▼", DOWN), "neutro": ("■", MUTED)}
 
     mk = [m for m in market if m["pct"] is not None]
@@ -340,18 +396,21 @@ def build_email(edition, now, new_items, market):
         when = datetime.fromisoformat(i["published"]).astimezone(BRT).strftime("%d/%m %H:%M")
         tag_bg = "#fde68a" if i["importance"] == "alta" else "#e5e7eb"
         extra = f" · também em {len(i['alsoIn'])} outra(s) fonte(s)" if i.get("alsoIn") else ""
+        night = (f'<span style="background:#1e3a5f;color:#ffffff;padding:1px 6px;font-weight:700">à noite</span> '
+                 if off_hours(i) else "")
         items_html += row(
             f'<div style="font:12px {FONT};color:{MUTED}"><b style="color:#1d4ed8">{esc(" · ".join(i["tickers"]))}</b> · {esc(i["company"])} · {when} '
-            + (f'<span style="background:{tag_bg};color:{INK};padding:1px 6px;font-weight:700">{esc(i["category"])}</span> ' if i.get("category") else "") +
+            + night + (f'<span style="background:{tag_bg};color:{INK};padding:1px 6px;font-weight:700">{esc(i["category"])}</span> ' if i.get("category") else "") +
             f'<b style="color:{col}">{sym} {esc(i["tone"])}</b></div>'
             f'<div style="margin-top:4px"><a href="{esc(i["link"])}" style="font:600 15px {FONT};color:{INK};text-decoration:none">{esc(i["title"])}</a></div>'
             f'<div style="font:12px {FONT};color:{MUTED};margin-top:2px">{esc(i["source"])}{extra}</div>')
     if not new_items:
         items_html = row(f'<span style="color:{MUTED}">Nenhuma notícia material nova desde o último boletim. O painel mostra as anteriores.</span>')
 
-    html_body = page("BOLETIM B3 · MOBILIDADE E LOGÍSTICA", f"Edição da {edition} · {hora}", "Mercado e notícias materiais desde o último boletim",
+    html_body = page("BOLETIM B3 · MOBILIDADE E LOGÍSTICA", f"Edição da {edition} · {hora}", "Mercado e notícias materiais desde o último boletim" + (" (inclui o que saiu à noite)" if edition == "manhã" else ""),
                      section_title("Mercado") + market_tbl + section_title("Notícias materiais") + items_html
                      + button(DASHBOARD_URL, "Abrir painel com gráficos e notícias"),
+                     "Fatos relevantes, comunicados ao mercado e avisos aos acionistas entregues à CVM entram sempre. "
                      "Seleção automática de notícias do Google News que mencionam as empresas e tratam de resultado, M&amp;A, dívida e rating, "
                      "proventos, gestão, regulatório, analistas ou contratos relevantes. O sinal ▲/▼ é uma leitura automática do título, não uma "
                      "recomendação. Cotações do Yahoo Finance com atraso de até 15 min.")
@@ -360,7 +419,7 @@ def build_email(edition, now, new_items, market):
     lines += [f"{m['symbol']}: {'+' if m['pct'] >= 0 else '−'}{br(abs(m['pct']))}%" for m in market if m["pct"] is not None]
     lines.append("")
     for i in new_items or []:
-        lines.append(f"[{'/'.join(i['tickers'])}] {i['category']} ({i['tone']}): {i['title']} — {i['source']}\n  {i['link']}")
+        lines.append(f"{'[à noite] ' if off_hours(i) else ''}[{'/'.join(i['tickers'])}] {i['category']} ({i['tone']}): {i['title']} — {i['source']}\n  {i['link']}")
     if not new_items:
         lines.append("Nenhuma notícia material nova desde o último boletim.")
     lines += ["", f"Painel: {DASHBOARD_URL}"]
@@ -479,7 +538,29 @@ def main():
         sys.exit(1)
 
     found = {i["id"]: i for i in dedupe(list(found.values()))}
-    fresh = [i for i in found.values() if datetime.fromisoformat(i["published"]) >= since]
+    try:
+        filings = fetch_cvm_filings(session)
+        print(f"[INFO] CVM: {len(filings)} documentos das empresas")
+    except Exception as e:
+        filings = []
+        print(f"[AVISO] CVM: {e}")
+    for d in filings:
+        c = d["company"]
+        cat, score, cats = classify(d["title"])
+        if d["categoria"] != "Aviso aos Acionistas" or not cat:
+            cat, score = "Fato relevante", max(score, 5)
+            cats = [cat] + [x for x in cats if x != cat]
+        key = "cvm" + hashlib.sha1(d["link"].encode()).hexdigest()[:9]
+        found[key] = {
+            "id": key, "tickers": list(c["tickers"]), "company": c["name"], "title": d["title"], "source": "CVM",
+            "link": d["link"], "published": d["published"].isoformat(timespec="seconds"),
+            "category": cat, "categories": cats, "score": score,
+            "importance": "alta" if score >= 4 else "média", "tone": tone_of(d["title"]),
+        }
+    # documentos da CVM: janela de 48h (o "seen" evita repetir), para não perder o que saiu à noite
+    since_cvm = min(since, datetime.now(timezone.utc) - timedelta(hours=48))
+    fresh = [i for i in found.values()
+             if datetime.fromisoformat(i["published"]) >= (since_cvm if i["source"] == "CVM" else since)]
     # alta relevância primeiro; dentro de cada grupo, mais recentes primeiro
     new_items = sorted((i for i in fresh if i["id"] not in state["seen"]),
                        key=lambda i: (i["importance"] != "alta", -datetime.fromisoformat(i["published"]).timestamp()))
@@ -499,8 +580,11 @@ def main():
     print(f"[INFO] notícias de bonds: {len(bond_items)} no histórico")
     # revalida o histórico com as regras atuais (remove o que deixou de passar no filtro)
     by_name = {c["name"]: c for c in COMPANIES}
-    old = [i for i in old if i.get("company") in by_name and is_material(by_name[i["company"]], i["title"])]
+    old = [i for i in old if i.get("company") in by_name
+           and (i.get("source") == "CVM" or is_material(by_name[i["company"]], i["title"]))]
     for i in old:
+        if i.get("source") == "CVM":
+            continue
         cat, score, cats = classify(i["title"])
         i.update(category=cat, categories=cats, score=score, tone=tone_of(i["title"]),
                  importance="alta" if score >= 4 else "média")
