@@ -113,7 +113,7 @@ tabela mês a mês e as maiores altas e quedas. Cada mês é enviado uma vez
 A FIPE não separa por carroceria, então o resumo usa uma cesta fixa de modelos
 representativos (lista `CESTA` no script), com até 2 versões e 2 anos-modelo
 de cada. A cesta fica em `alerts/fipe_cesta.json` e os preços em
-`alerts/fipe_historico.json` (13 meses). A primeira carga leva ~30–60 min;
+`alerts/fipe_historico.json` (13 meses). A FIPE bloqueia o IP depois de algumas centenas de consultas; o script faz pausas e usa o espelho `fipe.parallelum.com.br` enquanto isso (opcional: token gratuito de fipe.online no secret `FIPE_TOKEN` para aumentar o limite do espelho). A primeira carga pode levar mais de um run para completar os 13 meses;
 depois cada mês custa poucas consultas.
 
 Teste: disparo manual do workflow (opção "teste") envia agora com `[Teste]` no assunto.

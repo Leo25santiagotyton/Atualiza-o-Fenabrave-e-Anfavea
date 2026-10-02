@@ -51,6 +51,8 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          FIPE_TOKEN: ${{ secrets.FIPE_TOKEN }}
+          PYTHONUNBUFFERED: "1"
         run: |
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.teste }}" = "true" ]; then
             python fipe_mensal.py --force --teste --prazo-min 90

@@ -25,6 +25,7 @@ Uso:
 import argparse
 import json
 import math
+import os
 import random
 import re
 import sys
@@ -178,58 +179,81 @@ def pct_html(v, casas=1, bold=False):
 
 # ---------------------------------------------------------------- cliente FIPE
 class Fipe:
+    """Cliente da FIPE. O site oficial bloqueia (HTTP 403) depois de algumas centenas de
+    consultas seguidas; nesse caso o cliente faz uma pausa no site e, enquanto isso, usa o
+    espelho parallelum (mesmos códigos de marca/modelo). Para o espelho, um token gratuito
+    de fipe.online no secret FIPE_TOKEN aumenta o limite diário."""
     BASE = "https://veiculos.fipe.org.br/api/veiculos/"
-    RESERVA = "https://parallelum.com.br/fipe/api/v2/"
+    RESERVA = "https://fipe.parallelum.com.br/api/v2/"
 
     def __init__(self):
         self.s = requests.Session()
         self.s.headers.update(HEADERS)
+        self.r = requests.Session()
+        self.r.headers["User-Agent"] = HEADERS["User-Agent"]
+        if os.environ.get("FIPE_TOKEN"):
+            self.r.headers["X-Subscription-Token"] = os.environ["FIPE_TOKEN"]
         self.calls = 0
         self.reserva_calls = 0
-        self.falhas_seguidas = 0
-        self.fipe_fora = False
+        self.pausa_ate = 0.0      # time.monotonic() até quando o site oficial fica de lado
+        self.pausa = 120          # duração da próxima pausa (s), dobra a cada bloqueio
+        self.reserva_ate = 0.0    # idem para o espelho (limite diário / 429)
 
-    def _post(self, endpoint, data, tentativas=3):
-        """Consulta o site da FIPE. Depois de várias falhas seguidas (bloqueio por excesso
-        de consultas) desiste do site e passa a usar só o espelho parallelum."""
-        if self.fipe_fora:
+    def _post(self, endpoint, data):
+        if time.monotonic() < self.pausa_ate:
             return None
-        espera = 2
-        for i in range(tentativas):
+        for i in range(2):
             time.sleep(DELAY)
             self.calls += 1
             try:
                 r = self.s.post(self.BASE + endpoint, data=data, timeout=20)
                 if r.status_code == 200:
-                    self.falhas_seguidas = 0
+                    self.pausa = 120
                     return r.json()
-                print(f"[AVISO] FIPE {endpoint} HTTP {r.status_code} (tentativa {i + 1})", flush=True)
+                if r.status_code in (403, 429):
+                    print(f"[AVISO] FIPE bloqueou ({r.status_code}); pausa de {self.pausa}s no site oficial "
+                          f"(usando o espelho enquanto isso). Consultas até aqui: {self.calls}", flush=True)
+                    self.pausa_ate = time.monotonic() + self.pausa
+                    self.pausa = min(self.pausa * 2, 1800)
+                    return None
+                print(f"[AVISO] FIPE {endpoint} HTTP {r.status_code}", flush=True)
             except (requests.RequestException, ValueError) as exc:
-                print(f"[AVISO] FIPE {endpoint}: {exc} (tentativa {i + 1})", flush=True)
-            time.sleep(espera)
-            espera *= 2
-        self.falhas_seguidas += 1
-        if self.falhas_seguidas >= 5:
-            print("[AVISO] Site da FIPE não está respondendo; usando só o espelho parallelum.", flush=True)
-            self.fipe_fora = True
+                print(f"[AVISO] FIPE {endpoint}: {exc}", flush=True)
+            time.sleep(3)
         return None
 
     def _get_reserva(self, path, params=None):
-        for i in range(3):
+        """Retorna o JSON; {} se o espelho não tem o item (404); None se não respondeu."""
+        if time.monotonic() < self.reserva_ate:
+            return None
+        for i in range(2):
             time.sleep(DELAY)
             self.reserva_calls += 1
             try:
-                r = requests.get(self.RESERVA + path, params=params, timeout=30,
-                                 headers={"User-Agent": HEADERS["User-Agent"]})
+                r = self.r.get(self.RESERVA + path, params=params, timeout=30)
                 if r.status_code == 200:
                     return r.json()
                 if r.status_code == 404:
+                    return {}
+                print(f"[AVISO] parallelum {path} HTTP {r.status_code}: {r.text[:120]}", flush=True)
+                if r.status_code in (401, 403, 429):
+                    self.reserva_ate = time.monotonic() + 600
                     return None
-                print(f"[AVISO] parallelum {path} HTTP {r.status_code}", flush=True)
             except (requests.RequestException, ValueError) as exc:
                 print(f"[AVISO] parallelum {path}: {exc}", flush=True)
-            time.sleep(3 * (i + 1))
+            time.sleep(3)
         return None
+
+    def disponivel(self):
+        agora = time.monotonic()
+        return agora >= self.pausa_ate or agora >= self.reserva_ate
+
+    def esperar(self, prazo):
+        """As duas fontes estão bloqueadas: espera a primeira liberar (sem passar do prazo)."""
+        t = min(self.pausa_ate, self.reserva_ate, prazo) - time.monotonic()
+        if t > 0:
+            print(f"[INFO] Fontes bloqueadas; aguardando {t:.0f}s", flush=True)
+            time.sleep(t)
 
     def referencias(self):
         """[(codigo, 'outubro/2026'), ...] do mais novo para o mais antigo."""
@@ -281,18 +305,18 @@ class Fipe:
                 return None
         js = self._get_reserva(f"{TIPOS_PARALLELUM[it['tipo']]}/brands/{it['marca']}/models/{it['modelo']}"
                                f"/years/{it['ano']}-{it['comb']}", {"reference": ref})
-        if js and js.get("price"):
-            return parse_valor(js["price"])
         if js is None:
             raise RuntimeError("sem resposta")
-        return None
+        return parse_valor(js.get("price")) if js.get("price") else None
 
 
 # ---------------------------------------------------------------- cesta
-def montar_cesta(fipe, ref, ref_label):
+def montar_cesta(fipe, ref, ref_label, prazo):
     ano_ref = parse_mes(ref_label)[0]
     marcas_cache, modelos_cache, itens = {}, {}, []
     for seg, tipo, re_marca, re_modelo, re_excl, nome in CESTA:
+        if not fipe.disponivel():
+            fipe.esperar(prazo)
         if tipo not in marcas_cache:
             marcas_cache[tipo] = fipe.marcas(ref, tipo)
         marcas = [(c, l) for c, l in marcas_cache[tipo] if re.search(re_marca, l, re.I)]
@@ -311,11 +335,13 @@ def montar_cesta(fipe, ref, ref_label):
             print(f"[AVISO] Cesta: nenhum modelo encontrado para {nome}")
             continue
         # amostra espalhada pela lista (a FIPE ordena por nome da versão)
-        if len(candidatos) > 8:
-            passo = len(candidatos) / 8
-            candidatos = [candidatos[int(i * passo)] for i in range(8)]
+        if len(candidatos) > 5:
+            passo = len(candidatos) / 5
+            candidatos = [candidatos[int(i * passo)] for i in range(5)]
         vivos = []
         for marca, marca_nome, cod, label in candidatos:
+            if not fipe.disponivel():
+                fipe.esperar(prazo)
             anos = []
             for valor, alabel in fipe.anos(ref, tipo, marca, cod):
                 m = re.match(r"(\d{4})-(\d+)", str(valor))
@@ -356,6 +382,8 @@ def atualizar_historico(fipe, cesta, hist, refs, prazo):
                 if time.monotonic() > prazo:
                     print("[AVISO] Prazo de coleta esgotado; o restante do histórico fica para o próximo run.")
                     return falhas
+                if not fipe.disponivel():
+                    fipe.esperar(prazo)
                 try:
                     p[str(ref)] = fipe.preco(ref, it)
                 except RuntimeError:
@@ -427,8 +455,10 @@ def texto_resumo(res):
     verbo = "subiu" if v > 0.05 else "caiu" if v < -0.05 else "ficou estável"
     partes = [f"Na tabela FIPE de {res['mes']}, a cesta de veículos leves {verbo} "
               f"({pct(v, 2)}) frente a {res['mes_anterior']}."]
-    partes.append(f"Maior alta entre os segmentos: {alta[0]} ({pct(alta[1], 2)}); "
-                  f"maior queda: {baixa[0]} ({pct(baixa[1], 2)}).")
+    r_alta = "maior alta" if alta[1] > 0 else "menor queda"
+    r_baixa = "maior queda" if baixa[1] < 0 else "menor alta"
+    partes.append(f"Entre os segmentos, {r_alta}: {alta[0]} ({pct(alta[1], 2)}); "
+                  f"{r_baixa}: {baixa[0]} ({pct(baixa[1], 2)}).")
     for s in ("Caminhão", "Moto"):
         if m["var"][s] is not None and s not in (alta[0], baixa[0]):
             partes.append(f"{'Caminhões' if s == 'Caminhão' else 'Motos'}: {pct(m['var'][s], 2)}.")
@@ -554,25 +584,28 @@ def main():
             return 1
         ref, label = refs[0]
         print(f"[INFO] Tabela FIPE mais recente: {label} (código {ref})")
-        if not args.force and state.get("ultimo_enviado") == ref:
-            print("[INFO] Esse mês já foi enviado; nada a fazer.")
-            return 0
+        ja_enviado = not args.force and state.get("ultimo_enviado") == ref
+        if ja_enviado:
+            print("[INFO] Esse mês já foi enviado; só completo o histórico, sem e-mail.")
+        prazo = time.monotonic() + args.prazo_min * 60
 
         cesta = load_json(CESTA_FILE, None)
         if args.nova_cesta or not cesta or not cesta.get("itens"):
-            print("[INFO] Montando a cesta de modelos…")
-            cesta = montar_cesta(fipe, ref, label)
+            print("[INFO] Montando a cesta de modelos…", flush=True)
+            cesta = montar_cesta(fipe, ref, label, prazo)
             save_json(CESTA_FILE, cesta)
-        print(f"[INFO] Cesta: {len(cesta['itens'])} itens")
+        print(f"[INFO] Cesta: {len(cesta['itens'])} itens", flush=True)
 
         hist = load_json(HIST_FILE, {})
-        prazo = time.monotonic() + args.prazo_min * 60
         try:
             falhas = atualizar_historico(fipe, cesta, hist, refs, prazo)
         finally:
             hist["refs"] = {str(r): l for r, l in refs[:MESES_HIST]}
             hist["atualizado_em"] = datetime.now(BRT).isoformat(timespec="seconds")
             save_json(HIST_FILE, hist)
+        if ja_enviado:
+            print(f"[INFO] Consultas: FIPE {fipe.calls}, reserva {fipe.reserva_calls}, falhas {falhas}")
+            return 0
         print(f"[INFO] Consultas: FIPE {fipe.calls}, reserva {fipe.reserva_calls}, falhas {falhas}")
 
     res = calcular(cesta, hist, refs)
