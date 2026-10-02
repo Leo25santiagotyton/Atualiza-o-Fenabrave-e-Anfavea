@@ -111,6 +111,101 @@ def fetch_quote(session, ticker):
     }
 
 
+FUND_FILE = OUT_DIR / "fundamentals.json"
+FUND_MAX_AGE = 20 * 3600  # dados de balanço mudam pouco: atualiza no máximo ~1x por dia
+
+
+def _raw(d, *keys):
+    for k in keys:
+        v = (d or {}).get(k)
+        if isinstance(v, dict):
+            v = v.get("raw")
+        if isinstance(v, (int, float)) and not (isinstance(v, float) and math.isnan(v)):
+            return v
+    return None
+
+
+def yahoo_crumb(session):
+    """O quoteSummary do Yahoo pede um cookie de sessão e um 'crumb'."""
+    try:
+        session.get("https://fc.yahoo.com", timeout=15, allow_redirects=True)
+    except Exception:
+        pass
+    for host in ("query2.finance.yahoo.com", "query1.finance.yahoo.com"):
+        try:
+            r = session.get(f"https://{host}/v1/test/getcrumb", timeout=15)
+            if r.ok and r.text and "<" not in r.text:
+                return r.text.strip()
+        except Exception:
+            pass
+    return None
+
+
+def fetch_fundamentals(session, ticker, crumb):
+    """Ações, market cap, dívida, caixa e EBITDA (12 meses) do Yahoo Finance."""
+    params = {"modules": "price,defaultKeyStatistics,financialData,summaryDetail"}
+    if crumb:
+        params["crumb"] = crumb
+    last = None
+    for host in ("query2.finance.yahoo.com", "query1.finance.yahoo.com"):
+        try:
+            r = session.get(f"https://{host}/v10/finance/quoteSummary/{ticker}.SA", params=params, timeout=20)
+            r.raise_for_status()
+            res = (r.json().get("quoteSummary") or {}).get("result") or []
+            if not res:
+                raise RuntimeError("sem resultado")
+            res = res[0]
+            pr, ks, fd, sd = res.get("price"), res.get("defaultKeyStatistics"), res.get("financialData"), res.get("summaryDetail")
+            return {
+                "shares": _raw(ks, "impliedSharesOutstanding", "sharesOutstanding"),
+                "sharesTicker": _raw(ks, "sharesOutstanding"),
+                "marketCap": _raw(pr, "marketCap") or _raw(sd, "marketCap"),
+                "ebitda": _raw(fd, "ebitda"),
+                "totalDebt": _raw(fd, "totalDebt"),
+                "totalCash": _raw(fd, "totalCash"),
+                "enterpriseValue": _raw(ks, "enterpriseValue"),
+                "evEbitdaYahoo": _raw(ks, "enterpriseToEbitda"),
+                "currency": (pr or {}).get("currency") or "BRL",
+                "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            }
+        except Exception as e:
+            last = e
+    raise RuntimeError(f"fundamentos {ticker}: {last}")
+
+
+def load_fundamentals(session, tickers):
+    cache = json.loads(FUND_FILE.read_text()) if FUND_FILE.exists() else {}
+    stale = [t for t in tickers if not cache.get(t) or
+             (datetime.now(timezone.utc) - datetime.fromisoformat(cache[t]["at"])).total_seconds() > FUND_MAX_AGE]
+    if stale:
+        crumb = yahoo_crumb(session)
+        for t in stale:
+            try:
+                cache[t] = fetch_fundamentals(session, t, crumb)
+            except Exception as e:
+                print(f"[AVISO] {e}")
+        FUND_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=1, sort_keys=True))
+        print(f"[INFO] fundamentos atualizados: {', '.join(t for t in stale if t in cache)}")
+    return cache
+
+
+def attach_fundamentals(q, f):
+    """Market cap pelo preço de agora; EV = market cap + dívida bruta − caixa; EV/EBITDA dos últimos 12 meses."""
+    if not f:
+        return
+    price = q.get("price")
+    shares = f.get("shares")
+    mcap = price * shares if price and shares else f.get("marketCap")
+    ev = mcap + (f.get("totalDebt") or 0) - (f.get("totalCash") or 0) if mcap and f.get("totalDebt") is not None else f.get("enterpriseValue")
+    q["fund"] = {
+        "shares": shares, "marketCap": mcap, "totalDebt": f.get("totalDebt"), "totalCash": f.get("totalCash"),
+        "netDebt": (f.get("totalDebt") - (f.get("totalCash") or 0)) if f.get("totalDebt") is not None else None,
+        "ev": ev, "ebitda": f.get("ebitda"),
+        "evEbitda": round(ev / f["ebitda"], 2) if ev and f.get("ebitda") and f["ebitda"] > 0 else None,
+        "at": f.get("at"), "source": "Yahoo Finance",
+    }
+
+
 def demo_quote(ticker):
     rnd = random.Random(ticker + str(int(time.time() // 7200)))
     prev = round(rnd.uniform(2, 45), 2)
@@ -225,6 +320,14 @@ def main():
     if not quotes:
         print("[ERRO] Nenhuma cotação obtida.")
         sys.exit(1)
+
+    if not args.demo:
+        try:
+            funds = load_fundamentals(session, [q["symbol"] for q in quotes])
+            for q in quotes:
+                attach_fundamentals(q, funds.get(q["symbol"]))
+        except Exception as e:
+            print(f"[AVISO] fundamentos: {e}")
 
     # foto para o dashboard
     PRICES_FILE.write_text(json.dumps({
