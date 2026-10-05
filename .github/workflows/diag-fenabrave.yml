@@ -1,0 +1,15 @@
+name: Diagnostico FENABRAVE (temporario)
+on:
+  push:
+    branches: [claude/adoring-mendel-ttu2fk]
+    paths: [tools/diag_fenabrave.py, .github/workflows/diag-fenabrave.yml]
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python tools/diag_fenabrave.py
