@@ -38,8 +38,8 @@ SOURCES = [
     {
         "name": "ANFAVEA - Edições em PDF (Carta da Anfavea)",
         "home_url": "https://anfavea.com.br/",
-        "url": "https://anfavea.com.br/site/edicoes-em-pdf/",
-        "link_filter": lambda href: href and href.lower().endswith(".pdf"),
+        "url": "https://anfavea.com.br/site/conteudos/carta-da-anfavea/",
+        "link_filter": lambda href: href and "/cartas/" in href.lower() and href.lower().endswith(".pdf"),
     },
     {
         "name": "FENABRAVE - Imprensa (releases mensais)",
@@ -94,6 +94,8 @@ def fetch_links(source):
         if href.startswith("/"):
             base = "/".join(source["url"].split("/")[:3])
             href = base + href
+        # A NADA alterna entre /index.php/nada/... e /nada/...; trata como o mesmo link.
+        href = href.replace("/index.php/", "/")
         if href in seen_hrefs:
             continue
         seen_hrefs.add(href)
