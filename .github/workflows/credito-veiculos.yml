@@ -1,0 +1,50 @@
+name: Crédito para veículos (BCB e Trillia/B3)
+
+# Taxa diária por instituição (BCB, atualizada todo dia útil), séries mensais do SGS
+# (taxa, concessões, saldo, inadimplência, prazo; PF e PJ) e veículos financiados
+# (Trillia/B3). Duas vezes por dia útil: 9h10 e 17h10 de Brasília.
+on:
+  schedule:
+    - cron: "10 12,20 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  credito:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Ler crédito para veículos
+        run: python credito_veiculos.py && python monitoramento.py
+
+      - name: Salvar
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "monitor-bot@users.noreply.github.com"
+          cp alerts/credito_veiculos.json "$RUNNER_TEMP/credito_veiculos.json"
+          git add alerts/credito_veiculos.json alerts/monitoramento.json
+          git diff --quiet --cached && exit 0
+          git commit -qm "Crédito para veículos [skip ci]"
+          for i in 1 2 3 4; do
+            git push && exit 0
+            sleep 5
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/credito_veiculos.json" alerts/credito_veiculos.json && python monitoramento.py
+            git add alerts/credito_veiculos.json alerts/monitoramento.json
+            git diff --quiet --cached && exit 0
+            git commit -qm "Crédito para veículos [skip ci]"
+          done
+          exit 1
