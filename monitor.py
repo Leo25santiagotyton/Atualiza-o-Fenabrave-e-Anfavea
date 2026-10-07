@@ -23,6 +23,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
+import act_pedidos
 import monitoramento
 
 STATE_FILE = Path(__file__).parent / "state.json"
@@ -221,8 +222,23 @@ def main():
 
         state[name] = {"hash": new_hash, "items": items}
 
-    if updates_found:
+    # números de pedidos da ACT por classe (Classe 8 e 5-7) tirados das notícias
+    try:
+        act_avisos = act_pedidos.atualiza()
+    except Exception as exc:
+        print(f"[ERRO] Pedidos ACT: {exc}", file=sys.stderr)
+        act_avisos = []
+    for texto, link in act_avisos:
+        print(f"[ACT] {texto}")
+        monitoramento.add_event(state, "ACT Research · pedidos (EUA)", texto, link)
+
+    if updates_found or act_avisos:
         lines = ["Foram detectadas atualizações nas seguintes fontes:\n"]
+        if act_avisos:
+            lines.append("### Pedidos de caminhões nos EUA (ACT Research)")
+            for texto, link in act_avisos:
+                lines.append(f"  - {texto} -> {link}")
+            lines.append("")
         for name, url, items in updates_found:
             lines.append(f"### {name}")
             lines.append(f"Página: {url}")
