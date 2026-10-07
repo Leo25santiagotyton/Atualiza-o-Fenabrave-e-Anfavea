@@ -171,7 +171,7 @@ def main():
             antigos = {it["href"] for it in state.get(name, {}).get("items", [])}
             novos = [it for it in items if it["href"] not in antigos] or items[:1]
             for it in novos[:3]:
-                monitoramento.add_event(monitoramento.FONTES.get(name, (name,))[0], monitoramento._limpa(it["text"]), it["href"])
+                monitoramento.add_event(state, monitoramento.FONTES.get(name, (name,))[0], monitoramento._limpa(it["text"]), it["href"])
         else:
             print(f"[OK] Sem mudanças em {name}.")
 

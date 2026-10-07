@@ -222,5 +222,23 @@
         "acum_var": -7.6
       }
     ]
-  }
+  },
+  "_eventos": [
+    {
+      "id": "84782722b85e",
+      "at": "2026-10-07T09:34:19-03:00",
+      "label": "07/10 09:34",
+      "fonte": "FENABRAVE",
+      "titulo": "Emplacamentos de Setembro/2026 — tabela por segmento",
+      "link": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf"
+    },
+    {
+      "id": "b11d567e41fa",
+      "at": "2026-10-07T09:34:19-03:00",
+      "label": "07/10 09:34",
+      "fonte": "ANFAVEA",
+      "titulo": "Carta 484 — resultados de Agosto/2026",
+      "link": "https://www.anfavea.com.br/cartas/carta484.pdf"
+    }
+  ]
 }
