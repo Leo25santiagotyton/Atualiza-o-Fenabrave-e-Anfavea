@@ -1,0 +1,111 @@
+{
+ "fonte": "ACT Research (planilha ACT_Research_August.xlsx; set/2026 = preliminar divulgado em out/2026)",
+ "atualizado": "07/10/2026",
+ "preliminar": [
+  "2026-09"
+ ],
+ "classes": {
+  "Classe 8": {
+   "2025": [
+    25800,
+    17900,
+    16500,
+    8200,
+    13000,
+    9463,
+    13172,
+    12844,
+    20666,
+    24403,
+    19547,
+    42684
+   ],
+   "2026": [
+    30806,
+    46440,
+    38050,
+    24675,
+    26576,
+    31751,
+    22562,
+    16951,
+    18700
+   ]
+  },
+  "Classes 5-7": {
+   "2025": [
+    14700,
+    16600,
+    18600,
+    12800,
+    14264,
+    12387,
+    13159,
+    14613,
+    16133,
+    15833,
+    16262,
+    20126
+   ],
+   "2026": [
+    15984,
+    17919,
+    20693,
+    16801,
+    19725,
+    21122,
+    18300,
+    19966,
+    20200
+   ]
+  }
+ },
+ "exposicao": [
+  {
+   "empresa": "Tupy",
+   "ticker": "TUPY3",
+   "periodo": "2T26",
+   "itens": [
+    [
+     "América do Norte na receita",
+     "38%"
+    ],
+    [
+     "América do Sul e Central",
+     "42%"
+    ],
+    [
+     "Europa",
+     "17%"
+    ],
+    [
+     "Componentes estruturais e contratos de manufatura",
+     "86% da receita"
+    ]
+   ],
+   "nota": "Blocos e cabeçotes de motor para caminhões e off-road. A gestão diz que a participação em Classe 8 nos EUA ainda é relativamente baixa e que novos contratos (mais de R$ 600 mi de receita em 2026) ampliam essa fatia. Carteira de pedidos de Classe 8 nos EUA de cerca de 180 mil unidades, a maior desde o 2T23.",
+   "fonte": "Teleconferência de resultados 2T26"
+  },
+  {
+   "empresa": "Randoncorp",
+   "ticker": "RAPT4",
+   "periodo": "2T26",
+   "itens": [
+    [
+     "Mercado externo na receita líquida",
+     "30,3%"
+    ],
+    [
+     "USMCA (EUA, México, Canadá) no mercado externo",
+     "56,8%"
+    ],
+    [
+     "USMCA na receita total (estimado)",
+     "≈17%"
+    ]
+   ],
+   "nota": "Nos EUA: semirreboques (Hercules) e eixos e suspensões (AXN), mais ligados a reboques do que a pedidos de cavalos Classe 8; no México, autopeças e fricção (Dacomsa, Fras-le). A empresa cita demanda de semirreboques estagnada nos EUA.",
+   "fonte": "Release de resultados 2T26"
+  }
+ ]
+}
