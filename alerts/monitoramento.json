@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T10:12:59-03:00",
- "updatedLabel": "07/10/2026 10:12",
+ "updatedAt": "2026-10-07T10:18:36-03:00",
+ "updatedLabel": "07/10/2026 10:18",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -265,7 +265,28 @@
   {
    "nome": "FRED · vendas heavy trucks (EUA)",
    "url": "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
-   "itens": []
+   "itens": [
+    {
+     "text": "Set/2026 · 396,0 mil (anualizado) · m/m -4,1% · a/a +2,3%",
+     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-09"
+    },
+    {
+     "text": "Ago/2026 · 413,0 mil (anualizado) · m/m -4,8% · a/a +3,0%",
+     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-08"
+    },
+    {
+     "text": "Jul/2026 · 434,0 mil (anualizado) · m/m -5,0% · a/a +3,6%",
+     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-07"
+    },
+    {
+     "text": "Jun/2026 · 457,0 mil (anualizado) · m/m +5,8% · a/a +3,2%",
+     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-06"
+    },
+    {
+     "text": "Mai/2026 · 432,0 mil (anualizado) · m/m +14,0% · a/a -3,6%",
+     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-05"
+    }
+   ]
   },
   {
    "nome": "ACT Research · pedidos (EUA)",

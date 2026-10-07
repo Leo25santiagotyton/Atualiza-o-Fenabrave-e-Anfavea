@@ -67,5 +67,30 @@
         "href": "https://www.ccjdigital.com/economic-trends/article/15836590/class-8-market-shifts-to-my-2027-ordering-after-nox-prebuy"
       }
     ]
+  },
+  "FRED - vendas de caminhões pesados (EUA)": {
+    "hash": "65710bc63313cf5acb7258856649a1248295043b16ab902fefe1095181152eec",
+    "items": [
+      {
+        "text": "Set/2026 · 396,0 mil (anualizado) · m/m -4,1% · a/a +2,3%",
+        "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-09"
+      },
+      {
+        "text": "Ago/2026 · 413,0 mil (anualizado) · m/m -4,8% · a/a +3,0%",
+        "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-08"
+      },
+      {
+        "text": "Jul/2026 · 434,0 mil (anualizado) · m/m -5,0% · a/a +3,6%",
+        "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-07"
+      },
+      {
+        "text": "Jun/2026 · 457,0 mil (anualizado) · m/m +5,8% · a/a +3,2%",
+        "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-06"
+      },
+      {
+        "text": "Mai/2026 · 432,0 mil (anualizado) · m/m +14,0% · a/a -3,6%",
+        "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-05"
+      }
+    ]
   }
 }
