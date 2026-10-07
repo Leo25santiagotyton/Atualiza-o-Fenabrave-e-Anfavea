@@ -1,31 +1,28 @@
-"""Sonda temporária: de onde tirar os números de pedidos da ACT (Classe 8 e 5-7)."""
+"""Sonda temporária: arquivo público (sem reCAPTCHA) com taxas indicativas de CRI/CRA da ANBIMA."""
 import re, requests
-from bs4 import BeautifulSoup
-H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36", "Accept-Language": "en-US,en;q=0.9"}
-NUM = re.compile(r"[^.]*?(class(es)? ?[5-8][^.]{0,200}?(\d{1,3}(,\d{3})+|\d+(\.\d)?k|\d+(\.\d)? ?thousand)[^.]*\.)", re.I)
-def get(u):
-    r = requests.get(u, headers=H, timeout=30); return r.status_code, r.text
-s, t = get("https://www.actresearch.net/resources/trends-headlines")
-soup = BeautifulSoup(t, "html.parser")
-links = []
-for a in soup.find_all("a", href=True):
-    tx = a.get_text(" ", strip=True)
-    if re.search(r"order", tx, re.I) and re.search(r"class", tx, re.I) and a["href"].startswith("http"):
-        links.append((tx, a["href"].split("?utm")[0]))
-for u in ["https://www.actresearch.net/resources/blog/north-america-class-8-blog",
-          "https://www.actresearch.net/resources/blog",
-          "https://www.actresearch.net/resources/press-releases-news",
-          "https://www.ftrintel.com/class-8-truck-orders"]:
-    links.append(("DIRETO", u))
-seen = set()
-for tx, u in links[:14]:
-    if u in seen: continue
-    seen.add(u)
+from datetime import date, timedelta
+H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
+d = date.today() - timedelta(days=1)
+while d.weekday() >= 5: d -= timedelta(days=1)
+URLS = [
+ "https://www.anbima.com.br/pt_br/informar/precos-e-indices/precos/taxas-de-cri-e-cra.htm",
+ "https://www.anbima.com.br/pt_br/informar/precos-e-indices/precos/cri-e-cra.htm",
+ "https://www.anbima.com.br/informacoes/merc-sec-cri-cra/default.asp",
+ "https://www.anbima.com.br/informacoes/merc-sec-cri/default.asp",
+ "https://www.anbima.com.br/informacoes/merc-sec-cra/default.asp",
+ f"https://www.anbima.com.br/informacoes/merc-sec-cri-cra/arqs/cri{d:%y%m%d}.txt",
+ f"https://www.anbima.com.br/informacoes/merc-sec-cri-cra/arqs/cra{d:%y%m%d}.txt",
+ f"https://www.anbima.com.br/informacoes/merc-sec-cri-cra/arqs/cc{d:%y%m%d}.txt",
+ "https://www.anbima.com.br/informacoes/merc-sec-debentures/default.asp",
+ "https://www.anbima.com.br/pt_br/informar/precos-e-indices.htm",
+]
+for u in URLS:
     try:
-        s, t = get(u)
-        body = BeautifulSoup(t, "html.parser").get_text(" ", strip=True)
-        print("=====", s, len(body), tx[:90], "|", u[:120])
-        for m in list(NUM.finditer(body))[:6]:
-            print("   >", m.group(1).strip()[:260])
+        r = requests.get(u, headers=H, timeout=30)
+        t = r.text
+        print("=====", r.status_code, len(t), u)
+        for m in re.finditer(r'href="([^"]*(?:cri|cra|CRI|CRA)[^"]*)"', t):
+            print("   link:", m.group(1)[:160])
+        if r.status_code == 200 and len(t) < 4000: print(t[:1500])
     except Exception as e:
         print("=====", "ERRO", u, e)
