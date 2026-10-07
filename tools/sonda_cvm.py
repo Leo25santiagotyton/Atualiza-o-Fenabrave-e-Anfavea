@@ -1,24 +1,20 @@
-"""Sonda temporária: links da ANFAVEA (Carta e estatísticas) para achar o resultado mais novo."""
-import re, requests
+"""Sonda temporária: página da coletiva ANFAVEA Setembro/2026."""
+import re, io, requests, pdfplumber
 from bs4 import BeautifulSoup
 H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
-for u in ["https://anfavea.com.br/site/conteudos/carta-da-anfavea/", "https://anfavea.com.br/site/", "https://anfavea.com.br/site/estatisticas/",
-          "https://anfavea.com.br/site/edicoes-em-excel/", "https://anfavea.com.br/site/category/noticias/"]:
-    try:
-        r = requests.get(u, headers=H, timeout=30)
-        print("=====", r.status_code, u)
-        s = BeautifulSoup(r.text, "html.parser")
-        for a in s.find_all("a", href=True):
-            h = a["href"]; t = a.get_text(" ", strip=True)
-            if re.search(r"\.pdf|\.xlsx?|carta|resultad|setembro|emplacament|produ", h + " " + t, re.I):
-                print("  ", t[:80], "|", h[:160])
-    except Exception as e:
-        print("ERRO", u, e)
-for n in (485, 486):
-    for base in ("https://anfavea.com.br/site/wp-content/uploads/cartas/carta%d.pdf", "https://www.anfavea.com.br/cartas/carta%d.pdf", "https://anfavea.com.br/cartas/carta%d.pdf"):
-        u = base % n
-        try:
-            r = requests.get(u, headers=H, timeout=30, stream=True)
-            print(r.status_code, r.headers.get("content-type"), u)
-        except Exception as e:
-            print("ERRO", u, e)
+u = "https://anfavea.com.br/site/imprensa-noticia/coletiva-de-imprensa-setembro-2026/"
+r = requests.get(u, headers=H, timeout=30); print(r.status_code)
+s = BeautifulSoup(r.text, "html.parser")
+main = s.find("article") or s.find("main") or s
+print(main.get_text("\n", strip=True)[:4000])
+for a in s.find_all("a", href=True):
+    if re.search(r"\.pdf|\.pptx?|\.xlsx?|apresenta|wp-content/uploads", a["href"], re.I):
+        print("LINK", a.get_text(" ", strip=True)[:60], "|", a["href"])
+        if a["href"].lower().endswith(".pdf"):
+            try:
+                pr = requests.get(a["href"], headers=H, timeout=60)
+                with pdfplumber.open(io.BytesIO(pr.content)) as pdf:
+                    for i, p in enumerate(pdf.pages[:8]):
+                        print(f"--- pdf p{i+1}"); print((p.extract_text() or "")[:2500])
+            except Exception as e:
+                print("ERRO pdf", e)
