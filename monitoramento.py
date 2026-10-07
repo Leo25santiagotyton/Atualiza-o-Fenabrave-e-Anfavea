@@ -49,19 +49,18 @@ def _limpa(t):
     return t
 
 
-def add_event(fonte, titulo, link=""):
-    """Registra um aviso de novidade (repete o mesmo título/link só uma vez)."""
-    d = _read(OUT)
-    ev = d.get("eventos", [])
+def add_event(state, fonte, titulo, link=""):
+    """Registra um aviso de novidade dentro do estado da própria fonte (state.json do
+    monitor ou setor_state.json dos relatórios), assim cada workflow só grava o seu
+    arquivo e o monitoramento.json pode ser refeito a qualquer momento sem perder nada."""
+    ev = state.setdefault("_eventos", [])
     eid = hashlib.sha1(f"{fonte}|{titulo}|{link}".encode()).hexdigest()[:12]
     if any(e.get("id") == eid for e in ev):
         return
     now = datetime.now(BRT)
     ev.insert(0, {"id": eid, "at": now.isoformat(timespec="seconds"), "label": now.strftime("%d/%m %H:%M"),
                   "fonte": fonte, "titulo": titulo, "link": link})
-    d["eventos"] = ev[:MAX_EVENTOS]
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    del ev[MAX_EVENTOS:]
 
 
 def write():
@@ -79,7 +78,8 @@ def write():
     now = datetime.now(BRT)
     d.update(updatedAt=now.isoformat(timespec="seconds"), updatedLabel=now.strftime("%d/%m/%Y %H:%M"),
              fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes)
-    d.setdefault("eventos", [])
+    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []))}
+    d["eventos"] = sorted(ev.values(), key=lambda e: e["at"], reverse=True)[:MAX_EVENTOS]
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
 
