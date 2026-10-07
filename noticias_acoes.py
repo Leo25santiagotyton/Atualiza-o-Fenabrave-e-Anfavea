@@ -78,6 +78,7 @@ COMPANIES = [
 
 # emissores de bonds em US$ (aba Bond do painel): notícias de dívida, rating, resultado e eventos de crédito
 BOND_TERMS = '(bond OR bonds OR notes OR "senior notes" OR rating OR Fitch OR Moody\'s OR "S&P" OR dívida OR debt OR tender OR recompra OR resultado OR earnings OR refinanciamento OR refinancing)'
+BOND_TERMS_EN = '(bond OR bonds OR notes OR "senior notes" OR rating OR Fitch OR Moody\'s OR "S&P" OR debt OR tender OR earnings OR refinancing OR downgrade OR upgrade)'
 BOND_ISSUERS = [
     {"name": "Simpar", "bond": "Simpar Europe 2031", "query": f'(Simpar OR "Simpar Europe") {BOND_TERMS}', "match": r"\bSimpar\b"},
     {"name": "Movida", "bond": "Movida Europe 2029/2031/2033", "query": f'(Movida OR "Movida Europe") {BOND_TERMS}', "match": r"\bMovida\b"},
@@ -88,6 +89,29 @@ BOND_ISSUERS = [
     {"name": "Constellation", "bond": "Constellation 2033", "query": f'("Constellation Oil" OR "Constellation Oil Services" OR "Constellation Serviços") {BOND_TERMS}', "match": r"Constellation"},
     {"name": "Tupy", "bond": "Tupy Overseas 2031", "query": f'(Tupy OR "Tupy Overseas") {BOND_TERMS}', "match": r"\bTupy\b"},
     {"name": "CHC Group", "bond": "CHC 2030", "query": f'("CHC Group" OR "CHC Helicopter") {BOND_TERMS}', "match": r"\bCHC\b"},
+    # bonds dos EUA (transporte, locação, autopeças e bens de capital): só notícias em inglês
+    {"name": "Wabash", "bond": "Wabash National", "query": f'("Wabash National" OR Wabash) {BOND_TERMS_EN}', "match": r"\bWabash\b", "langs": ("en",)},
+    {"name": "DexKo", "bond": "DexKo Global", "query": f'(DexKo OR "Dexko Global") {BOND_TERMS_EN}', "match": r"\bDexKo\b", "langs": ("en",)},
+    {"name": "JB Poindexter", "bond": "JB Poindexter", "query": f'("JB Poindexter" OR "J.B. Poindexter") {BOND_TERMS_EN}', "match": r"Poindexter", "langs": ("en",)},
+    {"name": "Star Leasing", "bond": "Star Leasing", "query": f'("Star Leasing") {BOND_TERMS_EN}', "match": r"Star Leasing", "langs": ("en",)},
+    {"name": "Velocity Vehicle", "bond": "Velocity Vehicle Group", "query": f'("Velocity Vehicle Group" OR "Velocity Truck Centers") {BOND_TERMS_EN}', "match": r"Velocity (Vehicle|Truck)", "langs": ("en",)},
+    {"name": "EquipmentShare", "bond": "EquipmentShare", "query": f'(EquipmentShare) {BOND_TERMS_EN}', "match": r"EquipmentShare", "langs": ("en",)},
+    {"name": "Maxim Crane", "bond": "Maxim Crane Works", "query": f'("Maxim Crane") {BOND_TERMS_EN}', "match": r"Maxim Crane", "langs": ("en",)},
+    {"name": "Alta Equipment", "bond": "Alta Equipment Group", "query": f'("Alta Equipment") {BOND_TERMS_EN}', "match": r"Alta Equipment", "langs": ("en",)},
+    {"name": "Avis Budget", "bond": "Avis Budget Car Rental", "query": f'("Avis Budget") {BOND_TERMS_EN}', "match": r"Avis", "langs": ("en",)},
+    {"name": "Aptiv", "bond": "Aptiv", "query": f'(Aptiv) {BOND_TERMS_EN}', "match": r"\bAptiv\b", "langs": ("en",)},
+    {"name": "Tenneco", "bond": "Tenneco", "query": f'(Tenneco) {BOND_TERMS_EN}', "match": r"\bTenneco\b", "langs": ("en",)},
+    {"name": "American Axle", "bond": "American Axle", "query": f'("American Axle" OR "Dauch") {BOND_TERMS_EN}', "match": r"American Axle|\bDauch\b", "langs": ("en",)},
+    {"name": "Cooper-Standard", "bond": "Cooper-Standard Automotive", "query": f'("Cooper-Standard" OR "Cooper Standard") {BOND_TERMS_EN}', "match": r"Cooper[- ]Standard", "langs": ("en",)},
+    {"name": "Goodyear", "bond": "Goodyear Tire & Rubber", "query": f'(Goodyear) {BOND_TERMS_EN}', "match": r"\bGoodyear\b", "langs": ("en",)},
+    {"name": "Forward Air", "bond": "Clue Opco (Forward Air)", "query": f'("Forward Air" OR "Clue Opco" OR "Omni Logistics") {BOND_TERMS_EN}', "match": r"Forward Air|Clue Opco|Omni Logistics", "langs": ("en",)},
+    {"name": "Proficient Auto", "bond": "Proficient Auto Logistics", "query": f'("Proficient Auto Logistics") {BOND_TERMS_EN}', "match": r"Proficient Auto", "langs": ("en",)},
+    {"name": "PODS", "bond": "PODS LLC", "query": f'("PODS LLC" OR "PODS moving") {BOND_TERMS_EN}', "match": r"\bPODS\b", "langs": ("en",)},
+    {"name": "Railworks", "bond": "Railworks", "query": f'(Railworks OR "RailWorks") {BOND_TERMS_EN}', "match": r"Rail ?Works", "langs": ("en",)},
+    {"name": "Signature Aviation", "bond": "Signature Aviation", "query": f'("Signature Aviation") {BOND_TERMS_EN}', "match": r"Signature Aviation", "langs": ("en",)},
+    {"name": "Bridger Aerospace", "bond": "Bridger Aerospace", "query": f'("Bridger Aerospace") {BOND_TERMS_EN}', "match": r"Bridger Aerospace", "langs": ("en",)},
+    {"name": "Hillenbrand", "bond": "Hillenbrand", "query": f'(Hillenbrand) {BOND_TERMS_EN}', "match": r"\bHillenbrand\b", "langs": ("en",)},
+    {"name": "AIT Logistics", "bond": "GB AIT Buyer (AIT)", "query": f'("AIT Worldwide" OR "GB AIT Buyer") {BOND_TERMS_EN}', "match": r"AIT Worldwide|GB AIT", "langs": ("en",)},
 ]
 BOND_KEEP = 150
 # páginas de cotação e cadastros financeiros que o Google News devolve como notícia
@@ -125,7 +149,7 @@ def fetch_bond_news(session, old):
     """Notícias dos emissores de bonds (pt e en), juntas com o histórico já salvo; mais recentes primeiro."""
     found = {i["id"]: i for i in old}
     for c in BOND_ISSUERS:
-        for lang in ("pt", "en"):
+        for lang in c.get("langs", ("pt", "en")):
             try:
                 items = fetch_news(session, c, lang, "7d")
             except Exception as e:
