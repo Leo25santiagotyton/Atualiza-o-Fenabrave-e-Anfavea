@@ -33,13 +33,22 @@
       }
     ]
   },
-  "_eventos": [],
+  "_eventos": [
+    {
+      "id": "90de1b70e344",
+      "at": "2026-10-07T10:12:52-03:00",
+      "label": "07/10 10:12",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "New order season sputters to take off in September — Trucks, Parts, Service.",
+      "link": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
+    }
+  ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "445f7b8e7c092fa36c27355e64f933a0ea91e189a2a6e2d12ae7267d0b1525c9",
+    "hash": "ddee098ca8ee81e74bae0bff868a8e05b8450d4ff511e49ef0ecc388b4053778",
     "items": [
       {
-        "text": "Used Class 8 truck sales tumble 24% as US inventories tighten — Truck News.",
-        "href": "https://www.trucknews.com/equipment/used-class-8-truck-sales-tumble-24-as-us-inventories-tighten/1003222637/"
+        "text": "New order season sputters to take off in September — Trucks, Parts, Service.",
+        "href": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
       },
       {
         "text": "Class 8 orders rise in September as EPA27 uncertainty clouds market — Truck News.",
