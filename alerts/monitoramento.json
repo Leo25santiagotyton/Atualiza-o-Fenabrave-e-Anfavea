@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T10:31:09-03:00",
- "updatedLabel": "07/10/2026 10:31",
+ "updatedAt": "2026-10-07T10:47:10-03:00",
+ "updatedLabel": "07/10/2026 10:47",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -342,11 +342,16 @@
   }
  ],
  "act": {
-  "fonte": "ACT Research (planilha ACT_Research_August.xlsx; set/2026 = preliminar divulgado em out/2026)",
+  "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
   "atualizado": "07/10/2026",
-  "preliminar": [
-   "2026-09"
-  ],
+  "preliminar": {
+   "Classe 8": [
+    "2026-09"
+   ],
+   "Classes 5-7": [
+    "2026-09"
+   ]
+  },
   "classes": {
    "Classe 8": {
     "2025": [
@@ -450,6 +455,11 @@
     "nota": "Nos EUA: semirreboques (Hercules) e eixos e suspensões (AXN), mais ligados a reboques do que a pedidos de cavalos Classe 8; no México, autopeças e fricção (Dacomsa, Fras-le). A empresa cita demanda de semirreboques estagnada nos EUA.",
     "fonte": "Release de resultados 2T26"
    }
-  ]
+  ],
+  "ftr": {
+   "Classe 8": {
+    "2026-09": 21300
+   }
+  }
  }
 }
