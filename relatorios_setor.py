@@ -45,6 +45,7 @@ PREVIEW_FILE = BASE / "setor_preview.html"
 FENABRAVE_HOME = "https://www.fenabrave.org.br/portalv2/home/imprensa"
 FENABRAVE_PAGE = "https://www.fenabrave.org.br/portalv2/Conteudo/emplacamentos"
 ANFAVEA_PAGE = "https://anfavea.com.br/site/conteudos/carta-da-anfavea/"
+ANFAVEA_HOME = "https://anfavea.com.br/site/"
 
 MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
          "agosto", "setembro", "outubro", "novembro", "dezembro"]
@@ -281,7 +282,8 @@ def parse_anfavea(pages):
 
 
 def html_anfavea(d, url):
-    out = section_title(f"ANFAVEA · Carta · {d['periodo']}")
+    col = d.get("aprox")
+    out = section_title(f"ANFAVEA · {'Coletiva de imprensa' if col else 'Carta'} · {d['periodo']}")
     if d["resumo"]:
         e = d["resumo"][0]
         p = d["resumo"][2]
@@ -304,14 +306,174 @@ def html_anfavea(d, url):
                          fmt_int(l["mes_aa"]), fmt_pct(l["aa"]), b(fmt_int(l["acum"])), fmt_int(l["acum_aa"]),
                          fmt_pct(l["acum_var"])])
         out += data_table(headers, rows)
-    out += row(f'<span style="font:12px {FONT};color:{MUTED}">Fonte: ANFAVEA, Carta da Anfavea. '
+    if d.get("projecoes"):
+        out += section_title("ANFAVEA · Projeções 2026 revisadas (mil unidades)")
+        rows = [[f"<b>{esc(l['indicador'])}</b>", fmt_mil(l["ano_ant"]), fmt_mil(l["anterior"]),
+                 f"<b>{fmt_mil(l['nova'])}</b>", fmt_pct(l["var"])] for l in d["projecoes"]]
+        out += data_table(["Indicador", "Ano anterior", "Projeção anterior", "Nova projeção", "Var. s/ ano ant."], rows)
+    fonte = ("Fonte: ANFAVEA, apresentação da coletiva de imprensa. A Carta da Anfavea com os números exatos "
+             "ainda não saiu; por segmento, as unidades são aproximadas (slide em mil, uma casa) e serão "
+             "trocadas pelas da Carta quando ela sair." if col else "Fonte: ANFAVEA, Carta da Anfavea.")
+    out += row(f'<span style="font:12px {FONT};color:{MUTED}">{fonte} '
                f'Var. m/m = sobre o mês anterior; a/a = sobre o mesmo mês do ano anterior.</span>')
-    return out + button(url, "Abrir Carta da ANFAVEA")
+    return out + button(url, "Abrir apresentação da coletiva" if col else "Abrir Carta da ANFAVEA")
+
+
+# ------------------------------------------- ANFAVEA: coletiva de imprensa
+# A coletiva (apresentação em PDF) sai no dia da divulgação; a Carta às vezes
+# atrasa. Quando a coletiva traz um mês mais novo que o último guardado, os
+# números saem dela: cada valor (em mil, uma casa) só é aceito se bater com as
+# variações impressas no slide (mês/mês, ano/ano e acumulado) e com o
+# acumulado do mês anterior já guardado. Quando a Carta do mesmo mês sair, ela
+# substitui estes números sem mandar outro e-mail.
+
+def mes_idx(periodo):
+    """'Setembro/2026' -> 2026*12+9 ; vazio -> 0."""
+    m = re.match(r"(\w+)/(\d{4})", periodo or "")
+    if not m or m.group(1).lower() not in MESES:
+        return 0
+    return int(m.group(2)) * 12 + MESES.index(m.group(1).lower()) + 1
+
+
+def anfavea_coletiva(s):
+    """Coletiva mais recente na página inicial. Retorna (url do PDF, url da página, url do release) ou None."""
+    r = s.get(ANFAVEA_HOME, timeout=40)
+    r.raise_for_status()
+    best = None
+    for a in BeautifulSoup(r.text, "html.parser").find_all("a", href=True):
+        m = re.search(r"coletiva-de-imprensa-(\w+)-(\d{4})/?$", a["href"], re.I)
+        if m and m.group(1).lower() in MESES:
+            k = int(m.group(2)) * 12 + MESES.index(m.group(1).lower())
+            if best is None or k > best[0]:
+                best = (k, requests.compat.urljoin(ANFAVEA_HOME, a["href"]))
+    if not best:
+        return None
+    r = s.get(best[1], timeout=40)
+    r.raise_for_status()
+    pdf = release = None
+    for a in BeautifulSoup(r.text, "html.parser").find_all("a", href=True):
+        h = a["href"]
+        if not h.lower().endswith(".pdf"):
+            continue
+        if re.search(r"release", h, re.I):
+            release = release or h
+        elif re.search(r"coletiva", h + a.get_text(" "), re.I):
+            pdf = pdf or h
+    return (pdf, best[1], release) if pdf else None
+
+
+RE_VAR = re.compile(r"(?:\b(\w{3})\s+)?(\d{2})\s*vs\.\s*(?:(\w{3})\s+)?(\d{2})\s*:\s*([+-])\s*(\d+(?:,\d+)?)\s*%")
+RE_TOK = re.compile(r"(?<![\d,.])\d{1,3}(?:\.\d{3})*(?:,\d+)?(?![\d%])")
+
+
+def _pagina(pages, *titulos, sem=("VARIAÇÃO", "Média diária", "Acumulado")):
+    for t in pages:
+        cab = " ".join(t.split("\n")[:3])
+        if all(x in cab for x in titulos) and not any(x in t for x in sem):
+            return t
+    return ""
+
+
+def _variacoes(texto):
+    """Trios (m/m, a/a, acumulado) na ordem em que aparecem no slide."""
+    grupos, g = [], {}
+    for m1, a1, m2, a2, sinal, v in RE_VAR.findall(texto):
+        v = num(v) * (-1 if sinal == "-" else 1)
+        tipo = "acum" if not m1 else "aa" if m1.lower() == (m2 or "").lower() else "mm"
+        g[tipo] = v
+        if len(g) == 3:
+            grupos.append(g)
+            g = {}
+    return grupos
+
+
+def _tokens(texto):
+    out = []
+    for ln in texto.splitlines():
+        if "vs." in ln or "%" in ln or "Fonte" in ln:
+            continue
+        for t in RE_TOK.findall(ln):
+            v = num(t)
+            if isinstance(v, float) or v >= 10:
+                out.append(float(v))
+    return out
+
+
+def _resolve(tokens, var, ant):
+    """Acha no slide o valor do mês (X) e o do mesmo mês do ano anterior (Y), em mil,
+    conferindo com as variações. ant: mês anterior / acumulados anteriores, em mil."""
+    melhor = None
+    for x in set(tokens):
+        if abs(x - ant["mes"] * (1 + var["mm"] / 100)) > 0.06 + 0.001 * x:
+            continue
+        for y in set(tokens):
+            if abs(x / (1 + var["aa"] / 100) - y) > 0.08 + 0.001 * x:
+                continue
+            ac, ac_aa = ant["acum"] + x, ant["acum_aa"] + y
+            erro = abs((ac / ac_aa - 1) * 100 - var["acum"])
+            if erro < 0.3 and (melhor is None or erro < melhor[2]):
+                melhor = (x, y, erro)
+    return melhor
+
+
+def parse_coletiva(pages, antes):
+    """Monta resumo + segmentos (mesmo formato da Carta) a partir da coletiva e do mês anterior guardado."""
+    m = re.search(r"\|\s*([A-ZÇ]+)\s+(\d{4})", pages[0] if pages else "")
+    periodo = f"{m.group(1).capitalize()}/{m.group(2)}" if m else ""
+    if not periodo or mes_idx(periodo) != mes_idx(antes.get("periodo")) + 1:
+        return None
+    resumo, falhas = [], []
+    for nome, titulos in [("Emplacamento", ("EMPLACAMENTO", "AUTOVEÍCULOS")),
+                          ("Exportação", ("EXPORTAÇÃO", "AUTOVEÍCULOS EXPORTADOS")),
+                          ("Produção", ("PRODUÇÃO", "AUTOVEÍCULOS"))]:
+        t = _pagina(pages, *titulos)
+        a = next((l for l in antes.get("resumo", []) if l["indicador"] == nome), None)
+        g = _variacoes(t)
+        r = _resolve(_tokens(t), g[0], a) if (t and a and g) else None
+        if not r:
+            falhas.append(nome)
+            continue
+        x, y, _ = r
+        resumo.append({"indicador": nome, "mes": x, "mes_ant": a["mes"], "mes_aa": y,
+                       "acum": round(a["acum"] + x, 1), "acum_aa": round(a["acum_aa"] + y, 1),
+                       "mm": g[0]["mm"], "aa": g[0]["aa"], "acum_var": g[0]["acum"]})
+    segs = {l["segmento"]: l for l in antes.get("segmentos", [])}
+    slides = [("Total", _pagina(pages, "EMPLACAMENTO", "AUTOVEÍCULOS"), 0),
+              ("Automóveis", _pagina(pages, "EMPLACAMENTO", "VEÍCULOS LEVES"), 0),
+              ("Comerciais leves", _pagina(pages, "EMPLACAMENTO", "VEÍCULOS LEVES"), 1),
+              ("Caminhões", _pagina(pages, "EMPLACAMENTO", "VEÍCULOS PESADOS"), 0),
+              ("Ônibus", _pagina(pages, "EMPLACAMENTO", "VEÍCULOS PESADOS"), 1)]
+    segmentos = []
+    for nome, t, i in slides:
+        a, g = segs.get(nome), _variacoes(t)
+        if not a or len(g) <= i:
+            continue
+        mil = {k: a[k] / 1000 for k in ("mes", "acum", "acum_aa")}
+        r = _resolve(_tokens(t), g[i], mil)
+        if not r:
+            falhas.append(nome)
+            continue
+        x, y, _ = r
+        # unidades: parte do mês anterior exato e da variação, sem sair do valor arredondado do slide
+        mes = round(min(max(a["mes"] * (1 + g[i]["mm"] / 100), x * 1000 - 50), x * 1000 + 50))
+        mes_aa = round(min(max(mes / (1 + g[i]["aa"] / 100), y * 1000 - 50), y * 1000 + 50))
+        segmentos.append({"segmento": nome, "mes": mes, "mes_ant": a["mes"], "acum": a["acum"] + mes,
+                          "mes_aa": mes_aa, "acum_aa": a["acum_aa"] + mes_aa,
+                          "mm": g[i]["mm"], "aa": g[i]["aa"], "acum_var": g[i]["acum"]})
+    proj = []
+    t = next((x for x in pages if "REVISÃO DAS PROJEÇÕES" in x), "")
+    for m in re.finditer(r"(Emplacamento|Exportação|Produção)\s+([\d.,]+)\s+([\d.,]+)\s+([+-]?[\d,]+)%\s+([\d.,]+)\s+([+-]?[\d,]+)%", t):
+        proj.append({"indicador": m.group(1), "ano_ant": num(m.group(2)), "anterior": num(m.group(3)),
+                     "nova": num(m.group(5)), "var": num(m.group(6))})
+    if len(resumo) < 3:
+        print(f"[AVISO] ANFAVEA coletiva {periodo}: não bateu {', '.join(falhas)}.")
+        return None
+    return {"periodo": periodo, "resumo": resumo, "segmentos": segmentos, "projecoes": proj, "aprox": True}
 
 
 def texto_anfavea(d):
     mil = lambda v: fmt_mil(v).replace("&nbsp;", " ")
-    linhas = [f"ANFAVEA - Carta {d['periodo']}",
+    linhas = [f"ANFAVEA - {'Coletiva' if d.get('aprox') else 'Carta'} {d['periodo']}",
               f"{'Indicador':14} {'Mês':>12} {'m/m':>8} {'a/a':>8} {'Acum.':>14} {'Acum.%':>8}"]
     for l in d["resumo"]:
         linhas.append(f"{l['indicador']:14} {mil(l['mes']):>12} {pct_txt(l['mm']):>8} {pct_txt(l['aa']):>8} "
@@ -322,6 +484,11 @@ def texto_anfavea(d):
         for l in d["segmentos"]:
             linhas.append(f"{l['segmento']:18} {fmt_int(l['mes']):>10} {pct_txt(l['mm']):>8} {pct_txt(l['aa']):>8} "
                           f"{fmt_int(l['acum']):>12} {pct_txt(l['acum_var']):>8}")
+    if d.get("projecoes"):
+        linhas.append("")
+        linhas.append("Projeções 2026 revisadas (mil)")
+        for l in d["projecoes"]:
+            linhas.append(f"{l['indicador']:14} {fmt_int(l['anterior']):>8} -> {fmt_int(l['nova']):>8} ({pct_txt(l['var'])} s/ ano ant.)")
     return "\n".join(linhas)
 
 
@@ -373,14 +540,23 @@ def main():
     # ANFAVEA
     try:
         latest = anfavea_latest(s)
+        antes = state.get("anfavea", {})
         if not latest:
             erros.append("ANFAVEA: nenhuma Carta encontrada.")
-        elif (latest[0] != state.get("anfavea", {}).get("carta") or latest[2] != state.get("anfavea", {}).get("rotulo")
-              or args.force):
+        elif (latest[0] != antes.get("carta") or latest[2] != antes.get("rotulo")
+              or antes.get("fonte") == "coletiva" or args.force):
             numero, url, rotulo = latest
             d = parse_anfavea(get_pdf_text(s, url, 6))
-            antes = state.get("anfavea", {})
-            if numero == antes.get("carta") and d["periodo"] == antes.get("periodo") and not args.force:
+            if antes.get("fonte") == "coletiva" and d["periodo"] == antes.get("periodo") and d["resumo"] and not args.force:
+                # a Carta do mês que veio pela coletiva saiu: troca pelos números exatos, sem outro e-mail
+                state["anfavea"] = {"carta": numero, "url": url, "periodo": d["periodo"], "rotulo": rotulo,
+                                    "resumo": d["resumo"], "segmentos": d["segmentos"],
+                                    "projecoes": antes.get("projecoes", []), "coletiva_url": antes.get("coletiva_url")}
+                monitoramento.add_event(state, "ANFAVEA", f"Carta {numero} — números exatos de {d['periodo']}", url)
+                print(f"[INFO] ANFAVEA: Carta {numero} substituiu os números da coletiva ({d['periodo']}).")
+            elif mes_idx(d["periodo"]) < mes_idx(antes.get("periodo")) and not args.force:
+                print(f"[OK] ANFAVEA: Carta {numero} ainda com {d['periodo']}; {antes.get('periodo')} veio da coletiva.")
+            elif numero == antes.get("carta") and d["periodo"] == antes.get("periodo") and not args.force:
                 # mesmo número e mesmo mês no PDF: só o rótulo mudou (ou o PDF ainda não foi trocado)
                 print(f"[OK] ANFAVEA: Carta {numero} ainda com {d['periodo']} (rótulo do site: {rotulo}).")
                 state["anfavea"]["rotulo"] = rotulo if d["periodo"].lower() in rotulo.lower() else antes.get("rotulo")
@@ -398,12 +574,48 @@ def main():
                     send_email(subject, texto_anfavea(d) + f"\n\nPDF: {url}", html)
                     print("[INFO] E-mail ANFAVEA enviado.")
                 state["anfavea"] = {"carta": numero, "url": url, "periodo": d["periodo"], "rotulo": rotulo,
-                                    "resumo": d["resumo"], "segmentos": d["segmentos"]}
+                                    "resumo": d["resumo"], "segmentos": d["segmentos"],
+                                    "coletiva_url": antes.get("coletiva_url")}
                 monitoramento.add_event(state, "ANFAVEA", f"Carta {numero} — resultados de {d['periodo']}", url)
         else:
             print(f"[OK] ANFAVEA sem Carta nova ({state['anfavea'].get('periodo')}).")
     except Exception as exc:
         erros.append(f"ANFAVEA: {exc}")
+
+    # ANFAVEA pela coletiva, quando ela traz um mês que a Carta ainda não trouxe
+    try:
+        antes = state.get("anfavea", {})
+        col = anfavea_coletiva(s)
+        if col and (col[0] != antes.get("coletiva_url") or args.force):
+            url, pagina, release = col
+            pages = get_pdf_text(s, url, 30)
+            d = parse_coletiva(pages, antes)
+            if d is None and mes_idx(antes.get("periodo")) and re.search(r"\|\s*([A-ZÇ]+)\s+(\d{4})", pages[0] or ""):
+                m = re.search(r"\|\s*([A-ZÇ]+)\s+(\d{4})", pages[0])
+                if mes_idx(f"{m.group(1).capitalize()}/{m.group(2)}") > mes_idx(antes.get("periodo")):
+                    erros.append(f"ANFAVEA: não consegui ler os números da coletiva ({url}).")
+            if d:
+                print(texto_anfavea(d))
+                subject = f"ANFAVEA: resultados de {d['periodo']} em tabela (coletiva de imprensa)"
+                html = page("ANFAVEA · COLETIVA MENSAL", f"Resultados {d['periodo']}",
+                            "Coletiva de imprensa da Anfavea (a Carta ainda não saiu)", html_anfavea(d, url),
+                            "Enviado automaticamente pelo monitor ANFAVEA/FENABRAVE.")
+                if args.dry_run:
+                    PREVIEW_FILE.with_name("setor_preview_anfavea.html").write_text(html, encoding="utf-8")
+                else:
+                    send_email(subject, texto_anfavea(d) + f"\n\nApresentação: {url}" +
+                               (f"\nRelease: {release}" if release else ""), html)
+                    print("[INFO] E-mail ANFAVEA (coletiva) enviado.")
+                state["anfavea"] = {"carta": antes.get("carta"), "rotulo": antes.get("rotulo"), "url": url,
+                                    "periodo": d["periodo"], "fonte": "coletiva", "release": release,
+                                    "resumo": d["resumo"], "segmentos": d["segmentos"], "projecoes": d["projecoes"]}
+                monitoramento.add_event(state, "ANFAVEA", f"Coletiva — resultados de {d['periodo']} (Carta ainda não saiu)", url)
+            if not args.dry_run:
+                state.setdefault("anfavea", {})["coletiva_url"] = url
+        elif col:
+            print("[OK] ANFAVEA: coletiva já lida.")
+    except Exception as exc:
+        erros.append(f"ANFAVEA coletiva: {exc}")
 
     if not args.dry_run:
         STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
