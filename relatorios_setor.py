@@ -36,6 +36,7 @@ from bs4 import BeautifulSoup
 from alerta_acoes import send_email
 from email_layout import DOWN, FONT, INK, MUTED, UP, button, data_table, esc, page, row, section_title
 from monitor import BROWSER_HEADERS
+import monitoramento
 
 BASE = Path(__file__).parent / "alerts"
 STATE_FILE = BASE / "setor_state.json"
@@ -362,6 +363,7 @@ def main():
                     send_email(subject, texto_fenabrave(d) + f"\n\nPDF: {url}", html)
                     print("[INFO] E-mail FENABRAVE enviado.")
                 state["fenabrave"] = {"url": url, "periodo": d["periodo"], "linhas": d["linhas"]}
+                monitoramento.add_event("FENABRAVE", f"Emplacamentos de {d['periodo']} — tabela por segmento", url)
         else:
             print(f"[OK] FENABRAVE sem relatório novo ({state['fenabrave'].get('periodo')}).")
     except Exception as exc:
@@ -390,6 +392,7 @@ def main():
                     print("[INFO] E-mail ANFAVEA enviado.")
                 state["anfavea"] = {"carta": numero, "url": url, "periodo": d["periodo"],
                                     "resumo": d["resumo"], "segmentos": d["segmentos"]}
+                monitoramento.add_event("ANFAVEA", f"Carta {numero} — resultados de {d['periodo']}", url)
         else:
             print(f"[OK] ANFAVEA sem Carta nova ({state['anfavea'].get('periodo')}).")
     except Exception as exc:
@@ -397,6 +400,7 @@ def main():
 
     if not args.dry_run:
         STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+        monitoramento.write()
     for e in erros:
         print(f"[ERRO] {e}", file=sys.stderr)
     if erros:

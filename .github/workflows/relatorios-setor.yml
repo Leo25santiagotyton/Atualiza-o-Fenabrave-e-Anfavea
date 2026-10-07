@@ -42,5 +42,6 @@ jobs:
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
           git add alerts/setor_state.json 2>/dev/null || true
+          git add alerts/monitoramento.json 2>/dev/null || true
           git diff --quiet --cached || git commit -m "Relatórios FENABRAVE/ANFAVEA enviados [skip ci]"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

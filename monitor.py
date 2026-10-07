@@ -21,6 +21,8 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
+import monitoramento
+
 STATE_FILE = Path(__file__).parent / "state.json"
 
 BROWSER_HEADERS = {
@@ -166,6 +168,10 @@ def main():
         elif new_hash != old_hash:
             print(f"[MUDANÇA] Novo conteúdo detectado em {name}.")
             updates_found.append((name, source["url"], items))
+            antigos = {it["href"] for it in state.get(name, {}).get("items", [])}
+            novos = [it for it in items if it["href"] not in antigos] or items[:1]
+            for it in novos[:3]:
+                monitoramento.add_event(monitoramento.FONTES.get(name, (name,))[0], monitoramento._limpa(it["text"]), it["href"])
         else:
             print(f"[OK] Sem mudanças em {name}.")
 
@@ -191,6 +197,7 @@ def main():
             sys.exit(1)
 
     save_state(state)
+    monitoramento.write()
 
 
 if __name__ == "__main__":

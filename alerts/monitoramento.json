@@ -1,0 +1,315 @@
+{
+ "updatedAt": "2026-10-07T09:37:10-03:00",
+ "updatedLabel": "07/10/2026 09:37",
+ "fenabrave": {
+  "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
+  "periodo": "Setembro/2026",
+  "linhas": [
+   {
+    "segmento": "Automóveis",
+    "mes": 216366,
+    "mes_ant": 213024,
+    "acum": 1728390,
+    "mes_aa": 178517,
+    "acum_aa": 1411004,
+    "mm": 1.57,
+    "aa": 21.2,
+    "acum_var": 22.49
+   },
+   {
+    "segmento": "Comerciais leves",
+    "mes": 52355,
+    "mes_ant": 50104,
+    "acum": 428109,
+    "mes_aa": 52813,
+    "acum_aa": 396311,
+    "mm": 4.49,
+    "aa": -0.87,
+    "acum_var": 8.02
+   },
+   {
+    "segmento": "Autos + comerciais leves",
+    "mes": 268721,
+    "mes_ant": 263128,
+    "acum": 2156499,
+    "mes_aa": 231330,
+    "acum_aa": 1807315,
+    "mm": 2.13,
+    "aa": 16.16,
+    "acum_var": 19.32
+   },
+   {
+    "segmento": "Caminhões",
+    "mes": 9845,
+    "mes_ant": 9604,
+    "acum": 78665,
+    "mes_aa": 9591,
+    "acum_aa": 81850,
+    "mm": 2.51,
+    "aa": 2.65,
+    "acum_var": -3.89
+   },
+   {
+    "segmento": "Ônibus",
+    "mes": 2744,
+    "mes_ant": 2448,
+    "acum": 20873,
+    "mes_aa": 2317,
+    "acum_aa": 21240,
+    "mm": 12.09,
+    "aa": 18.43,
+    "acum_var": -1.73
+   },
+   {
+    "segmento": "Caminhões + ônibus",
+    "mes": 12589,
+    "mes_ant": 12052,
+    "acum": 99538,
+    "mes_aa": 11908,
+    "acum_aa": 103090,
+    "mm": 4.46,
+    "aa": 5.72,
+    "acum_var": -3.45
+   },
+   {
+    "segmento": "Subtotal (autoveículos)",
+    "mes": 281310,
+    "mes_ant": 275180,
+    "acum": 2256037,
+    "mes_aa": 243238,
+    "acum_aa": 1910405,
+    "mm": 2.23,
+    "aa": 15.65,
+    "acum_var": 18.09
+   },
+   {
+    "segmento": "Motos",
+    "mes": 205032,
+    "mes_ant": 205221,
+    "acum": 1783971,
+    "mes_aa": 205873,
+    "acum_aa": 1613818,
+    "mm": -0.09,
+    "aa": -0.41,
+    "acum_var": 10.54
+   },
+   {
+    "segmento": "Implementos rodoviários",
+    "mes": 6821,
+    "mes_ant": 6567,
+    "acum": 53879,
+    "mes_aa": 5941,
+    "acum_aa": 53695,
+    "mm": 3.87,
+    "aa": 14.81,
+    "acum_var": 0.34
+   },
+   {
+    "segmento": "Outros",
+    "mes": 16523,
+    "mes_ant": 16917,
+    "acum": 139581,
+    "mes_aa": 15492,
+    "acum_aa": 122251,
+    "mm": -2.33,
+    "aa": 6.66,
+    "acum_var": 14.18
+   },
+   {
+    "mes": 509686,
+    "mes_ant": 503885,
+    "acum": 4233468,
+    "mes_aa": 470544,
+    "acum_aa": 3700169,
+    "segmento": "Total geral",
+    "mm": 1.1512547505879267,
+    "aa": 8.318456934951879,
+    "acum_var": 14.41282817082139
+   }
+  ]
+ },
+ "anfavea": {
+  "carta": 484,
+  "url": "https://www.anfavea.com.br/cartas/carta484.pdf",
+  "periodo": "Agosto/2026",
+  "resumo": [
+   {
+    "indicador": "Emplacamento",
+    "mes": 275.1,
+    "mes_ant": 279.5,
+    "mes_aa": 225.4,
+    "acum": 1975.3,
+    "acum_aa": 1667.7,
+    "mm": -1.6,
+    "aa": 22.1,
+    "acum_var": 18.4
+   },
+   {
+    "indicador": "Exportação",
+    "mes": 39.8,
+    "mes_ant": 38.9,
+    "mes_aa": 58.2,
+    "acum": 294.1,
+    "acum_aa": 381.3,
+    "mm": 2.2,
+    "aa": -31.7,
+    "acum_var": -22.9
+   },
+   {
+    "indicador": "Produção",
+    "mes": 271.2,
+    "mes_ant": 254.0,
+    "mes_aa": 247.9,
+    "acum": 1897.5,
+    "acum_aa": 1749.4,
+    "mm": 6.8,
+    "aa": 9.4,
+    "acum_var": 8.5
+   }
+  ],
+  "segmentos": [
+   {
+    "segmento": "Total",
+    "mes": 275122,
+    "mes_ant": 279544,
+    "acum": 1975341,
+    "mes_aa": 225380,
+    "acum_aa": 1667707,
+    "mm": -1.6,
+    "aa": 22.1,
+    "acum_var": 18.4
+   },
+   {
+    "segmento": "Automóveis",
+    "mes": 213105,
+    "mes_ant": 212753,
+    "acum": 1512963,
+    "mes_aa": 172320,
+    "acum_aa": 1233057,
+    "mm": 0.2,
+    "aa": 23.7,
+    "acum_var": 22.7
+   },
+   {
+    "segmento": "Comerciais leves",
+    "mes": 49986,
+    "mes_ant": 52913,
+    "acum": 377184,
+    "mes_aa": 42425,
+    "acum_aa": 344662,
+    "mm": -5.5,
+    "aa": 17.8,
+    "acum_var": 9.4
+   },
+   {
+    "segmento": "Caminhões",
+    "mes": 10008,
+    "mes_ant": 11645,
+    "acum": 70650,
+    "mes_aa": 8915,
+    "acum_aa": 74252,
+    "mm": -14.1,
+    "aa": 12.3,
+    "acum_var": -4.9
+   },
+   {
+    "segmento": "Ônibus",
+    "mes": 2023,
+    "mes_ant": 2233,
+    "acum": 14544,
+    "mes_aa": 1720,
+    "acum_aa": 15736,
+    "mm": -9.4,
+    "aa": 17.6,
+    "acum_var": -7.6
+   }
+  ]
+ },
+ "fontes": [
+  {
+   "nome": "ANFAVEA",
+   "url": "https://anfavea.com.br/site/conteudos/carta-da-anfavea/",
+   "itens": []
+  },
+  {
+   "nome": "FENABRAVE",
+   "url": "https://www.fenabrave.org.br/portalv2/home/imprensa",
+   "itens": [
+    {
+     "text": "Emplacamentos de veículos batem recorde histórico em setembro · 05/10/2026",
+     "href": "https://www.fenabrave.org.br/portalv2/Noticia/17490"
+    },
+    {
+     "text": "Emplacamentos de veículos crescem quase 17% em agosto e acumulam alta de 15,3% em 2026 · 02/09/2026",
+     "href": "https://www.fenabrave.org.br/portalv2/Noticia/17489"
+    },
+    {
+     "text": "Emplacamentos de veículos alcançam 3º. melhor mês de julho da história e registram 2º. mai · 04/08/2026",
+     "href": "https://www.fenabrave.org.br/portalv2/Noticia/17488"
+    },
+    {
+     "text": "Emplacamentos de veículos fecham 1º semestre com alta acima de 16% · 02/07/2026",
+     "href": "https://www.fenabrave.org.br/portalv2/Noticia/17486"
+    },
+    {
+     "text": "Emplacamentos de veículos mantêm trajetória positiva em maio e crescimento acumulado é de · 02/06/2026",
+     "href": "https://www.fenabrave.org.br/portalv2/Noticia/17485"
+    }
+   ]
+  },
+  {
+   "nome": "NADA (EUA)",
+   "url": "https://www.nada.org/nada/market-beat",
+   "itens": [
+    {
+     "text": "October 5, 2026 · New Light-Vehicle Sales Hit 16.0 Million Unit SAAR in September 2026",
+     "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-hit-160-million-unit-saar-september"
+    },
+    {
+     "text": "September 4, 2026 · New Light-Vehicle Sales SAAR Hits 16.8 Million Units in August 2026",
+     "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-saar-hits-168-million-units-august"
+    },
+    {
+     "text": "July 31, 2026 · New Light-Vehicle SAAR Hits 16.3 Million Units in July 2026",
+     "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-saar-hits-163-million-units-july-2026"
+    }
+   ]
+  },
+  {
+   "nome": "Auto Innovators (EUA)",
+   "url": "https://www.autosinnovate.org/resources/market-reports",
+   "itens": [
+    {
+     "text": "Prior Economic Impact Reports",
+     "href": "https://www.autosinnovate.org/EconomicImpactReport"
+    },
+    {
+     "text": "September 28, 2026 · Reading the Meter: State of the Industry Report | 9-28-2026",
+     "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-9-28-2026"
+    },
+    {
+     "text": "September 22, 2026 · Stay Connected: EV Monthly Recharge, September 2026",
+     "href": "https://www.autosinnovate.org/posts/papers-reports/stay-connected-9-2026"
+    }
+   ]
+  }
+ ],
+ "eventos": [
+  {
+   "id": "84782722b85e",
+   "at": "2026-10-07T09:34:19-03:00",
+   "label": "07/10 09:34",
+   "fonte": "FENABRAVE",
+   "titulo": "Emplacamentos de Setembro/2026 — tabela por segmento",
+   "link": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf"
+  },
+  {
+   "id": "b11d567e41fa",
+   "at": "2026-10-07T09:34:19-03:00",
+   "label": "07/10 09:34",
+   "fonte": "ANFAVEA",
+   "titulo": "Carta 484 — resultados de Agosto/2026",
+   "link": "https://www.anfavea.com.br/cartas/carta484.pdf"
+  }
+ ]
+}
