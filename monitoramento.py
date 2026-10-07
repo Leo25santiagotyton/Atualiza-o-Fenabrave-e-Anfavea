@@ -27,8 +27,8 @@ GENERICOS = {"nada market beat", "atd truck beat", "market reports", "prior econ
 FONTES = {
     "ANFAVEA - Edições em PDF (Carta da Anfavea)": ("ANFAVEA", "https://anfavea.com.br/site/conteudos/carta-da-anfavea/"),
     "FENABRAVE - Imprensa (releases mensais)": ("FENABRAVE", "https://www.fenabrave.org.br/portalv2/home/imprensa"),
-    "ATD Truck Beat (EUA - vendas de caminhões)": ("ATD Truck Beat (EUA)", "https://www.nada.org/atd/research/truck-beat"),
-    "ACT Research - pedidos de caminhões (EUA)": ("ACT Research (EUA)", "https://www.actresearch.net/resources/trends-headlines"),
+    "FRED - vendas de caminhões pesados (EUA)": ("FRED · vendas heavy trucks (EUA)", "https://fred.stlouisfed.org/series/HTRUCKSSAAR"),
+    "ACT Research - pedidos de caminhões (EUA)": ("ACT Research · pedidos (EUA)", "https://www.actresearch.net/resources/trends-headlines"),
 }
 
 
