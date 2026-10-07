@@ -1,0 +1,67 @@
+name: Resumo FIPE mensal
+
+# Resumo da Tabela FIPE por segmento (hatch, sedã, SUV, picape, caminhão, moto).
+# Dias 1 a 10 de cada mês às 8h30 e às 19h (Brasília): se a FIPE já publicou a
+# tabela do mês e ela ainda não foi enviada, manda o e-mail; senão não faz nada.
+# Agendado 5 min antes (11h25 e 21h55 UTC) porque o GitHub costuma atrasar o início.
+# Disparo manual com "teste" marcado = e-mail de teste agora, com [Teste] no assunto.
+on:
+  schedule:
+    - cron: "25 11 1-10 * *"
+    - cron: "55 21 1-10 * *"
+  workflow_dispatch:
+    inputs:
+      teste:
+        description: "Enviar como teste (força o envio, assunto com [Teste])"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fipe-mensal
+  cancel-in-progress: false
+
+jobs:
+  resumo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Buscar tabela FIPE e enviar resumo
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          FIPE_TOKEN: ${{ secrets.FIPE_TOKEN }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          if [ "${{ inputs.teste }}" = "true" ]; then
+            python fipe_mensal.py --force --teste --prazo-min 90
+          else
+            python fipe_mensal.py
+          fi
+
+      - name: Salvar cesta e histórico FIPE
+        if: always()
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "monitor-bot@users.noreply.github.com"
+          git add alerts/fipe_*.json
+          git diff --quiet --cached && exit 0
+          git commit -m "Atualiza tabela FIPE [skip ci]"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
