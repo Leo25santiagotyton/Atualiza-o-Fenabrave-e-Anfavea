@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-07T10:07:09-03:00",
+ "updatedAt": "2026-10-07T10:07:39-03:00",
  "updatedLabel": "07/10/2026 10:07",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
@@ -265,12 +265,54 @@
   {
    "nome": "ATD Truck Beat (EUA)",
    "url": "https://www.nada.org/atd/research/truck-beat",
-   "itens": []
+   "itens": [
+    {
+     "text": "June 30, 2026 · June 2026 Commercial Truck Sales Up 6.5% Year Over Year",
+     "href": "https://www.nada.org/atd/atd-insider/atd-truck-beat-june-2026-commercial-truck-sales-65-year-over-year"
+    },
+    {
+     "text": "April 14, 2026 · Commercial Truck Sales Fall in Q1, but Rising Orders Point to Improving Sales Ahead",
+     "href": "https://www.nada.org/atd/atd-insider/atd-truck-beat-commercial-truck-sales-fall-q1-rising-orders-point-improving-sales"
+    },
+    {
+     "text": "January 21, 2026 · Commercial Truck Sales Down 13.6% in 2025",
+     "href": "https://www.nada.org/atd/atd-insider/atd-truck-beat-commercial-truck-sales-down-136-2025"
+    },
+    {
+     "text": "September 30, 2025 · September 2025 ATD Truck Beat:Medium- and Heavy-Duty Truck Sales Down",
+     "href": "https://www.nada.org/atd/atd-insider/september-2025-atd-truck-beat-medium-and-heavy-duty-truck-sales-down"
+    },
+    {
+     "text": "June 30, 2025 · June 2025 ATD Truck Beat:Commercial Truck Sales Down 5.9% Through Q2",
+     "href": "https://www.nada.org/atd/atd-insider/june-2025-atd-truck-beat-commercial-truck-sales-down-59-through-q2"
+    }
+   ]
   },
   {
    "nome": "ACT Research (EUA)",
    "url": "https://www.actresearch.net/resources/trends-headlines",
-   "itens": []
+   "itens": [
+    {
+     "text": "Used Class 8 truck sales tumble 24% as US inventories tighten — Truck News.",
+     "href": "https://www.trucknews.com/equipment/used-class-8-truck-sales-tumble-24-as-us-inventories-tighten/1003222637/"
+    },
+    {
+     "text": "Class 8 orders rise in September as EPA27 uncertainty clouds market — Truck News.",
+     "href": "https://www.trucknews.com/equipment/class-8-orders-rise-in-september-as-epa27-uncertainty-clouds-market/1003222761/"
+    },
+    {
+     "text": "ACT Research: Regulatory Uncertainty Weighs on September Preliminary Class 8 Net Orders — Equipment Finance Advisor.",
+     "href": "https://www.equipmentfa.com/news/42025/act-research-regulatory-uncertainty-weighs-on-september-preliminary-class-8-net-orders"
+    },
+    {
+     "text": "Preliminary Class 8 orders slide as Classes 5-7 climb — Power Progress.",
+     "href": "https://www.powerprogress.com/news/preliminary-class-8-orders-slide-as-classes-5-7-climb/8133023.article"
+    },
+    {
+     "text": "Regulatory uncertainty muddies Class 8 order season — Commercial Carrier Journal",
+     "href": "https://www.ccjdigital.com/economic-trends/article/15836590/class-8-market-shifts-to-my-2027-ordering-after-nox-prebuy"
+    }
+   ]
   }
  ],
  "eventos": [
