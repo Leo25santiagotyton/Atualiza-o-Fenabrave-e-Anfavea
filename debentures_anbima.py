@@ -55,6 +55,10 @@ ISSUERS = [
     (r"\bTUPY\b", "TUPY3", "Tupy"),
 ]
 
+# papéis cujo grupo sai do prefixo do código, não do nome do emissor: as JSML são da Simpar
+# (a antiga JSL S.A. virou Simpar; o SND ainda lista algumas com o nome antigo)
+CODE_GROUPS = {"JSML": ("SIMH3", "Simpar")}
+
 CODE_RE = re.compile(r"^[A-Z]{3,5}[A-Z0-9]?\d{1,2}$")
 
 
@@ -790,6 +794,9 @@ def main():
     cutoff = (datetime.now(BRT).date() - timedelta(days=KEEP_DAYS)).isoformat()
     papers = []
     for p in db["papers"].values():
+        g = CODE_GROUPS.get(p["code"][:4])
+        if g and p.get("section") not in ("CRA", "CRI"):
+            p["ticker"], p["issuer"] = g
         p["series"] = [s for s in p["series"] if s[0] >= cutoff]
         p["trades"] = [t for t in p.get("trades", []) if t[0] >= cutoff]
         p["anbima"] = bool(p["series"])
