@@ -1,17 +1,14 @@
-"""Sonda temporária: formas de baixar a série HTRUCKSSAAR do FRED."""
-import time, requests
-UAS = {"python": None, "curl": "curl/8.5.0",
-       "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
-URLS = ["https://fred.stlouisfed.org/graph/fredgraph.csv?id=HTRUCKSSAAR",
-        "https://fred.stlouisfed.org/data/HTRUCKSSAAR.txt",
-        "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
-        "https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=HTRUCKSSAAR"]
-for u in URLS:
-    for nome, ua in UAS.items():
-        t = time.time()
-        try:
-            r = requests.get(u, headers={"User-Agent": ua} if ua else {}, timeout=60)
-            txt = r.text.strip().splitlines()
-            print(f"{nome:6} {r.status_code} {time.time()-t:5.1f}s {u}\n   ", txt[:2], txt[-3:] if len(r.text) < 400000 else "")
-        except Exception as e:
-            print(f"{nome:6} ERRO {time.time()-t:5.1f}s {u} {e}")
+"""Sonda temporária: trechos dos releases 2T26 de Randoncorp e Tupy sobre América do Norte."""
+import io, re, requests, pdfplumber
+DOCS = {
+ "RANDON": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/cba9750b-4418-1060-0a74-124acb3f218c?origin=2",
+ "TUPY": "https://api.mziq.com/mzfilemanager/v2/d/5ab6a371-dd2f-452a-b6b2-22c97ed0abbb/7d05dc0c-683b-8fa5-e402-445069d76318?origin=2",
+}
+PAT = re.compile(r"am[ée]rica do norte|north america|estados unidos|eua\b|nafta|class[e]? 8|mercado externo|exporta|receita (l[ií]quida )?por|ve[ií]culos comerciais|pesad|%", re.I)
+for k, u in DOCS.items():
+    r = requests.get(u, timeout=60, headers={"User-Agent": "curl/8.5.0"})
+    print("=====", k, r.status_code, len(r.content))
+    PAGS = {"RANDON": [4, 8], "TUPY": [2, 3, 5]}[k]
+    with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+        for n in PAGS:
+            print(f"--- p{n}"); print(pdf.pages[n - 1].extract_text())

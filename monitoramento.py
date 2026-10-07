@@ -20,6 +20,7 @@ ROOT = Path(__file__).parent
 OUT = ROOT / "alerts" / "monitoramento.json"
 SETOR = ROOT / "alerts" / "setor_state.json"
 MONITOR = ROOT / "state.json"
+ACT = ROOT / "alerts" / "act_pedidos.json"  # pedidos de caminhões nos EUA por classe (planilha da ACT, atualizada à mão)
 BRT = timezone(timedelta(hours=-3))
 MAX_EVENTOS = 40
 GENERICOS = {"nada market beat", "atd truck beat", "market reports", "prior economic impact reports", "view the report"}
@@ -82,7 +83,7 @@ def write():
         fontes.append({"nome": nome, "url": url, "itens": itens[:5]})
     now = datetime.now(BRT)
     d.update(updatedAt=now.isoformat(timespec="seconds"), updatedLabel=now.strftime("%d/%m/%Y %H:%M"),
-             fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes)
+             fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes, act=_read(ACT) or None)
     ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []))}
     d["eventos"] = sorted(ev.values(), key=lambda e: e["at"], reverse=True)[:MAX_EVENTOS]
     OUT.parent.mkdir(exist_ok=True)
