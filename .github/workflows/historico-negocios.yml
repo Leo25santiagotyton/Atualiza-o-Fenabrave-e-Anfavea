@@ -1,0 +1,54 @@
+name: Histórico de negócios (B3, de hora em hora)
+
+# Relê o negócio a negócio da B3 (Boletim Diário, tabela Trade) das debêntures e CRI/CRA acompanhados
+# e refaz o histórico (alerts/historico) e o arquivo do painel. De hora em hora nos dias úteis,
+# das 10h às 20h de Brasília (13h às 23h UTC), no minuto 5 para chegar antes da sincronização das :25.
+on:
+  schedule:
+    - cron: "5 13-23 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: debentures-anbima
+  cancel-in-progress: false
+
+jobs:
+  negocios:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Ler negócios da B3
+        run: python debentures_anbima.py --negocios
+
+      - name: Salvar histórico
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "monitor-bot@users.noreply.github.com"
+          git add alerts/debentures.json alerts/debentures_painel.json alerts/debentures_fichas.json alerts/historico
+          git diff --quiet --cached && exit 0
+          git commit -qm "Atualiza negócios B3 [skip ci]"
+          # se outro workflow gravou antes, refaz a leitura sobre o main novo
+          for i in 1 2 3; do
+            git push && exit 0
+            sleep 5
+            git fetch -q origin main && git reset -q --hard origin/main
+            python debentures_anbima.py --negocios
+            git add alerts/debentures.json alerts/debentures_painel.json alerts/debentures_fichas.json alerts/historico
+            git diff --quiet --cached && exit 0
+            git commit -qm "Atualiza negócios B3 [skip ci]"
+          done
+          exit 1
