@@ -2,8 +2,8 @@
 Monitor ANFAVEA / FENABRAVE / caminhões nos EUA
 -----------------------------------------------
 Verifica periodicamente as páginas de divulgação de dados da ANFAVEA e da
-FENABRAVE e, nos EUA, só o mercado de caminhões: o ATD Truck Beat (divisão de
-caminhões da NADA) e os pedidos de Classe 8 e Classes 5-7 da ACT Research.
+FENABRAVE e, nos EUA, só o mercado de caminhões: vendas de caminhões pesados (série
+HTRUCKSSAAR do FRED, anualizada) e pedidos de Classe 8 e Classes 5-7 (ACT Research).
 Quando detecta um item novo, envia um e-mail de aviso e salva o novo estado
 em state.json para não avisar de novo o mesmo item no próximo run.
 
@@ -52,24 +52,62 @@ SOURCES = [
         "link_filter": lambda href: href and "/Noticia/" in href,
     },
     {
-        "name": "ATD Truck Beat (EUA - vendas de caminhões)",
-        "home_url": "https://www.nada.org/atd",
-        "url": "https://www.nada.org/atd/research/truck-beat",
-        "link_filter": lambda href: href and "atd-truck-beat" in href.lower(),
+        "name": "FRED - vendas de caminhões pesados (EUA)",
+        "url": "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
+        "fred": "HTRUCKSSAAR",
     },
     {
         "name": "ACT Research - pedidos de caminhões (EUA)",
         "home_url": "https://www.actresearch.net/",
         "url": "https://www.actresearch.net/resources/trends-headlines",
         "link_filter": lambda href: bool(href) and href.startswith("http"),
-        "text_filter": lambda t: re.search(r"class(es)? [5-8]|truck orders", t, re.I),
+        # Só pedidos (Classe 8 e Classes 5-7); vendas de usados e fretes ficam de fora.
+        "text_filter": lambda t: re.search(r"order", t, re.I) and re.search(r"class|truck", t, re.I),
     },
 ]
 
 MAX_ITEMS_TRACKED = 5
 
 
+MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+
+
+def _pct(a, b):
+    if not b:
+        return "—"
+    return f"{(a / b - 1) * 100:+.1f}%".replace(".", ",")
+
+
+def fetch_fred(source):
+    """Últimas observações de uma série do FRED (CSV público, sem chave).
+    Cada item traz o mês, o valor e as variações m/m e a/a."""
+    serie = source["fred"]
+    resp = requests.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={serie}",
+                        headers=BROWSER_HEADERS, timeout=30)
+    resp.raise_for_status()
+    obs = []
+    for linha in resp.text.strip().splitlines()[1:]:
+        data, _, valor = linha.partition(",")
+        try:
+            obs.append((data.strip(), float(valor)))
+        except ValueError:
+            continue  # "." = sem dado
+    items = []
+    for i in range(len(obs) - 1, max(len(obs) - 1 - MAX_ITEMS_TRACKED, -1), -1):
+        data, v = obs[i]
+        ano, mes = int(data[:4]), int(data[5:7])
+        mm = _pct(v, obs[i - 1][1]) if i >= 1 else "—"
+        aa = _pct(v, obs[i - 12][1]) if i >= 12 else "—"
+        mil = v * 1000 if v < 10 else v  # a série vem em milhões de unidades
+        num = f"{mil:,.1f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        items.append({"text": f"{MESES[mes - 1]}/{ano} · {num} mil (anualizado) · m/m {mm} · a/a {aa}",
+                      "href": f"{source['url']}#{data[:7]}"})
+    return items
+
+
 def fetch_links(source):
+    if source.get("fred"):
+        return fetch_fred(source)
     """Abre a home primeiro (pra pegar cookies, como um navegador faria) e
     depois busca a página alvo. Retorna lista de (texto, href)."""
     session = requests.Session()
