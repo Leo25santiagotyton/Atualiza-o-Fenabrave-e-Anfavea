@@ -384,6 +384,47 @@ def is_ipca(p):
     return (p.get("index") or "").strip().upper().startswith("IPCA")
 
 
+def atualizar_bdi(db, session):
+    """Negócio a negócio da B3 (Boletim Diário, tabela Trade) nos papéis acompanhados. A tabela do dia corrente
+    sai parcial ao longo do pregão, então um dia só conta como completo quando foi lido depois de terminar
+    (bdiAt guarda quando cada dia foi lido); até lá é relido a cada rodada."""
+    bdi_days = set(db.get("bdiDays", []))
+    bdi_at = dict(db.get("bdiAt") or {})
+    codes = set(db["papers"])
+    agora = datetime.now(BRT).isoformat(timespec="minutes")
+    for d in sorted(business_days_back(20 if len(bdi_days) < 5 else 6)):
+        iso = d.isoformat()
+        if iso in bdi_days and bdi_at.get(iso, "") > iso + "T23:59":
+            continue  # lido depois do fim do dia: completo
+        try:
+            got = fetch_bdi_trades(session, d, codes)
+        except Exception as e:
+            print(f"[AVISO] BDI {iso}: {e}")
+            continue
+        if got is None:
+            continue
+        for code, ticks in got.items():
+            p = db["papers"][code]
+            old = [t for t in p.get("ticks", []) if t[0] != iso]
+            p["ticks"] = sorted(old + ticks, key=lambda t: (t[0], t[1]))[-600:]
+        bdi_days.add(iso)
+        bdi_at[iso] = agora
+    db["bdiDays"] = sorted(bdi_days)[-60:]
+    db["bdiAt"] = {k: v for k, v in bdi_at.items() if k in db["bdiDays"]}
+
+
+def so_negocios():
+    """Rodada leve (de hora em hora no pregão): só relê os negócios da B3 e refaz o histórico e o painel."""
+    full = json.loads(DEB_FILE.read_text())
+    db = {"papers": {p["code"]: p for p in full.get("papers", [])}, "bdiDays": full.get("bdiDays", []), "bdiAt": full.get("bdiAt", {})}
+    session = requests.Session()
+    atualizar_bdi(db, session)
+    full["bdiDays"], full["bdiAt"] = db["bdiDays"], db["bdiAt"]
+    full["ticksAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    DEB_FILE.write_text(json.dumps(full, ensure_ascii=False))
+    write_panel_file()
+
+
 def business_days_back(n):
     d = datetime.now(BRT).date()
     out = []
@@ -397,7 +438,10 @@ def business_days_back(n):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dias", type=int, default=45, help="quantos dias úteis para trás tentar preencher")
+    ap.add_argument("--negocios", action="store_true", help="só os negócios da B3 (rodada de hora em hora)")
     args = ap.parse_args()
+    if args.negocios:
+        return so_negocios()
     OUT_DIR.mkdir(exist_ok=True)
 
     db = {"papers": {}, "dates": []}
@@ -418,6 +462,7 @@ def main():
             db["craDates"] = old.get("craDates", [])
             db["issuersKey"] = old.get("issuersKey")
             db["bdiDays"] = old.get("bdiDays", [])
+            db["bdiAt"] = old.get("bdiAt", {})
         except json.JSONDecodeError:
             pass
     have = set(db["dates"])
@@ -595,25 +640,7 @@ def main():
     db["tradeDays"] = sorted(traded_days)
 
     # negócio a negócio da B3 (Boletim Diário, tabela Trade): debêntures e CRI/CRA, com horário, preço e taxa
-    bdi_days = set(db.get("bdiDays", []))
-    codes = set(db["papers"])
-    for d in sorted(business_days_back(20 if len(bdi_days) < 5 else 5)):
-        iso = d.isoformat()
-        if iso in bdi_days and iso != sorted(business_days_back(2))[0]:
-            continue
-        try:
-            got = fetch_bdi_trades(session, d, codes)
-        except Exception as e:
-            print(f"[AVISO] BDI {iso}: {e}")
-            continue
-        if got is None:
-            continue
-        for code, ticks in got.items():
-            p = db["papers"][code]
-            old = [t for t in p.get("ticks", []) if t[0] != iso]
-            p["ticks"] = sorted(old + ticks, key=lambda t: (t[0], t[1]))[-600:]
-        bdi_days.add(iso)
-    db["bdiDays"] = sorted(bdi_days)[-60:]
+    atualizar_bdi(db, session)
 
     # IPCA+: taxa trocada em NTN-B + e CDI + (ambas em %), posições 6 e 7 da série
     curves = db.get("curves", {})
@@ -820,6 +847,7 @@ def main():
         "craDates": db.get("craDates", []),
         "issuersKey": db.get("issuersKey"),
         "bdiDays": db.get("bdiDays", []),
+        "bdiAt": db.get("bdiAt", {}),
         "newIssues": db.get("newIssues", []),
         "papers": papers,
     }, ensure_ascii=False))
