@@ -1,39 +1,27 @@
-"""Sonda: documentos IPE (fatos relevantes/comunicados) na CVM — RAD e dados abertos."""
-import csv, io, json, zipfile
-import requests
-
-H = {"User-Agent": "Mozilla/5.0", "Content-Type": "application/json; charset=utf-8",
-     "X-Requested-With": "XMLHttpRequest", "Referer": "https://www.rad.cvm.gov.br/ENET/frmConsultaExternaCVM.aspx"}
-s = requests.Session()
-try:
-    r = s.get("https://www.rad.cvm.gov.br/ENET/frmConsultaExternaCVM.aspx", headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
-    print("RAD GET", r.status_code, len(r.text))
-    body = {"dataDe": "01/10/2026", "dataAte": "02/10/2026", "empresa": "", "setorAtividade": "-1",
-            "categoriaEmissor": "-1", "situacaoEmissor": "-1", "tipoParticipante": "-1", "dataReferencia": "",
-            "categoria": "IPE_-1_-1_-1", "periodo": "2", "horaIni": "", "horaFim": "", "palavraChave": "",
-            "ultimaDtRef": "false", "tipoEmpresa": "0", "token": "", "versaoCaptcha": ""}
-    r = s.post("https://www.rad.cvm.gov.br/ENET/frmConsultaExternaCVM.aspx/ListarDocumentos", headers=H,
-               data=json.dumps(body), timeout=60)
-    print("RAD POST", r.status_code, r.text[:300])
-    d = r.json()["d"]
-    rows = (d.get("dados") or "").split("&*")
-    print("linhas", len(rows))
-    for x in rows:
-        if "SIMPAR" in x.upper():
-            print("SIMPAR>", x[:900])
-            break
-    print("EX>", rows[0][:900])
-except Exception as e:
-    print("RAD erro", e)
-try:
-    r = requests.get("https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/IPE/DADOS/ipe_cia_aberta_2026.zip", timeout=60)
-    print("DA", r.status_code, r.headers.get("Last-Modified"), len(r.content))
-    z = zipfile.ZipFile(io.BytesIO(r.content))
-    name = z.namelist()[0]
-    rd = list(csv.DictReader(io.TextIOWrapper(z.open(name), encoding="latin-1"), delimiter=";"))
-    print(name, len(rd), list(rd[0].keys()))
-    for x in rd:
-        if "SIMPAR" in x.get("Nome_Companhia", "").upper() and x.get("Data_Entrega", "") >= "2026-09-30":
-            print(x)
-except Exception as e:
-    print("DA erro", e)
+"""Sonda temporária: páginas de dados de caminhões dos EUA."""
+import re, requests
+from bs4 import BeautifulSoup
+H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+     "Accept-Language": "en-US,en;q=0.9"}
+URLS = [
+    "https://www.actresearch.net/resources/press-releases",
+    "https://www.actresearch.net/news",
+    "https://www.ftrintel.com/press-releases",
+    "https://www.ftrintel.com/news",
+    "https://www.nada.org/atd",
+    "https://www.nada.org/atd/news",
+    "https://www.trucknews.com/",
+]
+for u in URLS:
+    try:
+        r = requests.get(u, headers=H, timeout=30)
+        print("=====", u, r.status_code, r.url, len(r.text))
+        s = BeautifulSoup(r.text, "html.parser")
+        n = 0
+        for a in s.find_all("a", href=True):
+            t = a.get_text(" ", strip=True)
+            if re.search(r"class 8|order|truck|trailer|classes 5|class 5|vocational", t, re.I):
+                print("  ", t[:120], "|", a["href"][:150]); n += 1
+                if n >= 25: break
+    except Exception as e:
+        print("=====", u, "ERRO", e)
