@@ -420,7 +420,8 @@ def so_negocios():
     session = requests.Session()
     atualizar_bdi(db, session)
     full["bdiDays"], full["bdiAt"] = db["bdiDays"], db["bdiAt"]
-    full["ticksAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    # updatedAt novo: a sincronização do painel (de hora em hora, às :25) só grava o que mudou de updatedAt
+    full["ticksAt"] = full["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     DEB_FILE.write_text(json.dumps(full, ensure_ascii=False))
     write_panel_file()
 
