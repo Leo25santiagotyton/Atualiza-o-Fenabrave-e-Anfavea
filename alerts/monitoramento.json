@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-07T10:12:03-03:00",
+ "updatedAt": "2026-10-07T10:12:59-03:00",
  "updatedLabel": "07/10/2026 10:12",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
@@ -272,8 +272,8 @@
    "url": "https://www.actresearch.net/resources/trends-headlines",
    "itens": [
     {
-     "text": "Used Class 8 truck sales tumble 24% as US inventories tighten — Truck News.",
-     "href": "https://www.trucknews.com/equipment/used-class-8-truck-sales-tumble-24-as-us-inventories-tighten/1003222637/"
+     "text": "New order season sputters to take off in September — Trucks, Parts, Service.",
+     "href": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
     },
     {
      "text": "Class 8 orders rise in September as EPA27 uncertainty clouds market — Truck News.",
@@ -295,6 +295,14 @@
   }
  ],
  "eventos": [
+  {
+   "id": "90de1b70e344",
+   "at": "2026-10-07T10:12:52-03:00",
+   "label": "07/10 10:12",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "New order season sputters to take off in September — Trucks, Parts, Service.",
+   "link": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
+  },
   {
    "id": "84782722b85e",
    "at": "2026-10-07T09:34:19-03:00",

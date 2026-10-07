@@ -1,27 +1,17 @@
-"""Sonda temporária: páginas de dados de caminhões dos EUA."""
-import re, requests
-from bs4 import BeautifulSoup
-H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-     "Accept-Language": "en-US,en;q=0.9"}
-URLS = [
-    "https://www.actresearch.net/resources/press-releases",
-    "https://www.actresearch.net/news",
-    "https://www.ftrintel.com/press-releases",
-    "https://www.ftrintel.com/news",
-    "https://www.nada.org/atd",
-    "https://www.nada.org/atd/news",
-    "https://www.trucknews.com/",
-]
+"""Sonda temporária: formas de baixar a série HTRUCKSSAAR do FRED."""
+import time, requests
+UAS = {"python": None, "curl": "curl/8.5.0",
+       "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
+URLS = ["https://fred.stlouisfed.org/graph/fredgraph.csv?id=HTRUCKSSAAR",
+        "https://fred.stlouisfed.org/data/HTRUCKSSAAR.txt",
+        "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
+        "https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=HTRUCKSSAAR"]
 for u in URLS:
-    try:
-        r = requests.get(u, headers=H, timeout=30)
-        print("=====", u, r.status_code, r.url, len(r.text))
-        s = BeautifulSoup(r.text, "html.parser")
-        n = 0
-        for a in s.find_all("a", href=True):
-            t = a.get_text(" ", strip=True)
-            if re.search(r"class 8|order|truck|trailer|classes 5|class 5|vocational", t, re.I):
-                print("  ", t[:120], "|", a["href"][:150]); n += 1
-                if n >= 25: break
-    except Exception as e:
-        print("=====", u, "ERRO", e)
+    for nome, ua in UAS.items():
+        t = time.time()
+        try:
+            r = requests.get(u, headers={"User-Agent": ua} if ua else {}, timeout=60)
+            txt = r.text.strip().splitlines()
+            print(f"{nome:6} {r.status_code} {time.time()-t:5.1f}s {u}\n   ", txt[:2], txt[-3:] if len(r.text) < 400000 else "")
+        except Exception as e:
+            print(f"{nome:6} ERRO {time.time()-t:5.1f}s {u} {e}")

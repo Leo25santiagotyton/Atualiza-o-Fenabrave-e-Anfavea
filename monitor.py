@@ -83,7 +83,7 @@ def fetch_fred(source):
     Cada item traz o mês, o valor e as variações m/m e a/a."""
     serie = source["fred"]
     resp = requests.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={serie}",
-                        headers=BROWSER_HEADERS, timeout=30)
+                        headers={"User-Agent": "curl/8.5.0"}, timeout=30)  # o FRED trava com UA de navegador
     resp.raise_for_status()
     obs = []
     for linha in resp.text.strip().splitlines()[1:]:
