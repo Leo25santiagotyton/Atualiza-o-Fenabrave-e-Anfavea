@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T16:22:38-03:00",
- "updatedLabel": "07/10/2026 16:22",
+ "updatedAt": "2026-10-07T16:31:48-03:00",
+ "updatedLabel": "07/10/2026 16:31",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -130,101 +130,127 @@
  },
  "anfavea": {
   "carta": 484,
-  "url": "https://www.anfavea.com.br/cartas/carta484.pdf",
-  "periodo": "Agosto/2026",
+  "rotulo": null,
+  "url": "https://anfavea.com.br/site/wp-content/uploads/2026/10/Coletiva-de-Imprensa-Outubro.pdf",
+  "periodo": "Setembro/2026",
+  "fonte": "coletiva",
+  "release": "https://anfavea.com.br/site/wp-content/uploads/2026/10/RELEASE-OUTUBRO26-1.pdf",
   "resumo": [
    {
     "indicador": "Emplacamento",
-    "mes": 275.1,
-    "mes_ant": 279.5,
-    "mes_aa": 225.4,
-    "acum": 1975.3,
-    "acum_aa": 1667.7,
-    "mm": -1.6,
-    "aa": 22.1,
-    "acum_var": 18.4
+    "mes": 281.4,
+    "mes_ant": 275.1,
+    "mes_aa": 243.2,
+    "acum": 2256.7,
+    "acum_aa": 1910.9,
+    "mm": 2.3,
+    "aa": 15.7,
+    "acum_var": 18.1
    },
    {
     "indicador": "Exportação",
     "mes": 39.8,
-    "mes_ant": 38.9,
-    "mes_aa": 58.2,
-    "acum": 294.1,
-    "acum_aa": 381.3,
-    "mm": 2.2,
-    "aa": -31.7,
-    "acum_var": -22.9
+    "mes_ant": 39.8,
+    "mes_aa": 52.5,
+    "acum": 333.9,
+    "acum_aa": 433.8,
+    "mm": 0.1,
+    "aa": -24.2,
+    "acum_var": -23.0
    },
    {
     "indicador": "Produção",
-    "mes": 271.2,
-    "mes_ant": 254.0,
-    "mes_aa": 247.9,
-    "acum": 1897.5,
-    "acum_aa": 1749.4,
-    "mm": 6.8,
-    "aa": 9.4,
-    "acum_var": 8.5
+    "mes": 268.3,
+    "mes_ant": 271.2,
+    "mes_aa": 243.4,
+    "acum": 2165.8,
+    "acum_aa": 1992.8,
+    "mm": -1.1,
+    "aa": 10.2,
+    "acum_var": 8.7
    }
   ],
   "segmentos": [
    {
     "segmento": "Total",
-    "mes": 275122,
-    "mes_ant": 279544,
-    "acum": 1975341,
-    "mes_aa": 225380,
-    "acum_aa": 1667707,
-    "mm": -1.6,
-    "aa": 22.1,
-    "acum_var": 18.4
+    "mes": 281450,
+    "mes_ant": 275122,
+    "acum": 2256791,
+    "mes_aa": 243250,
+    "acum_aa": 1910957,
+    "mm": 2.3,
+    "aa": 15.7,
+    "acum_var": 18.1
    },
    {
     "segmento": "Automóveis",
-    "mes": 213105,
-    "mes_ant": 212753,
-    "acum": 1512963,
-    "mes_aa": 172320,
-    "acum_aa": 1233057,
-    "mm": 0.2,
-    "aa": 23.7,
-    "acum_var": 22.7
+    "mes": 216550,
+    "mes_ant": 213105,
+    "acum": 1729513,
+    "mes_aa": 178550,
+    "acum_aa": 1411607,
+    "mm": 1.6,
+    "aa": 21.3,
+    "acum_var": 22.5
    },
    {
     "segmento": "Comerciais leves",
-    "mes": 49986,
-    "mes_ant": 52913,
-    "acum": 377184,
-    "mes_aa": 42425,
-    "acum_aa": 344662,
-    "mm": -5.5,
-    "aa": 17.8,
-    "acum_var": 9.4
+    "mes": 52185,
+    "mes_ant": 49986,
+    "acum": 429369,
+    "mes_aa": 52926,
+    "acum_aa": 397588,
+    "mm": 4.4,
+    "aa": -1.4,
+    "acum_var": 8.0
    },
    {
     "segmento": "Caminhões",
-    "mes": 10008,
-    "mes_ant": 11645,
-    "acum": 70650,
-    "mes_aa": 8915,
-    "acum_aa": 74252,
-    "mm": -14.1,
-    "aa": 12.3,
-    "acum_var": -4.9
+    "mes": 10228,
+    "mes_ant": 10008,
+    "acum": 80878,
+    "mes_aa": 9797,
+    "acum_aa": 84049,
+    "mm": 2.2,
+    "aa": 4.4,
+    "acum_var": -3.8
    },
    {
     "segmento": "Ônibus",
-    "mes": 2023,
-    "mes_ant": 2233,
-    "acum": 14544,
-    "mes_aa": 1720,
-    "acum_aa": 15736,
-    "mm": -9.4,
-    "aa": 17.6,
-    "acum_var": -7.6
+    "mes": 2369,
+    "mes_ant": 2023,
+    "acum": 16913,
+    "mes_aa": 1955,
+    "acum_aa": 17691,
+    "mm": 17.1,
+    "aa": 21.2,
+    "acum_var": -4.4
    }
   ],
-  "rotulo": null
+  "projecoes": [
+   {
+    "indicador": "Emplacamento",
+    "ano_ant": 2690,
+    "anterior": 3014,
+    "nova": 3099,
+    "var": 15.2
+   },
+   {
+    "indicador": "Exportação",
+    "ano_ant": 529,
+    "anterior": 461,
+    "nova": 435,
+    "var": -17.7
+   },
+   {
+    "indicador": "Produção",
+    "ano_ant": 2644,
+    "anterior": 2797,
+    "nova": 2822,
+    "var": 6.7
+   }
+  ],
+  "coletiva_url": "https://anfavea.com.br/site/wp-content/uploads/2026/10/Coletiva-de-Imprensa-Outubro.pdf"
  },
  "fontes": [
   {
@@ -317,6 +343,14 @@
   }
  ],
  "eventos": [
+  {
+   "id": "ee95ea14f746",
+   "at": "2026-10-07T16:31:48-03:00",
+   "label": "07/10 16:31",
+   "fonte": "ANFAVEA",
+   "titulo": "Coletiva — resultados de Setembro/2026 (Carta ainda não saiu)",
+   "link": "https://anfavea.com.br/site/wp-content/uploads/2026/10/Coletiva-de-Imprensa-Outubro.pdf"
+  },
   {
    "id": "90de1b70e344",
    "at": "2026-10-07T10:12:52-03:00",
