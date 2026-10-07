@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T09:40:18-03:00",
- "updatedLabel": "07/10/2026 09:40",
+ "updatedAt": "2026-10-07T10:07:09-03:00",
+ "updatedLabel": "07/10/2026 10:07",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -263,36 +263,14 @@
    ]
   },
   {
-   "nome": "NADA (EUA)",
-   "url": "https://www.nada.org/nada/market-beat",
-   "itens": [
-    {
-     "text": "October 5, 2026 · New Light-Vehicle Sales Hit 16.0 Million Unit SAAR in September 2026",
-     "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-hit-160-million-unit-saar-september"
-    },
-    {
-     "text": "September 4, 2026 · New Light-Vehicle Sales SAAR Hits 16.8 Million Units in August 2026",
-     "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-saar-hits-168-million-units-august"
-    },
-    {
-     "text": "July 31, 2026 · New Light-Vehicle SAAR Hits 16.3 Million Units in July 2026",
-     "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-saar-hits-163-million-units-july-2026"
-    }
-   ]
+   "nome": "ATD Truck Beat (EUA)",
+   "url": "https://www.nada.org/atd/research/truck-beat",
+   "itens": []
   },
   {
-   "nome": "Auto Innovators (EUA)",
-   "url": "https://www.autosinnovate.org/resources/market-reports",
-   "itens": [
-    {
-     "text": "September 28, 2026 · Reading the Meter: State of the Industry Report | 9-28-2026",
-     "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-9-28-2026"
-    },
-    {
-     "text": "September 22, 2026 · Stay Connected: EV Monthly Recharge, September 2026",
-     "href": "https://www.autosinnovate.org/posts/papers-reports/stay-connected-9-2026"
-    }
-   ]
+   "nome": "ACT Research (EUA)",
+   "url": "https://www.actresearch.net/resources/trends-headlines",
+   "itens": []
   }
  ],
  "eventos": [

@@ -22,13 +22,13 @@ SETOR = ROOT / "alerts" / "setor_state.json"
 MONITOR = ROOT / "state.json"
 BRT = timezone(timedelta(hours=-3))
 MAX_EVENTOS = 40
-GENERICOS = {"nada market beat", "market reports", "prior economic impact reports", "view the report"}
+GENERICOS = {"nada market beat", "atd truck beat", "market reports", "prior economic impact reports", "view the report"}
 
 FONTES = {
     "ANFAVEA - Edições em PDF (Carta da Anfavea)": ("ANFAVEA", "https://anfavea.com.br/site/conteudos/carta-da-anfavea/"),
     "FENABRAVE - Imprensa (releases mensais)": ("FENABRAVE", "https://www.fenabrave.org.br/portalv2/home/imprensa"),
-    "NADA Market Beat (EUA - vendas mensais)": ("NADA (EUA)", "https://www.nada.org/nada/market-beat"),
-    "Alliance for Automotive Innovation - Market Reports (EUA)": ("Auto Innovators (EUA)", "https://www.autosinnovate.org/resources/market-reports"),
+    "ATD Truck Beat (EUA - vendas de caminhões)": ("ATD Truck Beat (EUA)", "https://www.nada.org/atd/research/truck-beat"),
+    "ACT Research - pedidos de caminhões (EUA)": ("ACT Research (EUA)", "https://www.actresearch.net/resources/trends-headlines"),
 }
 
 
@@ -40,13 +40,13 @@ def _read(p):
 
 
 def _limpa(t):
-    """Separa a data colada no fim do título (FENABRAVE) e o rótulo repetido da NADA."""
+    """Separa a data colada no fim do título (FENABRAVE) e o rótulo repetido do ATD Truck Beat."""
     t = re.sub(r"\s+", " ", t).strip()
     m = re.match(r"^(.*\S)\s*(\d{2}/\d{2}/\d{4})$", t)
     if m:
         t = m.group(1) + " · " + m.group(2)
     t = re.sub(r"^Papers Reports", "", t)
-    t = re.sub(r"^(\w+ \d{1,2}, \d{4})(?:NADA Market Beat)*:?\s*", r"\1 · ", t)
+    t = re.sub(r"^(\w+ \d{1,2}, \d{4})(?:ATD Truck Beat|NADA Market Beat)*:?\s*", r"\1 · ", t)
     return t
 
 
