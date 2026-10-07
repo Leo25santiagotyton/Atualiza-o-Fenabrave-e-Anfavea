@@ -1,8 +1,9 @@
 """
-Monitor ANFAVEA / FENABRAVE / NADA / Auto Innovators
-------------------------------------------------------
-Verifica periodicamente as páginas de divulgação de dados da ANFAVEA, da
-FENABRAVE, da NADA (EUA) e da Alliance for Automotive Innovation (EUA).
+Monitor ANFAVEA / FENABRAVE / caminhões nos EUA
+-----------------------------------------------
+Verifica periodicamente as páginas de divulgação de dados da ANFAVEA e da
+FENABRAVE e, nos EUA, só o mercado de caminhões: o ATD Truck Beat (divisão de
+caminhões da NADA) e os pedidos de Classe 8 e Classes 5-7 da ACT Research.
 Quando detecta um item novo, envia um e-mail de aviso e salva o novo estado
 em state.json para não avisar de novo o mesmo item no próximo run.
 
@@ -13,6 +14,7 @@ Configuração de e-mail via variáveis de ambiente (não deixe senha no código
 import hashlib
 import json
 import os
+import re
 import smtplib
 import sys
 from email.mime.text import MIMEText
@@ -50,16 +52,17 @@ SOURCES = [
         "link_filter": lambda href: href and "/Noticia/" in href,
     },
     {
-        "name": "NADA Market Beat (EUA - vendas mensais)",
-        "home_url": "https://www.nada.org/",
-        "url": "https://www.nada.org/nada/market-beat",
-        "link_filter": lambda href: href and "market-beat" in href.lower(),
+        "name": "ATD Truck Beat (EUA - vendas de caminhões)",
+        "home_url": "https://www.nada.org/atd",
+        "url": "https://www.nada.org/atd/research/truck-beat",
+        "link_filter": lambda href: href and "atd-truck-beat" in href.lower(),
     },
     {
-        "name": "Alliance for Automotive Innovation - Market Reports (EUA)",
-        "home_url": "https://www.autosinnovate.org/",
-        "url": "https://www.autosinnovate.org/resources/market-reports",
-        "link_filter": lambda href: href and ("report" in href.lower() or ".pdf" in href.lower()),
+        "name": "ACT Research - pedidos de caminhões (EUA)",
+        "home_url": "https://www.actresearch.net/",
+        "url": "https://www.actresearch.net/resources/trends-headlines",
+        "link_filter": lambda href: bool(href) and href.startswith("http"),
+        "text_filter": lambda t: re.search(r"class(es)? [5-8]|truck orders", t, re.I),
     },
 ]
 
@@ -93,11 +96,14 @@ def fetch_links(source):
         href = a["href"]
         if not source["link_filter"](href):
             continue
+        if source.get("text_filter") and not source["text_filter"](a.get_text(" ", strip=True)):
+            continue
         if href.startswith("/"):
             base = "/".join(source["url"].split("/")[:3])
             href = base + href
         # A NADA alterna entre /index.php/nada/... e /nada/...; trata como o mesmo link.
         href = href.replace("/index.php/", "/")
+        href = re.sub(r"[?&]utm_[^#]*$", "", href)
         if href in seen_hrefs:
             continue
         seen_hrefs.add(href)
@@ -188,7 +194,7 @@ def main():
         body = "\n".join(lines)
         try:
             send_email(
-                subject="[Monitor] Atualização detectada (ANFAVEA/FENABRAVE/NADA/AutoInnovators)",
+                subject="[Monitor] Atualização detectada (ANFAVEA/FENABRAVE/caminhões EUA)",
                 body=body,
             )
             print("[INFO] E-mail enviado com sucesso.")
@@ -196,6 +202,10 @@ def main():
             print(f"[ERRO] Falha ao enviar e-mail: {exc}", file=sys.stderr)
             sys.exit(1)
 
+    # Fontes que saíram da lista (ex.: NADA Market Beat de carros) não ficam no estado.
+    nomes = {src["name"] for src in SOURCES}
+    for k in [k for k in state if not k.startswith("_") and k not in nomes]:
+        del state[k]
     save_state(state)
     monitoramento.write()
 

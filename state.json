@@ -24,56 +24,6 @@
       }
     ]
   },
-  "NADA Market Beat (EUA - vendas mensais)": {
-    "hash": "f0aca3fd86dea11f9c9fc9f1234aee8e59eabfe9dd00f3ca1f9f39e8c7fdbc51",
-    "items": [
-      {
-        "text": "NADA Market Beat",
-        "href": "https://www.nada.org/nada/market-beat"
-      },
-      {
-        "text": "NADA Market Beat",
-        "href": "https://www.nada.org/nada/newsdata/market-beat"
-      },
-      {
-        "text": "October 5, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle Sales Hit 16.0 Million Unit SAAR in September 2026",
-        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-hit-160-million-unit-saar-september"
-      },
-      {
-        "text": "September 4, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle Sales SAAR Hits 16.8 Million Units in August 2026",
-        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-sales-saar-hits-168-million-units-august"
-      },
-      {
-        "text": "July 31, 2026NADA Market BeatNADA Market Beat: New Light-Vehicle SAAR Hits 16.3 Million Units in July 2026",
-        "href": "https://www.nada.org/nada/nada-headlines/nada-market-beat-new-light-vehicle-saar-hits-163-million-units-july-2026"
-      }
-    ]
-  },
-  "Alliance for Automotive Innovation - Market Reports (EUA)": {
-    "hash": "3e914dadf595f85edf891b69a828ab78259ab9ecad8fe83b7c2848d3470481ab",
-    "items": [
-      {
-        "text": "Market Reports",
-        "href": "https://www.autosinnovate.org/resources/market-reports"
-      },
-      {
-        "text": "Prior Economic Impact Reports",
-        "href": "https://www.autosinnovate.org/EconomicImpactReport"
-      },
-      {
-        "text": "view the report",
-        "href": "https://www.autosinnovate.org/resources/market-reports/data-driven"
-      },
-      {
-        "text": "Papers ReportsSeptember 28, 2026Reading the Meter: State of the Industry Report | 9-28-2026",
-        "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-9-28-2026"
-      },
-      {
-        "text": "Papers ReportsSeptember 22, 2026Stay Connected: EV Monthly Recharge, September 2026",
-        "href": "https://www.autosinnovate.org/posts/papers-reports/stay-connected-9-2026"
-      }
-    ]
-  },
   "ANFAVEA - Edições em PDF (Carta da Anfavea)": {
     "hash": "416e84348a478807e24b11ca3ea6cbe07977b4b67bc6cf878ec47ae842276a82",
     "items": [
@@ -82,5 +32,6 @@
         "href": "https://www.anfavea.com.br/cartas/carta484.pdf"
       }
     ]
-  }
+  },
+  "_eventos": []
 }
