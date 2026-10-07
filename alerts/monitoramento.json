@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T13:39:00-03:00",
- "updatedLabel": "07/10/2026 13:39",
+ "updatedAt": "2026-10-07T14:30:03-03:00",
+ "updatedLabel": "07/10/2026 14:30",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -462,5 +462,430 @@
    }
   }
  },
- "fipe": null
+ "fipe": {
+  "ref": 338,
+  "mes": "outubro/2026",
+  "mes_anterior": "setembro/2026",
+  "colunas": [
+   "Hatch",
+   "Sedã",
+   "SUV",
+   "Picape",
+   "Leves",
+   "Caminhão",
+   "Moto"
+  ],
+  "mensal": [
+   {
+    "ref": 338,
+    "mes": "outubro/2026",
+    "curto": "out/26",
+    "var": {
+     "Hatch": -1.2835417753828238,
+     "Sedã": -1.0834557609684325,
+     "SUV": -1.2074904353691296,
+     "Picape": -1.359404884015225,
+     "Leves": -1.2367881759922206,
+     "Caminhão": -1.3409086741365206,
+     "Moto": -0.6078300991615437
+    },
+    "n": {
+     "Hatch": 11,
+     "Sedã": 12,
+     "SUV": 26,
+     "Picape": 17,
+     "Leves": 66,
+     "Caminhão": 18,
+     "Moto": 23
+    }
+   },
+   {
+    "ref": 337,
+    "mes": "setembro/2026",
+    "curto": "set/26",
+    "var": {
+     "Hatch": -0.9095194748442004,
+     "Sedã": -0.8053632922066511,
+     "SUV": -1.5082326308662908,
+     "Picape": -1.7294263339100446,
+     "Leves": -1.2748215640169258,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 10,
+     "Sedã": 11,
+     "SUV": 24,
+     "Picape": 7,
+     "Leves": 52,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 336,
+    "mes": "agosto/2026",
+    "curto": "ago/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 335,
+    "mes": "julho/2026",
+    "curto": "jul/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 334,
+    "mes": "junho/2026",
+    "curto": "jun/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 333,
+    "mes": "maio/2026",
+    "curto": "mai/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 332,
+    "mes": "abril/2026",
+    "curto": "abr/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 331,
+    "mes": "março/2026",
+    "curto": "mar/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 330,
+    "mes": "fevereiro/2026",
+    "curto": "fev/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 329,
+    "mes": "janeiro/2026",
+    "curto": "jan/26",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 328,
+    "mes": "dezembro/2025",
+    "curto": "dez/25",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   },
+   {
+    "ref": 327,
+    "mes": "novembro/2025",
+    "curto": "nov/25",
+    "var": {
+     "Hatch": null,
+     "Sedã": null,
+     "SUV": null,
+     "Picape": null,
+     "Leves": null,
+     "Caminhão": null,
+     "Moto": null
+    },
+    "n": {
+     "Hatch": 0,
+     "Sedã": 0,
+     "SUV": 0,
+     "Picape": 0,
+     "Leves": 0,
+     "Caminhão": 0,
+     "Moto": 0
+    }
+   }
+  ],
+  "acumulado": {
+   "Hatch": {
+    "var": -2.181387187812156,
+    "meses": 2
+   },
+   "Sedã": {
+    "var": -1.880093298188945,
+    "meses": 2
+   },
+   "SUV": {
+    "var": -2.6975113014745977,
+    "meses": 2
+   },
+   "Picape": {
+    "var": -3.0653213118766565,
+    "meses": 2
+   },
+   "Leves": {
+    "var": -2.495842897640388,
+    "meses": 2
+   },
+   "Caminhão": {
+    "var": -1.3409086741365206,
+    "meses": 1
+   },
+   "Moto": {
+    "var": -0.6078300991615437,
+    "meses": 1
+   }
+  },
+  "preco_medio": {
+   "Hatch": 83553.46153846153,
+   "Sedã": 114073.08333333333,
+   "SUV": 138852.59259259258,
+   "Picape": 174340.4705882353,
+   "Leves": 132867.8260869565,
+   "Caminhão": 589825.2857142857,
+   "Moto": 20081.583333333332
+  },
+  "itens": {
+   "Hatch": 13,
+   "Sedã": 12,
+   "SUV": 27,
+   "Picape": 17,
+   "Leves": 69,
+   "Caminhão": 21,
+   "Moto": 24
+  },
+  "resumo": "Na tabela FIPE de outubro/2026, a cesta de veículos leves caiu (-1,24%) frente a setembro/2026. Entre os segmentos, menor queda: Moto (-0,61%); maior queda: Picape (-1,36%). Caminhões: -1,34%. Acumulado em 2 meses (leves): -2,5%.",
+  "gerado_em": "2026-10-07T14:29:21-03:00",
+  "maiores_altas": [
+   {
+    "nome": "Hyundai Creta",
+    "versao": "Creta Platinum 1.0 TB 12V Flex Aut.",
+    "segmento": "SUV",
+    "ano": "2027 Flex",
+    "preco": 168686.0,
+    "var": 3.16
+   },
+   {
+    "nome": "Mercedes-Benz Atego",
+    "versao": "Atego 1729 4x2 2p (diesel)(E6)",
+    "segmento": "Caminhão",
+    "ano": "2027",
+    "preco": 575854.0,
+    "var": 3.12
+   },
+   {
+    "nome": "Chevrolet Tracker",
+    "versao": "TRACKER 1.0 Turbo 12V Flex Aut.",
+    "segmento": "SUV",
+    "ano": "2027 Flex",
+    "preco": 115333.0,
+    "var": 2.88
+   },
+   {
+    "nome": "Honda Biz",
+    "versao": "BIZ 125 EX/ 125 EX FLEX",
+    "segmento": "Moto",
+    "ano": "2027",
+    "preco": 18571.0,
+    "var": 1.45
+   },
+   {
+    "nome": "Mitsubishi L200",
+    "versao": "L200 Trit. S.Out. GLS 2.4 CD Diesel Aut.",
+    "segmento": "Picape",
+    "ano": "2025 Diesel",
+    "preco": 201693.0,
+    "var": 1.15
+   }
+  ],
+  "maiores_quedas": [
+   {
+    "nome": "Scania R",
+    "versao": "R-500 A 6x4 XT (diesel)(E6)",
+    "segmento": "Caminhão",
+    "ano": "2026",
+    "preco": 903635.0,
+    "var": -4.13
+   },
+   {
+    "nome": "Mercedes-Benz Accelo",
+    "versao": "Accelo 817 4x2 2p (diesel)(E6)",
+    "segmento": "Caminhão",
+    "ano": "2027",
+    "preco": 320125.0,
+    "var": -3.93
+   },
+   {
+    "nome": "Fiat Strada",
+    "versao": "Strada Freedom 1.3 Flex 8V  CS Plus",
+    "segmento": "Picape",
+    "ano": "2027 Flex",
+    "preco": 103422.0,
+    "var": -3.5
+   },
+   {
+    "nome": "Mitsubishi L200",
+    "versao": "L200 Tri. Outd. GLX 2.4 CD 4x4 Die. Mec.",
+    "segmento": "Picape",
+    "ano": "2022 Diesel",
+    "preco": 115802.0,
+    "var": -3.5
+   },
+   {
+    "nome": "Jeep Compass",
+    "versao": "COMPASS Black Hurricane 2.0 4x4 TB Aut.",
+    "segmento": "SUV",
+    "ano": "2026 Gasolina",
+    "preco": 208008.0,
+    "var": -3.5
+   }
+  ]
+ }
 }
