@@ -200,7 +200,8 @@ def texto_fenabrave(d):
 
 # ---------------------------------------------------------------- ANFAVEA
 def anfavea_latest(s):
-    """Carta mais recente: links .../cartas/cartaNNN.pdf. Retorna (número, url)."""
+    """Carta mais recente: links .../cartas/cartaNNN.pdf. Retorna (número, url, rótulo do link).
+    A ANFAVEA às vezes troca o conteúdo do mesmo cartaNNN.pdf; o rótulo (ex.: "Setembro/2026") avisa."""
     r = s.get(ANFAVEA_PAGE, timeout=40)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
@@ -208,7 +209,7 @@ def anfavea_latest(s):
     for a in soup.find_all("a", href=True):
         m = re.search(r"cartas?/carta(\d+)\.pdf$", a["href"], re.I)
         if m and (best is None or int(m.group(1)) > best[0]):
-            best = (int(m.group(1)), requests.compat.urljoin(ANFAVEA_PAGE, a["href"]))
+            best = (int(m.group(1)), requests.compat.urljoin(ANFAVEA_PAGE, a["href"]), a.get_text(" ", strip=True))
     return best
 
 
@@ -374,10 +375,16 @@ def main():
         latest = anfavea_latest(s)
         if not latest:
             erros.append("ANFAVEA: nenhuma Carta encontrada.")
-        elif latest[0] != state.get("anfavea", {}).get("carta") or args.force:
-            numero, url = latest
+        elif (latest[0] != state.get("anfavea", {}).get("carta") or latest[2] != state.get("anfavea", {}).get("rotulo")
+              or args.force):
+            numero, url, rotulo = latest
             d = parse_anfavea(get_pdf_text(s, url, 6))
-            if not d["resumo"] and not d["segmentos"]:
+            antes = state.get("anfavea", {})
+            if numero == antes.get("carta") and d["periodo"] == antes.get("periodo") and not args.force:
+                # mesmo número e mesmo mês no PDF: só o rótulo mudou (ou o PDF ainda não foi trocado)
+                print(f"[OK] ANFAVEA: Carta {numero} ainda com {d['periodo']} (rótulo do site: {rotulo}).")
+                state["anfavea"]["rotulo"] = rotulo if d["periodo"].lower() in rotulo.lower() else antes.get("rotulo")
+            elif not d["resumo"] and not d["segmentos"]:
                 erros.append(f"ANFAVEA: não consegui ler as tabelas da Carta {numero} ({url}).")
             else:
                 print(texto_anfavea(d))
@@ -390,7 +397,7 @@ def main():
                 else:
                     send_email(subject, texto_anfavea(d) + f"\n\nPDF: {url}", html)
                     print("[INFO] E-mail ANFAVEA enviado.")
-                state["anfavea"] = {"carta": numero, "url": url, "periodo": d["periodo"],
+                state["anfavea"] = {"carta": numero, "url": url, "periodo": d["periodo"], "rotulo": rotulo,
                                     "resumo": d["resumo"], "segmentos": d["segmentos"]}
                 monitoramento.add_event(state, "ANFAVEA", f"Carta {numero} — resultados de {d['periodo']}", url)
         else:
