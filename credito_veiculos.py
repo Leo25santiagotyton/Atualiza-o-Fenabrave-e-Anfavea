@@ -21,6 +21,7 @@ import re
 import statistics
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote
 
 import requests
 from bs4 import BeautifulSoup
@@ -75,11 +76,16 @@ def mensal():
 def diaria(dias=200):
     """Média e mediana das taxas das instituições em cada janela (por data final)."""
     ini = (date.today() - timedelta(days=dias)).isoformat()
-    r = requests.get(OLINDA, headers=UA_API, timeout=120, params={
-        "$format": "json", "$top": "50000",
-        "$filter": f"Modalidade eq '{MODALIDADE}' and InicioPeriodo ge '{ini}'",
-        "$select": "InicioPeriodo,FimPeriodo,InstituicaoFinanceira,TaxaJurosAoMes,TaxaJurosAoAno"})
+    # o Olinda não entende espaço como "+": a consulta vai montada à mão, com %20
+    q = {"$format": "json", "$top": "50000", "$orderby": "InicioPeriodo desc",
+         "$filter": f"Modalidade eq '{MODALIDADE}' and InicioPeriodo ge '{ini}'",
+         "$select": "InicioPeriodo,FimPeriodo,InstituicaoFinanceira,TaxaJurosAoMes,TaxaJurosAoAno"}
+    seguro = "',"
+    url = OLINDA + "?" + "&".join(f"{k}={quote(v, safe=seguro)}" for k, v in q.items())
+    r = requests.get(url, headers=UA_API, timeout=120)
     r.raise_for_status()
+    if not r.json().get("value"):
+        print("[AVISO] taxa diária: consulta sem linhas", url)
     jan = {}
     for x in r.json().get("value", []):
         jan.setdefault((x["InicioPeriodo"], x["FimPeriodo"]), []).append(x)
