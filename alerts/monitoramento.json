@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T16:19:55-03:00",
- "updatedLabel": "07/10/2026 16:19",
+ "updatedAt": "2026-10-07T16:22:38-03:00",
+ "updatedLabel": "07/10/2026 16:22",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -223,7 +223,8 @@
     "aa": 17.6,
     "acum_var": -7.6
    }
-  ]
+  ],
+  "rotulo": null
  },
  "fontes": [
   {
