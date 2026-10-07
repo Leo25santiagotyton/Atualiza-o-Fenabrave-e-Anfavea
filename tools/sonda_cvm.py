@@ -8,11 +8,7 @@ PAT = re.compile(r"am[ée]rica do norte|north america|estados unidos|eua\b|nafta
 for k, u in DOCS.items():
     r = requests.get(u, timeout=60, headers={"User-Agent": "curl/8.5.0"})
     print("=====", k, r.status_code, len(r.content))
-    try:
-        with pdfplumber.open(io.BytesIO(r.content)) as pdf:
-            for i, p in enumerate(pdf.pages[:25]):
-                for ln in (p.extract_text() or "").splitlines():
-                    if re.search(r"am[ée]rica do norte|north america|estados unidos|\bEUA\b|nafta|classe? 8|mercado externo|ve[ií]culos comerciais", ln, re.I):
-                        print(f"p{i+1}:", ln[:220])
-    except Exception as e:
-        print("ERRO", e)
+    PAGS = {"RANDON": [4, 8], "TUPY": [2, 3, 5]}[k]
+    with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+        for n in PAGS:
+            print(f"--- p{n}"); print(pdf.pages[n - 1].extract_text())
