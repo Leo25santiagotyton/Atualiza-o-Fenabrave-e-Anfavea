@@ -1,15 +1,18 @@
-name: Monitor ANFAVEA/FENABRAVE
+name: Relatórios FENABRAVE/ANFAVEA em tabela
 
+# Dias úteis, a cada 2 horas das 8h20 às 20h20 (Brasília): procura relatório novo
+# da FENABRAVE (Informativo de Emplacamentos) e da ANFAVEA (Carta da Anfavea) e,
+# quando sai, manda por e-mail as tabelas com volumes e variações.
 on:
   schedule:
-    - cron: "0 12,18 * * *"
+    - cron: "20 11-23/2 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
 jobs:
-  check:
+  relatorios:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -23,7 +26,7 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: Rodar monitor
+      - name: Ler relatórios e enviar tabelas
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
@@ -31,14 +34,14 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-        run: python monitor.py
+        run: python relatorios_setor.py
 
-      - name: Salvar state.json atualizado no repositório
+      - name: Salvar relatórios enviados
+        if: always()
         run: |
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
-          git add state.json
+          git add alerts/setor_state.json 2>/dev/null || true
           git add alerts/monitoramento.json 2>/dev/null || true
-          git diff --quiet --cached && exit 0
-          git commit -m "Atualiza state.json [skip ci]"
+          git diff --quiet --cached || git commit -m "Relatórios FENABRAVE/ANFAVEA enviados [skip ci]"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

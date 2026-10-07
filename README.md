@@ -20,6 +20,21 @@ python dashboard/server.py --demo   # dados simulados, sem internet
 - Para mudar a lista de ações, edite `TICKERS` em `dashboard/server.py` e em
   `dashboard/index.html`.
 
+## Relatórios FENABRAVE e ANFAVEA em tabela
+
+`relatorios_setor.py` roda pelo workflow **Relatórios FENABRAVE/ANFAVEA em tabela**
+nos dias úteis, a cada 2 horas das 8h20 às 20h20. Quando sai um relatório novo,
+baixa o PDF e manda um e-mail com tabelas de volume do mês, mês anterior, mesmo
+mês do ano anterior, acumulado do ano e as variações (m/m, a/a e acumulado):
+
+- **FENABRAVE**: Informativo de Emplacamentos, por segmento (autos, comerciais
+  leves, caminhões, ônibus, motos, implementos, outros e total).
+- **ANFAVEA**: Carta da Anfavea, com emplacamento, exportação e produção de
+  autoveículos e emplacamento por segmento.
+
+Os relatórios já enviados ficam em `alerts/setor_state.json`. Prévia sem enviar:
+`python relatorios_setor.py --dry-run`; reenviar o último: `--force`.
+
 ## Alerta de ações por e-mail
 
 `alerta_acoes.py` roda pelo workflow **Alerta de ações B3** a cada 2 horas no
