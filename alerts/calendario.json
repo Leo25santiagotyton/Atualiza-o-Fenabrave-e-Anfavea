@@ -1376,18 +1376,6 @@
   },
   {
    "data": "2026-11-10",
-   "empresa": "Frasle Mobility",
-   "evento": "Resultado 3T26",
-   "fonte": "https://www.infomoney.com.br/mercados/frasle-mobility-registra-lucro-liquido-de-r-1076-mi-no-3o-tri/",
-   "grupo": "Ações",
-   "obs": "Estimado pelo 3T25 (11/11/2025, após o fechamento); costuma sair 1-2 dias antes da Randoncorp (3T26 em 12/11).",
-   "short": "3T26",
-   "status": "estimado",
-   "ticker": "FRAS3",
-   "tipo": "resultado"
-  },
-  {
-   "data": "2026-11-10",
    "empresa": "Foresea Holding",
    "evento": "Resultados 3T26",
    "fonte": "https://investors.foresea.com/",
@@ -1401,14 +1389,14 @@
   {
    "data": "2026-11-11",
    "empresa": "Frasle Mobility",
-   "evento": "Videoconferência 3T26",
-   "fonte": "https://content.btgpactual.com/research/files/file/pt-BR/2025-11-12T140027.598_Frasle_Mobility__FRAS3____Resultados_do_3T25.pdf",
+   "evento": "Resultado 3T26",
+   "fonte": "https://investidor10.com.br/acoes/link_comunicado/FRAS3/44733/",
    "grupo": "Ações",
-   "obs": "Estimado pelo 3T25 (call em 12/11/2025).",
-   "short": "Call 3T26",
-   "status": "estimado",
+   "obs": "Calendário de eventos corporativos 2026 (ITR do 3T em 11/11/2026).",
+   "short": "3T26",
+   "status": "confirmado",
    "ticker": "FRAS3",
-   "tipo": "teleconferencia"
+   "tipo": "resultado"
   },
   {
    "data": "2026-11-11",
@@ -1432,6 +1420,18 @@
    "status": "estimado",
    "ticker": "SIMH3",
    "tipo": "resultado"
+  },
+  {
+   "data": "2026-11-12",
+   "empresa": "Frasle Mobility",
+   "evento": "Videoconferência 3T26",
+   "fonte": "https://investidor10.com.br/acoes/link_comunicado/FRAS3/44733/",
+   "grupo": "Ações",
+   "obs": "Calendário de eventos corporativos 2026 (videoconferência de resultados 3T26).",
+   "short": "Call 3T26",
+   "status": "confirmado",
+   "ticker": "FRAS3",
+   "tipo": "teleconferencia"
   },
   {
    "data": "2026-11-12",
@@ -1630,6 +1630,6 @@
    "tipo": "cupom"
   }
  ],
- "updatedAt": "2026-10-07T09:10:00-03:00",
- "updatedLabel": "07/10/2026 09:10"
+ "updatedAt": "2026-10-07T19:46:51-03:00",
+ "updatedLabel": "07/10/2026 19:46"
 }
