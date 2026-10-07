@@ -22,6 +22,7 @@ SETOR = ROOT / "alerts" / "setor_state.json"
 MONITOR = ROOT / "state.json"
 BRT = timezone(timedelta(hours=-3))
 MAX_EVENTOS = 40
+GENERICOS = {"nada market beat", "market reports", "prior economic impact reports", "view the report"}
 
 FONTES = {
     "ANFAVEA - Edições em PDF (Carta da Anfavea)": ("ANFAVEA", "https://anfavea.com.br/site/conteudos/carta-da-anfavea/"),
@@ -71,9 +72,13 @@ def write():
     for chave, (nome, url) in FONTES.items():
         itens = []
         for it in (mon.get(chave) or {}).get("items", []):
-            t = _limpa(it.get("text", ""))
-            if len(t) >= 25:  # descarta links genéricos ("Market Reports", "view the report")
-                itens.append({"text": t, "href": it.get("href", "")})
+            t, href = _limpa(it.get("text", "")), it.get("href", "")
+            if t.lower() in GENERICOS or len(t) < 4:
+                continue
+            m = re.search(r"carta(\d+)\.pdf", href, re.I)
+            if m:
+                t = f"Carta {m.group(1)} · {t}"
+            itens.append({"text": t, "href": href})
         fontes.append({"nome": nome, "url": url, "itens": itens[:5]})
     now = datetime.now(BRT)
     d.update(updatedAt=now.isoformat(timespec="seconds"), updatedLabel=now.strftime("%d/%m/%Y %H:%M"),

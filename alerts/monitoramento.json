@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-07T09:39:47-03:00",
- "updatedLabel": "07/10/2026 09:39",
+ "updatedAt": "2026-10-07T09:40:18-03:00",
+ "updatedLabel": "07/10/2026 09:40",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -229,7 +229,12 @@
   {
    "nome": "ANFAVEA",
    "url": "https://anfavea.com.br/site/conteudos/carta-da-anfavea/",
-   "itens": []
+   "itens": [
+    {
+     "text": "Carta 484 · Setembro/2026",
+     "href": "https://www.anfavea.com.br/cartas/carta484.pdf"
+    }
+   ]
   },
   {
    "nome": "FENABRAVE",
@@ -279,10 +284,6 @@
    "nome": "Auto Innovators (EUA)",
    "url": "https://www.autosinnovate.org/resources/market-reports",
    "itens": [
-    {
-     "text": "Prior Economic Impact Reports",
-     "href": "https://www.autosinnovate.org/EconomicImpactReport"
-    },
     {
      "text": "September 28, 2026 · Reading the Meter: State of the Industry Report | 9-28-2026",
      "href": "https://www.autosinnovate.org/posts/papers-reports/reading-the-meter-9-28-2026"
