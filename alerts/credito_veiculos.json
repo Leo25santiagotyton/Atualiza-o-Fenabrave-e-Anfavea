@@ -531,8 +531,8 @@
    "total_aa": 10.4
   }
  },
- "atualizado": "07/10/2026 17:25",
- "atualizadoAt": "2026-10-07T17:25:16-03:00",
+ "atualizado": "08/10/2026 09:32",
+ "atualizadoAt": "2026-10-08T09:32:34-03:00",
  "fontes": {
   "sgs": "https://www3.bcb.gov.br/sgspub/",
   "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -1654,6 +1654,15 @@
    "mediana_am": 1.81,
    "media_aa": 24.79,
    "mediana_aa": 24.04
+  },
+  {
+   "ini": "2026-09-18",
+   "fim": "2026-09-24",
+   "n": 41,
+   "media_am": 1.84,
+   "mediana_am": 1.76,
+   "media_aa": 24.79,
+   "mediana_aa": 23.31
   }
  ]
 }
