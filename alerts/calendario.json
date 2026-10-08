@@ -1279,6 +1279,18 @@
    "tipo": "assembleia"
   },
   {
+   "data": "2026-10-27",
+   "empresa": "Foresea Holding",
+   "evento": "Resultados 3T26",
+   "fonte": "https://investors.foresea.com/",
+   "grupo": "Bonds",
+   "obs": "Estimado pelo 3T25 (divulgado em 28/10/2025, conforme busca); antes estimado em 10/11. Data ainda não anunciada.",
+   "short": "3T26",
+   "status": "estimado",
+   "ticker": "US262051AA36",
+   "tipo": "resultado"
+  },
+  {
    "data": "2026-11-05",
    "empresa": "Priner",
    "evento": "Resultado 3T26",
@@ -1372,18 +1384,6 @@
    "short": "3T26",
    "status": "estimado",
    "ticker": "ARML3",
-   "tipo": "resultado"
-  },
-  {
-   "data": "2026-11-10",
-   "empresa": "Foresea Holding",
-   "evento": "Resultados 3T26",
-   "fonte": "https://investors.foresea.com/",
-   "grupo": "Bonds",
-   "obs": "Estimado pela cadência trimestral (~5 semanas após o fim do trimestre); data do 3T25 não localizada.",
-   "short": "3T26",
-   "status": "estimado",
-   "ticker": "US262051AA36",
    "tipo": "resultado"
   },
   {
@@ -1630,6 +1630,6 @@
    "tipo": "cupom"
   }
  ],
- "updatedAt": "2026-10-07T19:46:51-03:00",
- "updatedLabel": "07/10/2026 19:46"
+ "updatedAt": "2026-10-08T19:46:22-03:00",
+ "updatedLabel": "08/10/2026 19:46"
 }
