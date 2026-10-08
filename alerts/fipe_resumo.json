@@ -43,19 +43,19 @@
     "Hatch": -0.9095194748442004,
     "Sedã": -0.8053632922066511,
     "SUV": -1.5082326308662908,
-    "Picape": -1.7294263339100446,
-    "Leves": -1.2748215640169258,
-    "Caminhão": null,
-    "Moto": null
+    "Picape": -1.264581618141758,
+    "Leves": -1.2205541915999651,
+    "Caminhão": -1.8047439742029048,
+    "Moto": 0.32652510691120185
    },
    "n": {
     "Hatch": 10,
     "Sedã": 11,
     "SUV": 24,
-    "Picape": 7,
-    "Leves": 52,
-    "Caminhão": 0,
-    "Moto": 0
+    "Picape": 17,
+    "Leves": 62,
+    "Caminhão": 12,
+    "Moto": 21
    }
   },
   {
@@ -63,21 +63,21 @@
    "mes": "agosto/2026",
    "curto": "ago/26",
    "var": {
-    "Hatch": null,
-    "Sedã": null,
-    "SUV": null,
-    "Picape": null,
-    "Leves": null,
-    "Caminhão": null,
+    "Hatch": -0.20163791443886803,
+    "Sedã": -0.21164538998416083,
+    "SUV": -0.025414467609263802,
+    "Picape": -1.2239608143365888,
+    "Leves": -0.5159968273542481,
+    "Caminhão": -1.6830322203003067,
     "Moto": null
    },
    "n": {
-    "Hatch": 0,
-    "Sedã": 0,
-    "SUV": 0,
-    "Picape": 0,
-    "Leves": 0,
-    "Caminhão": 0,
+    "Hatch": 2,
+    "Sedã": 1,
+    "SUV": 1,
+    "Picape": 2,
+    "Leves": 6,
+    "Caminhão": 1,
     "Moto": 0
    }
   },
@@ -86,21 +86,21 @@
    "mes": "julho/2026",
    "curto": "jul/26",
    "var": {
-    "Hatch": null,
-    "Sedã": null,
-    "SUV": null,
-    "Picape": null,
-    "Leves": null,
-    "Caminhão": null,
+    "Hatch": 2.043336409603169,
+    "Sedã": 0.6117412469920591,
+    "SUV": -0.5702493261455555,
+    "Picape": -0.9192175287513038,
+    "Leves": 0.04276910891978236,
+    "Caminhão": 1.1286997006983768,
     "Moto": null
    },
    "n": {
-    "Hatch": 0,
-    "Sedã": 0,
-    "SUV": 0,
-    "Picape": 0,
-    "Leves": 0,
-    "Caminhão": 0,
+    "Hatch": 1,
+    "Sedã": 1,
+    "SUV": 1,
+    "Picape": 2,
+    "Leves": 5,
+    "Caminhão": 1,
     "Moto": 0
    }
   },
@@ -109,20 +109,20 @@
    "mes": "junho/2026",
    "curto": "jun/26",
    "var": {
-    "Hatch": null,
-    "Sedã": null,
-    "SUV": null,
+    "Hatch": -0.12851801848582367,
+    "Sedã": -1.1696368834012483,
+    "SUV": 0.18819041832283112,
     "Picape": null,
-    "Leves": null,
+    "Leves": -0.37168023835246755,
     "Caminhão": null,
     "Moto": null
    },
    "n": {
-    "Hatch": 0,
-    "Sedã": 0,
-    "SUV": 0,
+    "Hatch": 1,
+    "Sedã": 1,
+    "SUV": 1,
     "Picape": 0,
-    "Leves": 0,
+    "Leves": 3,
     "Caminhão": 0,
     "Moto": 0
    }
@@ -291,32 +291,32 @@
  ],
  "acumulado": {
   "Hatch": {
-   "var": -2.181387187812156,
-   "meses": 2
+   "var": -0.5119181784795646,
+   "meses": 5
   },
   "Sedã": {
-   "var": -1.880093298188945,
-   "meses": 2
+   "var": -2.6410134432215404,
+   "meses": 5
   },
   "SUV": {
-   "var": -2.6975113014745977,
-   "meses": 2
+   "var": -3.0949424982988694,
+   "meses": 5
   },
   "Picape": {
-   "var": -3.0653213118766565,
-   "meses": 2
+   "var": -4.683148204338949,
+   "meses": 4
   },
   "Leves": {
-   "var": -2.495842897640388,
-   "meses": 2
+   "var": -3.265018477699344,
+   "meses": 5
   },
   "Caminhão": {
-   "var": -1.3409086741365206,
-   "meses": 1
+   "var": -3.6768853887890085,
+   "meses": 4
   },
   "Moto": {
-   "var": -0.6078300991615437,
-   "meses": 1
+   "var": -0.2832897101314624,
+   "meses": 2
   }
  },
  "preco_medio": {
@@ -337,8 +337,8 @@
   "Caminhão": 21,
   "Moto": 24
  },
- "resumo": "Na tabela FIPE de outubro/2026, a cesta de veículos leves caiu (-1,24%) frente a setembro/2026. Entre os segmentos, menor queda: Moto (-0,61%); maior queda: Picape (-1,36%). Caminhões: -1,34%. Acumulado em 2 meses (leves): -2,5%.",
- "gerado_em": "2026-10-07T14:29:21-03:00",
+ "resumo": "Na tabela FIPE de outubro/2026, a cesta de veículos leves caiu (-1,24%) frente a setembro/2026. Entre os segmentos, menor queda: Moto (-0,61%); maior queda: Picape (-1,36%). Caminhões: -1,34%. Acumulado em 5 meses (leves): -3,3%.",
+ "gerado_em": "2026-10-08T09:28:44-03:00",
  "maiores_altas": [
   {
    "nome": "Hyundai Creta",

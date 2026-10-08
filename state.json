@@ -25,15 +25,23 @@
     ]
   },
   "ANFAVEA - Edições em PDF (Carta da Anfavea)": {
-    "hash": "416e84348a478807e24b11ca3ea6cbe07977b4b67bc6cf878ec47ae842276a82",
+    "hash": "d2650d80d9bba4ca099472b8e4dc623a2a07f0710a741c84b795e557a2e00503",
     "items": [
       {
-        "text": "Setembro/2026",
-        "href": "https://www.anfavea.com.br/cartas/carta484.pdf"
+        "text": "Outubro/2026",
+        "href": "https://www.anfavea.com.br/cartas/carta485.pdf"
       }
     ]
   },
   "_eventos": [
+    {
+      "id": "ca7295f05593",
+      "at": "2026-10-08T09:12:40-03:00",
+      "label": "08/10 09:12",
+      "fonte": "ANFAVEA",
+      "titulo": "Outubro/2026",
+      "link": "https://www.anfavea.com.br/cartas/carta485.pdf"
+    },
     {
       "id": "90de1b70e344",
       "at": "2026-10-07T10:12:52-03:00",
