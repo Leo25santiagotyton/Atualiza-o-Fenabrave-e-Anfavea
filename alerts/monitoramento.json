@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-08T08:34:23-03:00",
- "updatedLabel": "08/10/2026 08:34",
+ "updatedAt": "2026-10-08T09:12:58-03:00",
+ "updatedLabel": "08/10/2026 09:12",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -258,8 +258,8 @@
    "url": "https://anfavea.com.br/site/conteudos/carta-da-anfavea/",
    "itens": [
     {
-     "text": "Carta 484 · Setembro/2026",
-     "href": "https://www.anfavea.com.br/cartas/carta484.pdf"
+     "text": "Carta 485 · Outubro/2026",
+     "href": "https://www.anfavea.com.br/cartas/carta485.pdf"
     }
    ]
   },
@@ -344,6 +344,14 @@
  ],
  "eventos": [
   {
+   "id": "ca7295f05593",
+   "at": "2026-10-08T09:12:40-03:00",
+   "label": "08/10 09:12",
+   "fonte": "ANFAVEA",
+   "titulo": "Outubro/2026",
+   "link": "https://www.anfavea.com.br/cartas/carta485.pdf"
+  },
+  {
    "id": "ee95ea14f746",
    "at": "2026-10-07T16:31:48-03:00",
    "label": "07/10 16:31",
@@ -378,7 +386,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "07/10/2026",
+  "atualizado": "08/10/2026",
   "preliminar": {
    "Classe 8": [
     "2026-09"
