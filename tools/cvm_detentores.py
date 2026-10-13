@@ -7,7 +7,8 @@ Lê os dois meses mais recentes, procura os códigos de todos os papéis do pain
 alerts/detentores.json: por papel, os fundos que têm o papel, com gestor, quantidade e valor,
 e a quantidade no mês anterior (para ver quem entrou, saiu, aumentou ou reduziu).
 
-Uso: python tools/cvm_detentores.py [--meses 2] [--diag]
+Uso: python tools/cvm_detentores.py [--meses 4] [--diag]
+Também grava alerts/detentores/<4 letras do código>.json, um por emissor, que vão para o banco do painel (debentures/det_<PFX>).
 """
 import csv, io, json, re, sys, zipfile, datetime
 import requests
@@ -220,6 +221,16 @@ def main():
     s = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
     open(OUT, "w", encoding="utf-8").write(s)
     print("gravado", OUT, len(s), "bytes; papéis com detentores:", len(out))
+    # um arquivo por emissor (4 primeiras letras do código): o banco do painel aceita até 256 KB por documento
+    import os
+    os.makedirs("alerts/detentores", exist_ok=True)
+    grupos = {}
+    for code, v in out.items():
+        grupos.setdefault(code[:4], {})[code] = v
+    for pfx, pp in grupos.items():
+        d2 = dict(doc, papeis=pp)
+        open(f"alerts/detentores/{pfx}.json", "w", encoding="utf-8").write(json.dumps(d2, ensure_ascii=False, separators=(",", ":")))
+    print("por emissor:", sorted(grupos))
 
 
 if __name__ == "__main__":
