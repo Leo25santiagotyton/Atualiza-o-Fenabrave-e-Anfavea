@@ -294,10 +294,23 @@ def main():
             top = sorted(d.items(), key=lambda kv: -kv[1])[:15]
             fundos[cnpj] = [curto(nome), curto(gest.get(cnpj, ""), False), round(pl / 1e6, 1), i, round(tot / pl * 100, 3),
                             [[c, round(x / pl * 100, 3)] for c, x in top if x / pl >= 1e-5]]
-    s3 = json.dumps({"fonte": doc["fonte"], "meses": doc["meses"], "updatedAt": doc["updatedAt"],
-                     "obs": "Por CNPJ: [nome, gestora, PL R$ mi, mês (0 = mais recente), % do PL nos papéis da cobertura, [[papel, % do PL]]]. Inclui o que o fundo tem via cotas de outros fundos (master).",
-                     "fundos": fundos}, ensure_ascii=False, separators=(",", ":"))
-    open("alerts/detentores/_fundos.json", "w", encoding="utf-8").write(s3)
+    # o banco do painel aceita até 256 KB por documento: só fundos com >= 0,05% do PL na cobertura, top 10 papéis, em pedaços de ~180 KB
+    fundos = {k: v[:4] + [round(v[4], 2), [[c, round(x, 2)] for c, x in v[5][:10] if round(x, 2) > 0]] for k, v in fundos.items() if v[4] >= 0.05}
+    meta = {"fonte": doc["fonte"], "meses": doc["meses"], "updatedAt": doc["updatedAt"],
+            "obs": "Por CNPJ: [nome, gestora, PL R$ mi, mês (0 = mais recente), % do PL nos papéis da cobertura, [[papel, % do PL]]]. Inclui o que o fundo tem via cotas de outros fundos (master)."}
+    for fn in os.listdir("alerts/detentores"):
+        if fn.startswith("_fundos"):
+            os.remove(os.path.join("alerts/detentores", fn))
+    parte, tam, k = {}, 0, 0
+    for cnpj, v in sorted(fundos.items(), key=lambda kv: -kv[1][2]):
+        t = len(json.dumps(v, ensure_ascii=False).encode()) + 20
+        if tam + t > 180000:
+            open(f"alerts/detentores/_fundos_{k}.json", "w", encoding="utf-8").write(json.dumps(dict(meta, parte=k, fundos=parte), ensure_ascii=False, separators=(",", ":")))
+            parte, tam, k = {}, 0, k + 1
+        parte[cnpj] = v
+        tam += t
+    open(f"alerts/detentores/_fundos_{k}.json", "w", encoding="utf-8").write(json.dumps(dict(meta, parte=k, fundos=parte), ensure_ascii=False, separators=(",", ":")))
+    s3 = str(k + 1) + " pedaço(s)"
     print("fundos com exposição (PL >= 50 mi):", len(fundos), len(s3), "bytes")
 
 
