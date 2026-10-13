@@ -51,7 +51,8 @@ def main(pasta, saida, base=None, arquivo=None):
                 continue
             emi[x["ticker"]] = emissor(x["devedor"])
             hist.setdefault(x["ticker"], []).append(
-                [data, round(x["fin"], 2), x.get("qtd"), x.get("mtm")])
+                [data, round(x["fin"], 2), x.get("qtd"), x.get("mtm"),
+                 {f: round(v["fin"]) for f, v in x["fundos"].items()}])
         if ultimo is None or data >= ultimo[0]:
             ultimo = (data, r)
     for h in hist.values():
