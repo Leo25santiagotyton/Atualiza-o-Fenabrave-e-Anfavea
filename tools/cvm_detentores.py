@@ -169,53 +169,57 @@ def gestores():
     return g
 
 
+def curto(n, fundo=True):
+    """Encurta nome de fundo/gestor para caber no banco do painel."""
+    if fundo:
+        n = re.sub(r"\b(FUNDO DE INVESTIMENTO FINANCEIRO|FUNDO DE INVESTIMENTO|DE RESPONSABILIDADE LIMITADA|RESPONSABILIDADE LIMITADA|RESP\.? LIMITADA|RESP LTDA|CRÉDITO PRIVADO|CRED PRIV|CRÉD PRIVADO|CRÉD PRIV|MULTIMERCADO|RENDA FIXA)\b", "", n, flags=re.I)
+        lim = 48
+    else:
+        n = re.sub(r"\b(LTDA\.?|S/?A\.?|S\.A\.|DTVM|GESTÃO DE RECURSOS|GESTAO DE RECURSOS|GESTORA DE RECURSOS|INVESTIMENTOS|ASSET MANAGEMENT|ADMINISTRADORA DE VALORES MOBILIÁRIOS|DISTRIBUIDORA DE TÍTULOS E VALORES MOBILIÁRIOS)\b", "", n, flags=re.I)
+        lim = 40
+    return re.sub(r"\s+", " ", n).strip(" -.,/")[:lim]
+
+
 def main():
-    n = int(sys.argv[sys.argv.index("--meses") + 1]) if "--meses" in sys.argv else 2
+    n = int(sys.argv[sys.argv.index("--meses") + 1]) if "--meses" in sys.argv else 4
     tg = alvos()
     print("papéis-alvo:", len(tg))
     ms = meses_cda(n)
-    por_mes = {ym: le_cda(ym, tg) for ym in ms}
-    gest = gestores()
-    atual, ant = ms[-1], (ms[-2] if len(ms) > 1 else None)
-
-    def agrega(lin):
-        d = {}
-        for a in lin:
+    pos = {}   # (code, cnpj) -> {ym: [qtd, vl]}
+    info = {}
+    for ym in ms:
+        for a in le_cda(ym, tg):
             k = (tg[a["alvo"]]["code"], a["cnpj"])
-            o = d.setdefault(k, {"fundo": a["fundo"], "tipo": a["tipo"], "qtd": 0.0, "vl": 0.0, "data": a["data"]})
-            o["qtd"] += a["qtd"] or 0
-            o["vl"] += a["vl"] or 0
-        return d
-
-    cur = agrega(por_mes[atual])
-    prev = agrega(por_mes[ant]) if ant else {}
+            o = pos.setdefault(k, {}).setdefault(ym, [0.0, 0.0])
+            o[0] += a["qtd"] or 0
+            o[1] += a["vl"] or 0
+            info[a["cnpj"]] = a["fundo"]
+    gest = gestores()
+    idx = {ym: i for i, ym in enumerate(reversed(ms))}   # 0 = mês mais recente
     papeis = {}
-    for (code, cnpj), o in cur.items():
-        p = prev.get((code, cnpj))
-        papeis.setdefault(code, []).append({
-            "cnpj": cnpj, "fundo": o["fundo"], "tipo": o["tipo"], "gestor": gest.get(cnpj, ""),
-            "qtd": round(o["qtd"], 2), "vl": round(o["vl"], 2), "qtdAnt": round(p["qtd"], 2) if p else None,
-        })
-    # quem tinha no mês anterior e zerou
-    for (code, cnpj), p in prev.items():
-        if (code, cnpj) not in cur:
-            papeis.setdefault(code, []).append({
-                "cnpj": cnpj, "fundo": p["fundo"], "tipo": p["tipo"], "gestor": gest.get(cnpj, ""),
-                "qtd": 0, "vl": 0, "qtdAnt": round(p["qtd"], 2), "saiu": True,
-            })
-    for v in papeis.values():
-        v.sort(key=lambda x: -x["vl"])
-    datas = sorted({a["data"] for a in por_mes[atual] if a["data"]})
+    for (code, cnpj), por in pos.items():
+        ult = max(por)
+        qtd, vl = por[ult]
+        if qtd <= 0 and vl <= 0:
+            continue
+        ant = ms[ms.index(ult) - 1] if ms.index(ult) > 0 else None
+        qa = round(por[ant][0]) if ant and ant in por else (0 if ant else None)
+        g = curto(gest.get(cnpj, "") or "(gestor não identificado)", False)
+        papeis.setdefault(code, {}).setdefault(g, []).append([curto(info[cnpj]), round(qtd), round(vl / 1e3), idx[ult], qa])
+    out = {}
+    for code, gs in papeis.items():
+        out[code] = sorted(([g, sorted(fs, key=lambda f: -f[2])] for g, fs in gs.items()), key=lambda x: -sum(f[2] for f in x[1]))
     doc = {
         "fonte": "CVM · CDA (composição das carteiras dos fundos)",
-        "mes": f"{atual[4:]}/{atual[:4]}", "mesAnt": f"{ant[4:]}/{ant[:4]}" if ant else None,
-        "dataBase": datas[-1] if datas else None,
+        "meses": [f"{m[4:]}/{m[:4]}" for m in reversed(ms)],
         "geradoEm": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%MZ"),
-        "obs": "Fundos podem pedir sigilo da carteira por até 90 dias; posições sigilosas não aparecem.",
-        "papeis": papeis,
+        "updatedAt": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%MZ"),
+        "obs": "Por fundo: [nome, quantidade, valor em R$ mil, mês da posição (0 = mais recente em `meses`), quantidade no mês anterior]. Fundos podem pedir sigilo da carteira por até 90 dias; aí a posição mais recente fica de fora e vale a última publicada.",
+        "papeis": out,
     }
-    json.dump(doc, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-    print("gravado", OUT, "papéis com detentores:", len(papeis), {k: len(v) for k, v in list(papeis.items())[:40]})
+    s = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
+    open(OUT, "w", encoding="utf-8").write(s)
+    print("gravado", OUT, len(s), "bytes; papéis com detentores:", len(out))
 
 
 if __name__ == "__main__":
