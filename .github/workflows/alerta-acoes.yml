@@ -9,7 +9,17 @@ on:
     - cron: "5 14,16,18,20 * * 1-5"
     - cron: "*/15 13-20 * * 1-5"
     - cron: "5,20 21 * * 1-5"
-  workflow_dispatch: {}
+  # Disparo manual/externo (o agendamento do GitHub às vezes não roda por horas):
+  # "voltas" = quantas fotos de preço tirar, uma a cada 15 min (4 = cobre a hora inteira).
+  # Só manda e-mail se "email" for true.
+  workflow_dispatch:
+    inputs:
+      voltas:
+        description: "Quantas fotos de preço (uma a cada 15 min)"
+        default: "1"
+      email:
+        description: "Enviar o e-mail de alerta"
+        default: "false"
 
 permissions:
   contents: write
@@ -42,7 +52,9 @@ jobs:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: |
-          if [ "${{ github.event.schedule }}" = "*/15 13-20 * * 1-5" ] || [ "${{ github.event.schedule }}" = "5,20 21 * * 1-5" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ "${{ inputs.email }}" = "true" ] && python alerta_acoes.py || python alerta_acoes.py --no-email
+          elif [ "${{ github.event.schedule }}" = "*/15 13-20 * * 1-5" ] || [ "${{ github.event.schedule }}" = "5,20 21 * * 1-5" ]; then
             python alerta_acoes.py --no-email
           else
             python alerta_acoes.py
@@ -57,3 +69,17 @@ jobs:
           git diff --quiet --cached && exit 0
           git commit -m "Atualiza cotações B3 [skip ci]"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
+
+      - name: Mais fotos a cada 15 min (só no disparo manual com voltas > 1)
+        if: github.event_name == 'workflow_dispatch' && inputs.voltas != '1'
+        env:
+          VOLTAS: ${{ inputs.voltas }}
+        run: |
+          for i in $(seq 2 "$VOLTAS"); do
+            sleep 840
+            python alerta_acoes.py --no-email || continue
+            git add alerts/prices.json alerts/alert_state.json alerts/fundamentals.json 2>/dev/null || true
+            git diff --quiet --cached && continue
+            git commit -m "Atualiza cotações B3 [skip ci]"
+            for t in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
+          done
