@@ -1,0 +1,34 @@
+name: Detentores das debêntures (CVM CDA)
+
+on:
+  schedule:
+    - cron: "17 11 * * 1"   # segunda, 8h17 BRT: a CVM publica o CDA uma vez por mês
+  workflow_dispatch:
+    inputs:
+      diag:
+        description: "Imprime as colunas dos arquivos (diagnóstico)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  detentores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+      - run: python tools/cvm_detentores.py --meses 2 ${{ github.event.inputs.diag == 'true' && '--diag' || '' }}
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add alerts/detentores.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Detentores das debêntures (CVM CDA) [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
