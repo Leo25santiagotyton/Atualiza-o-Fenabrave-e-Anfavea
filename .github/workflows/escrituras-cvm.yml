@@ -1,0 +1,46 @@
+name: Escrituras de debêntures (CVM IPE)
+
+on:
+  workflow_dispatch:
+    inputs:
+      emissores:
+        description: "Regex do nome da companhia, separados por vírgula (ex.: ARMAC,RANDON)"
+        required: true
+      desde:
+        description: "Ano inicial"
+        required: false
+        default: "2018"
+      diag:
+        description: "Lista todos os documentos IPE do emissor (diagnóstico)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  escrituras:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests pypdf
+      - name: Baixa
+        env:
+          EMISSORES: ${{ github.event.inputs.emissores }}
+        run: |
+          args=()
+          IFS=',' read -ra E <<< "$EMISSORES"
+          for e in "${E[@]}"; do args+=(--emissor "$e"); done
+          python tools/cvm_escrituras.py "${args[@]}" --desde "${{ github.event.inputs.desde }}" ${{ github.event.inputs.diag == 'true' && '--diag' || '' }}
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add alerts/escrituras || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Escrituras de debêntures (CVM IPE) [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
