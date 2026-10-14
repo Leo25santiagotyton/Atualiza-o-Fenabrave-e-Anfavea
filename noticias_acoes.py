@@ -99,7 +99,6 @@ BOND_ISSUERS = [
     {"name": "Maxim Crane", "bond": "Maxim Crane Works", "query": f'("Maxim Crane") {BOND_TERMS_EN}', "match": r"Maxim Crane", "langs": ("en",)},
     {"name": "Alta Equipment", "bond": "Alta Equipment Group", "query": f'("Alta Equipment") {BOND_TERMS_EN}', "match": r"Alta Equipment", "langs": ("en",)},
     {"name": "Avis Budget", "bond": "Avis Budget Car Rental", "query": f'("Avis Budget") {BOND_TERMS_EN}', "match": r"Avis", "langs": ("en",)},
-    {"name": "Aptiv", "bond": "Aptiv", "query": f'(Aptiv) {BOND_TERMS_EN}', "match": r"\bAptiv\b", "langs": ("en",)},
     {"name": "Tenneco", "bond": "Tenneco", "query": f'(Tenneco) {BOND_TERMS_EN}', "match": r"\bTenneco\b", "langs": ("en",)},
     {"name": "American Axle", "bond": "American Axle", "query": f'("American Axle" OR "Dauch") {BOND_TERMS_EN}', "match": r"American Axle|\bDauch\b", "langs": ("en",)},
     {"name": "Cooper-Standard", "bond": "Cooper-Standard Automotive", "query": f'("Cooper-Standard" OR "Cooper Standard") {BOND_TERMS_EN}', "match": r"Cooper[- ]Standard", "langs": ("en",)},
@@ -147,7 +146,9 @@ def translate_pt(session, text):
 
 def fetch_bond_news(session, old):
     """Notícias dos emissores de bonds (pt e en), juntas com o histórico já salvo; mais recentes primeiro."""
-    found = {i["id"]: i for i in old}
+    # emissor que saiu de BOND_ISSUERS some também do histórico
+    nomes = {b["name"] for b in BOND_ISSUERS}
+    found = {i["id"]: i for i in old if i.get("company") in nomes}
     for c in BOND_ISSUERS:
         for lang in c.get("langs", ("pt", "en")):
             try:
