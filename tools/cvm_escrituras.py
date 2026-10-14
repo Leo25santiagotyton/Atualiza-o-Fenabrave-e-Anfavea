@@ -65,7 +65,7 @@ def main():
             tipo = " ".join(l.get(k, "") for k in ("Categoria", "Tipo", "Especie", "Assunto"))
             if a.diag:
                 print(f"::notice::{ano} {nome[:30]} | {tipo[:150]}")
-            if CAT.search(tipo) and re.search(r"escritura|aditamento|termo", tipo, re.I):
+            if CAT.search(tipo) and re.search(r"escritura(?!dor|is)|aditamento|termo", tipo, re.I) and not re.search(r"escriturador|mapa ", tipo, re.I):
                 docs.append(l)
     print(f"::notice::{len(docs)} documento(s) de escritura/aditamento")
     for l in docs:
