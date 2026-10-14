@@ -1,14 +1,19 @@
 name: Boletim de notícias B3 e bonds
 
 # Dois e-mails todo dia às 8h30 e às 19h (horário de Brasília): ações na B3 e bonds em US$.
-# A edição da manhã é disparada às 8h20 por uma rotina do Claude (workflow_dispatch), porque o
-# agendamento do GitHub chegava a atrasar horas; a da noite segue no cron de 21h55 UTC.
+# As duas edições são disparadas por rotinas do Claude (workflow_dispatch às 8h20 e às 18h50), porque o
+# agendamento do GitHub chegava a atrasar horas. A rotina passa os emissores favoritados no painel em
+# bond_favs: o e-mail de bonds só traz notícias deles (o de ações traz tudo).
 # De hora em hora (minuto 5) só atualiza as notícias do painel, sem e-mail.
 on:
   schedule:
-    - cron: "55 21 * * *"
     - cron: "5 * * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      bond_favs:
+        description: "Emissores de bonds favoritados (lista JSON); vazio = todos"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -40,6 +45,7 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          BOND_FAVS: ${{ github.event.inputs.bond_favs }}
         run: |
           if [ "${{ github.event.schedule }}" = "5 * * * *" ]; then
             python noticias_acoes.py --no-email

@@ -27,6 +27,7 @@ import argparse
 import hashlib
 import html
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -451,6 +452,21 @@ def build_email(edition, now, new_items, market):
     return subject, "\n".join(lines), html_body
 
 
+def _norm_co(t):
+    t = unicodedata.normalize("NFD", str(t)).encode("ascii", "ignore").decode().lower()
+    t = re.sub(r"\b(europe|group|holding|holdings|overseas|s\.?a\.?|inc|ltd|corp|ihc)\b|\(.*?\)", " ", t)
+    return re.sub(r"[^a-z0-9]+", " ", t).strip()
+
+
+def _fav_match(company, favs):
+    """Notícia de um emissor favorito? (mesma regra do painel: nome contido ou primeira palavra igual)."""
+    c = _norm_co(company)
+    if not c:
+        return False
+    w = c.split(" ")[0]
+    return any(f and (f in c or c in f or (len(w) >= 4 and w in f.split(" "))) for f in favs)
+
+
 def build_bond_email(edition, now, new_items):
     """E-mail das notícias dos bonds em US$ (só emissores sem ação na B3), com preço e YTM do monitor Bloomberg."""
     hora = now.strftime("%d/%m/%Y")
@@ -636,6 +652,15 @@ def main():
                        key=lambda i: (i["importance"] != "alta", -datetime.fromisoformat(i["published"]).timestamp()))
 
     subject, text, html_body = build_email(edition, now, new_items, market)
+    # e-mail de bonds: só os emissores favoritados no painel (BOND_FAVS = lista JSON de emissores, vinda da rotina que dispara o boletim)
+    favs_raw = os.environ.get("BOND_FAVS", "").strip()
+    if favs_raw:
+        try:
+            favs = [_norm_co(x) for x in json.loads(favs_raw) if str(x).strip()]
+        except (json.JSONDecodeError, TypeError):
+            favs = []
+        new_bonds = [i for i in new_bonds if _fav_match(i["company"], favs)]
+        print(f"[INFO] bonds no e-mail: só favoritos ({len(favs)} emissores) → {len(new_bonds)} notícia(s)")
     b_subject, b_text, b_html = build_bond_email(edition, now, new_bonds)
     print(subject)
     print(text)
@@ -648,7 +673,10 @@ def main():
         return
 
     send_email(subject, text, html_body)
-    send_email(b_subject, b_text, b_html)
+    if new_bonds or not favs_raw:
+        send_email(b_subject, b_text, b_html)
+    else:
+        print("[INFO] nenhuma notícia de bond favorito: e-mail de bonds não enviado")
     for i in new_items + new_bonds:
         state["seen"][i["id"]] = i["published"]
     state["lastRun"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
