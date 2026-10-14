@@ -691,6 +691,17 @@
   {
    "data": "2026-05-20",
    "empresa": "Borr Drilling",
+   "evento": "Assembleia Geral Ordinária 2026",
+   "fonte": "https://www.theglobeandmail.com/investing/markets/stocks/BORR/pressreleases/1206674/borr-drilling-sets-may-20-2026-date-for-annual-general-meeting/",
+   "grupo": "Bonds",
+   "short": "Assembleia",
+   "status": "realizado",
+   "ticker": "US100018AC46",
+   "tipo": "assembleia"
+  },
+  {
+   "data": "2026-05-20",
+   "empresa": "Borr Drilling",
    "evento": "Resultados 1T26",
    "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-invitation-webcast-and-conference-call-q1-2026-results-2026-04",
    "grupo": "Bonds",
@@ -699,17 +710,6 @@
    "status": "realizado",
    "ticker": "US100018AC46",
    "tipo": "resultado"
-  },
-  {
-   "data": "2026-05-20",
-   "empresa": "Borr Drilling",
-   "evento": "Assembleia Geral Ordinária 2026",
-   "fonte": "https://www.theglobeandmail.com/investing/markets/stocks/BORR/pressreleases/1206674/borr-drilling-sets-may-20-2026-date-for-annual-general-meeting/",
-   "grupo": "Bonds",
-   "short": "Assembleia",
-   "status": "realizado",
-   "ticker": "US100018AC46",
-   "tipo": "assembleia"
   },
   {
    "data": "2026-05-21",
@@ -1351,18 +1351,6 @@
    "tipo": "teleconferencia"
   },
   {
-   "data": "2026-11-09",
-   "empresa": "Movida",
-   "evento": "Resultado 3T26",
-   "fonte": "https://www.infomoney.com.br/mercados/movida-movi3-resultados-terceiro-trimestre-de-2025/",
-   "grupo": "Ações",
-   "obs": "Estimado pelo 3T25 (noite de 10/11/2025, segunda); call provavelmente no dia seguinte. O grupo Simpar costuma soltar prévia ~2 semanas antes.",
-   "short": "3T26",
-   "status": "estimado",
-   "ticker": "MOVI3",
-   "tipo": "resultado"
-  },
-  {
    "data": "2026-11-10",
    "empresa": "Armac",
    "evento": "Resultado 3T26",
@@ -1411,14 +1399,14 @@
   },
   {
    "data": "2026-11-11",
-   "empresa": "Simpar",
-   "evento": "Resultado 3T26",
-   "fonte": "https://content.btgpactual.com/research/files/file/pt-BR/2025-11-13T101613.953_Simpar__SIMH3____Resultados_do_3T25.pdf",
+   "empresa": "Movida",
+   "evento": "ITR 3T26 · calendário anual",
+   "fonte": "https://investidor10.com.br/acoes/link_comunicado/MOVI3/46225/",
    "grupo": "Ações",
-   "obs": "Estimado pelo 3T25 (~12/11/2025).",
+   "obs": "Calendário anual de eventos corporativos 2026; antes estimado em 09/11. O grupo Simpar costuma soltar prévia ~2 semanas antes.",
    "short": "3T26",
-   "status": "estimado",
-   "ticker": "SIMH3",
+   "status": "confirmado",
+   "ticker": "MOVI3",
    "tipo": "resultado"
   },
   {
@@ -1442,6 +1430,17 @@
    "short": "Call 3T26",
    "status": "confirmado",
    "ticker": "JSLG3",
+   "tipo": "teleconferencia"
+  },
+  {
+   "data": "2026-11-12",
+   "empresa": "Movida",
+   "evento": "Apresentação pública de resultados 3T26 · calendário anual",
+   "fonte": "https://investidor10.com.br/acoes/link_comunicado/MOVI3/46225/",
+   "grupo": "Ações",
+   "short": "Call 3T26",
+   "status": "confirmado",
+   "ticker": "MOVI3",
    "tipo": "teleconferencia"
   },
   {
@@ -1477,6 +1476,18 @@
    "status": "confirmado",
    "ticker": "RAPT4",
    "tipo": "teleconferencia"
+  },
+  {
+   "data": "2026-11-13",
+   "empresa": "Simpar",
+   "evento": "ITR 3T26 · calendário anual",
+   "fonte": "https://investidor10.com.br/acoes/link_comunicado/SIMH3/46556/",
+   "grupo": "Ações",
+   "obs": "Calendário anual de eventos corporativos 2026; antes estimado em 11/11.",
+   "short": "3T26",
+   "status": "confirmado",
+   "ticker": "SIMH3",
+   "tipo": "resultado"
   },
   {
    "data": "2026-11-18",
@@ -1641,6 +1652,6 @@
    "tipo": "cupom"
   }
  ],
- "updatedAt": "2026-10-13T19:46:00-03:00",
- "updatedLabel": "13/10/2026 19:46"
+ "updatedAt": "2026-10-14T19:45:00-03:00",
+ "updatedLabel": "14/10/2026 19:45"
 }
