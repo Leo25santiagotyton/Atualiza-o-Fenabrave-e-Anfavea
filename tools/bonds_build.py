@@ -3,6 +3,8 @@ Monta o documento debentures/bonds a partir das abas 'Monitor valores' e 'Histó
 import json, sys
 from datetime import datetime
 updated = sys.argv[1]  # ex.: "01/10/2026 13:30"
+# ISINs da planilha que não entram no painel (pedido do usuário)
+EXCLUIR = {"US00217GAB95"}  # Aptiv 3,25% 2032
 def num(s):
     s = (s or "").strip().replace("+", "")
     if not s or s.startswith("#") or s == "N/D": return None
@@ -14,7 +16,7 @@ def mat(s):
 bonds = []
 for line in open("valores.tsv", encoding="utf-8"):
     c = line.rstrip("\n").split("\t")
-    if len(c) < 23 or not c[3].strip(): continue
+    if len(c) < 23 or not c[3].strip() or c[3].strip() in EXCLUIR: continue
     m = mat(c[19]); cpn = num(c[18])
     label = c[2].strip() or (f"{cpn:.2f}%".replace(".", ",") + (f" {m[5:7]}/{m[:4]}" if m else ""))
     bonds.append({"issuer": c[0].strip(), "country": c[1].strip(), "bond": label, "isin": c[3].strip(),
@@ -26,6 +28,7 @@ hist = {}
 for line in open("hist.tsv", encoding="utf-8"):
     c = line.rstrip("\n").split("\t")
     d, isin, px, y = c[:4]
+    if isin.strip() in EXCLUIR: continue
     vol = num(c[4]) if len(c) > 4 else None  # volume (TRACE), se a planilha trouxer
     dd, mm, yy = d.split("/")
     last = num(c[5]) if len(c) > 5 else None  # último negócio no TRACE
