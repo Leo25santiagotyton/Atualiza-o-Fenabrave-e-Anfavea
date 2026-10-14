@@ -1,11 +1,11 @@
 name: Boletim de notícias B3 e bonds
 
 # Dois e-mails todo dia às 8h30 e às 19h (horário de Brasília): ações na B3 e bonds em US$.
-# Agendado 5 min antes (11h25 e 21h55 UTC) porque o GitHub costuma atrasar o início.
+# A edição da manhã é disparada às 8h20 por uma rotina do Claude (workflow_dispatch), porque o
+# agendamento do GitHub chegava a atrasar horas; a da noite segue no cron de 21h55 UTC.
 # De hora em hora (minuto 5) só atualiza as notícias do painel, sem e-mail.
 on:
   schedule:
-    - cron: "25 11 * * *"
     - cron: "55 21 * * *"
     - cron: "5 * * * *"
   workflow_dispatch: {}
