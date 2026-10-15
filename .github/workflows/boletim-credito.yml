@@ -1,10 +1,9 @@
 name: Boletim de crédito
 
-# Dias úteis às 8h50 (Brasília). Agendado às 8h40 (11h40 UTC) porque o GitHub
-# costuma atrasar o início. Atualiza a ANBIMA antes de montar o e-mail.
+# Disparado por uma rotina do Claude nos dias úteis às 8h20 (Brasília), para o
+# e-mail chegar até 8h30: o agendamento do GitHub atrasava horas (chegava no almoço).
+# Atualiza a ANBIMA antes de montar o e-mail.
 on:
-  schedule:
-    - cron: "40 11 * * 1-5"
   workflow_dispatch: {}
 
 permissions:
