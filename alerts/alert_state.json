@@ -3,9 +3,12 @@
   "levels": {
     "JSLG3": 4,
     "TUPY3": 2,
-    "PRNR3": 2,
-    "MOVI3": 2,
-    "VAMO3": 2,
-    "SIMH3": 2
+    "PRNR3": 4,
+    "MOVI3": 4,
+    "VAMO3": 4,
+    "SIMH3": 2,
+    "AMOB3": 4,
+    "FRAS3": 2,
+    "ARML3": 2
   }
 }
