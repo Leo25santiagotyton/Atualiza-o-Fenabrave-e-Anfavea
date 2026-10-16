@@ -19,8 +19,7 @@ Fontes:
             www.seminovosmovida.com.br, paginada por "from" e "size")
   Localiza: https://seminovos.localiza.com/carros?page=N  (dados da própria página, 23 por página)
 
-Como as vitrines só mostram o preço de hoje, a visão mensal e em 12 meses desde já vem da Tabela
-FIPE dos mesmos carros que a Movida anuncia (código FIPE e ano-modelo de cada anúncio, pesados pela
+Opcional (--com-fipe): Tabela FIPE dos mesmos carros que a Movida anuncia (código FIPE e ano-modelo de cada anúncio, pesados pela
 quantidade à venda), guardada em alerts/seminovos_fipe.json; e o preço pedido pela Movida frente à FIPE.
 
 Saída: alerts/seminovos_hist.json (histórico diário por categoria e mensal por modelo/ano),
@@ -471,7 +470,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--so", choices=list(LOJAS))
     ap.add_argument("--max-paginas", type=int)
-    ap.add_argument("--sem-fipe", action="store_true", help="não consulta a FIPE (usa o que já está guardado)")
+    ap.add_argument("--com-fipe", action="store_true", help="consulta também a FIPE dos carros da Movida (referência opcional)")
     a = ap.parse_args()
     h = json.loads(HIST.read_text(encoding="utf-8")) if HIST.exists() else {"dias": {}, "mensal": {}}
     hoje = datetime.now(BRT).date().isoformat()
@@ -537,9 +536,9 @@ def main():
     HIST.write_text(json.dumps(h, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     res = monta_resumo(h, hoje)
     try:
-        c = fipe_atualiza(lista_movida) if lista_movida and not a.sem_fipe else (
-            json.loads(FIPE_CACHE.read_text(encoding="utf-8")) if FIPE_CACHE.exists() else None)
-        res["fipe"] = fipe_resumo(c) if c else None
+        c = fipe_atualiza(lista_movida) if lista_movida and a.com_fipe else None
+        r = fipe_resumo(c) if c else None
+        res["fipe"] = r if r and r["cobertura"]["carros"] else None
     except Exception as e:
         print(f"::warning::FIPE da cesta da Movida: {e}")
     RESUMO.write_text(json.dumps(res, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
