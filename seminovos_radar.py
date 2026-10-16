@@ -1,11 +1,11 @@
 """
 Radar de seminovos: preços anunciados nas vitrines de seminovos da Movida e da Localiza.
 
-Uma vez por dia lê todos os anúncios das duas vitrines (sem login, as mesmas buscas que o site
+Toda segunda-feira (e quando pedido pelo botão do painel) lê todos os anúncios das duas vitrines (sem login, as mesmas buscas que o site
 faz para quem navega) e guarda, por locadora e por categoria (hatch, sedã, SUV, picape, outros),
 quantidade de carros, preço médio, preço mediano, km médio e ano-modelo médio.
 
-A variação mês a mês sai de duas formas, como no resumo da FIPE:
+Cada foto é comparada com a da semana anterior (semana a semana). A variação mês a mês sai de duas formas, como no resumo da FIPE:
   - preço médio da categoria no mês (média dos dias) contra o mês anterior, que mistura o efeito
     de preço com a mudança de mix (carros mais novos ou mais velhos à venda);
   - "mesma cesta": para cada modelo e ano-modelo com carros nos dois meses, a variação do preço
@@ -391,13 +391,15 @@ def curto(mes):
 def monta_resumo(h, hoje):
     meses = sorted(h["mensal"])
     out = {"gerado_em": datetime.now(BRT).isoformat(timespec="seconds"), "dia": hoje, "lojas": {}, "mensal": [], "modelos": [],
-           "comparacao": [], "diario": {}}
+           "comparacao": [], "semanal": {}}
     for loja in LOJAS:
         d = h["dias"].get(hoje, {}).get(loja) or next((h["dias"][x][loja] for x in sorted(h["dias"], reverse=True) if loja in h["dias"][x]), None)
         if d:
             out["lojas"][loja] = {"cats": d["cats"], "total_site": d.get("total_site"), "dia": d.get("dia", hoje)}
-        out["diario"][loja] = [{"dia": x, **{c: h["dias"][x][loja]["cats"].get(c, {}).get("media") for c in CATS + ["Total"]}}
-                               for x in sorted(h["dias"])[-62:] if loja in h["dias"][x]]
+        out["semanal"] = out.get("semanal", {})
+        out["semanal"][loja] = [{"dia": x, "cats": {c: {"media": v.get("media"), "n": v.get("n"), **(h["dias"][x][loja].get("sem", {}).get(c) or {})}
+                                                    for c, v in h["dias"][x][loja]["cats"].items()}}
+                                for x in sorted(h["dias"])[-27:] if loja in h["dias"][x]]
     medias = {mes: {loja: media_mes(h["mensal"][mes][loja]) for loja in h["mensal"][mes]} for mes in meses}
     for i, mes in enumerate(meses):
         linha = {"mes": mes, "curto": curto(mes), "lojas": {}}
@@ -460,7 +462,7 @@ def monta_resumo(h, hoje):
                 partes.append(s)
     out["resumo"] = ". ".join(partes) + "." if partes else ""
     if len(meses) < 2:
-        out["aviso"] = (f"Coleta diária desde {curto(meses[0]) if meses else 'hoje'}; a variação mês a mês aparece quando houver dois meses "
+        out["aviso"] = (f"Coleta semanal (segundas) desde {curto(meses[0]) if meses else 'hoje'}; a variação mês a mês aparece quando houver dois meses "
                         "de dados (o site das locadoras não mostra preços antigos).")
     return out
 
@@ -508,16 +510,27 @@ def main():
         if a.max_paginas:
             print(json.dumps(f["cats"], ensure_ascii=False))
             continue
-        h["dias"].setdefault(hoje, {})[loja] = {"cats": f["cats"], "cells": f["cells"], "total_site": total}
+        # variação contra a foto anterior (rodada semanal: a da segunda-feira passada), ainda com as células por modelo/ano
+        ant = next((h["dias"][d][loja] for d in sorted(h["dias"], reverse=True)
+                    if d <= (datetime.fromisoformat(hoje) - timedelta(days=5)).date().isoformat() and loja in h["dias"][d]
+                    and h["dias"][d][loja].get("cells")), None)
+        sem = None
+        if ant:
+            sem = {c: {"var": pct(ant["cats"].get(c, {}).get("media"), v["media"]),
+                       "var_cesta": cesta({k: tuple(x) for k, x in ant["cells"].items()}, {k: tuple(x) for k, x in f["cells"].items()},
+                                          None if c == "Total" else c)[0]} for c, v in f["cats"].items()}
+        h["dias"].setdefault(hoje, {})[loja] = {"cats": f["cats"], "cells": f["cells"], "total_site": total, **({"sem": sem} if sem else {})}
         acumula_mes(h["mensal"].setdefault(mes, {}), loja, f)
         ok += 1
         print(f"{LOJAS[loja]}: {len(lista)} carros, preço médio R$ {f['cats']['Total']['media']:,}")
     if a.max_paginas:
         return
-    # só a foto por categoria fica no histórico diário; as células por modelo/ano ficam no mensal
-    for d in sorted(h["dias"])[:-1]:
-        for v in h["dias"][d].values():
-            v.pop("cells", None)
+    # só a foto por categoria fica no histórico; as células por modelo/ano ficam no mensal e nas fotos dos últimos 10 dias
+    lim = (datetime.fromisoformat(hoje) - timedelta(days=10)).date().isoformat()
+    for d in sorted(h["dias"]):
+        if d < lim:
+            for v in h["dias"][d].values():
+                v.pop("cells", None)
     for d in sorted(h["dias"])[:-MAX_DIAS]:
         del h["dias"][d]
     HIST.parent.mkdir(exist_ok=True)

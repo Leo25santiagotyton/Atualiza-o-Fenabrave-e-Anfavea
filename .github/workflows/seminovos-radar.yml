@@ -1,10 +1,10 @@
 name: Radar de seminovos (Movida e Localiza)
 
-# Uma vez por dia lê os preços anunciados nas vitrines de seminovos da Movida e da Localiza
-# e atualiza o resumo da aba Monitoramento > Radar de seminovos. 7h40 de Brasília.
+# Toda segunda-feira lê os preços anunciados nas vitrines de seminovos da Movida e da Localiza
+# e atualiza o resumo da aba Monitoramento > Radar de seminovos. Segunda, 7h40 de Brasília.
 on:
   schedule:
-    - cron: "40 10 * * *"
+    - cron: "40 10 * * 1"
   workflow_dispatch: {}
 
 permissions:
