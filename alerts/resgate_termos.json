@@ -1,0 +1,1477 @@
+{
+ "updatedAt": "2026-10-16T15:06:00Z",
+ "fonte": "Escrituras e aditamentos públicos na CVM (IPE), cláusula de resgate antecipado facultativo",
+ "papeis": {
+  "LORTA5": {
+   "desde": "2024-04-15",
+   "premios": [
+    [
+     "2024-04-15",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 15ª emissão (CVM, entregue 2019-05-06)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=687801&numSequencia=214778&numVersao=1",
+   "obs": "0,20% ao ano, base 252 DU, pelo prazo remanescente."
+  },
+  "LORTA6": {
+   "desde": "2023-05-25",
+   "premios": [
+    [
+     "2023-05-25",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 16ª emissão (CVM, entregue 2019-12-06)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=724707&numSequencia=249509&numVersao=1"
+  },
+  "LORTA8": {
+   "desde": "2023-11-06",
+   "premios": [
+    [
+     "2023-11-06",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 18ª emissão (CVM, entregue 2021-09-24)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=903301&numSequencia=428035&numVersao=1",
+   "obs": "Escritura condiciona o resgate a ocorrida a Repactuação (Cl. 4.17). O 1º aditamento (CVM 2023-10-10, repactuacao com spread 1,75%) não traz a cláusula de resgate no trecho extraido; mantidos os termos da escritura."
+  },
+  "LORTA9": {
+   "desde": "2024-09-25",
+   "premios": [
+    [
+     "2024-09-25",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 19ª emissão (CVM, entregue 2022-03-14)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=953777&numSequencia=478511&numVersao=1",
+   "obs": "Primeira Série. Aditamento de 2022-03-14 sem cláusula de resgate no trecho."
+  },
+  "LORTB1": {
+   "desde": "2025-01-15",
+   "premios": [
+    [
+     "2025-01-15",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 21ª emissão (CVM, entregue 2022-07-15)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=998408&numSequencia=523142&numVersao=1"
+  },
+  "LORTB2": {
+   "desde": "2026-12-05",
+   "premios": [
+    [
+     "2026-12-05",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 22ª emissão (CVM, entregue 2022-12-06)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1038450&numSequencia=563180&numVersao=1"
+  },
+  "LORTB9": {
+   "desde": "2026-03-25",
+   "premios": [
+    [
+     "2026-03-25",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 19ª emissão (CVM, entregue 2022-03-14)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=953777&numSequencia=478511&numVersao=1",
+   "obs": "Segunda Série. Aditamento de 2022-03-14 sem cláusula de resgate no trecho."
+  },
+  "RENTA5": {
+   "desde": "2030-02-11",
+   "premios": [
+    [
+     "2030-02-11",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 25ª emissão (CVM, entregue 2023-07-26)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1125338&numSequencia=650067&numVersao=1",
+   "obs": "Documento com assunto vazio na CVM; identificado pelas datas (emissão/vencimento 11/08/2023-11/08/2033, 78º mes)."
+  },
+  "RENTC4": {
+   "desde": "2026-12-25",
+   "premios": [
+    [
+     "2026-12-25",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 34ª emissão (CVM, entregue 2023-11-13)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1161934&numSequencia=686660&numVersao=1"
+  },
+  "RENTC8": {
+   "desde": "2027-03-27",
+   "premios": [
+    [
+     "2027-03-27",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 38ª emissão (CVM, entregue 2024-02-27)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1199868&numSequencia=724594&numVersao=1"
+  },
+  "RENTD0": {
+   "desde": "2027-12-10",
+   "premios": [
+    [
+     "2027-12-10",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 40ª emissão (CVM, entregue 2024-12-10)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1313650&numSequencia=838376&numVersao=1"
+  },
+  "RENTD5": {
+   "desde": "2028-08-28",
+   "premios": [
+    [
+     "2028-08-28",
+     0.3
+    ],
+    [
+     "2029-08-28",
+     0.25
+    ],
+    [
+     "2030-08-28",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 45ª emissão (CVM, entregue 2025-08-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1416842&numSequencia=941554&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. 1ª Série."
+  },
+  "RENTD6": {
+   "desde": "2030-05-19",
+   "premios": [
+    [
+     "2030-05-19",
+     0.3
+    ],
+    [
+     "2031-05-19",
+     0.25
+    ],
+    [
+     "2032-05-19",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 46ª emissão (CVM, entregue 2026-05-12)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1520765&numSequencia=1045471&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. "
+  },
+  "RENTE2": {
+   "desde": "2027-05-21",
+   "premios": [
+    [
+     "2027-05-21",
+     0.3
+    ],
+    [
+     "2028-05-21",
+     0.25
+    ],
+    [
+     "2029-05-21",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 42ª emissão (CVM, entregue 2025-05-12)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1376641&numSequencia=901353&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. 1ª Série. 1o e 2º aditamentos (2025-05-22, 2025-06-03) sem a cláusula no trecho extraido."
+  },
+  "RENTE3": {
+   "desde": "2027-07-17",
+   "premios": [
+    [
+     "2027-07-17",
+     0.3
+    ],
+    [
+     "2028-07-18",
+     0.25
+    ],
+    [
+     "2029-07-18",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 43ª emissão (CVM, entregue 2025-07-14)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1400815&numSequencia=925527&numVersao=1"
+  },
+  "RENTE4": {
+   "desde": "2029-08-02",
+   "premios": [
+    [
+     "2029-08-02",
+     0.3
+    ],
+    [
+     "2030-08-02",
+     0.25
+    ],
+    [
+     "2031-08-02",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 44ª emissão (CVM, entregue 2025-07-29)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1405110&numSequencia=929822&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. "
+  },
+  "RENTE5": {
+   "desde": "2029-08-28",
+   "premios": [
+    [
+     "2029-08-28",
+     0.3
+    ],
+    [
+     "2030-08-28",
+     0.25
+    ],
+    [
+     "2031-08-28",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 45ª emissão (CVM, entregue 2025-08-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1416842&numSequencia=941554&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. 2ª Série."
+  },
+  "RENTF2": {
+   "desde": "2029-05-21",
+   "premios": [
+    [
+     "2029-05-21",
+     0.3
+    ],
+    [
+     "2030-05-21",
+     0.25
+    ],
+    [
+     "2031-05-21",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 42ª emissão (CVM, entregue 2025-05-12)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1376641&numSequencia=901353&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. 2ª Série. 1o e 2º aditamentos (2025-05-22, 2025-06-03) sem a cláusula no trecho extraido."
+  },
+  "RENTH7": {
+   "desde": "2030-06-24",
+   "premios": [
+    [
+     "2030-06-24",
+     0.3
+    ],
+    [
+     "2031-06-24",
+     0.25
+    ],
+    [
+     "2032-06-24",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 47ª emissão (CVM, entregue 2026-06-23)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1537539&numSequencia=1062245&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. "
+  },
+  "RENTQ8": {
+   "desde": "2030-07-15",
+   "premios": [
+    [
+     "2030-07-15",
+     0.3
+    ],
+    [
+     "2031-07-15",
+     0.25
+    ],
+    [
+     "2032-07-15",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 48ª emissão (CVM, entregue 2026-07-16)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1545346&numSequencia=1070052&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. "
+  },
+  "TFLE15": {
+   "desde": "2021-07-18",
+   "premios": [
+    [
+     "2021-07-18",
+     0.25
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Ata da AGE que aprovou a 5ª emissão (Localiza Fleet) (CVM, entregue 2019-08-22)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=707549&numSequencia=240558&numVersao=1",
+   "obs": "So há a ata de aprovacao (não a escritura): prêmio 0,25% ao ano, base 252 DU, incidente sobre o Valor Base, fórmula a ser estabelecida na Escritura."
+  },
+  "TFLE17": {
+   "desde": "2023-01-29",
+   "premios": [
+    [
+     "2023-01-29",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 7ª emissão (Localiza Fleet) (CVM, entregue 2020-01-29)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=732469&numSequencia=257249&numVersao=1"
+  },
+  "TFLE18": {
+   "desde": "2020-02-12",
+   "premios": [
+    [
+     "2020-02-12",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 8ª emissão (Localiza Fleet) (CVM, entregue 2020-02-13)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=737382&numSequencia=262160&numVersao=1",
+   "obs": "Resgate permitido a qualquer tempo a partir da Data de Emissão."
+  },
+  "TFLE19": {
+   "desde": "2027-05-28",
+   "premios": [
+    [
+     "2027-05-28",
+     0.3
+    ],
+    [
+     "2028-05-28",
+     0.25
+    ],
+    [
+     "2029-05-28",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 9ª emissão (Localiza Fleet) (CVM, entregue 2025-05-28)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1383982&numSequencia=908694&numVersao=1"
+  },
+  "TFLEA0": {
+   "desde": "2024-10-05",
+   "premios": [
+    [
+     "2024-10-05",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 10ª emissão (Localiza Fleet) (CVM, entregue 2022-08-26)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1011296&numSequencia=536030&numVersao=1",
+   "obs": "Primeira Série."
+  },
+  "TFLEA1": {
+   "desde": "2025-05-05",
+   "premios": [
+    [
+     "2025-05-05",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 11ª emissão (Localiza Fleet) (CVM, entregue 2022-10-18)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1022849&numSequencia=547582&numVersao=1"
+  },
+  "TFLEA3": {
+   "desde": "2027-01-20",
+   "premios": [
+    [
+     "2027-01-20",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 13ª emissão (Localiza Fleet) (CVM, entregue 2023-12-18)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1174908&numSequencia=699634&numVersao=1"
+  },
+  "TFLEA4": {
+   "desde": "2027-02-26",
+   "premios": [
+    [
+     "2027-02-26",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 14ª emissão (Localiza Fleet) (CVM, entregue 2024-01-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1186004&numSequencia=710730&numVersao=1"
+  },
+  "TFLEA5": {
+   "desde": "2027-12-04",
+   "premios": [
+    [
+     "2027-12-04",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 15ª emissão (Localiza Fleet) (CVM, entregue 2024-10-30)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1296152&numSequencia=820878&numVersao=1",
+   "obs": "1ª Série (mesma data e prêmio para ambas)."
+  },
+  "TFLEA6": {
+   "desde": "2027-12-12",
+   "premios": [
+    [
+     "2027-12-12",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 16ª emissão (Localiza Fleet) (CVM, entregue 2024-12-12)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1314882&numSequencia=839608&numVersao=1"
+  },
+  "TFLEA7": {
+   "desde": "2028-02-10",
+   "premios": [
+    [
+     "2028-02-10",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 17ª emissão (Localiza Fleet) (CVM, entregue 2025-02-06)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1331099&numSequencia=855825&numVersao=1"
+  },
+  "TFLEA8": {
+   "desde": "2027-06-20",
+   "premios": [
+    [
+     "2027-06-20",
+     0.3
+    ],
+    [
+     "2028-06-21",
+     0.25
+    ],
+    [
+     "2029-06-21",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 18ª emissão (Localiza Fleet) (CVM, entregue 2025-06-10)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1388830&numSequencia=913542&numVersao=1"
+  },
+  "TFLEA9": {
+   "desde": "2029-09-10",
+   "premios": [
+    [
+     "2029-09-10",
+     0.3
+    ],
+    [
+     "2030-09-10",
+     0.25
+    ],
+    [
+     "2031-09-10",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 19ª emissão (Localiza Fleet) (CVM, entregue 2025-08-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1416861&numSequencia=941573&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. "
+  },
+  "TFLEB0": {
+   "desde": "2025-04-05",
+   "premios": [
+    [
+     "2025-04-05",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 10ª emissão (Localiza Fleet) (CVM, entregue 2022-08-26)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1011296&numSequencia=536030&numVersao=1",
+   "obs": "Segunda Série."
+  },
+  "TFLEB5": {
+   "desde": "2027-12-04",
+   "premios": [
+    [
+     "2027-12-04",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 15ª emissão (Localiza Fleet) (CVM, entregue 2024-10-30)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1296152&numSequencia=820878&numVersao=1",
+   "obs": "2ª Série (mesma data e prêmio para ambas)."
+  },
+  "TFLEC0": {
+   "desde": "2027-09-19",
+   "premios": [
+    [
+     "2027-09-19",
+     0.3
+    ],
+    [
+     "2028-09-19",
+     0.25
+    ],
+    [
+     "2029-09-19",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 20ª emissão (Localiza Fleet) (CVM, entregue 2025-08-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1416853&numSequencia=941565&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. 1ª Série. 1º aditamento (2025-09-22) sem a cláusula no trecho extraido."
+  },
+  "TFLED0": {
+   "desde": "2029-09-19",
+   "premios": [
+    [
+     "2029-09-19",
+     0.3
+    ],
+    [
+     "2030-09-19",
+     0.25
+    ],
+    [
+     "2031-09-19",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 20ª emissão (Localiza Fleet) (CVM, entregue 2025-08-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1416853&numSequencia=941565&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. 2ª Série. 1º aditamento (2025-09-22) sem a cláusula no trecho extraido."
+  },
+  "TFLEE1": {
+   "desde": "2030-07-15",
+   "premios": [
+    [
+     "2030-07-15",
+     0.3
+    ],
+    [
+     "2031-07-15",
+     0.25
+    ],
+    [
+     "2032-07-15",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 21ª emissão (Localiza Fleet) (CVM, entregue 2026-07-16)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1545348&numSequencia=1070054&numVersao=1",
+   "obs": "Texto diz \"a partir de <data> (exclusive)\"; usada a data seguinte. "
+  },
+  "UNDAC2": {
+   "desde": "2024-04-10",
+   "premios": [
+    [
+     "2024-04-10",
+     0.25
+    ],
+    [
+     "2025-04-10",
+     0.2
+    ],
+    [
+     "2026-04-10",
+     0.15
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 13ª emissão da Unidas S.A. (CVM, entregue 2019-04-08)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=678029&numSequencia=206208&numVersao=1",
+   "obs": "2ª Série. Prêmio P sobre o valor de resgate com DU ate o vencimento (fórmula não legível no texto); considerado pro rata."
+  },
+  "UNDAC3": {
+   "desde": "2026-04-10",
+   "premios": [
+    [
+     "2026-04-10",
+     0.25
+    ],
+    [
+     "2027-04-10",
+     0.2
+    ],
+    [
+     "2027-12-10",
+     0.15
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º aditamento da escritura da 13ª emissão da Unidas S.A. (CVM, entregue 2019-04-08)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=678029&numSequencia=206208&numVersao=1",
+   "obs": "3ª Série. Prêmio P sobre o valor de resgate com DU ate o vencimento (fórmula não legível no texto); considerado pro rata."
+  },
+  "UNDAF5": {
+   "desde": "2024-01-15",
+   "premios": [
+    [
+     "2024-01-15",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "2º aditamento da 25ª emissão da Cia de Locação das Américas (ex-16ª emissão da Unidas S.A., emissão 15/12/2021) (CVM, entregue 2024-01-05)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1180808&numSequencia=705534&numVersao=1",
+   "obs": "P = 0,30% ao ano pelo prazo médio remanescente, DU ate o vencimento."
+  },
+  "ARML12": {
+   "desde": "2023-11-25",
+   "premios": [
+    [
+     "2023-11-25",
+     0.75
+    ],
+    [
+     "2024-11-25",
+     0.65
+    ],
+    [
+     "2025-11-25",
+     0.55
+    ],
+    [
+     "2026-11-25",
+     0.5
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 2ª emissão (CVM, entregue 2021-11-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=920333&numSequencia=445067&numVersao=1",
+   "obs": "P = PU * i * (DU/252); cláusula 6.17"
+  },
+  "ARML14": {
+   "desde": "2027-03-15",
+   "premios": [
+    [
+     "2027-03-15",
+     0.75
+    ],
+    [
+     "2028-03-15",
+     0.65
+    ],
+    [
+     "2029-03-15",
+     0.55
+    ],
+    [
+     "2030-03-15",
+     0.5
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "2º Aditamento à escritura da 4ª emissão (CVM, entregue 2024-03-18)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1208825&numSequencia=733551&numVersao=1",
+   "obs": "P = PU * i * (DU/252); cláusula 5.1"
+  },
+  "ARML15": {
+   "desde": "2027-09-25",
+   "premios": [
+    [
+     "2027-09-25",
+     0.75
+    ],
+    [
+     "2028-09-25",
+     0.65
+    ],
+    [
+     "2029-09-25",
+     0.55
+    ],
+    [
+     "2030-09-25",
+     0.5
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 5ª emissão (CVM, entregue 2024-10-10)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1290444&numSequencia=815170&numVersao=1",
+   "obs": "1ª série; P = PU * i * (DU/252)"
+  },
+  "ARML25": {
+   "desde": "2028-06-25",
+   "premios": [
+    [
+     "2028-06-25",
+     0.85
+    ],
+    [
+     "2029-06-25",
+     0.75
+    ],
+    [
+     "2030-06-25",
+     0.65
+    ],
+    [
+     "2031-06-25",
+     0.55
+    ],
+    [
+     "2032-06-25",
+     0.5
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 5ª emissão (CVM, entregue 2024-10-10)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1290444&numSequencia=815170&numVersao=1",
+   "obs": "2ª série; P = PU * i * (DU/252)"
+  },
+  "ARML16": {
+   "desde": "2027-11-05",
+   "premios": [
+    [
+     "2027-11-05",
+     0.5
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 6ª emissão (CVM, entregue 2025-10-15)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1433110&numSequencia=957822&numVersao=1",
+   "obs": "1ª série; mesma cláusula 5.1 para todas as séries: prêmio 0,50% a.a. x prazo remanescente (DU)"
+  },
+  "ARML26": {
+   "desde": "2027-11-05",
+   "premios": [
+    [
+     "2027-11-05",
+     0.5
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 6ª emissão (CVM, entregue 2025-10-15)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1433110&numSequencia=957822&numVersao=1",
+   "obs": "2ª série; mesma cláusula 5.1 para todas as séries: prêmio 0,50% a.a. x prazo remanescente (DU)"
+  },
+  "RANM17": {
+   "desde": "2019-04-10",
+   "premios": [
+    [
+     "2019-04-10",
+     1.5
+    ],
+    [
+     "2021-09-29",
+     1.2
+    ],
+    [
+     "2023-09-29",
+     0.9
+    ]
+   ],
+   "tipo": "Flat",
+   "fonte": "Escritura da 7ª emissão (CVM, entregue 2019-04-10)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=678577&numSequencia=206708&numVersao=1",
+   "obs": "Documento não cita o número da emissão no trecho; casado pela data de entrega (= data de emissão do papel). Resgate permitido 'a partir da Primeira Data de Integralização' (desde = data de emissão, assumida); 1ª faixa até 28/09/2021 (inclusive), 2ª até 28/09/2023 (inclusive). Papel vencido em 10/04/2026."
+  },
+  "RNDN19": {
+   "desde": "2024-08-03",
+   "premios": [
+    [
+     "2024-08-03",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 9ª emissão (CVM, entregue 2022-02-03)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=938605&numSequencia=463339&numVersao=1",
+   "obs": "1ª série; 0,40% a.a. pro rata, base 252, DU até o vencimento"
+  },
+  "RNDN29": {
+   "desde": "2025-08-03",
+   "premios": [
+    [
+     "2025-08-03",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 9ª emissão (CVM, entregue 2022-02-03)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=938605&numSequencia=463339&numVersao=1",
+   "obs": "2ª série; 0,40% a.a. pro rata, base 252, DU até o vencimento"
+  },
+  "RNDNA1": {
+   "desde": "2028-05-17",
+   "premios": [
+    [
+     "2028-05-17",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 11ª emissão (CVM, entregue 2024-04-19)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1223937&numSequencia=748663&numVersao=1",
+   "obs": "PUresgate = VR + VR*(d/252*0,40%); 1º aditamento (2024-05-21) só alterou a remuneração no trecho disponível"
+  },
+  "RNDNA2": {
+   "desde": "2028-01-26",
+   "premios": [
+    [
+     "2028-01-26",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 12ª emissão (CVM, entregue 2025-07-02)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1397313&numSequencia=922025&numVersao=1",
+   "obs": "1ª série; PUresgate = VR + VR*(d/252)*0,40%; o 1º aditamento (2025-07-24) não traz a cláusula de resgate no trecho"
+  },
+  "RNDNB2": {
+   "desde": "2029-07-26",
+   "premios": [
+    [
+     "2029-07-26",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 12ª emissão (CVM, entregue 2025-07-02)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1397313&numSequencia=922025&numVersao=1",
+   "obs": "2ª série; PUresgate = VR + VR*(d/252)*0,40%; o 1º aditamento (2025-07-24) não traz a cláusula de resgate no trecho"
+  },
+  "FRAS13": {
+   "desde": "2020-06-15",
+   "premios": [
+    [
+     "2020-06-15",
+     0.75
+    ],
+    [
+     "2022-06-15",
+     0.55
+    ],
+    [
+     "2023-06-15",
+     0.45
+    ],
+    [
+     "2024-06-15",
+     0.25
+    ],
+    [
+     "2025-06-15",
+     0.2
+    ],
+    [
+     "2026-06-15",
+     0.15
+    ]
+   ],
+   "tipo": "Flat",
+   "fonte": "1º Aditamento à escritura da 3ª emissão (CVM, entregue 2024-09-24)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1284939&numSequencia=809665&numVersao=1",
+   "obs": "Resgate a qualquer tempo a partir da Data de Emissão; prêmio flat sobre o valor de resgate. Escritura da 6ª emissão cita uso de recursos para resgate da 3ª emissão (FRAS13)."
+  },
+  "FRAS14": {
+   "desde": "2020-07-15",
+   "premios": [
+    [
+     "2020-07-15",
+     2.12
+    ],
+    [
+     "2021-07-15",
+     1.9
+    ],
+    [
+     "2022-07-15",
+     1.68
+    ],
+    [
+     "2023-07-15",
+     1.46
+    ],
+    [
+     "2024-07-15",
+     1.24
+    ],
+    [
+     "2025-07-15",
+     0.8
+    ],
+    [
+     "2026-07-15",
+     0.6
+    ]
+   ],
+   "tipo": "Flat",
+   "fonte": "Escritura da 4ª emissão (CVM, entregue 2020-07-09)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=775103&numSequencia=299844&numVersao=1",
+   "obs": "Trecho não cita o nº da emissão; casado pela Data de Emissão 15/07/2020. Escritura da 6ª emissão cita uso de recursos para resgate da 4ª emissão (FRAS14)."
+  },
+  "FRAS15": {
+   "desde": "2024-12-20",
+   "premios": [
+    [
+     "2024-12-20",
+     0.69
+    ],
+    [
+     "2025-12-20",
+     0.68
+    ],
+    [
+     "2026-12-20",
+     0.67
+    ],
+    [
+     "2027-12-20",
+     0.65
+    ],
+    [
+     "2028-12-20",
+     0.64
+    ],
+    [
+     "2029-12-20",
+     0.62
+    ],
+    [
+     "2030-12-20",
+     0.51
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º Aditamento à escritura da 5ª emissão (CVM, entregue 2024-12-20)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1318265&numSequencia=842991&numVersao=1",
+   "obs": "Texto chama de 'prêmio flat regressivo', mas a fórmula 5.1.1.1 é PUresgate = VR + VR*(d/252*Prêmio), ou seja, multiplica pelo prazo remanescente; resgate 'a qualquer momento' (desde = data de emissão)"
+  },
+  "FRAS16": {
+   "desde": "2028-04-25",
+   "premios": [
+    [
+     "2028-04-25",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Aditamento à escritura da 6ª emissão (CVM, entregue 2025-10-31)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1438417&numSequencia=963129&numVersao=1",
+   "obs": "PUresgate = VR + VR*(d/252)*0,40%; aditamento consolida em série única"
+  },
+  "TUPY15": {
+   "desde": "2026-07-17",
+   "premios": [
+    [
+     "2026-07-17",
+     0.35
+    ],
+    [
+     "2028-07-17",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "2º Aditamento à escritura da 5ª emissão (CVM, entregue 2026-01-05)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1463695&numSequencia=988401&numVersao=1",
+   "obs": "1ª série; a partir do 24º mês; prêmio a.a. pro rata, base 252, DU até o vencimento"
+  },
+  "TUPY25": {
+   "desde": "2027-07-17",
+   "premios": [
+    [
+     "2027-07-17",
+     0.35
+    ],
+    [
+     "2030-07-17",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "2º Aditamento à escritura da 5ª emissão (CVM, entregue 2026-01-05)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1463695&numSequencia=988401&numVersao=1",
+   "obs": "2ª série; a partir do 36º mês"
+  },
+  "TUPY35": {
+   "desde": "2028-07-17",
+   "premios": [
+    [
+     "2028-07-17",
+     0.35
+    ],
+    [
+     "2033-07-17",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "2º Aditamento à escritura da 5ª emissão (CVM, entregue 2026-01-05)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1463695&numSequencia=988401&numVersao=1",
+   "obs": "3ª série; a partir do 48º mês"
+  },
+  "PRNR14": {
+   "desde": "2028-05-21",
+   "premios": [
+    [
+     "2028-05-21",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura da 4ª emissão (CVM, entregue 2026-05-27)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1527336&numSequencia=1052042&numVersao=1",
+   "obs": "A partir do 24º mês da Data de Emissão (21/05/2028 inclusive); 0,30% a.a. pro rata, base 252. Nº da emissão não explícito no trecho; casado pela data (ref. 2026-05-21)."
+  },
+  "AGAU13": {
+   "desde": "2025-09-15",
+   "premios": [
+    [
+     "2025-09-15",
+     1.0
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "1º Aditamento à escritura da 3ª emissão (CVM, entregue 2024-03-27)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1213779&numSequencia=738505&numVersao=1",
+   "obs": "A partir do 18º mês; PUprêmio = 1,00% x (dup/252) x PURdebênture"
+  },
+  "MOVI34": {
+   "desde": "2024-07-01",
+   "premios": [
+    [
+     "2024-07-01",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 4ª emissão (CVM, entregue 2019-06-28)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=698077&numSequencia=224271&numVersao=1",
+   "obs": "3ª série; P={[(1+i)^(DU/252)]-1} x PU, DU até a Data de Vencimento da 3ª série."
+  },
+  "MOVIA2": {
+   "desde": "2025-10-30",
+   "premios": [
+    [
+     "2025-10-30",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 12ª emissão (CVM, entregue 2023-10-31)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1156132&numSequencia=680858&numVersao=1",
+   "obs": "Emissão 30/10/2023, venc. 15/10/2026 (identificada por datas). PUprêmio = Prêmio*(Prazo Remanescente/252)*PU."
+  },
+  "MOVIA3": {
+   "desde": "2026-03-06",
+   "premios": [
+    [
+     "2026-03-06",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 13ª emissão (CVM, entregue 2024-03-13)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1207063&numSequencia=731789&numVersao=1",
+   "obs": "Aditamento alterou cláusula 5.1 (a partir de 06/03/2026 inclusive)."
+  },
+  "MOVIA5": {
+   "desde": "2025-07-31",
+   "premios": [
+    [
+     "2025-07-31",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 15ª emissão (CVM, entregue 2024-08-08)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1269249&numSequencia=793975&numVersao=1",
+   "obs": "Texto: 'a partir de 30/07/2025 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIA6": {
+   "desde": "2026-11-28",
+   "premios": [
+    [
+     "2026-11-28",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 16ª emissão (CVM, entregue 2024-11-26)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1308260&numSequencia=832986&numVersao=1",
+   "obs": "1ª série. Texto: 'a partir de 27/11/2026 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIB6": {
+   "desde": "2026-11-28",
+   "premios": [
+    [
+     "2026-11-28",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 16ª emissão (CVM, entregue 2024-11-26)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1308260&numSequencia=832986&numVersao=1",
+   "obs": "2ª série. Texto: 'a partir de 27/11/2026 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIB2": {
+   "desde": "2027-06-16",
+   "premios": [
+    [
+     "2027-06-16",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 22ª emissão (CVM, entregue 2025-06-13)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1390512&numSequencia=915224&numVersao=1",
+   "obs": "Identificada por venc. 15/06/2030. Texto: 'a partir de 15/06/2027 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIC2": {
+   "desde": "2027-09-16",
+   "premios": [
+    [
+     "2027-09-16",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 23ª emissão (CVM, entregue 2025-09-23)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1426016&numSequencia=950728&numVersao=1",
+   "obs": "Texto: 'a partir de 15/09/2027 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIB4": {
+   "desde": "2027-10-11",
+   "premios": [
+    [
+     "2027-10-11",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 24ª emissão (CVM, entregue 2025-10-07)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1430453&numSequencia=955165&numVersao=1",
+   "obs": "Texto: 'a partir de 10/10/2027 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIB5": {
+   "desde": "2028-01-21",
+   "premios": [
+    [
+     "2028-01-21",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 25ª emissão (CVM, entregue 2026-01-22)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1469397&numSequencia=994103&numVersao=1",
+   "obs": "Texto: 'a partir de 20/01/2028 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIC6": {
+   "desde": "2028-02-21",
+   "premios": [
+    [
+     "2028-02-21",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 26ª emissão (CVM, entregue 2026-02-11)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1476293&numSequencia=1000999&numVersao=1",
+   "obs": "Texto: 'a partir de 20/02/2028 (exclusive)'; usado o dia seguinte."
+  },
+  "MOVIB8": {
+   "desde": "2027-08-10",
+   "premios": [
+    [
+     "2027-08-10",
+     0.5
+    ]
+   ],
+   "tipo": "Flat",
+   "fonte": "Escritura/aditamento da 28ª emissão (CVM, entregue 2026-08-03)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1551396&numSequencia=1076102&numVersao=1",
+   "obs": "1ª série; identificada por emissão 10/08/2026 e venc. 15/07/2028. Prêmio flat 0,50% de 10/08/2027 até o vencimento."
+  },
+  "MOVIC8": {
+   "desde": "2029-08-10",
+   "premios": [
+    [
+     "2029-08-10",
+     1.3
+    ],
+    [
+     "2030-08-10",
+     1.0
+    ],
+    [
+     "2031-08-11",
+     0.7
+    ],
+    [
+     "2032-08-11",
+     0.5
+    ]
+   ],
+   "tipo": "Flat",
+   "fonte": "Escritura/aditamento da 28ª emissão (CVM, entregue 2026-08-03)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1551396&numSequencia=1076102&numVersao=1",
+   "obs": "2ª série. Escada flat: 1,30% de 10/08/2029 (incl.) até 10/08/2030 (incl.); 1,00% a partir de 10/08/2030 (incl., sobreposição no texto); 0,70% após 10/08/2031 (excl.); 0,50% após 10/08/2032 (excl.) até o vencimento."
+  },
+  "MOVID9": {
+   "desde": "2028-09-21",
+   "premios": [
+    [
+     "2028-09-21",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 29ª emissão (CVM, entregue 2026-09-22)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1570321&numSequencia=1095027&numVersao=1",
+   "obs": "Identificada por venc. 20/03/2032. Texto: 'a partir de 20/09/2028 (exclusive)'; usado o dia seguinte."
+  },
+  "MVLVA2": {
+   "desde": "2028-03-21",
+   "premios": [
+    [
+     "2028-03-21",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 20ª emissão (CVM, entregue 2026-04-17)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1506188&numSequencia=1030894&numVersao=1",
+   "obs": "2º aditamento (vencimento prorrogado para 20/09/2031; AGD de 31/03/2026 alterou a data do resgate). Texto: 'a partir de 20/03/2028 (exclusive)'; usado o dia seguinte."
+  },
+  "MVLVA3": {
+   "desde": "2026-08-11",
+   "premios": [
+    [
+     "2026-08-11",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 13ª (Movida Locação) emissão (CVM, entregue 2024-08-09)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1270013&numSequencia=794739&numVersao=1",
+   "obs": "1ª série (venc. 10/08/2027); emissão 10/08/2024. Texto: 'a partir de 10/08/2026 (exclusive)'; usado o dia seguinte."
+  },
+  "MVLVB3": {
+   "desde": "2026-08-11",
+   "premios": [
+    [
+     "2026-08-11",
+     0.85
+    ],
+    [
+     "2026-11-10",
+     0.75
+    ],
+    [
+     "2027-02-10",
+     0.65
+    ],
+    [
+     "2027-05-10",
+     0.6
+    ],
+    [
+     "2027-08-10",
+     0.47
+    ],
+    [
+     "2027-11-10",
+     0.35
+    ],
+    [
+     "2028-02-10",
+     0.25
+    ],
+    [
+     "2028-05-10",
+     0.15
+    ]
+   ],
+   "tipo": "Flat",
+   "fonte": "Escritura/aditamento da 13ª (Movida Locação) emissão (CVM, entregue 2024-08-09)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1270013&numSequencia=794739&numVersao=1",
+   "obs": "2ª série (venc. 10/08/2028). Escada flat trimestral; primeira faixa a partir de 10/08/2026 (exclusive)."
+  },
+  "VAMO19": {
+   "desde": "2026-06-20",
+   "premios": [
+    [
+     "2026-06-20",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 9ª emissão (CVM, entregue 2023-12-21)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1176573&numSequencia=701299&numVersao=1",
+   "obs": "30º mês da emissão; P=[(1+i)^(du/252)-1]*PU."
+  },
+  "VAMOA1": {
+   "desde": "2026-12-25",
+   "premios": [
+    [
+     "2026-12-25",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 11ª emissão (CVM, entregue 2024-06-21)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1252336&numSequencia=777062&numVersao=1",
+   "obs": "30º mês da emissão."
+  },
+  "VAMOA3": {
+   "desde": "2028-03-20",
+   "premios": [
+    [
+     "2028-03-20",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 13ª emissão (CVM, entregue 2025-09-24)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1426379&numSequencia=951091&numVersao=1",
+   "obs": "30º mês da emissão."
+  },
+  "VAMOA5": {
+   "desde": "2028-03-20",
+   "premios": [
+    [
+     "2028-03-20",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 15ª emissão (CVM, entregue 2026-03-26)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1495451&numSequencia=1020157&numVersao=1",
+   "obs": "1º aditamento; 24º mês da emissão."
+  },
+  "AMOB11": {
+   "desde": "2026-06-15",
+   "premios": [
+    [
+     "2026-06-15",
+     0.2
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 1ª (Automob Participações) emissão (CVM, entregue 2024-12-13)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1315553&numSequencia=840279&numVersao=1",
+   "obs": "'A partir do 18º mês contado da Data de Emissão' (calculado de 15/12/2024). Fórmula no texto P=[(1+i)^(duration/252)]*PU, com 'quantidade de Dias Úteis até a Data de Vencimento'."
+  },
+  "OGHD13": {
+   "desde": "2025-06-16",
+   "premios": [
+    [
+     "2025-06-16",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 1ª (Automob S.A.) emissão (CVM, entregue 2024-11-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1307805&numSequencia=832531&numVersao=1",
+   "obs": "Aditamento de reorganização; casada pela data (18 meses após a emissão, 'a partir do dia 16 de junho de 2025')."
+  },
+  "OGHD14": {
+   "desde": "2025-12-20",
+   "premios": [
+    [
+     "2025-12-20",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 1ª (Automob S.A.) emissão (CVM, entregue 2024-11-25)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1307809&numSequencia=832535&numVersao=1",
+   "obs": "Aditamento de reorganização; 18 meses após emissão 20/06/2024."
+  },
+  "SIMH14": {
+   "desde": "2023-07-15",
+   "premios": [
+    [
+     "2023-07-15",
+     0.35
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 4ª (Simpar) emissão (CVM, entregue 2022-07-06)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=995902&numSequencia=520636&numVersao=1",
+   "obs": "Prêmio=VR*i*(d/252), d até a Data da Repactuação ou, após esta, até a Data de Vencimento."
+  },
+  "JSMLB3": {
+   "desde": "2023-05-20",
+   "premios": [
+    [
+     "2023-05-20",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 13ª (JSL) emissão (CVM, entregue 2019-05-13)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=690179&numSequencia=216995&numVersao=1",
+   "obs": "2ª série; P={[(1+i)^(DU/252)]-1} x PU. 1º aditamento (2019-05-29) está digitalizado sem texto."
+  },
+  "JSLGA8": {
+   "desde": "2026-09-21",
+   "premios": [
+    [
+     "2026-09-21",
+     0.4
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 18ª (JSL) emissão (CVM, entregue 2024-03-12)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1206573&numSequencia=731299&numVersao=1",
+   "obs": "'após 30 meses (exclusive) contados da Data de Emissão' (20/03/2024); trecho com a data por extenso cortado; calculado dia seguinte a 20/09/2026."
+  },
+  "JSLGA9": {
+   "desde": "2027-06-21",
+   "premios": [
+    [
+     "2027-06-21",
+     0.3
+    ]
+   ],
+   "tipo": "Pro Rata",
+   "fonte": "Escritura/aditamento da 19ª (JSL) emissão (CVM, entregue 2025-06-11)",
+   "link": "https://www.rad.cvm.gov.br/ENET/frmDownloadDocumento.aspx?Tela=ext&descTipo=IPE&CodigoInstituicao=1&numProtocolo=1389841&numSequencia=914553&numVersao=1",
+   "obs": "'após 24 meses (exclusive) contados da Data de Emissão' (20/06/2025); calculado dia seguinte a 20/06/2027."
+  }
+ }
+}
