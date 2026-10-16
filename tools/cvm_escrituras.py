@@ -13,6 +13,7 @@ IPE = "https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/IPE/DADOS/ipe_cia_aberta_{}
 OUT = pathlib.Path("alerts/escrituras")
 CAT = re.compile(r"escritura|debênture|debenture|securitiza", re.I)
 FIN = re.compile(r"d[ií]vida\s+l[ií]quida|ebitda|[ií]ndices?\s+financeiros?|alavancagem|cobertura\s+de\s+juros|patrim[oô]nio\s+l[ií]quido\s+m[ií]nimo", re.I)
+RESG = re.compile(r"resgate\s+antecipado\s+facultativo|pr[eê]mio\s+de\s+resgate|pr[eê]mio\s+flat|amortiza[cç][aã]o\s+extraordin[aá]ria\s+facultativa|oferta\s+de\s+resgate", re.I)
 OUTROS = re.compile(r"vencimento\s+antecipado\s+(n[aã]o\s+)?autom[aá]tic|cross|inadimpl\w+\s+de\s+qualquer|controle\s+acion[aá]rio|dividendos|classifica[cç][aã]o\s+de\s+risco|raz[aã]o\s+(m[ií]nima\s+)?de\s+garantia", re.I)
 
 
@@ -54,6 +55,7 @@ def main():
     ap.add_argument("--emissor", action="append", required=True, help="regex no nome da companhia")
     ap.add_argument("--desde", type=int, default=2018)
     ap.add_argument("--diag", action="store_true")
+    ap.add_argument("--refazer", action="store_true", help="regrava os arquivos já baixados")
     a = ap.parse_args()
     pats = [re.compile(p, re.I) for p in a.emissor]
     docs = []
@@ -71,7 +73,7 @@ def main():
     for l in docs:
         nome = l["Nome_Companhia"]; prot = l.get("Protocolo_Entrega", "") or "x"
         dest = OUT / slug(nome) / f"{l.get('Data_Entrega', '')[:10]}_{prot}.txt"
-        if dest.exists():
+        if dest.exists() and not a.refazer:
             continue
         try:
             r = requests.get(l["Link_Download"], headers=H, timeout=180)
@@ -82,11 +84,12 @@ def main():
             continue
         fin = janelas(txt, FIN, 900, 14000)
         out = janelas(txt, OUTROS, 350, 6000)
+        res = janelas(txt, RESG, 1200, 12000)
         dest.parent.mkdir(parents=True, exist_ok=True)
         cab = (f"# {nome} | {l.get('Assunto', '')} | {l.get('Tipo', '')} {l.get('Especie', '')}\n"
                f"# entregue {l.get('Data_Entrega', '')} | referência {l.get('Data_Referencia', '')} | {l['Link_Download']}\n"
                f"# {len(pdf.pages)} páginas, {len(txt)} caracteres de texto{' (provavelmente digitalizado, sem texto)' if len(txt) < 2000 else ''}\n")
-        dest.write_text(cab + "\n## ÍNDICES FINANCEIROS\n" + "\n…\n".join(fin) + "\n\n## OUTROS GATILHOS\n" + "\n…\n".join(out) + "\n", encoding="utf-8")
+        dest.write_text(cab + "\n## ÍNDICES FINANCEIROS\n" + "\n…\n".join(fin) + "\n\n## OUTROS GATILHOS\n" + "\n…\n".join(out) + "\n\n## RESGATE ANTECIPADO\n" + "\n…\n".join(res) + "\n", encoding="utf-8")
         print(f"::notice::ok {dest} fin={len(fin)} out={len(out)}")
 
 
