@@ -46,6 +46,24 @@ def prox_util(d):
     return d
 
 
+def dur_fluxo(call, e, venc, agenda):
+    """Duration (anos, a partir do resgate) pelo fluxo da agenda do SND: juros a e e amortizações iguais
+    nas datas de amortização restantes. Só para papéis sem duration ANBIMA (aproximação)."""
+    iso = lambda x: datetime.date.fromisoformat(x)
+    ams = sorted({iso(a[0]) for a in agenda if a[1].startswith("Amort") and iso(a[0]) > call} | {venc})
+    jur = sorted({iso(a[0]) for a in agenda if a[1] == "Juros" and iso(a[0]) > call} | {venc})
+    bal, last, k, out = 1.0, call, 0, []
+    for d in sorted(set(jur) | set(ams)):
+        f = (1 + e) ** (du(last, d) / 252)
+        am = bal / (len(ams) - k) if d in ams else 0
+        k += d in ams
+        out.append((du(call, d) / 252, bal * (f - 1) + am))
+        bal -= am
+        last = d
+    pv = [c / (1 + e) ** t for t, c in out]
+    return sum(t * v for (t, _), v in zip(out, pv)) / sum(pv) if pv else None
+
+
 def spread(det):
     s = det.get("Juros/Spread") or ""
     m = re.match(r"\s*(\d+(?:,\d+)?)", s)
@@ -71,7 +89,7 @@ def main():
         e = spread(det)
         venc = det.get("Vencimento")
         ser = [x for x in papers[code].get("series", []) if x[1] is not None and x[3]]
-        if e is None or not venc or not ser or not t.get("desde"):
+        if e is None or not venc or not t.get("desde"):
             continue
         venc = datetime.date(*map(int, reversed(venc.split("/"))))
         desde = datetime.date.fromisoformat(t["desde"])
@@ -88,14 +106,16 @@ def main():
             continue
         nr = du(call, venc) / 252
         ratio = (1 + prem / 100) ** nr if (t.get("tipo") or "Pro Rata").lower().startswith("pro") else 1 + prem / 100
-        D = ser[-1][3] / 252
-        if D <= 0:
+        D = ser[-1][3] / 252 if ser else dur_fluxo(call, e, venc, fich.get(code, {}).get("agenda") or [])
+        if not D or D <= 0:
             continue
         md = ((1 + e) / ratio ** (1 / D) - 1) * 100
         doc["papeis"][code] = {"md": round(md, 4), "venc": venc.isoformat(), "resgate": call.isoformat(),
                                "tipo": t.get("tipo") or "Pro Rata", "premio": prem, "fonte": "calc",
-                               "obs": "calculado pelo método da planilha com a duration ANBIMA de " + ser[-1][0]
-                                      + ("; resgate ainda não aberto, a duration a partir do resgate seria menor" if desde > prox_util(hoje) else "")}
+                               "obs": ("calculado pelo método da planilha com a duration ANBIMA de " + ser[-1][0] if ser else
+                                       "aproximado: sem taxa ANBIMA, duration estimada pela agenda do SND")
+                                      + ("; resgate ainda não aberto, a duration a partir do resgate seria menor" if ser and desde > prox_util(hoje) else ""),
+                               **({"aprox": True} if not ser else {})}
         n += 1
     json.dump(doc, open(path, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print(n, "papéis calculados")
