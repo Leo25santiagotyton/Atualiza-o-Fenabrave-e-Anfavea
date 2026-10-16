@@ -19,7 +19,12 @@ Fontes:
             www.seminovosmovida.com.br, paginada por "from" e "size")
   Localiza: https://seminovos.localiza.com/carros?page=N  (dados da própria página, 23 por página)
 
-Saída: alerts/seminovos_hist.json (histórico diário por categoria e mensal por modelo/ano) e
+Como as vitrines só mostram o preço de hoje, a visão mensal e em 12 meses desde já vem da Tabela
+FIPE dos mesmos carros que a Movida anuncia (código FIPE e ano-modelo de cada anúncio, pesados pela
+quantidade à venda), guardada em alerts/seminovos_fipe.json; e o preço pedido pela Movida frente à FIPE.
+
+Saída: alerts/seminovos_hist.json (histórico diário por categoria e mensal por modelo/ano),
+       alerts/seminovos_fipe.json (FIPE dos 13 últimos meses da cesta da Movida) e
        alerts/seminovos_resumo.json (resumo para o painel, entra em monitoramento.json).
 
 Uso: python seminovos_radar.py [--so movida|localiza] [--max-paginas N]
@@ -133,7 +138,8 @@ def movida(max_paginas=None):
             continue
         cat = categoria(x.get("categoria"))
         lista.append({"cat": cat, "modelo": chave_modelo(x.get("marca"), x.get("modelo"), cat), "ano": x.get("ano_modelo"),
-                      "km": x.get("quilometragem"), "preco": float(p), "uf": x.get("uf")})
+                      "km": x.get("quilometragem"), "preco": float(p), "uf": x.get("uf"), "fipe": x.get("codigo_fipe"),
+                      "comb": 3 if "DIESEL" in _ascii(x.get("combustivel")) else 1})
     return lista, total
 
 
@@ -190,6 +196,135 @@ def localiza(max_paginas=None):
         lista.append({"cat": cat, "modelo": chave_modelo(x.get("marcaDescricao"), x.get("modeloFamiliaDescricao"), cat),
                       "ano": x.get("anoModelo"), "km": x.get("odometro"), "preco": float(p), "uf": x.get("siglaEstado")})
     return lista, total
+
+
+# ---------------- FIPE dos carros à venda na Movida ----------------
+FIPE_CACHE = ROOT / "alerts" / "seminovos_fipe.json"
+FIPE_ITENS = 120      # células (código FIPE + ano-modelo) mais anunciadas que entram na cesta
+FIPE_MESES = 13       # meses de referência (12 variações mensais e a variação em 12 meses)
+FIPE_PRAZO = 22 * 60  # segundos de consultas por rodada; o que faltar vem nas próximas
+
+
+def fipe_atualiza(lista):
+    """Guarda, para os modelos/anos mais anunciados pela Movida, o preço FIPE dos últimos 13 meses."""
+    from fipe_mensal import Fipe, parse_mes, parse_valor, TIPOS
+
+    class F(Fipe):
+        def preco_codigo(self, ref, fipe, ano, comb):
+            js = self._post("ConsultarValorComTodosParametros", {
+                "codigoTabelaReferencia": ref, "codigoTipoVeiculo": 1, "anoModelo": ano, "codigoTipoCombustivel": comb,
+                "tipoVeiculo": TIPOS[1], "modeloCodigoExternoFipe": fipe, "tipoConsulta": "codigo"})
+            if js is not None:
+                if js.get("Valor"):
+                    return parse_valor(js["Valor"])
+                if js.get("erro") == "nadaencontrado":
+                    return 0
+            js = self._get_reserva(f"cars/{fipe}/years/{ano}-{comb}", {"reference": ref})
+            if not js:  # sem resposta, ou o espelho não achou: tenta de novo na próxima rodada
+                raise RuntimeError("sem resposta")
+            return parse_valor(js.get("price")) if js.get("price") else 0
+
+    c = json.loads(FIPE_CACHE.read_text(encoding="utf-8")) if FIPE_CACHE.exists() else {"refs": {}, "precos": {}, "itens": {}}
+    cel = {}
+    for x in lista:
+        if x.get("fipe") and x.get("ano"):
+            a = cel.setdefault(f"{x['fipe']}|{x['ano']}|{x['comb']}", {"cat": x["cat"], "modelo": x["modelo"], "n": 0, "soma": 0})
+            a["n"] += 1; a["soma"] += x["preco"]
+    top = sorted(cel, key=lambda k: -cel[k]["n"])[:FIPE_ITENS]
+    c["itens"] = {k: {"cat": cel[k]["cat"], "modelo": cel[k]["modelo"], "n": cel[k]["n"], "preco_movida": round(cel[k]["soma"] / cel[k]["n"])}
+                  for k in top}
+    fp = F()
+    refs = fp.referencias()[:FIPE_MESES]
+    if not refs:
+        print("::warning::FIPE: sem tabelas de referência")
+        return c
+    for cod, lab in refs:
+        ym = parse_mes(lab)
+        if ym:
+            c["refs"][f"{ym[0]}-{ym[1]:02d}"] = cod
+    meses = sorted(c["refs"], reverse=True)[:FIPE_MESES]
+    t0, feitos, falhas = time.monotonic(), 0, 0
+    for k in top:
+        fipe, ano, comb = k.split("|")
+        pr = c["precos"].setdefault(k, {})
+        for m in meses:
+            if m in pr:
+                continue
+            if time.monotonic() - t0 > FIPE_PRAZO:
+                break
+            if not fp.disponivel():
+                fp.esperar(time.monotonic() + 120)
+            try:
+                v = fp.preco_codigo(c["refs"][m], fipe, int(ano), int(comb))
+            except RuntimeError:
+                falhas += 1
+                continue
+            if v == 0 and comb == "1":  # carro a diesel ou elétrico cadastrado com outro combustível
+                for alt in (3, 4):
+                    try:
+                        v = fp.preco_codigo(c["refs"][m], fipe, int(ano), alt) or 0
+                    except RuntimeError:
+                        v = 0
+                    if v:
+                        break
+            pr[m] = v or None
+            feitos += 1
+    # descarta meses velhos e itens que saíram da vitrine há tempo
+    for k in list(c["precos"]):
+        c["precos"][k] = {m: v for m, v in c["precos"][k].items() if m in meses}
+        if k not in c["itens"] and not c["precos"][k]:
+            del c["precos"][k]
+    c["refs"] = {m: c["refs"][m] for m in meses}
+    c["atualizado"] = datetime.now(BRT).isoformat(timespec="seconds")
+    FIPE_CACHE.write_text(json.dumps(c, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    falta = sum(1 for k in top for m in meses if m not in c["precos"].get(k, {}))
+    print(f"FIPE: {feitos} consultas novas, {falhas} sem resposta, {falta} pendentes para as próximas rodadas")
+    return c
+
+
+def fipe_resumo(c):
+    """Variação mensal e em 12 meses da FIPE da cesta de carros da Movida (pesos = carros anunciados)."""
+    meses = sorted(c.get("refs", {}))
+    if len(meses) < 2:
+        return None
+    itens, pr = c["itens"], c["precos"]
+
+    def var(m0, m1, cat=None, mk=None):
+        sw = sl = 0
+        for k, it in itens.items():
+            if (cat and cat != "Total" and it["cat"] != cat) or (mk and it["modelo"] != mk):
+                continue
+            a, b = pr.get(k, {}).get(m0), pr.get(k, {}).get(m1)
+            if a and b:
+                sw += it["n"]; sl += it["n"] * math.log(b / a)
+        return round((math.exp(sl / sw) - 1) * 100, 2) if sw else None
+
+    cats = [x for x in CATS + ["Total"] if x == "Total" or any(it["cat"] == x for it in itens.values())]
+    mensal = [{"mes": m, "curto": curto(m), **{k: var(meses[i - 1], m, k) for k in cats}} for i, m in enumerate(meses) if i]
+    ult = meses[-1]
+    dez = f"{int(ult[:4]) - 1}-12"
+    out = {"meses": len(meses), "ultimo": ult, "ultimo_curto": curto(ult), "mensal": mensal, "cats": cats,
+           "doze": {k: var(meses[0], ult, k) for k in cats} if len(meses) >= 13 else None,
+           "doze_de": curto(meses[0]),
+           "ano": {k: var(dez, ult, k) for k in cats} if dez in meses else None,
+           "cobertura": {"itens": sum(1 for k in itens if pr.get(k, {}).get(ult)), "de": len(itens),
+                         "carros": sum(it["n"] for k, it in itens.items() if pr.get(k, {}).get(ult))}}
+    # preço pedido pela Movida frente à FIPE do mês (mesmo código e ano-modelo)
+    rel = {}
+    for k, it in itens.items():
+        f = pr.get(k, {}).get(ult)
+        if f:
+            for g in (it["cat"], "Total"):
+                a = rel.setdefault(g, [0, 0]); a[0] += it["n"]; a[1] += it["n"] * math.log(it["preco_movida"] / f)
+    out["vs_fipe"] = {g: round((math.exp(s / n) - 1) * 100, 2) for g, (n, s) in rel.items() if n}
+    mods = {}
+    for it in itens.values():
+        mods[it["modelo"]] = mods.get(it["modelo"], 0) + it["n"]
+    out["modelos"] = [{"modelo": nome_modelo(mk), "n": n, "mes": var(meses[-2], ult, mk=mk),
+                       "doze": var(meses[0], ult, mk=mk) if len(meses) >= 13 else None,
+                       "ano": var(dez, ult, mk=mk) if dez in meses else None}
+                      for mk, n in sorted(mods.items(), key=lambda x: -x[1])[:20]]
+    return out
 
 
 # ---------------- agregação ----------------
@@ -275,6 +410,10 @@ def monta_resumo(h, hoje):
                 if ant and c in ant[0]:
                     dl[c]["var"] = pct(ant[0][c]["media"], v["media"])
                     dl[c]["var_cesta"], dl[c]["cesta_n"] = cesta(ant[1], cells, None if c == "Total" else c)
+                for nome, ref in (("var_12m", f"{int(mes[:4]) - 1}{mes[4:]}"), ("var_ano", f"{int(mes[:4]) - 1}-12")):
+                    base = medias.get(ref, {}).get(loja)
+                    if base and ref != mes and c in base[0]:
+                        dl[c][nome] = cesta(base[1], cells, None if c == "Total" else c)[0]
             linha["lojas"][loja] = dl
         out["mensal"].append(linha)
     if meses:
@@ -330,11 +469,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--so", choices=list(LOJAS))
     ap.add_argument("--max-paginas", type=int)
+    ap.add_argument("--sem-fipe", action="store_true", help="não consulta a FIPE (usa o que já está guardado)")
     a = ap.parse_args()
     h = json.loads(HIST.read_text(encoding="utf-8")) if HIST.exists() else {"dias": {}, "mensal": {}}
     hoje = datetime.now(BRT).date().isoformat()
     mes = hoje[:7]
     ok = 0
+    lista_movida = None
     for loja, fn in (("movida", movida), ("localiza", localiza)):
         if a.so and a.so != loja:
             continue
@@ -347,6 +488,8 @@ def main():
             print(f"::warning::{LOJAS[loja]}: coleta incompleta ({len(lista)} de {total}); dia não gravado")
             continue
         f = foto(lista)
+        if loja == "movida":
+            lista_movida = lista
         ja = h["dias"].get(hoje, {}).get(loja)
         if ja and not a.max_paginas:  # já coletado hoje: troca a foto do dia sem contar o dia duas vezes no mês
             m = h["mensal"].get(mes, {}).get(loja)
@@ -379,7 +522,14 @@ def main():
         del h["dias"][d]
     HIST.parent.mkdir(exist_ok=True)
     HIST.write_text(json.dumps(h, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    RESUMO.write_text(json.dumps(monta_resumo(h, hoje), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    res = monta_resumo(h, hoje)
+    try:
+        c = fipe_atualiza(lista_movida) if lista_movida and not a.sem_fipe else (
+            json.loads(FIPE_CACHE.read_text(encoding="utf-8")) if FIPE_CACHE.exists() else None)
+        res["fipe"] = fipe_resumo(c) if c else None
+    except Exception as e:
+        print(f"::warning::FIPE da cesta da Movida: {e}")
+    RESUMO.write_text(json.dumps(res, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     if not ok:
         sys.exit(1)
 
