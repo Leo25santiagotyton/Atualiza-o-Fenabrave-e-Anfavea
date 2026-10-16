@@ -239,17 +239,6 @@
     },
     {
       "data": "2026-03-23",
-      "empresa": "Movida",
-      "evento": "Divulgação de resultados 4T25 (noite)",
-      "fonte": "https://www.infomoney.com.br/mercados/movida-movi3-resultados-quarto-trimestre-2025/",
-      "grupo": "Ações",
-      "short": "4T25",
-      "status": "realizado",
-      "ticker": "MOVI3",
-      "tipo": "resultado"
-    },
-    {
-      "data": "2026-03-23",
       "empresa": "Constellation",
       "evento": "Resultados 4T25/FY25",
       "fonte": "https://www.inderes.fi/en/releases/cosh-constellation-reports-fourth-quarter-and-full-year-2025-financial-statements-and-earnings-release",
@@ -260,14 +249,14 @@
       "tipo": "resultado"
     },
     {
-      "data": "2026-03-24",
-      "empresa": "JSL",
-      "evento": "Divulgação de resultados 4T25/DFP 2025 (noite)",
-      "fonte": "https://www.infomoney.com.br/mercados/jsl-jslg3-resultados-quarto-trimestre-2025/",
+      "data": "2026-03-23",
+      "empresa": "Movida",
+      "evento": "Divulgação de resultados 4T25 (noite)",
+      "fonte": "https://www.infomoney.com.br/mercados/movida-movi3-resultados-quarto-trimestre-2025/",
       "grupo": "Ações",
       "short": "4T25",
       "status": "realizado",
-      "ticker": "JSLG3",
+      "ticker": "MOVI3",
       "tipo": "resultado"
     },
     {
@@ -281,6 +270,17 @@
       "status": "realizado",
       "ticker": "USL1965HAH32",
       "tipo": "teleconferencia"
+    },
+    {
+      "data": "2026-03-24",
+      "empresa": "JSL",
+      "evento": "Divulgação de resultados 4T25/DFP 2025 (noite)",
+      "fonte": "https://www.infomoney.com.br/mercados/jsl-jslg3-resultados-quarto-trimestre-2025/",
+      "grupo": "Ações",
+      "short": "4T25",
+      "status": "realizado",
+      "ticker": "JSLG3",
+      "tipo": "resultado"
     },
     {
       "data": "2026-03-25",
@@ -781,17 +781,6 @@
     },
     {
       "data": "2026-06-15",
-      "empresa": "Simpar",
-      "evento": "Pagamento de dividendos R$ 0,1713/ação",
-      "fonte": "https://investidor10.com.br/acoes/simh3/",
-      "grupo": "Ações",
-      "short": "Proventos",
-      "status": "realizado",
-      "ticker": "SIMH3",
-      "tipo": "dividendos"
-    },
-    {
-      "data": "2026-06-15",
       "empresa": "Foresea Holding",
       "evento": "Cupom trimestral da 7,5% 2030",
       "fonte": "https://investors.foresea.com/investors/senior-secured-notes/",
@@ -800,6 +789,17 @@
       "status": "realizado",
       "ticker": "US262051AA36",
       "tipo": "cupom"
+    },
+    {
+      "data": "2026-06-15",
+      "empresa": "Simpar",
+      "evento": "Pagamento de dividendos R$ 0,1713/ação",
+      "fonte": "https://investidor10.com.br/acoes/simh3/",
+      "grupo": "Ações",
+      "short": "Proventos",
+      "status": "realizado",
+      "ticker": "SIMH3",
+      "tipo": "dividendos"
     },
     {
       "data": "2026-06-19",
@@ -995,6 +995,18 @@
     },
     {
       "data": "2026-08-11",
+      "empresa": "Borr Drilling",
+      "evento": "Resultados 2T26",
+      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-announces-second-quarter-2026-results-2026-08-11",
+      "grupo": "Bonds",
+      "hora": "após fech. NYSE",
+      "short": "2T26",
+      "status": "realizado",
+      "ticker": "US100018AC46",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2026-08-11",
       "empresa": "Frasle Mobility",
       "evento": "Divulgação resultados 2T26 (após fechamento)",
       "fonte": "https://www.prnewswire.com/news-releases/frasle-mobility-reports-net-revenue-of-r-1-4-billion-and-record-ebitda-margin-in-2q26-806095670.html",
@@ -1039,18 +1051,6 @@
       "tipo": "resultado"
     },
     {
-      "data": "2026-08-11",
-      "empresa": "Borr Drilling",
-      "evento": "Resultados 2T26",
-      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-announces-second-quarter-2026-results-2026-08-11",
-      "grupo": "Bonds",
-      "hora": "após fech. NYSE",
-      "short": "2T26",
-      "status": "realizado",
-      "ticker": "US100018AC46",
-      "tipo": "resultado"
-    },
-    {
       "data": "2026-08-12",
       "empresa": "Armac",
       "evento": "Teleconferência de resultados 2T26",
@@ -1059,6 +1059,18 @@
       "short": "Call 2T26",
       "status": "realizado",
       "ticker": "ARML3",
+      "tipo": "teleconferencia"
+    },
+    {
+      "data": "2026-08-12",
+      "empresa": "Borr Drilling",
+      "evento": "Teleconferência 2T26",
+      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-invitation-webcast-and-conference-call-q2-2026-results-2026-07",
+      "grupo": "Bonds",
+      "hora": "09:00 NY",
+      "short": "Call 2T26",
+      "status": "realizado",
+      "ticker": "US100018AC46",
       "tipo": "teleconferencia"
     },
     {
@@ -1094,18 +1106,6 @@
       "short": "Call 2T26",
       "status": "realizado",
       "ticker": "VAMO3",
-      "tipo": "teleconferencia"
-    },
-    {
-      "data": "2026-08-12",
-      "empresa": "Borr Drilling",
-      "evento": "Teleconferência 2T26",
-      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-invitation-webcast-and-conference-call-q2-2026-results-2026-07",
-      "grupo": "Bonds",
-      "hora": "09:00 NY",
-      "short": "Call 2T26",
-      "status": "realizado",
-      "ticker": "US100018AC46",
       "tipo": "teleconferencia"
     },
     {
@@ -1491,17 +1491,6 @@
     },
     {
       "data": "2026-11-18",
-      "empresa": "Localiza",
-      "evento": "Pagamento de JCP R$ 614,9 mi (R$ 0,5566/ação; data-com 25/09)",
-      "fonte": "https://br.advfn.com/jornal/2026/09/localiza-aprova-r-614-9-milhoes-em-jcp-veja-data-de-corte-e-pagamento",
-      "grupo": "Ações",
-      "short": "Proventos",
-      "status": "confirmado",
-      "ticker": "RENT3",
-      "tipo": "dividendos"
-    },
-    {
-      "data": "2026-11-18",
       "empresa": "Borr Drilling",
       "evento": "Resultados 3T26 · calendário financeiro 2026",
       "fonte": "https://www.inderes.fi/en/releases/borr-financial-calendar-16",
@@ -1523,6 +1512,17 @@
       "status": "confirmado",
       "ticker": "USL1965HAH32",
       "tipo": "resultado"
+    },
+    {
+      "data": "2026-11-18",
+      "empresa": "Localiza",
+      "evento": "Pagamento de JCP R$ 614,9 mi (R$ 0,5566/ação; data-com 25/09)",
+      "fonte": "https://br.advfn.com/jornal/2026/09/localiza-aprova-r-614-9-milhoes-em-jcp-veja-data-de-corte-e-pagamento",
+      "grupo": "Ações",
+      "short": "Proventos",
+      "status": "confirmado",
+      "ticker": "RENT3",
+      "tipo": "dividendos"
     },
     {
       "data": "2026-12-03",
@@ -1652,6 +1652,6 @@
       "tipo": "cupom"
     }
   ],
-  "updatedAt": "2026-10-16T12:00:00-03:00",
-  "updatedLabel": "16/10/2026 12:00"
+  "updatedAt": "2026-10-16T19:45:00-03:00",
+  "updatedLabel": "16/10/2026 19:45"
 }
