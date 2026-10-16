@@ -7,3 +7,6 @@ ado o Evento de Inadimplemento, nem será exigido o resgate ou pré-pagamento da
 
 ## OUTROS GATILHOS
 
+
+## RESGATE ANTECIPADO
+
