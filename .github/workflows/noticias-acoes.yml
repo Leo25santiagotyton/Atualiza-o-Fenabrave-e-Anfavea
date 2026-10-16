@@ -14,6 +14,10 @@ on:
         description: "Emissores de bonds favoritados (lista JSON); vazio = todos"
         required: false
         default: ""
+      sem_email:
+        description: "true = só atualiza as notícias do painel, sem e-mail (botão Atualizar do painel)"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -47,7 +51,7 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           BOND_FAVS: ${{ github.event.inputs.bond_favs }}
         run: |
-          if [ "${{ github.event.schedule }}" = "5 * * * *" ]; then
+          if [ "${{ github.event.schedule }}" = "5 * * * *" ] || [ "${{ github.event.inputs.sem_email }}" = "true" ]; then
             python noticias_acoes.py --no-email
           else
             python noticias_acoes.py
