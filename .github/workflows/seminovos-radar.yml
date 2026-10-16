@@ -17,7 +17,7 @@ concurrency:
 jobs:
   radar:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 55
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -31,22 +31,24 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Ler as vitrines
+        env:
+          FIPE_TOKEN: ${{ secrets.FIPE_TOKEN }}
         run: python seminovos_radar.py && python monitoramento.py
 
       - name: Salvar
         run: |
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
-          cp alerts/seminovos_hist.json alerts/seminovos_resumo.json "$RUNNER_TEMP/"
-          git add alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/monitoramento.json
+          cp alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json "$RUNNER_TEMP/"
+          git add alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json alerts/monitoramento.json
           git diff --quiet --cached && exit 0
           git commit -qm "Radar de seminovos [skip ci]"
           for i in 1 2 3 4; do
             git push && exit 0
             sleep 5
             git fetch -q origin main && git reset -q --hard origin/main
-            cp "$RUNNER_TEMP/seminovos_hist.json" "$RUNNER_TEMP/seminovos_resumo.json" alerts/ && python monitoramento.py
-            git add alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/monitoramento.json
+            cp "$RUNNER_TEMP/seminovos_hist.json" "$RUNNER_TEMP/seminovos_resumo.json" "$RUNNER_TEMP/seminovos_fipe.json" alerts/ && python monitoramento.py
+            git add alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json alerts/monitoramento.json
             git diff --quiet --cached && exit 0
             git commit -qm "Radar de seminovos [skip ci]"
           done
