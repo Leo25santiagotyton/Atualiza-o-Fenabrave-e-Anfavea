@@ -183,10 +183,13 @@ def send_email(subject: str, body: str):
     msg["From"] = email_from
     msg["To"] = email_to
 
-    with smtplib.SMTP(smtp_host, smtp_port) as server:
-        server.starttls()
-        server.login(smtp_user, smtp_pass)
-        server.sendmail(email_from, email_to.split(","), msg.as_string())
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=60) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_pass)
+            server.sendmail(email_from, email_to.split(","), msg.as_string())
+    except (smtplib.SMTPException, OSError) as exc:  # não derruba o robô (nem gera e-mail de falha do GitHub)
+        print(f"::warning::E-mail não enviado ({type(exc).__name__}: {exc}). Assunto: {subject}")
 
 
 def main():
