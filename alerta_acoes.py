@@ -359,10 +359,17 @@ def send_email(subject, text, html):
     msg["To"] = os.environ["EMAIL_TO"]
     msg.attach(MIMEText(text, "plain", "utf-8"))
     msg.attach(MIMEText(html, "html", "utf-8"))
-    with smtplib.SMTP(os.environ["SMTP_HOST"], int(os.environ.get("SMTP_PORT") or 587)) as server:
-        server.starttls()
-        server.login(smtp_user, os.environ["SMTP_PASS"])
-        server.sendmail(msg["From"], [a.strip() for a in msg["To"].split(",")], msg.as_string())
+    # falha de e-mail não derruba o robô: os dados do painel continuam sendo atualizados e o GitHub
+    # não manda o aviso "All jobs have failed"; o problema aparece só como aviso no log
+    try:
+        with smtplib.SMTP(os.environ["SMTP_HOST"], int(os.environ.get("SMTP_PORT") or 587), timeout=60) as server:
+            server.starttls()
+            server.login(smtp_user, os.environ["SMTP_PASS"])
+            server.sendmail(msg["From"], [a.strip() for a in msg["To"].split(",")], msg.as_string())
+        return True
+    except (smtplib.SMTPException, OSError) as exc:
+        print(f"::warning::E-mail não enviado ({type(exc).__name__}: {exc}). Assunto: {subject}")
+        return False
 
 
 # ---------------------------------------------------------------- principal

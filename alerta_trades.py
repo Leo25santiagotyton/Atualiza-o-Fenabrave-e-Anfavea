@@ -138,14 +138,15 @@ def main():
                      + button(DASHBOARD_URL, "Abrir aba Dívida"),
                      "Favoritos acompanhados: " + ", ".join(favs) + ". Aviso enviado uma vez por papel e dia (novo aviso se o volume do dia mudar).")
     text = "\n".join(f"{h['t']['code']} {h['t']['date']}: R$ {br(h['vol'] / 1e6)} mi, PU médio {br(h['t']['puAvg'])}"
-                     + (f", taxa ~{br(h['rate'])}% ({round(h['bps'])} bps vs ANBIMA)" if h["rate"] is not None else "") for h in hits)
+                     + (f", taxa ~{br(h['rate'])}%" + (f" ({round(h['bps'])} bps vs ANBIMA)" if h["bps"] is not None else "") if h["rate"] is not None else "") for h in hits)
     subject = "[Crédito] Negócio relevante: " + ", ".join(f"{h['t']['code']} R$ {br(h['vol'] / 1e6, 1)} mi" for h in hits[:3])
     print(subject)
     print(text)
     if args.dry_run:
         (OUT / "trades_preview.html").write_text(html_body)
         return
-    send_email(subject, text + f"\n\nPainel: {DASHBOARD_URL}", html_body)
+    if not send_email(subject, text + f"\n\nPainel: {DASHBOARD_URL}", html_body):
+        return  # tenta de novo na próxima rodada
     for h in hits:
         state["sent"][h["key"]] = h["t"]["date"]
     STATE_FILE.write_text(json.dumps(state, indent=1))
