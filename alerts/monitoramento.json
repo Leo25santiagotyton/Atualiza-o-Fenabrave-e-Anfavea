@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-20T13:17:35-03:00",
- "updatedLabel": "20/10/2026 13:17",
+ "updatedAt": "2026-10-20T13:54:41-03:00",
+ "updatedLabel": "20/10/2026 13:54",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -1464,23 +1464,14 @@
     "total_aa": 10.4
    }
   },
-  "atualizado": "19/10/2026 20:34",
-  "atualizadoAt": "2026-10-19T20:34:55-03:00",
+  "atualizado": "20/10/2026 13:54",
+  "atualizadoAt": "2026-10-20T13:54:41-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
    "b3": "https://www.b3.com.br/pt_br/noticias/"
   },
   "diaria": [
-   {
-    "ini": "2026-04-02",
-    "fim": "2026-04-09",
-    "n": 38,
-    "media_am": 1.93,
-    "mediana_am": 1.83,
-    "media_aa": 26.07,
-    "mediana_aa": 24.34
-   },
    {
     "ini": "2026-04-06",
     "fim": "2026-04-10",
@@ -2578,6 +2569,15 @@
     "mediana_am": 1.73,
     "media_aa": 24.27,
     "mediana_aa": 22.87
+   },
+   {
+    "ini": "2026-09-29",
+    "fim": "2026-10-05",
+    "n": 41,
+    "media_am": 1.8,
+    "mediana_am": 1.74,
+    "media_aa": 24.15,
+    "mediana_aa": 22.99
    }
   ]
  },
