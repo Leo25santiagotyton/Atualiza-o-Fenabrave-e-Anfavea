@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-20T17:39:04-03:00",
- "updatedLabel": "20/10/2026 17:39",
+ "updatedAt": "2026-10-20T18:12:24-03:00",
+ "updatedLabel": "20/10/2026 18:12",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -344,6 +344,14 @@
  ],
  "eventos": [
   {
+   "id": "85abab079efc",
+   "at": "2026-10-20T18:12:23-03:00",
+   "label": "20/10 18:12",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "Classe 8 Set/2026 final: 18.700 pedidos (-10% a/a)",
+   "link": "https://www.logisticsmgmt.com/article/preliminary_september_class_8_orders_see_mixed_results"
+  },
+  {
    "id": "ca7295f05593",
    "at": "2026-10-08T09:12:40-03:00",
    "label": "08/10 09:12",
@@ -388,9 +396,7 @@
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
   "atualizado": "20/10/2026",
   "preliminar": {
-   "Classe 8": [
-    "2026-09"
-   ],
+   "Classe 8": [],
    "Classes 5-7": [
     "2026-09"
    ]
