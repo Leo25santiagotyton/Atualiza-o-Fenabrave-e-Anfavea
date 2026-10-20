@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-20T18:12:24-03:00",
- "updatedLabel": "20/10/2026 18:12",
+ "updatedAt": "2026-10-20T20:08:50-03:00",
+ "updatedLabel": "20/10/2026 20:08",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -1468,10 +1468,18 @@
     "pesados": 27000,
     "pesados_aa": 10.4,
     "total_aa": 10.4
+   },
+   "2026-09": {
+    "total": 670675,
+    "url": "https://www.b3.com.br/pt_br/noticias/financiamento-de-veiculos-bate-recorde-para-setembro-e-alcanca-maior-volume-em-15-anos-aponta-trillia.htm",
+    "publicado": "20/10/2026",
+    "leves": 468000,
+    "pesados": 26000,
+    "total_aa": 2.8
    }
   },
-  "atualizado": "20/10/2026 13:54",
-  "atualizadoAt": "2026-10-20T13:54:41-03:00",
+  "atualizado": "20/10/2026 20:08",
+  "atualizadoAt": "2026-10-20T20:08:50-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
