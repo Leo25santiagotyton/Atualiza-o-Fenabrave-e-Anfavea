@@ -279,6 +279,43 @@ PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do N
                  "Deb. Incent. (Lei 12.431)", "Coordenador Líder", "Amortização", "Tipo de Amortização",
                  "Securitizadora", "Remuneração na emissão", "Volume", "Fonte", "Confiança do levantamento"}
 PANEL_LIMIT = 250_000  # o banco do painel aceita até 256 KB por documento
+CURV_HIST_FILE = OUT_DIR / "curvas_hist.json"
+CURV_GRID = list(range(63, 2521, 63))  # vértices em dias úteis (3 meses a 10 anos)
+
+
+def _lin(pts, x):
+    """Interpolação linear em [[x, y], ...] ordenado; fora da faixa usa a ponta."""
+    pts = [p for p in pts if p[1] is not None]
+    if not pts:
+        return None
+    if x <= pts[0][0]:
+        return pts[0][1]
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+        if x <= x1:
+            return y0 if x1 == x0 else y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+    return pts[-1][1]
+
+
+def write_curv_hist_file():
+    """Histórico diário das curvas num grid fixo de vértices, para o gráfico de curvas × debêntures IPCA+ do painel:
+    PRE = DI futuro (DI x Pré da B3), DIC = cupom de IPCA do swap B3, REAL/NOM/INFL = ETTJ IPCA, prefixada e
+    inflação implícita da ANBIMA."""
+    full = json.loads(DEB_FILE.read_text())
+    curves = full.get("curves") or {}
+    out = {"updatedAt": full.get("updatedAt"), "du": CURV_GRID, "dates": [], "PRE": [], "DIC": [], "REAL": [], "NOM": [], "INFL": []}
+    for iso in sorted(curves):
+        c = curves[iso] or {}
+        b3, ettj = c.get("b3") or {}, c.get("ettj") or []
+        if not ettj and not b3.get("PRE"):
+            continue
+        out["dates"].append(iso)
+        for key, pts in (("PRE", b3.get("PRE") or []), ("DIC", b3.get("DIC") or []),
+                         ("REAL", [[e[0], e[1]] for e in ettj]), ("NOM", [[e[0], e[2]] for e in ettj]),
+                         ("INFL", [[e[0], e[3]] for e in ettj])):
+            pts = sorted([p[0], p[1]] for p in pts if p and p[0] and p[0] > 0)
+            out[key].append([_r(_lin(pts, du), 4) if pts else None for du in CURV_GRID])
+    CURV_HIST_FILE.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"[INFO] histórico de curvas: {len(out['dates'])} dias, {CURV_HIST_FILE.stat().st_size // 1024} KB.")
 
 
 def _r(v, n):
@@ -380,6 +417,10 @@ def write_panel_file():
         print(f"[ERRO] painel com {len(text.encode()) // 1024} KB passa do limite; mantendo o arquivo anterior.")
         return
     PANEL_FILE.write_text(text)
+    try:
+        write_curv_hist_file()
+    except Exception as e:  # o gráfico de histórico não pode derrubar o painel
+        print(f"[AVISO] histórico de curvas não gerado: {e}")
     print(f"[INFO] painel: {len(text.encode()) // 1024} KB ({keep_trades} dias de negócios por papel).")
 
 
