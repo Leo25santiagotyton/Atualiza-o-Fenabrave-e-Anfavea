@@ -458,9 +458,10 @@ def main():
         print(f"[INFO] Prévia salva em {OUT_DIR / 'preview.html'} (nada enviado).")
         return
 
-    send_email(subject, text, html)
+    ok = send_email(subject, text, html)
     STATE_FILE.write_text(json.dumps(state, indent=2))
-    print("[INFO] E-mail enviado.")
+    if ok:
+        print("[INFO] E-mail enviado.")
 
 
 if __name__ == "__main__":

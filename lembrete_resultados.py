@@ -136,7 +136,8 @@ def main():
         (BASE / "lembrete_preview.html").write_text(html_body)
         print("[INFO] Prévia salva em alerts/lembrete_preview.html.")
         return
-    send_email(subject, text, html_body)
+    if not send_email(subject, text, html_body):
+        return  # não marca como enviado: tenta de novo na próxima rodada
     now = datetime.now(BRT).isoformat(timespec="minutes")
     for k, _ in novos:
         sent[k] = now

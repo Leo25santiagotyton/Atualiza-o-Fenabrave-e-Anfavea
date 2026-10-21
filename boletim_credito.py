@@ -223,8 +223,8 @@ def main():
         (DEB_FILE.parent / "credito_preview.html").write_text(html_body)
         print("[INFO] Prévia salva em alerts/credito_preview.html.")
         return
-    send_email(subject, text, html_body)
-    print("[INFO] E-mail enviado.")
+    if send_email(subject, text, html_body):
+        print("[INFO] E-mail enviado.")
 
 
 if __name__ == "__main__":
