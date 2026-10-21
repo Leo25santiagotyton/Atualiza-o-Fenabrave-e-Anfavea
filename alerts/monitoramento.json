@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-20T13:54:41-03:00",
- "updatedLabel": "20/10/2026 13:54",
+ "updatedAt": "2026-10-20T20:56:27-03:00",
+ "updatedLabel": "20/10/2026 20:56",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -344,6 +344,14 @@
  ],
  "eventos": [
   {
+   "id": "85abab079efc",
+   "at": "2026-10-20T18:12:23-03:00",
+   "label": "20/10 18:12",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "Classe 8 Set/2026 final: 18.700 pedidos (-10% a/a)",
+   "link": "https://www.logisticsmgmt.com/article/preliminary_september_class_8_orders_see_mixed_results"
+  },
+  {
    "id": "ca7295f05593",
    "at": "2026-10-08T09:12:40-03:00",
    "label": "08/10 09:12",
@@ -388,9 +396,7 @@
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
   "atualizado": "20/10/2026",
   "preliminar": {
-   "Classe 8": [
-    "2026-09"
-   ],
+   "Classe 8": [],
    "Classes 5-7": [
     "2026-09"
    ]
@@ -1462,10 +1468,18 @@
     "pesados": 27000,
     "pesados_aa": 10.4,
     "total_aa": 10.4
+   },
+   "2026-09": {
+    "total": 670675,
+    "url": "https://www.b3.com.br/pt_br/noticias/financiamento-de-veiculos-bate-recorde-para-setembro-e-alcanca-maior-volume-em-15-anos-aponta-trillia.htm",
+    "publicado": "20/10/2026",
+    "leves": 468000,
+    "pesados": 26000,
+    "total_aa": 2.8
    }
   },
-  "atualizado": "20/10/2026 13:54",
-  "atualizadoAt": "2026-10-20T13:54:41-03:00",
+  "atualizado": "20/10/2026 20:08",
+  "atualizadoAt": "2026-10-20T20:08:50-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
