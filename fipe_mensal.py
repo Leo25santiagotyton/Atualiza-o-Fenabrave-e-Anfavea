@@ -636,8 +636,8 @@ def main():
         print("[ERRO] Sem preços suficientes para comparar dois meses; e-mail não enviado.", file=sys.stderr)
         return 1
 
-    send_email(subject, text, html)
-    print("[INFO] E-mail enviado.")
+    if send_email(subject, text, html):
+        print("[INFO] E-mail enviado.")
     if not args.teste and not args.demo:
         state["ultimo_enviado"] = res["ref"]
         state["enviado_em"] = datetime.now(BRT).isoformat(timespec="seconds")
