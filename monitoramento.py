@@ -23,6 +23,7 @@ MONITOR = ROOT / "state.json"
 FIPE = ROOT / "alerts" / "fipe_resumo.json"  # resumo mensal da Tabela FIPE (fipe_mensal.py)
 CRED = ROOT / "alerts" / "credito_veiculos.json"  # crédito para veículos (credito_veiculos.py)
 SEMI = ROOT / "alerts" / "seminovos_resumo.json"  # radar de seminovos Movida e Localiza (seminovos_radar.py)
+USADOS = ROOT / "alerts" / "usados_fenauto.json"  # mercado de usados e seminovos, press releases da FENAUTO (fenauto_usados.py)
 ACT = ROOT / "alerts" / "act_pedidos.json"  # pedidos de caminhões nos EUA por classe (planilha da ACT, atualizada à mão)
 BRT = timezone(timedelta(hours=-3))
 MAX_EVENTOS = 40
@@ -87,7 +88,7 @@ def write():
     now = datetime.now(BRT)
     d.update(updatedAt=now.isoformat(timespec="seconds"), updatedLabel=now.strftime("%d/%m/%Y %H:%M"),
              fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes, act=_read(ACT) or None, fipe=_read(FIPE) or None,
-             credito=_read(CRED) or None, seminovos=_read(SEMI) or None)
+             credito=_read(CRED) or None, seminovos=_read(SEMI) or None, usados=_read(USADOS) or None)
     ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []))}
     d["eventos"] = sorted(ev.values(), key=lambda e: e["at"], reverse=True)[:MAX_EVENTOS]
     OUT.parent.mkdir(exist_ok=True)

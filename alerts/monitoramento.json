@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-22T10:09:08-03:00",
- "updatedLabel": "22/10/2026 10:09",
+ "updatedAt": "2026-10-22T10:30:27-03:00",
+ "updatedLabel": "22/10/2026 10:30",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -3378,5 +3378,130 @@
   "resumo": "Movida: 6.689 carros anunciados, preço médio R$ 91.360. Localiza: 20.744 carros anunciados, preço médio R$ 104.936.",
   "aviso": "Coleta semanal (segundas) desde out/26; a variação mês a mês aparece quando houver dois meses de dados (o site das locadoras não mostra preços antigos).",
   "fipe": null
+ },
+ "usados": {
+  "updatedAt": "2026-10-22T10:30:26-03:00",
+  "fonte": "FENAUTO (press releases)",
+  "meses": [
+   {
+    "ref": "2026-09",
+    "mes": "setembro/2026",
+    "total": 1673017,
+    "total_ant": 1699519,
+    "acum": 14205505,
+    "acum_aa": 13478527,
+    "acum_var": 5.39,
+    "mm": -1.56,
+    "segmentos": {
+     "Automóveis": {
+      "unidades": 1031538,
+      "mm": -1.2
+     },
+     "Comerciais leves": {
+      "unidades": 196777,
+      "mm": -2.0
+     },
+     "Motos": {
+      "unidades": 369440,
+      "mm": -1.9
+     },
+     "Comerciais pesados": {
+      "unidades": 39986,
+      "mm": -4.2
+     }
+    },
+    "seminovos": {
+     "mm": 1.2,
+     "unidades": 318531,
+     "acum_var": 12.6
+    },
+    "lideres": {
+     "Automóveis": {
+      "modelo": "VW Gol",
+      "unidades": 66789
+     },
+     "Comerciais leves": {
+      "modelo": "Fiat Strada",
+      "unidades": 41761
+     },
+     "Motos": {
+      "modelo": "Honda CG150",
+      "unidades": 87627
+     },
+     "Comerciais pesados": {
+      "modelo": "Volvo FH",
+      "unidades": 3229
+     }
+    },
+    "fonte": "https://www.fenauto.org.br/news/segmento-de-veiculos-usados-registra-pequena-retracao-em-setembro"
+   },
+   {
+    "ref": "2026-08",
+    "mes": "agosto/2026",
+    "total": 1699519,
+    "total_ant": 1754785,
+    "acum": 12532488,
+    "acum_aa": 11781360,
+    "acum_var": 6.38,
+    "mm": -3.15,
+    "seminovos": {
+     "acum_var": 13.5
+    },
+    "lideres": {
+     "Automóveis": {
+      "modelo": "VW Gol",
+      "unidades": 67461
+     },
+     "Comerciais leves": {
+      "modelo": "Fiat Strada",
+      "unidades": 41851
+     },
+     "Motos": {
+      "modelo": "Honda CG150",
+      "unidades": 89790
+     },
+     "Comerciais pesados": {
+      "modelo": "Volvo FH",
+      "unidades": 3039
+     }
+    },
+    "fonte": "https://www.fenauto.org.br/news/mercado-de-veiculos-usados-cresce-64-no-ano-fenauto-espera"
+   },
+   {
+    "ref": "2026-07",
+    "mes": "julho/2026",
+    "total": 1754785,
+    "total_ant": 1585208,
+    "acum": 10832969,
+    "acum_var": 7.7,
+    "mm": 10.7,
+    "aa": 2.6,
+    "lideres": {
+     "Automóveis": {
+      "modelo": "VW GOL",
+      "unidades": 70874
+     },
+     "Comerciais leves": {
+      "modelo": "FIAT STRADA",
+      "unidades": 43193
+     },
+     "Motos": {
+      "modelo": "HONDA CG150",
+      "unidades": 93041
+     },
+     "Comerciais pesados": {
+      "modelo": "VOLVO FH",
+      "unidades": 3341
+     }
+    },
+    "fonte": "https://www.fenauto.org.br/news/mercado-de-carros-usados-cresce-107-em-julho"
+   },
+   {
+    "ref": "2026-06",
+    "mes": "junho/2026",
+    "parcial": true,
+    "total": 1585208
+   }
+  ]
  }
 }
