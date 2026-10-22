@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-22T10:30:26-03:00",
+ "updatedAt": "2026-10-22T17:35:06-03:00",
  "fonte": "FENAUTO (press releases)",
  "meses": [
   {
@@ -119,7 +119,58 @@
    "ref": "2026-06",
    "mes": "junho/2026",
    "parcial": true,
-   "total": 1585208
+   "total": 1585208,
+   "acum": 9078184,
+   "acum_var": 8.7,
+   "fonte": "https://www.fenauto.org.br/news/mercado-de-veiculos-usados-mantem-estabilidade-em-junho",
+   "mm": 0.03
+  },
+  {
+   "ref": "2026-05",
+   "mes": "maio/2026",
+   "total": 1584806,
+   "acum": 7492976,
+   "acum_var": 8.4,
+   "lideres": {
+    "Automóveis": {
+     "modelo": "VW GOL",
+     "unidades": 63317
+    },
+    "Comerciais leves": {
+     "modelo": "FIAT STRADA",
+     "unidades": 38826
+    },
+    "Motos": {
+     "modelo": "HONDA CG150",
+     "unidades": 83373
+    },
+    "Comerciais pesados": {
+     "modelo": "VOLVO FH",
+     "unidades": 2824
+    }
+   },
+   "fonte": "https://www.fenauto.org.br/news/vendas-de-carros-usados-crescem-em-maio"
+  },
+  {
+   "ref": "2026-04",
+   "mes": "abril/2026",
+   "acum": 5908170,
+   "acum_var": 10.0,
+   "lideres": {
+    "Comerciais leves": {
+     "modelo": "FIAT STRADA",
+     "unidades": 36777
+    },
+    "Motos": {
+     "modelo": "HONDA CG150",
+     "unidades": 81672
+    },
+    "Comerciais pesados": {
+     "modelo": "VOLVO FH",
+     "unidades": 2547
+    }
+   },
+   "fonte": "https://www.fenauto.org.br/news/vendas-de-veiculos-usados-tem-alta"
   }
  ]
 }
