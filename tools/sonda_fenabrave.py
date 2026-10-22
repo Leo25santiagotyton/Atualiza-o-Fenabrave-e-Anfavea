@@ -16,7 +16,7 @@ s.headers.update(BROWSER_HEADERS)
 BASE = "https://www.fenabrave.org.br/portalv2/"
 PAGES = ["home/imprensa", "Conteudo/emplacamentos", "Conteudo/seminovos-e-usados", "Conteudo/seminovoseusados",
          "Conteudo/usados", "Conteudo/seminovos", "Conteudo/transferencias", "Conteudo/dados-de-mercado", "home"]
-achados = set()
+achados = {}
 for p in PAGES:
     url = BASE + p
     try:
@@ -24,24 +24,21 @@ for p in PAGES:
     except Exception as e:
         print("ERRO", url, e)
         continue
-    print("==", url, r.status_code, len(r.text))
+    print("==", url, r.status_code)
     if r.status_code != 200:
         continue
-    soup = BeautifulSoup(r.text, "html.parser")
-    for a in soup.find_all("a", href=True):
-        t = " ".join(a.get_text(" ").split())
+    for a in BeautifulSoup(r.text, "html.parser").find_all("a", href=True):
         h = requests.compat.urljoin(url, a["href"])
-        if re.search(r"usad|semin|transfer|conteudo/|\.pdf", (t + " " + h), re.I):
-            print("  ", t[:80], "|", h)
-            if re.search(r"usad|semin|transfer", t + h, re.I) and h.lower().endswith(".pdf"):
-                achados.add(h)
-for h in sorted(achados)[-3:]:
-    try:
-        r = s.get(h, timeout=60)
-        with pdfplumber.open(io.BytesIO(r.content)) as pdf:
-            print("#### PDF", h, len(pdf.pages), "páginas")
-            for i, pg in enumerate(pdf.pages[:3]):
-                print(f"--- página {i + 1}")
-                print((pg.extract_text() or "")[:3500])
-    except Exception as e:
-        print("ERRO PDF", h, e)
+        m = re.search(r"/portal/files/(\d{4})_(\d{2})_(\d+)_usados\.pdf$", h, re.I)
+        if m:
+            achados[h] = (int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            print("  USADOS", " ".join(a.get_text(" ").split())[:60], "|", h)
+for h in sorted(achados, key=achados.get)[-1:]:
+    r = s.get(h, timeout=60)
+    with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+        print("#### PDF", h, len(pdf.pages), "páginas")
+        for i, pg in enumerate(pdf.pages):
+            if i in (1, 2):
+                continue
+            print(f"--- página {i + 1}")
+            print((pg.extract_text() or "")[:4000])
