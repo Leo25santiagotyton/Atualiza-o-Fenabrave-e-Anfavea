@@ -6,7 +6,10 @@ import pdfplumber
 import requests
 from bs4 import BeautifulSoup
 
-from monitor import BROWSER_HEADERS
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from monitor import BROWSER_HEADERS  # noqa: E402
 
 s = requests.Session()
 s.headers.update(BROWSER_HEADERS)
