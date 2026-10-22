@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-22T10:30:27-03:00",
- "updatedLabel": "22/10/2026 10:30",
+ "updatedAt": "2026-10-22T12:54:20-03:00",
+ "updatedLabel": "22/10/2026 12:54",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -582,7 +582,7 @@
      "Picape": -1.2239608143365888,
      "Leves": -0.5159968273542481,
      "Caminhão": -1.6830322203003067,
-     "Moto": null
+     "Moto": -0.10843536800253517
     },
     "n": {
      "Hatch": 2,
@@ -591,7 +591,7 @@
      "Picape": 2,
      "Leves": 6,
      "Caminhão": 1,
-     "Moto": 0
+     "Moto": 1
     }
    },
    {
@@ -828,8 +828,8 @@
     "meses": 4
    },
    "Moto": {
-    "var": -0.2832897101314624,
-    "meses": 2
+    "var": -0.39141789189430787,
+    "meses": 3
    }
   },
   "preco_medio": {
@@ -851,7 +851,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de outubro/2026, a cesta de veículos leves caiu (-1,24%) frente a setembro/2026. Entre os segmentos, menor queda: Moto (-0,61%); maior queda: Picape (-1,36%). Caminhões: -1,34%. Acumulado em 5 meses (leves): -3,3%.",
-  "gerado_em": "2026-10-10T19:56:10-03:00",
+  "gerado_em": "2026-10-22T10:57:34-03:00",
   "maiores_altas": [
    {
     "nome": "Hyundai Creta",
