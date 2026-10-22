@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-21T21:01:33-03:00",
- "updatedLabel": "21/10/2026 21:01",
+ "updatedAt": "2026-10-22T10:09:08-03:00",
+ "updatedLabel": "22/10/2026 10:09",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -394,7 +394,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "21/10/2026",
+  "atualizado": "22/10/2026",
   "preliminar": {
    "Classe 8": [],
    "Classes 5-7": [
@@ -1478,8 +1478,8 @@
     "total_aa": 2.8
    }
   },
-  "atualizado": "21/10/2026 20:14",
-  "atualizadoAt": "2026-10-21T20:14:13-03:00",
+  "atualizado": "22/10/2026 10:08",
+  "atualizadoAt": "2026-10-22T10:08:17-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -2601,60 +2601,69 @@
     "mediana_am": 1.76,
     "media_aa": 24.25,
     "mediana_aa": 23.35
+   },
+   {
+    "ini": "2026-10-01",
+    "fim": "2026-10-07",
+    "n": 40,
+    "media_am": 1.81,
+    "mediana_am": 1.77,
+    "media_aa": 24.34,
+    "mediana_aa": 23.44
    }
   ]
  },
  "seminovos": {
-  "gerado_em": "2026-10-19T14:22:01-03:00",
-  "dia": "2026-10-19",
+  "gerado_em": "2026-10-22T10:09:02-03:00",
+  "dia": "2026-10-22",
   "lojas": {
    "movida": {
     "cats": {
      "Hatch": {
-      "n": 2781,
-      "media": 70595,
+      "n": 2872,
+      "media": 70420,
       "mediana": 70900,
-      "km": 54932,
+      "km": 55123,
       "ano": 2025.0
      },
      "Sedã": {
-      "n": 1383,
-      "media": 90055,
-      "mediana": 89500,
-      "km": 50005,
+      "n": 1404,
+      "media": 89729,
+      "mediana": 89100,
+      "km": 214125,
       "ano": 2025.3
      },
      "SUV": {
-      "n": 2034,
-      "media": 117362,
-      "mediana": 114600,
-      "km": 45487,
+      "n": 2060,
+      "media": 117121,
+      "mediana": 114500,
+      "km": 45499,
       "ano": 2025.1
      },
      "Picape": {
-      "n": 334,
-      "media": 104722,
+      "n": 347,
+      "media": 105368,
       "mediana": 86000,
-      "km": 45110,
+      "km": 45407,
       "ano": 2025.2
      },
      "Outros": {
-      "n": 81,
-      "media": 119390,
+      "n": 99,
+      "media": 119244,
       "mediana": 117600,
-      "km": 45811,
-      "ano": 2025.3
+      "km": 45920,
+      "ano": 2025.2
      },
      "Total": {
-      "n": 6613,
-      "media": 91371,
-      "mediana": 87600,
-      "km": 50389,
+      "n": 6782,
+      "media": 91103,
+      "mediana": 87150,
+      "km": 84485,
       "ano": 2025.1
      }
     },
-    "total_site": 6633,
-    "dia": "2026-10-19"
+    "total_site": 6784,
+    "dia": "2026-10-22"
    },
    "localiza": {
     "cats": {
@@ -2702,7 +2711,7 @@
      }
     },
     "total_site": 21953,
-    "dia": "2026-10-19"
+    "dia": "2026-10-22"
    }
   },
   "mensal": [
@@ -2712,52 +2721,52 @@
     "lojas": {
      "movida": {
       "Hatch": {
-       "media": 70532,
-       "mediana": 70850,
-       "n": 2776,
-       "km": 55084,
+       "media": 70495,
+       "mediana": 70867,
+       "n": 2808,
+       "km": 55097,
        "ano": 2025.0,
-       "dias": 2
+       "dias": 3
       },
       "Sedã": {
-       "media": 90100,
-       "mediana": 89775,
-       "n": 1384,
-       "km": 50066,
+       "media": 89976,
+       "mediana": 89550,
+       "n": 1391,
+       "km": 104753,
        "ano": 2025.3,
-       "dias": 2
+       "dias": 3
       },
       "SUV": {
-       "media": 117339,
-       "mediana": 114650,
+       "media": 117266,
+       "mediana": 114600,
        "n": 2062,
-       "km": 45522,
+       "km": 45515,
        "ano": 2025.1,
-       "dias": 2
+       "dias": 3
       },
       "Picape": {
-       "media": 104826,
+       "media": 105006,
        "mediana": 86000,
-       "n": 336,
-       "km": 45126,
+       "n": 340,
+       "km": 45220,
        "ano": 2025.2,
-       "dias": 2
+       "dias": 3
       },
       "Outros": {
-       "media": 119522,
-       "mediana": 117650,
-       "n": 82,
-       "km": 46010,
+       "media": 119429,
+       "mediana": 117633,
+       "n": 88,
+       "km": 45980,
        "ano": 2025.3,
-       "dias": 2
+       "dias": 3
       },
       "Total": {
-       "media": 91488,
-       "mediana": 88000,
-       "n": 6642,
-       "km": 50452,
+       "media": 91360,
+       "mediana": 87717,
+       "n": 6689,
+       "km": 61797,
        "ano": 2025.1,
-       "dias": 2
+       "dias": 3
       }
      },
      "localiza": {
@@ -2818,8 +2827,8 @@
     "modelo": "Volkswagen Polo (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 736,
-     "preco": 75469
+     "n": 743,
+     "preco": 75461
     },
     "localiza": {
      "n": 1442,
@@ -2830,8 +2839,8 @@
     "modelo": "Renault Kwid (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 660,
-     "preco": 56065
+     "n": 667,
+     "preco": 56031
     },
     "localiza": {
      "n": 1511,
@@ -2842,8 +2851,8 @@
     "modelo": "Fiat Mobi (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 358,
-     "preco": 62028
+     "n": 366,
+     "preco": 62004
     },
     "localiza": {
      "n": 1800,
@@ -2854,8 +2863,8 @@
     "modelo": "Fiat Argo (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 521,
-     "preco": 72461
+     "n": 530,
+     "preco": 72472
     },
     "localiza": {
      "n": 1612,
@@ -2866,8 +2875,8 @@
     "modelo": "Hyundai Hb20 (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 320,
-     "preco": 77760
+     "n": 322,
+     "preco": 77676
     },
     "localiza": {
      "n": 1518,
@@ -2878,8 +2887,8 @@
     "modelo": "Chevrolet Onix (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 44,
-     "preco": 74574
+     "n": 43,
+     "preco": 73971
     },
     "localiza": {
      "n": 1694,
@@ -2890,8 +2899,8 @@
     "modelo": "Volkswagen Tcross (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 453,
-     "preco": 115882
+     "n": 455,
+     "preco": 115933
     },
     "localiza": {
      "n": 1112,
@@ -2903,7 +2912,7 @@
     "cat": "Sedã",
     "movida": {
      "n": 14,
-     "preco": 86757
+     "preco": 86760
     },
     "localiza": {
      "n": 1323,
@@ -2914,8 +2923,8 @@
     "modelo": "Hyundai Hb20S (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 374,
-     "preco": 90953
+     "n": 376,
+     "preco": 90695
     },
     "localiza": {
      "n": 828,
@@ -2926,8 +2935,8 @@
     "modelo": "Fiat Strada (Picape)",
     "cat": "Picape",
     "movida": {
-     "n": 103,
-     "preco": 84776
+     "n": 106,
+     "preco": 84848
     },
     "localiza": {
      "n": 777,
@@ -2939,7 +2948,7 @@
     "cat": "SUV",
     "movida": {
      "n": 100,
-     "preco": 134515
+     "preco": 134399
     },
     "localiza": {
      "n": 713,
@@ -2950,8 +2959,8 @@
     "modelo": "Volkswagen Virtus (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 346,
-     "preco": 102043
+     "n": 347,
+     "preco": 102110
     },
     "localiza": {
      "n": 306,
@@ -2962,8 +2971,8 @@
     "modelo": "Volkswagen Nivus (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 295,
-     "preco": 110736
+     "n": 294,
+     "preco": 110760
     },
     "localiza": {
      "n": 258,
@@ -2974,8 +2983,8 @@
     "modelo": "Nissan Kicks (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 88,
-     "preco": 106957
+     "n": 92,
+     "preco": 106907
     },
     "localiza": {
      "n": 458,
@@ -2986,8 +2995,8 @@
     "modelo": "Jeep Renegade (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 58,
-     "preco": 113365
+     "n": 57,
+     "preco": 113333
     },
     "localiza": {
      "n": 485,
@@ -2998,8 +3007,8 @@
     "modelo": "Hyundai Creta (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 200,
-     "preco": 120305
+     "n": 196,
+     "preco": 120557
     },
     "localiza": {
      "n": 313,
@@ -3011,7 +3020,7 @@
     "cat": "SUV",
     "movida": {
      "n": 111,
-     "preco": 140759
+     "preco": 140834
     },
     "localiza": {
      "n": 394,
@@ -3022,8 +3031,8 @@
     "modelo": "Fiat Cronos (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 282,
-     "preco": 80442
+     "n": 283,
+     "preco": 80403
     },
     "localiza": {
      "n": 182,
@@ -3034,8 +3043,8 @@
     "modelo": "Jeep Commander (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 58,
-     "preco": 158959
+     "n": 57,
+     "preco": 158530
     },
     "localiza": {
      "n": 366,
@@ -3046,8 +3055,8 @@
     "modelo": "Fiat Fastback (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 10,
-     "preco": 119069
+     "n": 11,
+     "preco": 119423
     },
     "localiza": {
      "n": 392,
@@ -3059,7 +3068,7 @@
     "cat": "SUV",
     "movida": {
      "n": 12,
-     "preco": 111796
+     "preco": 111323
     },
     "localiza": {
      "n": 378,
@@ -3070,8 +3079,8 @@
     "modelo": "Volkswagen Saveiro (Picape)",
     "cat": "Picape",
     "movida": {
-     "n": 144,
-     "preco": 84458
+     "n": 143,
+     "preco": 84505
     },
     "localiza": {
      "n": 212,
@@ -3082,8 +3091,8 @@
     "modelo": "Volkswagen Tera (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 79,
-     "preco": 113500
+     "n": 78,
+     "preco": 113167
     },
     "localiza": {
      "n": 254,
@@ -3094,8 +3103,8 @@
     "modelo": "Fiat Fiorino (Outros)",
     "cat": "Outros",
     "movida": {
-     "n": 14,
-     "preco": 97207
+     "n": 17,
+     "preco": 96973
     },
     "localiza": {
      "n": 276,
@@ -3106,8 +3115,8 @@
     "modelo": "Fiat Pulse (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 82,
-     "preco": 97303
+     "n": 85,
+     "preco": 97364
     },
     "localiza": {
      "n": 204,
@@ -3118,7 +3127,7 @@
     "modelo": "Renault Kardian (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 171,
+     "n": 173,
      "preco": 90300
     },
     "localiza": {
@@ -3130,8 +3139,8 @@
     "modelo": "Chevrolet Spin (Outros)",
     "cat": "Outros",
     "movida": {
-     "n": 52,
-     "preco": 123686
+     "n": 54,
+     "preco": 123667
     },
     "localiza": {
      "n": 181,
@@ -3142,8 +3151,8 @@
     "modelo": "Renault Logan (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 226,
-     "preco": 69973
+     "n": 229,
+     "preco": 69937
     },
     "localiza": {
      "n": 4,
@@ -3155,7 +3164,7 @@
     "cat": "SUV",
     "movida": {
      "n": 207,
-     "preco": 103425
+     "preco": 103163
     },
     "localiza": {
      "n": 14,
@@ -3174,33 +3183,33 @@
   "comparacao": [
    {
     "cat": "Hatch",
-    "dif": -5.46,
-    "carros": 1762
+    "dif": -5.49,
+    "carros": 1781
    },
    {
     "cat": "Sedã",
-    "dif": -6.97,
-    "carros": 824
+    "dif": -7.04,
+    "carros": 821
    },
    {
     "cat": "SUV",
-    "dif": -13.09,
+    "dif": -13.12,
     "carros": 1434
    },
    {
     "cat": "Picape",
-    "dif": -7.84,
-    "carros": 262
+    "dif": -7.81,
+    "carros": 264
    },
    {
     "cat": "Outros",
-    "dif": -4.69,
-    "carros": 68
+    "dif": -4.72,
+    "carros": 72
    },
    {
     "cat": "Total",
-    "dif": -8.45,
-    "carros": 4349
+    "dif": -8.47,
+    "carros": 4373
    }
   ],
   "semanal": {
@@ -3260,6 +3269,47 @@
       "Total": {
        "media": 91371,
        "n": 6613
+      }
+     }
+    },
+    {
+     "dia": "2026-10-22",
+     "cats": {
+      "Hatch": {
+       "media": 70420,
+       "n": 2872,
+       "var": -0.07,
+       "var_cesta": -0.14
+      },
+      "Sedã": {
+       "media": 89729,
+       "n": 1404,
+       "var": -0.46,
+       "var_cesta": -0.22
+      },
+      "SUV": {
+       "media": 117121,
+       "n": 2060,
+       "var": -0.17,
+       "var_cesta": -0.19
+      },
+      "Picape": {
+       "media": 105368,
+       "n": 347,
+       "var": 0.42,
+       "var_cesta": -0.14
+      },
+      "Outros": {
+       "media": 119244,
+       "n": 99,
+       "var": -0.34,
+       "var_cesta": 0.21
+      },
+      "Total": {
+       "media": 91103,
+       "n": 6782,
+       "var": -0.55,
+       "var_cesta": -0.17
       }
      }
     }
@@ -3325,7 +3375,7 @@
     }
    ]
   },
-  "resumo": "Movida: 6.642 carros anunciados, preço médio R$ 91.488. Localiza: 20.744 carros anunciados, preço médio R$ 104.936.",
+  "resumo": "Movida: 6.689 carros anunciados, preço médio R$ 91.360. Localiza: 20.744 carros anunciados, preço médio R$ 104.936.",
   "aviso": "Coleta semanal (segundas) desde out/26; a variação mês a mês aparece quando houver dois meses de dados (o site das locadoras não mostra preços antigos).",
   "fipe": null
  }
