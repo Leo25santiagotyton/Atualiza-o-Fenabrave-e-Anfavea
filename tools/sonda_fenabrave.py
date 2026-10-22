@@ -11,7 +11,7 @@ from monitor import BROWSER_HEADERS  # noqa: E402
 
 s = requests.Session()
 s.headers.update(BROWSER_HEADERS)
-for url in ["https://www.fenauto.org.br/news/", "https://www.fenauto.org.br/news/categoria/novidades", "https://www.fenauto.org.br/"]:
+for url in ["https://www.fenauto.org.br/news/categoria/press-releases", "https://www.fenauto.org.br/news/categoria/na-imprensa"]:
     try:
         r = s.get(url, timeout=40)
     except Exception as e:
@@ -23,18 +23,17 @@ for url in ["https://www.fenauto.org.br/news/", "https://www.fenauto.org.br/news
     for a in soup.find_all("a", href=True):
         t = " ".join(a.get_text(" ").split())
         h = requests.compat.urljoin(url, a["href"])
-        if re.search(r"usad|semin|transfer|vend|mercado|\.pdf", t + " " + h, re.I) and len(t) > 10:
+        if "/news/" in h and re.search(r".", t + " " + h, re.I) and len(t) > 10:
             links.append((t[:110], h))
     for t, h in dict.fromkeys(links):
         print("  ", t, "|", h)
     noticias = [h for t, h in links if "/news/" in h and "categoria" not in h]
-    for h in list(dict.fromkeys(noticias))[:3]:
+    for h in [x for x in dict.fromkeys(noticias) if re.search(r"setembro|agosto|mercado|vend|usad", x)][:3]:
         try:
             rr = s.get(h, timeout=40)
             txt = " ".join(BeautifulSoup(rr.text, "html.parser").get_text(" ").split())
-            i = max(0, txt.find("transfer") - 300)
+            i = max(0, txt.find(" | FENAUTO"))
             print("#### ", h, rr.status_code)
             print(txt[i:i + 5000])
         except Exception as e:
             print("ERRO", h, e)
-    break
