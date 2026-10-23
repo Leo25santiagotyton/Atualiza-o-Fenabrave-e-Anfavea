@@ -282,6 +282,7 @@ PANEL_DETAILS = {"Série/Emissão", "ISIN", "Emissão", "Vencimento", "Data do N
 PANEL_LIMIT = 250_000  # o banco do painel aceita até 256 KB por documento
 CURV_HIST_FILE = OUT_DIR / "curvas_hist.json"
 CURV_GRID = list(range(63, 2521, 63))  # vértices em dias úteis (3 meses a 10 anos)
+CURV_GRID_DC = list(range(91, 3651, 91))  # vértices em dias corridos para as curvas em dólar (3 meses a 10 anos)
 
 
 def _lin(pts, x):
@@ -300,10 +301,11 @@ def _lin(pts, x):
 def write_curv_hist_file():
     """Histórico diário das curvas num grid fixo de vértices, para o gráfico de curvas × debêntures IPCA+ do painel:
     PRE = DI futuro (DI x Pré da B3), DIC = cupom de IPCA do swap B3, REAL/NOM/INFL = ETTJ IPCA, prefixada e
-    inflação implícita da ANBIMA."""
+    inflação implícita da ANBIMA; USD (em dias corridos) = cupom cambial limpo dos FRC (DOC) e Treasury (UST)."""
     full = json.loads(DEB_FILE.read_text())
     curves = full.get("curves") or {}
-    out = {"updatedAt": full.get("updatedAt"), "du": CURV_GRID, "dates": [], "PRE": [], "DIC": [], "REAL": [], "NOM": [], "INFL": []}
+    out = {"updatedAt": full.get("updatedAt"), "du": CURV_GRID, "dates": [], "PRE": [], "DIC": [], "REAL": [], "NOM": [], "INFL": [],
+           "dc": CURV_GRID_DC, "DOC": [], "UST": []}
     for iso in sorted(curves):
         c = curves[iso] or {}
         b3, ettj = c.get("b3") or {}, c.get("ettj") or []
@@ -315,8 +317,63 @@ def write_curv_hist_file():
                          ("INFL", [[e[0], e[3]] for e in ettj])):
             pts = sorted([p[0], p[1]] for p in pts if p and p[0] and p[0] > 0)
             out[key].append([_r(_lin(pts, du), 4) if pts else None for du in CURV_GRID])
+        for key, pts in (("DOC", c.get("doc") or (c.get("usd") or {}).get("DOC") or []), ("UST", c.get("ust") or [])):
+            pts = sorted([p[0], p[-1]] for p in pts if p and p[0] and p[0] > 0)
+            out[key].append([_r(_lin(pts, dc), 4) if pts else None for dc in CURV_GRID_DC])
     CURV_HIST_FILE.write_text(json.dumps(out, separators=(",", ":")))
     print(f"[INFO] histórico de curvas: {len(out['dates'])} dias, {CURV_HIST_FILE.stat().st_size // 1024} KB.")
+
+
+UST_CSV = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/{y}/all"
+           "?type=daily_treasury_yield_curve&field_tdr_date_value={y}&page&_format=csv")
+FRED_UST = {"DGS1MO": 30, "DGS3MO": 91, "DGS6MO": 182, "DGS1": 365, "DGS2": 730, "DGS3": 1095, "DGS5": 1826,
+            "DGS7": 2557, "DGS10": 3652, "DGS20": 7305, "DGS30": 10957}
+
+
+def fetch_ust(session, anos):
+    """Curva par do Tesouro americano por dia: {iso: [[dias corridos, yield %], ...]}.
+    Fonte: CSV diário do U.S. Treasury; se falhar, as séries DGS* do FRED (St. Louis Fed)."""
+    out = {}
+    for y in anos:
+        try:
+            r = session.get(UST_CSV.format(y=y), timeout=60, headers={"Accept": "text/csv,*/*"})
+            r.raise_for_status()
+            linhas = r.text.strip().splitlines()
+            cab = [c.strip().strip('"') for c in linhas[0].split(",")]
+            prazo = {}
+            for i, c in enumerate(cab):
+                m = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(Mo|Month|Months|Yr|Year|Years)", c)
+                if m:
+                    prazo[i] = round(float(m.group(1)) * (30.4375 if m.group(2).startswith("Mo") else 365.25))
+            for ln in linhas[1:]:
+                v = [x.strip().strip('"') for x in ln.split(",")]
+                md = re.fullmatch(r"(\d{2})/(\d{2})/(\d{4})", v[0])
+                if not md:
+                    continue
+                pts = sorted([dc, float(v[i])] for i, dc in prazo.items() if i < len(v) and re.fullmatch(r"-?\d+(\.\d+)?", v[i]))
+                if len(pts) >= 5:
+                    out[f"{md.group(3)}-{md.group(1)}-{md.group(2)}"] = pts
+        except Exception as e:
+            print(f"[AVISO] Treasury {y}: {e}")
+    if out:
+        return out
+    try:
+        r = session.get("https://fred.stlouisfed.org/graph/fredgraph.csv?id=" + ",".join(FRED_UST), timeout=60)
+        r.raise_for_status()
+        linhas = r.text.strip().splitlines()
+        cab = linhas[0].split(",")
+        ini = f"{min(anos)}-01-01"
+        for ln in linhas[1:]:
+            v = ln.split(",")
+            if v[0] < ini:
+                continue
+            pts = sorted([FRED_UST[c], float(x)] for c, x in zip(cab[1:], v[1:]) if c in FRED_UST and re.fullmatch(r"-?\d+(\.\d+)?", x))
+            if len(pts) >= 5:
+                out[v[0]] = pts
+        print(f"[INFO] Treasury pelo FRED: {len(out)} dias.")
+    except Exception as e:
+        print(f"[AVISO] Treasury pelo FRED: {e}")
+    return out
 
 
 def _r(v, n):
@@ -764,6 +821,28 @@ def main():
             curves[curve_day]["usd"] = fetch_taxa_swap(session, date.fromisoformat(curve_day)).get("usd") or {}
         except Exception as e:
             print(f"[AVISO] TaxaSwap dólar {curve_day}: {e}")
+    # histórico do cupom cambial limpo (DOC, formado pelos FRC) e da curva do Tesouro americano, para
+    # comparar a YTM dos bonds no painel; só os dias que ainda não têm
+    hist_ini = (datetime.now(BRT).date() - timedelta(days=KEEP_DAYS)).isoformat()
+    for iso in [k for k in sorted(curves) if k >= hist_ini and not curves[k].get("doc")][-60:]:
+        usd = curves[iso].get("usd") or {}
+        if not usd.get("DOC"):
+            try:
+                usd = fetch_taxa_swap(session, date.fromisoformat(iso)).get("usd") or {}
+            except Exception as e:
+                print(f"[AVISO] cupom cambial {iso}: {e}")
+                continue
+        if usd.get("DOC"):
+            curves[iso]["doc"] = [[dc, _r(v, 4)] for dc, _du, v in usd["DOC"]]
+    falta_ust = [k for k in sorted(curves) if k >= hist_ini and not curves[k].get("ust")]
+    if falta_ust:
+        ust = fetch_ust(session, sorted({int(k[:4]) for k in falta_ust}))
+        datas_ust = sorted(ust)
+        for iso in falta_ust:
+            ant = [d for d in datas_ust if d <= iso]  # feriado nos EUA: usa o último dia útil americano
+            if ant and (date.fromisoformat(iso) - date.fromisoformat(ant[-1])).days <= 4:
+                curves[iso]["ust"] = ust[ant[-1]]
+        print(f"[INFO] Treasury: {len(ust)} dias lidos; {sum(1 for k in falta_ust if curves[k].get('ust'))} de {len(falta_ust)} dias preenchidos.")
     # ajustes de DOL e FRC do Boletim de Preços da B3 (mesmo dia da curva)
     if curve_day and not (curves[curve_day].get("usdMkt") or {}).get("DOL"):
         try:
