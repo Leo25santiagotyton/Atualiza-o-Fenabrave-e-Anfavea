@@ -125,7 +125,7 @@ def parse_file(text):
 
 
 MARKET_FILE = OUT_DIR / "debentures_mercado.json"
-MARKET_VERSION = 2  # mude para regravar a foto do mercado com o formato novo
+MARKET_VERSION = 3  # mude para regravar a foto do mercado com o formato novo
 
 
 def market_kind(r):
@@ -142,17 +142,18 @@ def market_kind(r):
 
 def write_market_file(iso, rows):
     """Foto do mercado inteiro de debêntures da ANBIMA (último dia) para os gráficos do painel:
-    [código, emissor, seção, taxa, duration em anos, ticker acompanhado ou null, vencimento]."""
+    [código, emissor, seção, taxa, duration em anos, ticker acompanhado ou null, vencimento, % do PU par]."""
     out = []
     for r in rows:
         if r["rate"] is None or r["duration"] is None:
             continue
         ticker, _ = group_of(r)
         out.append([r["code"], (r["name"] or "")[:40], market_kind(r), round(r["rate"], 4),
-                    round(r["duration"] / 252, 3), ticker, r["maturity"] or ""])
+                    round(r["duration"] / 252, 3), ticker, r["maturity"] or "",
+                    round(r["pctPar"], 2) if r.get("pctPar") is not None else None])
     out.sort()
     MARKET_FILE.write_text(json.dumps({"updatedAt": datetime.now(BRT).isoformat(timespec="seconds"), "date": iso, "v": MARKET_VERSION,
-                                       "cols": ["code", "name", "kind", "rate", "durYears", "ticker", "maturity"],
+                                       "cols": ["code", "name", "kind", "rate", "durYears", "ticker", "maturity", "pctPar"],
                                        "papers": out}, ensure_ascii=False, separators=(",", ":")))
     print(f"[INFO] mercado {iso}: {len(out)} debêntures com taxa e duration em {MARKET_FILE.name}.")
 
