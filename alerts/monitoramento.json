@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-26T14:25:13-03:00",
- "updatedLabel": "26/10/2026 14:25",
+ "updatedAt": "2026-10-26T15:10:28-03:00",
+ "updatedLabel": "26/10/2026 15:10",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -320,6 +320,10 @@
    "url": "https://www.actresearch.net/resources/trends-headlines",
    "itens": [
     {
+     "text": "Class 8 Orders Slip as Trailer Demand Builds",
+     "href": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
+    },
+    {
      "text": "New order season sputters to take off in September — Trucks, Parts, Service.",
      "href": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
     },
@@ -334,15 +338,19 @@
     {
      "text": "Preliminary Class 8 orders slide as Classes 5-7 climb — Power Progress.",
      "href": "https://www.powerprogress.com/news/preliminary-class-8-orders-slide-as-classes-5-7-climb/8133023.article"
-    },
-    {
-     "text": "Regulatory uncertainty muddies Class 8 order season — Commercial Carrier Journal",
-     "href": "https://www.ccjdigital.com/economic-trends/article/15836590/class-8-market-shifts-to-my-2027-ordering-after-nox-prebuy"
     }
    ]
   }
  ],
  "eventos": [
+  {
+   "id": "b7b34fb7fdb3",
+   "at": "2026-10-26T15:10:19-03:00",
+   "label": "26/10 15:10",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "Class 8 Orders Slip as Trailer Demand Builds",
+   "link": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
+  },
   {
    "id": "85abab079efc",
    "at": "2026-10-20T18:12:23-03:00",
@@ -394,7 +402,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "25/10/2026",
+  "atualizado": "26/10/2026",
   "preliminar": {
    "Classe 8": [],
    "Classes 5-7": [

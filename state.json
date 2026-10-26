@@ -35,6 +35,14 @@
   },
   "_eventos": [
     {
+      "id": "b7b34fb7fdb3",
+      "at": "2026-10-26T15:10:19-03:00",
+      "label": "26/10 15:10",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "Class 8 Orders Slip as Trailer Demand Builds",
+      "link": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
+    },
+    {
       "id": "85abab079efc",
       "at": "2026-10-20T18:12:23-03:00",
       "label": "20/10 18:12",
@@ -60,8 +68,12 @@
     }
   ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "ddee098ca8ee81e74bae0bff868a8e05b8450d4ff511e49ef0ecc388b4053778",
+    "hash": "2758e54020a034c45a122d3b524f337dbbb147eadc1c8c1b1c150a57d8e793d0",
     "items": [
+      {
+        "text": "Class 8 Orders Slip as Trailer Demand Builds",
+        "href": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
+      },
       {
         "text": "New order season sputters to take off in September — Trucks, Parts, Service.",
         "href": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
@@ -77,10 +89,6 @@
       {
         "text": "Preliminary Class 8 orders slide as Classes 5-7 climb — Power Progress.",
         "href": "https://www.powerprogress.com/news/preliminary-class-8-orders-slide-as-classes-5-7-climb/8133023.article"
-      },
-      {
-        "text": "Regulatory uncertainty muddies Class 8 order season — Commercial Carrier Journal",
-        "href": "https://www.ccjdigital.com/economic-trends/article/15836590/class-8-market-shifts-to-my-2027-ordering-after-nox-prebuy"
       }
     ]
   },
