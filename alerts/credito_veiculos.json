@@ -539,23 +539,14 @@
    "total_aa": 2.8
   }
  },
- "atualizado": "26/10/2026 20:48",
- "atualizadoAt": "2026-10-26T20:48:56-03:00",
+ "atualizado": "27/10/2026 14:55",
+ "atualizadoAt": "2026-10-27T14:55:56-03:00",
  "fontes": {
   "sgs": "https://www3.bcb.gov.br/sgspub/",
   "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
   "b3": "https://www.b3.com.br/pt_br/noticias/"
  },
  "diaria": [
-  {
-   "ini": "2026-04-09",
-   "fim": "2026-04-15",
-   "n": 35,
-   "media_am": 1.98,
-   "mediana_am": 1.88,
-   "media_aa": 26.83,
-   "mediana_aa": 25.07
-  },
   {
    "ini": "2026-04-10",
    "fim": "2026-04-16",
@@ -1662,6 +1653,15 @@
    "mediana_am": 1.73,
    "media_aa": 24.33,
    "mediana_aa": 22.91
+  },
+  {
+   "ini": "2026-10-06",
+   "fim": "2026-10-13",
+   "n": 39,
+   "media_am": 1.82,
+   "mediana_am": 1.75,
+   "media_aa": 24.56,
+   "mediana_aa": 23.12
   }
  ]
 }

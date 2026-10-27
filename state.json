@@ -35,6 +35,14 @@
   },
   "_eventos": [
     {
+      "id": "6a061a1c6323",
+      "at": "2026-10-27T14:24:13-03:00",
+      "label": "27/10 14:24",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "ACT: Final Class 8 orders down in September",
+      "link": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-orders-down-in-september"
+    },
+    {
       "id": "b7b34fb7fdb3",
       "at": "2026-10-26T15:10:19-03:00",
       "label": "26/10 15:10",
@@ -68,8 +76,12 @@
     }
   ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "2758e54020a034c45a122d3b524f337dbbb147eadc1c8c1b1c150a57d8e793d0",
+    "hash": "28d25e5e5030475a29074b04ad770e82f610e9cb8dee52dc4ae0660f70f8d204",
     "items": [
+      {
+        "text": "ACT: Final Class 8 orders down in September",
+        "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-orders-down-in-september"
+      },
       {
         "text": "Class 8 Orders Slip as Trailer Demand Builds",
         "href": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
@@ -85,10 +97,6 @@
       {
         "text": "ACT Research: Regulatory Uncertainty Weighs on September Preliminary Class 8 Net Orders — Equipment Finance Advisor.",
         "href": "https://www.equipmentfa.com/news/42025/act-research-regulatory-uncertainty-weighs-on-september-preliminary-class-8-net-orders"
-      },
-      {
-        "text": "Preliminary Class 8 orders slide as Classes 5-7 climb — Power Progress.",
-        "href": "https://www.powerprogress.com/news/preliminary-class-8-orders-slide-as-classes-5-7-climb/8133023.article"
       }
     ]
   },
