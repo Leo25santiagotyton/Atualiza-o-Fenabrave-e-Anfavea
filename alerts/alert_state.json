@@ -4,9 +4,10 @@
     "ARML3": 4,
     "PRNR3": 4,
     "AMOB3": 4,
-    "VAMO3": 2,
+    "VAMO3": 4,
     "FRAS3": 2,
     "RAPT3": 2,
-    "RENT3": 2
+    "RENT3": 2,
+    "RAPT4": 2
   }
 }
