@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-10-29T19:37:27-03:00",
- "updatedLabel": "29/10/2026 19:37",
+ "updatedAt": "2026-10-29T23:41:37-03:00",
+ "updatedLabel": "29/10/2026 23:41",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -1505,8 +1505,8 @@
     "total_aa": 2.8
    }
   },
-  "atualizado": "29/10/2026 15:25",
-  "atualizadoAt": "2026-10-29T15:25:33-03:00",
+  "atualizado": "29/10/2026 20:54",
+  "atualizadoAt": "2026-10-29T20:54:58-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -3448,7 +3448,7 @@
   "fipe": null
  },
  "usados": {
-  "updatedAt": "2026-10-29T14:27:22-03:00",
+  "updatedAt": "2026-10-29T23:41:37-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
