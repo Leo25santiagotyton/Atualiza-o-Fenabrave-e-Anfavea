@@ -1334,14 +1334,14 @@
       "tipo": "outro"
     },
     {
-      "data": "2026-10-27",
+      "data": "2026-10-29",
       "empresa": "Foresea Holding",
       "evento": "Resultados 3T26",
-      "fonte": "https://investors.foresea.com/",
+      "fonte": "https://cenarioenergia.com.br/2026/10/29/foresea-receita-3t26-backlog-1-7-bilhao-guidance-perfuracao-offshore/",
       "grupo": "Bonds",
-      "obs": "Estimado pelo 3T25 (divulgado em 28/10/2025, conforme busca); antes estimado em 10/11. Data ainda não anunciada; até 29/10 nenhuma divulgação do 3T26 foi encontrada.",
+      "obs": "Data da notícia (29/10); não confirmada no RI. Receita líquida US$ 179,1 mi, lucro US$ 46,6 mi, guidance 2026 elevado; distribuição adicional de US$ 51,2 mi com pagamento em novembro (data não informada).",
       "short": "3T26",
-      "status": "estimado",
+      "status": "realizado",
       "ticker": "US262051AA36",
       "tipo": "resultado"
     },
@@ -1704,6 +1704,6 @@
       "tipo": "cupom"
     }
   ],
-  "updatedAt": "2026-10-29T19:45:00-03:00",
-  "updatedLabel": "29/10/2026 19:45"
+  "updatedAt": "2026-11-02T19:45:00-03:00",
+  "updatedLabel": "02/11/2026 19:45"
 }
