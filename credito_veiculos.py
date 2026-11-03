@@ -176,6 +176,11 @@ def sondar_b3(paginas=12):
             elif re.search(r"financ", h, re.I) and re.search(r"veicul|veícul|carros|motos", h, re.I) \
                     and re.search(r"/noticias/", h):
                 arts[h] = 1
+    import os
+    for u in os.environ.get("B3_PDFS", "").split():
+        pdfs[u] = 1
+    if os.environ.get("B3_PDFS"):
+        arts = {}
     print("ARTIGOS", len(arts), "PDFS", len(pdfs))
     for u in list(arts)[:80]:
         try:
@@ -200,8 +205,8 @@ def sondar_b3(paginas=12):
         print("\n=== PDF", u)
         try:
             with pdfplumber.open(io.BytesIO(s.get(u, timeout=60).content)) as pdf:
-                for pg in pdf.pages[:4]:
-                    print((pg.extract_text() or "")[:2500])
+                for pg in pdf.pages[:12]:
+                    print((pg.extract_text() or "")[:6000])
                     print("--- pg")
         except Exception as e:
             print("[pdf erro]", e)

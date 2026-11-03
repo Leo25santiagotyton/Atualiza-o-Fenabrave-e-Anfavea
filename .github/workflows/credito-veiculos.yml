@@ -12,6 +12,10 @@ on:
         description: "Só listar notícias/PDFs da B3 no log (depuração)"
         required: false
         default: "false"
+      pdfs:
+        description: "URLs de PDFs da B3 para ler na sondagem (separadas por espaço)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -34,6 +38,8 @@ jobs:
 
       - name: Sondar B3 (depuração)
         if: ${{ github.event.inputs.sondar == 'true' }}
+        env:
+          B3_PDFS: ${{ github.event.inputs.pdfs }}
         run: python credito_veiculos.py --sondar
 
       - name: Ler crédito para veículos
