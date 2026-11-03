@@ -152,112 +152,100 @@ def b3_financiados():
 
 B3_RELATORIOS = "https://www.b3.com.br/pt_br/market-data-e-indices/informacoes-para-mercado-de-financiamentos/veiculos/"
 SEG_PAG = {"total": r"\|\s*TOTAL", "leves": r"LEVES", "motos": r"\|\s*MOTOS", "pesados": r"\|\s*PESADOS"}
+ABREV = {m[:3]: i + 1 for i, m in enumerate(MESES)}
 
 
-def pdf_segmentos(conteudo, debug=False):
-    """Lê um relatório mensal 'Mercado de Financiamentos de Veículos' (Trillia/B3).
-    Em cada página de segmento há três quadros (mês, mês anterior e mesmo mês do ano
-    anterior), cada um com total = usados + novos em mil unidades. Acha as trincas que
-    fecham a soma e liga cada uma ao rótulo de mês mais próximo na horizontal.
-    Devolve {'AAAA-MM': {'total': mil, 'leves': mil, ...}}."""
+def _ym(ano, mes):
+    ano, mes = (ano - 1, 12) if mes == 0 else (ano, mes)
+    return f"{ano}-{mes:02d}"
+
+
+def pdf_segmentos(conteudo, ano, mes):
+    """Lê um relatório mensal 'Mercado de Financiamentos de Veículos' (Trillia/B3) do mês
+    ano-mes. Cada página de segmento tem três quadros lado a lado: mês anterior (esquerda),
+    o mês (centro) e o mesmo mês do ano anterior (direita), cada um com total = usados +
+    novos em mil unidades. O texto do PDF sai embaralhado, então o leitor procura as trincas
+    de números que fecham essa soma e usa a posição horizontal do total para saber o mês.
+    Devolve {'AAAA-MM': {'total': mil, 'leves': mil, ...}, ...} (quadros que não deu para
+    ler ficam de fora)."""
     import io
     import pdfplumber
-    abrev = {m[:3]: i + 1 for i, m in enumerate(MESES)}
+    meses = [_ym(ano, mes - 1), _ym(ano, mes), _ym(ano - 1, mes)]
     out = {}
     with pdfplumber.open(io.BytesIO(conteudo)) as pdf:
         for pg in pdf.pages[:12]:
             txt = pg.extract_text() or ""
-            if "QUANTIDADE DE FINANCIAMENTO" not in txt or "ACUMULADO" in txt or "PARA O M" in txt or "EVOLU" in txt:
+            if "QUANTIDADE DE FINANCIAMENTO" not in txt or re.search(r"ACUMULADO|PARA O M|EVOLU", txt):
                 continue
             seg = next((k for k, rx in SEG_PAG.items() if re.search(rx, txt)), None)
             if not seg:
                 continue
-            ws = pg.extract_words(x_tolerance=6, y_tolerance=3)
-            labels, nums = [], []
-            for w in ws:
+            nums = []
+            for w in pg.extract_words(x_tolerance=6, y_tolerance=3):
                 t = w["text"].replace(" ", "")
-                xc = (w["x0"] + w["x1"]) / 2
-                m = re.fullmatch(r"([a-z]{3})/(\d{2})", t)
-                if m and m.group(1) in abrev:
-                    labels.append((f"20{m.group(2)}-{abrev[m.group(1)]:02d}", xc, w["top"]))
-                elif re.fullmatch(r"\d{1,4}", t) and w["x1"] - w["x0"] < 60:
-                    nums.append((int(t), xc, w["top"]))
-            trincas = []
+                if re.fullmatch(r"\d{1,4}", t) and w["x1"] - w["x0"] < 60:
+                    nums.append((int(t), (w["x0"] + w["x1"]) / 2, w["top"]))
+            achados = {}
             for a in nums:
+                if a[0] < 5:
+                    continue
                 for b in nums:
                     for c in nums:
-                        if a is b or a is c or b is c or a[0] < 10 or b[0] > a[0] or c[0] > a[0]:
+                        if a is b or a is c or b is c or b[0] >= a[0] or c[0] >= a[0]:
                             continue
-                        if abs(b[0] + c[0] - a[0]) <= 1 and abs(b[1] - c[1]) < 120 and abs(a[1] - b[1]) < 120:
-                            trincas.append(a)
-            trincas = list(dict.fromkeys(trincas))
-            if debug:
-                print("  pag", seg, "labels", labels, "trincas", trincas)
-            for ym, x, _ in labels:
-                if not trincas:
-                    break
-                best = min(trincas, key=lambda a: abs(a[1] - x))
-                if abs(best[1] - x) < 90:
-                    out.setdefault(ym, {})[seg] = best[0]
+                        if abs(b[0] + c[0] - a[0]) <= 1 and abs(b[1] - a[1]) < 120 and abs(c[1] - a[1]) < 120:
+                            quadro = min(2, int(3 * a[1] / pg.width))
+                            achados.setdefault(quadro, set()).add(a[0])
+            for q, vs in achados.items():
+                if len(vs) == 1:  # mais de um candidato no mesmo quadro: ambíguo, fica de fora
+                    out.setdefault(meses[q], {})[seg] = vs.pop()
     return out
 
 
-def sondar_b3(paginas=12):
-    """Só para depuração: lista as notícias e relatórios (PDF) de financiamento de veículos
-    da B3/Trillia e imprime os trechos com números por segmento."""
+def b3_relatorios(ultimos=None):
+    """Junta os relatórios mensais em PDF (página de 'Informações para mercado de
+    financiamentos'). Para cada mês vale, nesta ordem, o relatório do próprio mês, o do mês
+    seguinte (quadro do mês anterior) e o do ano seguinte (mesmo mês do ano anterior).
+    Devolve {'AAAA-MM': {'leves': unidades, 'motos': ..., 'pesados': ..., 'total': ...}}."""
     s = requests.Session()
     s.headers.update(UA_WEB)
-    seeds = [B3_RELATORIOS, B3_LISTA, "https://www.b3.com.br/pt_br/noticias/trillia.htm"]
-    for tag in ("veiculos", "carros", "financiamento"):
-        seeds += [f"https://borainvestir.b3.com.br/tudo-sobre/{tag}/"] + \
-                 [f"https://borainvestir.b3.com.br/tudo-sobre/{tag}/page/{i}/" for i in range(2, paginas + 1)]
-    arts, pdfs = {}, {}
-    for u in seeds:
+    r = s.get(B3_RELATORIOS, timeout=60)
+    r.raise_for_status()
+    pdfs = []
+    for href in dict.fromkeys(re.findall(r'href="([^"]+\.pdf)"', r.text)):
+        m = re.search(r"Veiculos_+([a-z]+)(\d{2})\.pdf$", href, re.I)
+        if m and m.group(1)[:3].lower() in ABREV:
+            pdfs.append((2000 + int(m.group(2)), ABREV[m.group(1)[:3].lower()], requests.compat.urljoin(B3_RELATORIOS, href)))
+    pdfs.sort()
+    if ultimos:
+        pdfs = pdfs[-ultimos:]
+    lido = {}  # mês -> segmento -> (prioridade, valor)
+    for ano, mes, url in pdfs:
         try:
-            r = s.get(u, timeout=40)
+            segs = pdf_segmentos(s.get(url, timeout=90).content, ano, mes)
         except Exception as e:
-            print("[seed erro]", u, e)
+            print("[AVISO] PDF", url, e)
             continue
-        print("[seed]", r.status_code, u)
-        if r.status_code != 200:
-            continue
-        for href in re.findall(r'href="([^"]+)"', r.text):
-            h = requests.compat.urljoin(u, href)
-            if h.lower().endswith(".pdf") and re.search(r"financiamento", h, re.I):
-                pdfs[h] = 1
-            elif re.search(r"financ", h, re.I) and re.search(r"veicul|veícul|carros|motos", h, re.I) \
-                    and re.search(r"/noticias/", h):
-                arts[h] = 1
-    import os
-    for u in os.environ.get("B3_PDFS", "").split():
-        pdfs[u] = 1
-    arts = {}
-    print("ARTIGOS", len(arts), "PDFS", len(pdfs))
-    for u in list(arts)[:80]:
-        try:
-            html = s.get(u, timeout=40).text
-        except Exception as e:
-            print("[art erro]", u, e)
-            continue
-        soup = BeautifulSoup(html, "html.parser")
-        for a in soup.find_all("a", href=True):
-            h = requests.compat.urljoin(u, a["href"])
-            if h.lower().endswith(".pdf"):
-                pdfs[h] = 1
-        t = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
-        tit = soup.title.get_text(strip=True) if soup.title else ""
-        print("\n=== ART", u, "|", tit)
-        for m in re.finditer(r"[^.]*(?:leves|motos|pesados|foram financiad|Publicado|\d{2}/\d{2}/\d{4})[^.]*\.", t):
-            print("  >", m.group(0).strip()[:300])
-    print("PDFS", len(pdfs))
-    import io
-    import pdfplumber
-    for u in list(pdfs)[:60]:
-        print("\n=== PDF", u)
-        try:
-            print("SEGMENTOS", pdf_segmentos(s.get(u, timeout=60).content, debug=True))
-        except Exception as e:
-            print("[pdf erro]", e)
+        prio = {_ym(ano, mes): 0, _ym(ano, mes - 1): 1, _ym(ano - 1, mes): 2}
+        for ym, vs in segs.items():
+            for k, v in vs.items():
+                atual = lido.setdefault(ym, {}).get(k)
+                if atual is None or prio[ym] < atual[0]:
+                    lido[ym][k] = (prio[ym], v)
+        print("PDF", f"{ano}-{mes:02d}", segs)
+    return {ym: {k: v * 1000 for k, (_, v) in vs.items()} for ym, vs in sorted(lido.items())}
+
+
+def junta_b3(d, rel):
+    """Completa d['b3'] com os números dos relatórios; o que veio da notícia (mais exato) fica."""
+    b3 = d.setdefault("b3", {})
+    for ym, vs in rel.items():
+        alvo = b3.setdefault(ym, {})
+        for k, v in vs.items():
+            alvo.setdefault(k, v)
+        if "url" not in alvo:
+            alvo.setdefault("fonte", "relatório mensal Trillia/B3 (mil unidades)")
+    d["b3"] = dict(sorted(b3.items()))
 
 
 def atualiza():
@@ -276,9 +264,13 @@ def atualiza():
     try:
         b = b3_financiados()
         if b:
-            d.setdefault("b3", {})[b[0]] = b[1]
+            d.setdefault("b3", {})[b[0]] = {**d.get("b3", {}).get(b[0], {}), **b[1]}
     except Exception as e:
         erros.append(f"B3: {e}")
+    try:
+        junta_b3(d, b3_relatorios(ultimos=3))
+    except Exception as e:
+        erros.append(f"B3 relatórios: {e}")
     now = datetime.now(BRT)
     d.update(atualizado=now.strftime("%d/%m/%Y %H:%M"), atualizadoAt=now.isoformat(timespec="seconds"),
              fontes={"sgs": "https://www3.bcb.gov.br/sgspub/",
@@ -291,9 +283,10 @@ def atualiza():
 
 if __name__ == "__main__":
     import sys
-    if "--sondar" in sys.argv:
-        sondar_b3()
-        sys.exit(0)
+    if "--historico" in sys.argv:
+        d = _ler()
+        junta_b3(d, b3_relatorios())
+        ARQ.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     for e in atualiza():
         print("[ERRO]", e)
     d = _ler()
