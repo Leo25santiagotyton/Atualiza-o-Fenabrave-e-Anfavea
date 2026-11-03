@@ -197,7 +197,7 @@ def pdf_relatorio(conteudo, ano, mes):
             if "PARA O M" in txt:
                 ws = pg.extract_words(x_tolerance=3, y_tolerance=3)
                 rot = [(w, re.fullmatch(r"([a-z]{3})/(\d{2})", w["text"])) for w in ws]
-                nums = [w for w in ws if re.fullmatch(r"\d{3}", w["text"]) and w["x0"] > 70]
+                nums = [w for w in ws if re.fullmatch(r"\d{3}", w["text"]) and w["x0"] > 66]
                 for w, m in rot:
                     if not m or m.group(1) not in ABREV or ABREV[m.group(1)] != mes:
                         continue
@@ -298,6 +298,10 @@ def atualiza():
             d.setdefault("b3", {})[b[0]] = {**d.get("b3", {}).get(b[0], {}), **b[1]}
     except Exception as e:
         erros.append(f"B3: {e}")
+    try:
+        junta_b3(d, b3_relatorios(ultimos=2))
+    except Exception as e:
+        erros.append(f"B3 relatórios: {e}")
 
     now = datetime.now(BRT)
     d.update(atualizado=now.strftime("%d/%m/%Y %H:%M"), atualizadoAt=now.isoformat(timespec="seconds"),
