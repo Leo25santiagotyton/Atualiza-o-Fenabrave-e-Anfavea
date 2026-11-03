@@ -43,7 +43,7 @@ SGS = {  # chave: (código, descrição)
     "prazo_pf": (20886, "Prazo médio das concessões PF (meses)"),
     "prazo_pj": (20864, "Prazo médio das concessões PJ (meses)"),
 }
-INICIO = "01/01/2023"
+INICIO = "01/01/2015"
 OLINDA = "https://olinda.bcb.gov.br/olinda/servico/taxaJuros/versao/v2/odata/TaxasJurosDiariaPorInicioPeriodo"
 MODALIDADE = "Aquisição de veículos - Prefixado"
 B3_LISTA = "https://www.b3.com.br/pt_br/noticias/"
