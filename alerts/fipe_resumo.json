@@ -1,7 +1,7 @@
 {
- "ref": 338,
- "mes": "outubro/2026",
- "mes_anterior": "setembro/2026",
+ "ref": 339,
+ "mes": "novembro/2026",
+ "mes_anterior": "outubro/2026",
  "colunas": [
   "Hatch",
   "Sedã",
@@ -12,6 +12,29 @@
   "Moto"
  ],
  "mensal": [
+  {
+   "ref": 339,
+   "mes": "novembro/2026",
+   "curto": "nov/26",
+   "var": {
+    "Hatch": -0.8496682459495197,
+    "Sedã": -1.1171965732938882,
+    "SUV": -1.3055390608153083,
+    "Picape": -0.8581738840454656,
+    "Leves": -1.076888298978873,
+    "Caminhão": -1.3017626367573643,
+    "Moto": -0.19307219105769713
+   },
+   "n": {
+    "Hatch": 13,
+    "Sedã": 12,
+    "SUV": 27,
+    "Picape": 17,
+    "Leves": 69,
+    "Caminhão": 21,
+    "Moto": 24
+   }
+  },
   {
    "ref": 338,
    "mes": "outubro/2026",
@@ -264,69 +287,46 @@
     "Caminhão": 0,
     "Moto": 0
    }
-  },
-  {
-   "ref": 327,
-   "mes": "novembro/2025",
-   "curto": "nov/25",
-   "var": {
-    "Hatch": null,
-    "Sedã": null,
-    "SUV": null,
-    "Picape": null,
-    "Leves": null,
-    "Caminhão": null,
-    "Moto": null
-   },
-   "n": {
-    "Hatch": 0,
-    "Sedã": 0,
-    "SUV": 0,
-    "Picape": 0,
-    "Leves": 0,
-    "Caminhão": 0,
-    "Moto": 0
-   }
   }
  ],
  "acumulado": {
   "Hatch": {
-   "var": -0.5119181784795646,
-   "meses": 5
+   "var": -1.357236818221308,
+   "meses": 6
   },
   "Sedã": {
-   "var": -2.6410134432215404,
-   "meses": 5
+   "var": -3.7287047048275346,
+   "meses": 6
   },
   "SUV": {
-   "var": -3.0949424982988694,
-   "meses": 5
+   "var": -4.360075875889125,
+   "meses": 6
   },
   "Picape": {
-   "var": -4.683148204338949,
-   "meses": 4
-  },
-  "Leves": {
-   "var": -3.265018477699344,
+   "var": -5.501132533543629,
    "meses": 5
   },
+  "Leves": {
+   "var": -4.306746174732378,
+   "meses": 6
+  },
   "Caminhão": {
-   "var": -3.6768853887890085,
-   "meses": 4
+   "var": -4.930783705358732,
+   "meses": 5
   },
   "Moto": {
-   "var": -0.973561945326118,
-   "meses": 4
+   "var": -1.1647544590046799,
+   "meses": 5
   }
  },
  "preco_medio": {
-  "Hatch": 83553.46153846153,
-  "Sedã": 114073.08333333333,
-  "SUV": 138852.59259259258,
-  "Picape": 174340.4705882353,
-  "Leves": 132867.8260869565,
-  "Caminhão": 589825.2857142857,
-  "Moto": 20081.583333333332
+  "Hatch": 82815.46153846153,
+  "Sedã": 112803.91666666667,
+  "SUV": 136921.8148148148,
+  "Picape": 172801.64705882352,
+  "Leves": 131373.40579710144,
+  "Caminhão": 582063.1904761905,
+  "Moto": 20034.0
  },
  "itens": {
   "Hatch": 13,
@@ -337,89 +337,89 @@
   "Caminhão": 21,
   "Moto": 24
  },
- "resumo": "Na tabela FIPE de outubro/2026, a cesta de veículos leves caiu (-1,24%) frente a setembro/2026. Entre os segmentos, menor queda: Moto (-0,61%); maior queda: Picape (-1,36%). Caminhões: -1,34%. Acumulado em 5 meses (leves): -3,3%.",
- "gerado_em": "2026-11-03T01:05:11-03:00",
+ "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 6 meses (leves): -4,3%.",
+ "gerado_em": "2026-11-03T16:19:26-03:00",
  "maiores_altas": [
   {
-   "nome": "Hyundai Creta",
-   "versao": "Creta Platinum 1.0 TB 12V Flex Aut.",
-   "segmento": "SUV",
-   "ano": "2027 Flex",
-   "preco": 168686.0,
-   "var": 3.16
-  },
-  {
-   "nome": "Mercedes-Benz Atego",
-   "versao": "Atego 1729 4x2 2p (diesel)(E6)",
-   "segmento": "Caminhão",
-   "ano": "2027",
-   "preco": 575854.0,
-   "var": 3.12
-  },
-  {
-   "nome": "Chevrolet Tracker",
-   "versao": "TRACKER 1.0 Turbo 12V Flex Aut.",
-   "segmento": "SUV",
-   "ano": "2027 Flex",
-   "preco": 115333.0,
-   "var": 2.88
-  },
-  {
-   "nome": "Honda Biz",
-   "versao": "BIZ 125 EX/ 125 EX FLEX",
+   "nome": "Honda CG 160",
+   "versao": "CG 160 CARGO Flex",
    "segmento": "Moto",
-   "ano": "2027",
-   "preco": 18571.0,
-   "var": 1.45
+   "ano": "2026",
+   "preco": 19717.0,
+   "var": 3.5
   },
   {
    "nome": "Mitsubishi L200",
-   "versao": "L200 Trit. S.Out. GLS 2.4 CD Diesel Aut.",
+   "versao": "L200 Tri. Outd. GLX 2.4 CD 4x4 Die. Mec.",
    "segmento": "Picape",
    "ano": "2025 Diesel",
-   "preco": 201693.0,
-   "var": 1.15
-  }
- ],
- "maiores_quedas": [
+   "preco": 185852.0,
+   "var": 3.24
+  },
   {
-   "nome": "Scania R",
-   "versao": "R-500 A 6x4 XT (diesel)(E6)",
-   "segmento": "Caminhão",
-   "ano": "2026",
-   "preco": 903635.0,
-   "var": -4.13
+   "nome": "Honda Biz",
+   "versao": "BIZ 125 ES/ 125 ES FLEX",
+   "segmento": "Moto",
+   "ano": "2015",
+   "preco": 12042.0,
+   "var": 3.03
   },
   {
    "nome": "Mercedes-Benz Accelo",
    "versao": "Accelo 817 4x2 2p (diesel)(E6)",
    "segmento": "Caminhão",
    "ano": "2027",
-   "preco": 320125.0,
-   "var": -3.93
+   "preco": 328830.0,
+   "var": 2.72
   },
   {
-   "nome": "Fiat Strada",
-   "versao": "Strada Freedom 1.3 Flex 8V  CS Plus",
+   "nome": "Toyota Hilux",
+   "versao": "Hilux CS 4x4 2.8 TDI Diesel Mec.",
    "segmento": "Picape",
-   "ano": "2027 Flex",
-   "preco": 103422.0,
-   "var": -3.5
+   "ano": "2026 Diesel",
+   "preco": 235863.0,
+   "var": 2.56
+  }
+ ],
+ "maiores_quedas": [
+  {
+   "nome": "DAF XF",
+   "versao": "XF FTT480 6x4 Super Space Cab (Die.)(E6)",
+   "segmento": "Caminhão",
+   "ano": "2024",
+   "preco": 671325.0,
+   "var": -6.06
   },
   {
-   "nome": "Mitsubishi L200",
-   "versao": "L200 Tri. Outd. GLX 2.4 CD 4x4 Die. Mec.",
-   "segmento": "Picape",
-   "ano": "2022 Diesel",
-   "preco": 115802.0,
-   "var": -3.5
+   "nome": "VW Virtus",
+   "versao": "VIRTUS Exclusive 250TSI 1.4 Flex 16V Aut",
+   "segmento": "Sedã",
+   "ano": "2023 Flex",
+   "preco": 106521.0,
+   "var": -4.68
   },
   {
-   "nome": "Jeep Compass",
-   "versao": "COMPASS Black Hurricane 2.0 4x4 TB Aut.",
-   "segmento": "SUV",
-   "ano": "2026 Gasolina",
-   "preco": 208008.0,
+   "nome": "Mercedes-Benz Atego",
+   "versao": "Atego 1729 4x2 2p (diesel)(E6)",
+   "segmento": "Caminhão",
+   "ano": "2027",
+   "preco": 555200.0,
+   "var": -3.59
+  },
+  {
+   "nome": "Honda Biz",
+   "versao": "BIZ 125 EX/ 125 EX FLEX",
+   "segmento": "Moto",
+   "ano": "2015",
+   "preco": 12278.0,
+   "var": -3.51
+  },
+  {
+   "nome": "Honda PCX",
+   "versao": "PCX 160 DLX",
+   "segmento": "Moto",
+   "ano": "2027",
+   "preco": 22486.0,
    "var": -3.5
   }
  ]
