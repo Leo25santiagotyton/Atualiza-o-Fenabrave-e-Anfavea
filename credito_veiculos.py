@@ -155,58 +155,76 @@ SEG_PAG = {"total": r"\|\s*TOTAL", "leves": r"LEVES", "motos": r"\|\s*MOTOS", "p
 ABREV = {m[:3]: i + 1 for i, m in enumerate(MESES)}
 
 
-def _ym(ano, mes):
-    ano, mes = (ano - 1, 12) if mes == 0 else (ano, mes)
-    return f"{ano}-{mes:02d}"
+def _numeros(pg):
+    """Números da página com a posição do centro. Os rótulos girados dos gráficos saem um
+    caractere por vez; aqui eles são remontados (mesma linha, mesma fonte, colados)."""
+    ws = pg.extract_words(x_tolerance=3, y_tolerance=3, extra_attrs=["size", "upright"])
+    out, girados = [], []
+    for w in ws:
+        if not w["upright"] and re.fullmatch(r"\d", w["text"]):
+            girados.append(w)
+        elif re.fullmatch(r"\d{1,4}", w["text"]):
+            out.append((int(w["text"]), (w["x0"] + w["x1"]) / 2, w["top"], w["size"]))
+    girados.sort(key=lambda w: (round(w["top"]), w["x0"]))
+    grupo = []
+    for w in girados + [None]:
+        if grupo and (w is None or abs(w["top"] - grupo[-1]["top"]) > 1 or abs(w["size"] - grupo[-1]["size"]) > 0.2
+                      or w["x0"] - grupo[-1]["x1"] > 2):
+            x0, x1 = grupo[0]["x0"], grupo[-1]["x1"]
+            out.append((int("".join(g["text"] for g in grupo)), (x0 + x1) / 2, grupo[0]["top"], grupo[0]["size"]))
+            grupo = []
+        if w is not None:
+            grupo.append(w)
+    return out
 
 
-def pdf_segmentos(conteudo, ano, mes):
+def pdf_relatorio(conteudo, ano, mes):
     """Lê um relatório mensal 'Mercado de Financiamentos de Veículos' (Trillia/B3) do mês
-    ano-mes. Cada página de segmento tem três quadros lado a lado: mês anterior (esquerda),
-    o mês (centro) e o mesmo mês do ano anterior (direita), cada um com total = usados +
-    novos em mil unidades. O texto do PDF sai embaralhado, então o leitor procura as trincas
-    de números que fecham essa soma e usa a posição horizontal do total para saber o mês.
-    Devolve {'AAAA-MM': {'total': mil, 'leves': mil, ...}, ...} (quadros que não deu para
-    ler ficam de fora)."""
+    ano-mes (só os que têm texto; os anteriores a out/2025 são imagens). Devolve
+    (segmentos, historico):
+    - segmentos: {'total'|'leves'|'motos'|'pesados': mil unidades} do próprio mês, do quadro
+      central de cada página de segmento, aceito só se total = usados + novos fechar;
+    - historico: {'AAAA-MM': mil unidades} do total do mesmo mês em cada ano desde 2015
+      (página 'PARA O MÊS DE ...', cada barra com o rótulo do mês em cima)."""
     import io
     import pdfplumber
-    meses = [_ym(ano, mes - 1), _ym(ano, mes), _ym(ano - 1, mes)]
-    out = {}
+    segs, hist = {}, {}
     with pdfplumber.open(io.BytesIO(conteudo)) as pdf:
-        for pg in pdf.pages[:12]:
+        for pg in pdf.pages[:14]:
             txt = pg.extract_text() or ""
-            if "QUANTIDADE DE FINANCIAMENTO" not in txt or re.search(r"ACUMULADO|PARA O M|EVOLU", txt):
+            if "QUANTIDADE DE FINANCIAMENTO" not in txt:
+                continue
+            if "PARA O M" in txt:
+                ws = pg.extract_words(x_tolerance=3, y_tolerance=3)
+                rot = [(w, re.fullmatch(r"([a-z]{3})/(\d{2})", w["text"])) for w in ws]
+                nums = [w for w in ws if re.fullmatch(r"\d{3}", w["text"]) and w["x0"] > 70]
+                for w, m in rot:
+                    if not m or m.group(1) not in ABREV or ABREV[m.group(1)] != mes:
+                        continue
+                    xc = (w["x0"] + w["x1"]) / 2
+                    cand = [n for n in nums if abs((n["x0"] + n["x1"]) / 2 - xc) < 10 and 0 < n["top"] - w["top"] < 25]
+                    if len(cand) == 1:
+                        hist[f"20{m.group(2)}-{mes:02d}"] = int(cand[0]["text"])
+                continue
+            if re.search(r"ACUMULADO|EVOLU", txt):
                 continue
             seg = next((k for k, rx in SEG_PAG.items() if re.search(rx, txt)), None)
             if not seg:
                 continue
-            nums = []
-            for w in pg.extract_words(x_tolerance=6, y_tolerance=3):
-                t = w["text"].replace(" ", "")
-                if re.fullmatch(r"\d{1,4}", t) and w["x1"] - w["x0"] < 60:
-                    nums.append((int(t), (w["x0"] + w["x1"]) / 2, w["top"]))
-            achados = {}
-            for a in nums:
-                if a[0] < 5:
-                    continue
-                for b in nums:
-                    for c in nums:
-                        if a is b or a is c or b is c or b[0] >= a[0] or c[0] >= a[0]:
-                            continue
-                        if abs(b[0] + c[0] - a[0]) <= 1 and abs(b[1] - a[1]) < 120 and abs(c[1] - a[1]) < 120:
-                            quadro = min(2, int(3 * a[1] / pg.width))
-                            achados.setdefault(quadro, set()).add(a[0])
-            for q, vs in achados.items():
-                if len(vs) == 1:  # mais de um candidato no mesmo quadro: ambíguo, fica de fora
-                    out.setdefault(meses[q], {})[seg] = vs.pop()
-    return out
+            nums = [n for n in _numeros(pg) if pg.width / 3 < n[1] < 2 * pg.width / 3 and n[2] > 130]
+            tot = [a for a in nums if a[0] >= 5 and any(
+                b is not c and abs(b[0] + c[0] - a[0]) <= 1 and b[2] > a[2] and c[2] > a[2] and b[0] < a[0] and c[0] < a[0]
+                for b in nums for c in nums)]
+            if len({a[0] for a in tot}) == 1:
+                segs[seg] = tot[0][0]
+    return segs, hist
 
 
 def b3_relatorios(ultimos=None):
     """Junta os relatórios mensais em PDF (página de 'Informações para mercado de
-    financiamentos'). Para cada mês vale, nesta ordem, o relatório do próprio mês, o do mês
-    seguinte (quadro do mês anterior) e o do ano seguinte (mesmo mês do ano anterior).
-    Devolve {'AAAA-MM': {'leves': unidades, 'motos': ..., 'pesados': ..., 'total': ...}}."""
+    financiamentos'). Devolve {'AAAA-MM': {'total': unidades, 'leves': ..., ...}}: o
+    total vem do histórico 'para o mês de' (desde 2015) e os segmentos, do relatório do
+    próprio mês."""
     s = requests.Session()
     s.headers.update(UA_WEB)
     r = s.get(B3_RELATORIOS, timeout=60)
@@ -216,24 +234,22 @@ def b3_relatorios(ultimos=None):
         m = re.search(r"Veiculos_+([a-z]+)(\d{2})\.pdf$", href, re.I)
         if m and m.group(1)[:3].lower() in ABREV:
             pdfs.append((2000 + int(m.group(2)), ABREV[m.group(1)[:3].lower()], requests.compat.urljoin(B3_RELATORIOS, href)))
-    pdfs.sort()
+    pdfs = sorted(set(pdfs))
     if ultimos:
         pdfs = pdfs[-ultimos:]
-    lido = {}  # mês -> segmento -> (prioridade, valor)
+    out = {}
     for ano, mes, url in pdfs:
         try:
-            segs = pdf_segmentos(s.get(url, timeout=90).content, ano, mes)
+            segs, hist = pdf_relatorio(s.get(url, timeout=90).content, ano, mes)
         except Exception as e:
             print("[AVISO] PDF", url, e)
             continue
-        prio = {_ym(ano, mes): 0, _ym(ano, mes - 1): 1, _ym(ano - 1, mes): 2}
-        for ym, vs in segs.items():
-            for k, v in vs.items():
-                atual = lido.setdefault(ym, {}).get(k)
-                if atual is None or prio[ym] < atual[0]:
-                    lido[ym][k] = (prio[ym], v)
-        print("PDF", f"{ano}-{mes:02d}", segs)
-    return {ym: {k: v * 1000 for k, (_, v) in vs.items()} for ym, vs in sorted(lido.items())}
+        print("PDF", f"{ano}-{mes:02d}", segs, hist)
+        for ym, v in hist.items():  # relatórios mais novos sobrescrevem (podem ter revisão)
+            out.setdefault(ym, {})["total"] = v * 1000
+        for k, v in segs.items():
+            out.setdefault(f"{ano}-{mes:02d}", {})[k] = v * 1000
+    return dict(sorted(out.items()))
 
 
 def junta_b3(d, rel):
@@ -298,7 +314,9 @@ if __name__ == "__main__":
     if "--debug-pdf" in sys.argv:
         for u in sys.argv[sys.argv.index("--debug-pdf") + 1:]:
             print("=== PDF", u)
-            debug_pdf(u)
+            m = re.search(r"Veiculos_+([a-z]+)(\d{2})\.pdf$", u, re.I)
+            print("RESULTADO", pdf_relatorio(requests.get(u, headers=UA_WEB, timeout=90).content,
+                                            2000 + int(m.group(2)), ABREV[m.group(1)[:3].lower()]))
         sys.exit(0)
     if "--historico" in sys.argv:
         d = _ler()
