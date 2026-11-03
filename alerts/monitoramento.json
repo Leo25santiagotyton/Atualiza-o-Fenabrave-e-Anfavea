@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-03T17:17:41-03:00",
- "updatedLabel": "03/11/2026 17:17",
+ "updatedAt": "2026-11-03T17:18:31-03:00",
+ "updatedLabel": "03/11/2026 17:18",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -1494,130 +1494,6 @@
    ]
   },
   "b3": {
-   "2024-10": {
-    "total": 670000,
-    "leves": 478000,
-    "pesados": 30000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2024-11": {
-    "leves": 439000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2024-12": {
-    "leves": 441000,
-    "motos": 9000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-01": {
-    "motos": 9000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-02": {
-    "leves": 9000,
-    "pesados": 5000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-03": {
-    "total": 551000,
-    "leves": 376000,
-    "pesados": 5000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-04": {
-    "total": 567000,
-    "motos": 5000,
-    "pesados": 23000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-05": {
-    "total": 602000,
-    "motos": 5000,
-    "pesados": 23000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-06": {
-    "total": 560000,
-    "leves": 388000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-07": {
-    "total": 639000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-08": {
-    "total": 622000,
-    "motos": 170000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-09": {
-    "leves": 448000,
-    "pesados": 25000,
-    "total": 653000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-10": {
-    "total": 697000,
-    "leves": 481000,
-    "motos": 5000,
-    "pesados": 29000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-11": {
-    "pesados": 8000,
-    "total": 623000,
-    "leves": 437000,
-    "motos": 6000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2025-12": {
-    "total": 682000,
-    "leves": 483000,
-    "pesados": 5000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-01": {
-    "total": 6000,
-    "leves": 432000,
-    "pesados": 6000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-02": {
-    "leves": 397000,
-    "pesados": 21000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-03": {
-    "leves": 481000,
-    "total": 703000,
-    "motos": 9000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-04": {
-    "total": 635000,
-    "pesados": 8000,
-    "leves": 441000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-05": {
-    "total": 630000,
-    "leves": 6000,
-    "pesados": 22000,
-    "motos": 162000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-06": {
-    "leves": 434000,
-    "total": 620000,
-    "pesados": 29000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
-   "2026-07": {
-    "total": 675000,
-    "leves": 480000,
-    "pesados": 30000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
-   },
    "2026-08": {
     "total": 683928,
     "url": "https://www.b3.com.br/pt_br/noticias/financiamento-de-veiculos-bate-recorde-para-agosto-e-alcanca-maior-volume-em-15-anos-aponta-trillia.htm",

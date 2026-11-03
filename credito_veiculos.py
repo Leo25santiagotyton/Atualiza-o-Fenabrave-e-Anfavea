@@ -267,10 +267,7 @@ def atualiza():
             d.setdefault("b3", {})[b[0]] = {**d.get("b3", {}).get(b[0], {}), **b[1]}
     except Exception as e:
         erros.append(f"B3: {e}")
-    try:
-        junta_b3(d, b3_relatorios(ultimos=3))
-    except Exception as e:
-        erros.append(f"B3 relatórios: {e}")
+
     now = datetime.now(BRT)
     d.update(atualizado=now.strftime("%d/%m/%Y %H:%M"), atualizadoAt=now.isoformat(timespec="seconds"),
              fontes={"sgs": "https://www3.bcb.gov.br/sgspub/",
