@@ -6,7 +6,12 @@ name: Crédito para veículos (BCB e Trillia/B3)
 on:
   schedule:
     - cron: "10 12,20 * * 1-5"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      sondar:
+        description: "Só listar notícias/PDFs da B3 no log (depuração)"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -27,10 +32,16 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
+      - name: Sondar B3 (depuração)
+        if: ${{ github.event.inputs.sondar == 'true' }}
+        run: python credito_veiculos.py --sondar
+
       - name: Ler crédito para veículos
+        if: ${{ github.event.inputs.sondar != 'true' }}
         run: python credito_veiculos.py && python monitoramento.py
 
       - name: Salvar
+        if: ${{ github.event.inputs.sondar != 'true' }}
         run: |
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
