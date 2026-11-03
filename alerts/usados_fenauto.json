@@ -1,7 +1,34 @@
 {
- "updatedAt": "2026-11-02T23:56:28-03:00",
+ "updatedAt": "2026-11-03T15:28:17-03:00",
  "fonte": "FENAUTO (press releases)",
  "meses": [
+  {
+   "ref": "2026-10",
+   "mes": "outubro/2026",
+   "total": 1606314,
+   "acum": 15811819,
+   "acum_var": 3.7,
+   "lideres": {
+    "Automóveis": {
+     "modelo": "VW GOL",
+     "unidades": 62635
+    },
+    "Comerciais leves": {
+     "modelo": "FIAT STRADA",
+     "unidades": 39023
+    },
+    "Motos": {
+     "modelo": "HONDA CG150",
+     "unidades": 83269
+    },
+    "Comerciais pesados": {
+     "modelo": "VOLVO FH",
+     "unidades": 2915
+    }
+   },
+   "fonte": "https://www.fenauto.org.br/news/mercado-de-veiculos-usados-registra-oscilacao-em-outubro",
+   "mm": -3.99
+  },
   {
    "ref": "2026-09",
    "mes": "setembro/2026",
