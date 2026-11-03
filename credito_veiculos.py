@@ -248,6 +248,21 @@ def junta_b3(d, rel):
     d["b3"] = dict(sorted(b3.items()))
 
 
+def debug_pdf(url):
+    """Depuração do leitor dos relatórios: imprime, página a página, os números com posição,
+    tamanho de fonte e orientação."""
+    import io
+    import pdfplumber
+    r = requests.get(url, headers=UA_WEB, timeout=90)
+    with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+        for n, pg in enumerate(pdf.pages[:10]):
+            txt = (pg.extract_text() or "")
+            print(f"--- pg {n} w={pg.width:.0f} h={pg.height:.0f} chars={len(pg.chars)} imgs={len(pg.images)} | {txt[:120]!r}")
+            for w in pg.extract_words(x_tolerance=3, y_tolerance=3, extra_attrs=["size", "upright"]):
+                if re.search(r"\d", w["text"]):
+                    print(f"   {w['text']!r} x={w['x0']:.0f}-{w['x1']:.0f} top={w['top']:.0f} size={w['size']:.1f} up={w['upright']}")
+
+
 def atualiza():
     d = _ler()
     erros = []
@@ -280,6 +295,11 @@ def atualiza():
 
 if __name__ == "__main__":
     import sys
+    if "--debug-pdf" in sys.argv:
+        for u in sys.argv[sys.argv.index("--debug-pdf") + 1:]:
+            print("=== PDF", u)
+            debug_pdf(u)
+        sys.exit(0)
     if "--historico" in sys.argv:
         d = _ler()
         junta_b3(d, b3_relatorios())
