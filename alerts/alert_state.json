@@ -1,14 +1,8 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-11-03",
   "levels": {
-    "RENT3": 4,
-    "MOVI3": 4,
-    "RAPT3": 2,
-    "AMOB3": 2,
-    "TUPY3": 2,
-    "RAPT4": 2,
-    "JSLG3": 2,
+    "SIMH3": 4,
     "PRNR3": 2,
-    "VAMO3": 2
+    "RENT3": 2
   }
 }
