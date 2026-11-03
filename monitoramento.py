@@ -69,6 +69,18 @@ def add_event(state, fonte, titulo, link=""):
     del ev[MAX_EVENTOS:]
 
 
+def _evento_fipe(f):
+    """Aviso de tabela FIPE nova, tirado do próprio resumo (fipe_resumo.json): um por mês de
+    referência, com a hora em que o resumo foi gerado, para não depender de outro estado."""
+    if not f or not f.get("ref") or not f.get("gerado_em"):
+        return []
+    at = datetime.fromisoformat(f["gerado_em"])
+    titulo = f"Tabela de {f.get('mes', '')} publicada — " + (f.get("resumo") or "").split(". ")[0].rstrip(".")
+    return [{"id": hashlib.sha1(f"FIPE|{f['ref']}".encode()).hexdigest()[:12], "at": at.isoformat(timespec="seconds"),
+             "label": at.strftime("%d/%m %H:%M"), "fonte": "FIPE", "titulo": titulo,
+             "link": "https://veiculos.fipe.org.br/"}]
+
+
 def write():
     d = _read(OUT)
     setor = _read(SETOR)
@@ -89,7 +101,7 @@ def write():
     d.update(updatedAt=now.isoformat(timespec="seconds"), updatedLabel=now.strftime("%d/%m/%Y %H:%M"),
              fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes, act=_read(ACT) or None, fipe=_read(FIPE) or None,
              credito=_read(CRED) or None, seminovos=_read(SEMI) or None, usados=_read(USADOS) or None)
-    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []))}
+    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []) + _evento_fipe(d.get("fipe")))}
     d["eventos"] = sorted(ev.values(), key=lambda e: e["at"], reverse=True)[:MAX_EVENTOS]
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
