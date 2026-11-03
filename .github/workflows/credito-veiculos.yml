@@ -12,6 +12,10 @@ on:
         description: "Recarregar o histórico de financiados por segmento (todos os relatórios mensais da B3)"
         required: false
         default: "false"
+      debug_pdf:
+        description: "Depuração: URLs de relatórios em PDF para imprimir no log (não grava nada)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -32,10 +36,16 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
+      - name: Depurar PDFs
+        if: ${{ github.event.inputs.debug_pdf != '' && github.event.inputs.debug_pdf != null }}
+        run: python credito_veiculos.py --debug-pdf ${{ github.event.inputs.debug_pdf }}
+
       - name: Ler crédito para veículos
+        if: ${{ github.event.inputs.debug_pdf == '' || github.event.inputs.debug_pdf == null }}
         run: python credito_veiculos.py ${{ github.event.inputs.historico == 'true' && '--historico' || '' }} && python monitoramento.py
 
       - name: Salvar
+        if: ${{ github.event.inputs.debug_pdf == '' || github.event.inputs.debug_pdf == null }}
         run: |
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
