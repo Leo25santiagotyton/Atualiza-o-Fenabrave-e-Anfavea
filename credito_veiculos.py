@@ -150,12 +150,64 @@ def b3_financiados():
     return None
 
 
+B3_RELATORIOS = "https://www.b3.com.br/pt_br/market-data-e-indices/informacoes-para-mercado-de-financiamentos/veiculos/"
+SEG_PAG = {"total": r"\|\s*TOTAL", "leves": r"LEVES", "motos": r"\|\s*MOTOS", "pesados": r"\|\s*PESADOS"}
+
+
+def pdf_segmentos(conteudo, debug=False):
+    """Lê um relatório mensal 'Mercado de Financiamentos de Veículos' (Trillia/B3).
+    Em cada página de segmento há três quadros (mês, mês anterior e mesmo mês do ano
+    anterior), cada um com total = usados + novos em mil unidades. Acha as trincas que
+    fecham a soma e liga cada uma ao rótulo de mês mais próximo na horizontal.
+    Devolve {'AAAA-MM': {'total': mil, 'leves': mil, ...}}."""
+    import io
+    import pdfplumber
+    abrev = {m[:3]: i + 1 for i, m in enumerate(MESES)}
+    out = {}
+    with pdfplumber.open(io.BytesIO(conteudo)) as pdf:
+        for pg in pdf.pages[:12]:
+            txt = pg.extract_text() or ""
+            if "QUANTIDADE DE FINANCIAMENTO" not in txt or "ACUMULADO" in txt or "PARA O M" in txt or "EVOLU" in txt:
+                continue
+            seg = next((k for k, rx in SEG_PAG.items() if re.search(rx, txt)), None)
+            if not seg:
+                continue
+            ws = pg.extract_words(x_tolerance=6, y_tolerance=3)
+            labels, nums = [], []
+            for w in ws:
+                t = w["text"].replace(" ", "")
+                xc = (w["x0"] + w["x1"]) / 2
+                m = re.fullmatch(r"([a-z]{3})/(\d{2})", t)
+                if m and m.group(1) in abrev:
+                    labels.append((f"20{m.group(2)}-{abrev[m.group(1)]:02d}", xc, w["top"]))
+                elif re.fullmatch(r"\d{1,4}", t) and w["x1"] - w["x0"] < 60:
+                    nums.append((int(t), xc, w["top"]))
+            trincas = []
+            for a in nums:
+                for b in nums:
+                    for c in nums:
+                        if a is b or a is c or b is c or a[0] < 10 or b[0] > a[0] or c[0] > a[0]:
+                            continue
+                        if abs(b[0] + c[0] - a[0]) <= 1 and abs(b[1] - c[1]) < 120 and abs(a[1] - b[1]) < 120:
+                            trincas.append(a)
+            trincas = list(dict.fromkeys(trincas))
+            if debug:
+                print("  pag", seg, "labels", labels, "trincas", trincas)
+            for ym, x, _ in labels:
+                if not trincas:
+                    break
+                best = min(trincas, key=lambda a: abs(a[1] - x))
+                if abs(best[1] - x) < 90:
+                    out.setdefault(ym, {})[seg] = best[0]
+    return out
+
+
 def sondar_b3(paginas=12):
     """Só para depuração: lista as notícias e relatórios (PDF) de financiamento de veículos
     da B3/Trillia e imprime os trechos com números por segmento."""
     s = requests.Session()
     s.headers.update(UA_WEB)
-    seeds = [B3_LISTA, "https://www.b3.com.br/pt_br/noticias/trillia.htm"]
+    seeds = [B3_RELATORIOS, B3_LISTA, "https://www.b3.com.br/pt_br/noticias/trillia.htm"]
     for tag in ("veiculos", "carros", "financiamento"):
         seeds += [f"https://borainvestir.b3.com.br/tudo-sobre/{tag}/"] + \
                  [f"https://borainvestir.b3.com.br/tudo-sobre/{tag}/page/{i}/" for i in range(2, paginas + 1)]
@@ -179,8 +231,7 @@ def sondar_b3(paginas=12):
     import os
     for u in os.environ.get("B3_PDFS", "").split():
         pdfs[u] = 1
-    if os.environ.get("B3_PDFS"):
-        arts = {}
+    arts = {}
     print("ARTIGOS", len(arts), "PDFS", len(pdfs))
     for u in list(arts)[:80]:
         try:
@@ -201,13 +252,10 @@ def sondar_b3(paginas=12):
     print("PDFS", len(pdfs))
     import io
     import pdfplumber
-    for u in list(pdfs)[:40]:
+    for u in list(pdfs)[:60]:
         print("\n=== PDF", u)
         try:
-            with pdfplumber.open(io.BytesIO(s.get(u, timeout=60).content)) as pdf:
-                for pg in pdf.pages[:12]:
-                    print((pg.extract_text() or "")[:6000])
-                    print("--- pg")
+            print("SEGMENTOS", pdf_segmentos(s.get(u, timeout=60).content, debug=True))
         except Exception as e:
             print("[pdf erro]", e)
 
