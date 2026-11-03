@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-03T16:27:38-03:00",
- "updatedLabel": "03/11/2026 16:27",
+ "updatedAt": "2026-11-03T16:56:31-03:00",
+ "updatedLabel": "03/11/2026 16:56",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -343,6 +343,14 @@
   }
  ],
  "eventos": [
+  {
+   "id": "296b00b4475d",
+   "at": "2026-11-03T16:19:26-03:00",
+   "label": "03/11 16:19",
+   "fonte": "FIPE",
+   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
+   "link": "https://veiculos.fipe.org.br/"
+  },
   {
    "id": "6a061a1c6323",
    "at": "2026-10-27T14:24:13-03:00",
