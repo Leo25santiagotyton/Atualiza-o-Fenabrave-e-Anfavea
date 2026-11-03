@@ -150,6 +150,63 @@ def b3_financiados():
     return None
 
 
+def sondar_b3(paginas=12):
+    """Só para depuração: lista as notícias e relatórios (PDF) de financiamento de veículos
+    da B3/Trillia e imprime os trechos com números por segmento."""
+    s = requests.Session()
+    s.headers.update(UA_WEB)
+    seeds = [B3_LISTA, "https://www.b3.com.br/pt_br/noticias/trillia.htm"]
+    for tag in ("veiculos", "carros", "financiamento"):
+        seeds += [f"https://borainvestir.b3.com.br/tudo-sobre/{tag}/"] + \
+                 [f"https://borainvestir.b3.com.br/tudo-sobre/{tag}/page/{i}/" for i in range(2, paginas + 1)]
+    arts, pdfs = {}, {}
+    for u in seeds:
+        try:
+            r = s.get(u, timeout=40)
+        except Exception as e:
+            print("[seed erro]", u, e)
+            continue
+        print("[seed]", r.status_code, u)
+        if r.status_code != 200:
+            continue
+        for href in re.findall(r'href="([^"]+)"', r.text):
+            h = requests.compat.urljoin(u, href)
+            if h.lower().endswith(".pdf") and re.search(r"financiamento", h, re.I):
+                pdfs[h] = 1
+            elif re.search(r"financ", h, re.I) and re.search(r"veicul|veícul|carros|motos", h, re.I) \
+                    and re.search(r"/noticias/", h):
+                arts[h] = 1
+    print("ARTIGOS", len(arts), "PDFS", len(pdfs))
+    for u in list(arts)[:80]:
+        try:
+            html = s.get(u, timeout=40).text
+        except Exception as e:
+            print("[art erro]", u, e)
+            continue
+        soup = BeautifulSoup(html, "html.parser")
+        for a in soup.find_all("a", href=True):
+            h = requests.compat.urljoin(u, a["href"])
+            if h.lower().endswith(".pdf"):
+                pdfs[h] = 1
+        t = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+        tit = soup.title.get_text(strip=True) if soup.title else ""
+        print("\n=== ART", u, "|", tit)
+        for m in re.finditer(r"[^.]*(?:leves|motos|pesados|foram financiad|Publicado|\d{2}/\d{2}/\d{4})[^.]*\.", t):
+            print("  >", m.group(0).strip()[:300])
+    print("PDFS", len(pdfs))
+    import io
+    import pdfplumber
+    for u in list(pdfs)[:40]:
+        print("\n=== PDF", u)
+        try:
+            with pdfplumber.open(io.BytesIO(s.get(u, timeout=60).content)) as pdf:
+                for pg in pdf.pages[:4]:
+                    print((pg.extract_text() or "")[:2500])
+                    print("--- pg")
+        except Exception as e:
+            print("[pdf erro]", e)
+
+
 def atualiza():
     d = _ler()
     erros = []
@@ -180,6 +237,10 @@ def atualiza():
 
 
 if __name__ == "__main__":
+    import sys
+    if "--sondar" in sys.argv:
+        sondar_b3()
+        sys.exit(0)
     for e in atualiza():
         print("[ERRO]", e)
     d = _ler()
