@@ -19,6 +19,7 @@ Junta em alerts/credito_veiculos.json:
 import json
 import re
 import statistics
+import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote
@@ -62,8 +63,12 @@ def mensal():
     """{'meses': ['2023-01', ...], 'taxa_pf': [..], ...} alinhado por mês (None onde falta)."""
     series = {}
     for k, (cod, _) in SGS.items():
-        r = requests.get(f"https://api.bcb.gov.br/dados/serie/bcdata.sgs.{cod}/dados",
-                         params={"formato": "json", "dataInicial": INICIO}, headers=UA_API, timeout=60)
+        for tentativa in range(3):  # a API do SGS devolve 502 de vez em quando
+            r = requests.get(f"https://api.bcb.gov.br/dados/serie/bcdata.sgs.{cod}/dados",
+                             params={"formato": "json", "dataInicial": INICIO}, headers=UA_API, timeout=60)
+            if r.status_code < 500:
+                break
+            time.sleep(5 * (tentativa + 1))
         r.raise_for_status()
         series[k] = {f"{x['data'][6:10]}-{x['data'][3:5]}": float(x["valor"]) for x in r.json()}
     meses = sorted(set().union(*series.values()))
