@@ -265,9 +265,25 @@ def b3_relatorios(ultimos=None):
     return dict(sorted(out.items()))
 
 
-def junta_b3(d, rel):
+# números por tipo citados nas notícias mensais da Trillia/B3 (borainvestir.b3.com.br) que o
+# leitor dos PDFs não consegue pegar no quadro do próprio mês; valem mais que os PDFs
+NOTICIAS_B3 = {
+    "2026-03": {"total": 703000, "leves": 480600, "motos": 192300, "pesados": 28700,
+                "url": "https://borainvestir.b3.com.br/noticias/financiamento-de-veiculos-cresce-128-no-trimestre-e-tem-melhor-inicio-de-ano-desde-2008-aponta-trillia/"},
+    "2026-05": {"total": 630100, "leves": 446000, "pesados": 22000,
+                "url": "https://borainvestir.b3.com.br/noticias/financiamento-de-veiculos-cresce-109-em-12-meses-e-maio-atinge-maior-nivel-para-o-periodo-desde-2011/"},
+    "2026-06": {"motos": 155000, "pesados": 24000,
+                "url": "https://borainvestir.b3.com.br/noticias/financiamento-de-veiculos-cresce-109-no-semestre-e-tem-melhor-inicio-de-ano-desde-2008/"},
+}
+
+
+def junta_b3(d, rel, refazer=False):
     """Completa d['b3'] com os números dos relatórios; o que veio da notícia (mais exato) fica."""
     b3 = d.setdefault("b3", {})
+    if refazer:  # recarga completa: fica só o que veio de notícia, o resto é relido dos PDFs
+        b3 = d["b3"] = {k: v for k, v in b3.items() if "url" in v}
+    for ym, vs in NOTICIAS_B3.items():
+        b3.setdefault(ym, {}).update(vs)
     for ym, vs in rel.items():
         alvo = b3.setdefault(ym, {})
         for k, v in vs.items():
@@ -337,7 +353,7 @@ if __name__ == "__main__":
         sys.exit(0)
     if "--historico" in sys.argv:
         d = _ler()
-        junta_b3(d, b3_relatorios())
+        junta_b3(d, b3_relatorios(), refazer=True)
         ARQ.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     for e in atualiza():
         print("[ERRO]", e)
