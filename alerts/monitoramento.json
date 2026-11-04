@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-03T21:00:16-03:00",
- "updatedLabel": "03/11/2026 21:00",
+ "updatedAt": "2026-11-03T21:34:50-03:00",
+ "updatedLabel": "03/11/2026 21:34",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -3062,23 +3062,14 @@
     "motos": 176000
    }
   },
-  "atualizado": "03/11/2026 17:41",
-  "atualizadoAt": "2026-11-03T17:41:24-03:00",
+  "atualizado": "03/11/2026 21:34",
+  "atualizadoAt": "2026-11-03T21:34:44-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
    "b3": "https://www.b3.com.br/pt_br/noticias/"
   },
   "diaria": [
-   {
-    "ini": "2026-04-17",
-    "fim": "2026-04-24",
-    "n": 38,
-    "media_am": 1.89,
-    "mediana_am": 1.84,
-    "media_aa": 25.56,
-    "mediana_aa": 24.45
-   },
    {
     "ini": "2026-04-20",
     "fim": "2026-04-27",
