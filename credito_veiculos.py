@@ -187,8 +187,9 @@ def pdf_relatorio(conteudo, ano, mes):
     """Lê um relatório mensal 'Mercado de Financiamentos de Veículos' (Trillia/B3) do mês
     ano-mes (só os que têm texto; os anteriores a out/2025 são imagens). Devolve
     (segmentos, historico):
-    - segmentos: {'total'|'leves'|'motos'|'pesados': mil unidades} do próprio mês, do quadro
-      central de cada página de segmento, aceito só se total = usados + novos fechar;
+    - segmentos: {quadro: {'total'|'leves'|'motos'|'pesados': mil unidades}}, quadro 0 = mês
+      anterior, 1 = o próprio mês, 2 = mesmo mês do ano anterior; cada número só é aceito
+      se total = usados + novos fechar e não houver dois candidatos no mesmo quadro;
     - historico: {'AAAA-MM': mil unidades} do total do mesmo mês em cada ano desde 2015
       (página 'PARA O MÊS DE ...', cada barra com o rótulo do mês em cima)."""
     import io
@@ -216,12 +217,14 @@ def pdf_relatorio(conteudo, ano, mes):
             seg = next((k for k, rx in SEG_PAG.items() if re.search(rx, txt)), None)
             if not seg:
                 continue
-            nums = [n for n in _numeros(pg) if pg.width / 3 < n[1] < 2 * pg.width / 3 and n[2] > 130]
-            tot = [a for a in nums if a[0] >= 5 and any(
-                b is not c and abs(b[0] + c[0] - a[0]) <= 1 and b[2] > a[2] and c[2] > a[2] and b[0] < a[0] and c[0] < a[0]
-                for b in nums for c in nums)]
-            if len({a[0] for a in tot}) == 1:
-                segs[seg] = tot[0][0]
+            todos = [n for n in _numeros(pg) if n[2] > 130]
+            for q in range(3):  # 0 = mês anterior, 1 = o mês, 2 = mesmo mês do ano anterior
+                nums = [n for n in todos if q * pg.width / 3 < n[1] < (q + 1) * pg.width / 3]
+                tot = [a for a in nums if a[0] >= 5 and any(
+                    b is not c and abs(b[0] + c[0] - a[0]) <= 1 and b[2] > a[2] and c[2] > a[2] and b[0] < a[0] and c[0] < a[0]
+                    for b in nums for c in nums)]
+                if len({a[0] for a in tot}) == 1:
+                    segs.setdefault(q, {})[seg] = tot[0][0]
     return segs, hist
 
 
@@ -242,7 +245,7 @@ def b3_relatorios(ultimos=None):
     pdfs = sorted(set(pdfs))
     if ultimos:
         pdfs = pdfs[-ultimos:]
-    out = {}
+    out, prio = {}, {}
     for ano, mes, url in pdfs:
         try:
             segs, hist = pdf_relatorio(s.get(url, timeout=90).content, ano, mes)
@@ -252,8 +255,13 @@ def b3_relatorios(ultimos=None):
         print("PDF", f"{ano}-{mes:02d}", segs, hist)
         for ym, v in hist.items():  # relatórios mais novos sobrescrevem (podem ter revisão)
             out.setdefault(ym, {})["total"] = v * 1000
-        for k, v in segs.items():
-            out.setdefault(f"{ano}-{mes:02d}", {})[k] = v * 1000
+        meses = [f"{ano - (mes == 1)}-{(mes - 2) % 12 + 1:02d}", f"{ano}-{mes:02d}", f"{ano - 1}-{mes:02d}"]
+        for q, vs in segs.items():
+            for k, v in vs.items():
+                atual = prio.setdefault(meses[q], {}).get(k)
+                if atual is None or (q == 1) or (q == 0 and atual != 1):  # o próprio mês vale mais; depois o mais recente
+                    prio[meses[q]][k] = q
+                    out.setdefault(meses[q], {})[k] = v * 1000
     return dict(sorted(out.items()))
 
 
