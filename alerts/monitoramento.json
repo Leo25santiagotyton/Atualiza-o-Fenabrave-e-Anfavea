@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-03T21:34:50-03:00",
- "updatedLabel": "03/11/2026 21:34",
+ "updatedAt": "2026-11-04T14:54:02-03:00",
+ "updatedLabel": "04/11/2026 14:54",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -345,8 +345,8 @@
  "eventos": [
   {
    "id": "296b00b4475d",
-   "at": "2026-11-03T16:19:26-03:00",
-   "label": "03/11 16:19",
+   "at": "2026-11-03T23:39:31-03:00",
+   "label": "03/11 23:39",
    "fonte": "FIPE",
    "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
    "link": "https://veiculos.fipe.org.br/"
@@ -875,7 +875,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 6 meses (leves): -4,3%.",
-  "gerado_em": "2026-11-03T16:19:26-03:00",
+  "gerado_em": "2026-11-03T23:39:31-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
@@ -2950,90 +2950,145 @@
     "total": 601000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
+   "2024-10": {
+    "total": 670000,
+    "leves": 478000,
+    "motos": 160000,
+    "pesados": 30000,
+    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   },
    "2024-11": {
     "total": 605000,
+    "leves": 439000,
+    "motos": 139000,
+    "pesados": 26000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2024-12": {
     "total": 614000,
+    "leves": 441000,
+    "motos": 143000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-01": {
     "total": 563000,
+    "leves": 397000,
+    "motos": 134000,
+    "pesados": 20000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-02": {
     "total": 564000,
+    "leves": 391000,
+    "motos": 148000,
+    "pesados": 23000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-03": {
     "total": 551000,
+    "leves": 376000,
+    "motos": 150000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-04": {
     "total": 567000,
+    "leves": 389000,
+    "motos": 153000,
+    "pesados": 23000,
+    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   },
+   "2025-05": {
+    "total": 602000,
+    "leves": 407000,
+    "motos": 153000,
+    "pesados": 23000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-06": {
     "total": 560000,
+    "leves": 388000,
+    "motos": 147000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-07": {
     "total": 639000,
+    "leves": 452000,
+    "motos": 160000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-08": {
     "total": 622000,
+    "leves": 427000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-09": {
     "total": 653000,
+    "leves": 448000,
+    "motos": 5000,
+    "pesados": 25000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-10": {
     "total": 697000,
     "leves": 481000,
+    "motos": 187000,
+    "pesados": 29000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-11": {
     "total": 623000,
     "leves": 437000,
+    "motos": 162000,
+    "pesados": 24000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2025-12": {
     "total": 682000,
     "leves": 483000,
     "motos": 173000,
+    "pesados": 25000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2026-01": {
     "total": 616000,
     "leves": 432000,
+    "motos": 163000,
+    "pesados": 20000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2026-02": {
     "total": 575000,
+    "leves": 397000,
+    "motos": 156000,
+    "pesados": 21000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2026-03": {
     "total": 703000,
-    "leves": 481000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+    "leves": 480600,
+    "motos": 192300,
+    "pesados": 28700,
+    "url": "https://borainvestir.b3.com.br/noticias/financiamento-de-veiculos-cresce-128-no-trimestre-e-tem-melhor-inicio-de-ano-desde-2008-aponta-trillia/"
    },
    "2026-04": {
     "total": 635000,
     "leves": 441000,
+    "motos": 168000,
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    },
    "2026-05": {
-    "total": 630000,
-    "motos": 162000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+    "total": 630100,
+    "leves": 446000,
+    "pesados": 22000,
+    "url": "https://borainvestir.b3.com.br/noticias/financiamento-de-veiculos-cresce-109-em-12-meses-e-maio-atinge-maior-nivel-para-o-periodo-desde-2011/",
+    "motos": 162000
    },
    "2026-06": {
-    "total": 620000,
     "motos": 155000,
-    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+    "pesados": 24000,
+    "url": "https://borainvestir.b3.com.br/noticias/financiamento-de-veiculos-cresce-109-no-semestre-e-tem-melhor-inicio-de-ano-desde-2008/",
+    "total": 620000,
+    "leves": 434000
    },
    "2026-07": {
     "total": 675000,
@@ -3062,8 +3117,8 @@
     "motos": 176000
    }
   },
-  "atualizado": "03/11/2026 21:34",
-  "atualizadoAt": "2026-11-03T21:34:44-03:00",
+  "atualizado": "04/11/2026 14:54",
+  "atualizadoAt": "2026-11-04T14:54:01-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -4167,6 +4222,15 @@
     "mediana_am": 1.66,
     "media_aa": 24.35,
     "mediana_aa": 21.87
+   },
+   {
+    "ini": "2026-10-14",
+    "fim": "2026-10-20",
+    "n": 40,
+    "media_am": 1.77,
+    "mediana_am": 1.71,
+    "media_aa": 23.82,
+    "mediana_aa": 22.62
    }
   ]
  },
