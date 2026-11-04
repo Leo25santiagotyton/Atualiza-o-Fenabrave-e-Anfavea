@@ -291,6 +291,25 @@ def junta_b3(d, rel, refazer=False):
         if "url" not in alvo:
             alvo.setdefault("fonte", "relatório mensal Trillia/B3 (mil unidades)")
     d["b3"] = dict(sorted(b3.items()))
+    # conferência: valores fora de escala saem; se leves + motos + pesados não fecharem com o
+    # total (folga de 3 mil, arredondamento), a quebra do mês sai; se faltar só um dos três,
+    # ele vira o total menos os outros dois, marcado como calculado (<tipo>_calc)
+    faixa = {"leves": (200000, 700000), "motos": (50000, 300000), "pesados": (8000, 60000)}
+    for ym, v in b3.items():
+        for k in faixa:
+            if v.pop(f"{k}_calc", None):
+                v.pop(k, None)
+            if v.get(k) is not None and not faixa[k][0] <= v[k] <= faixa[k][1]:
+                del v[k]
+        partes = [v.get(k) for k in faixa]
+        if v.get("total") and None not in partes and abs(sum(partes) - v["total"]) > 3000 and ym not in NOTICIAS_B3:
+            for k in faixa:
+                v.pop(k, None)
+        falta = [k for k in faixa if v.get(k) is None]
+        if v.get("total") and len(falta) == 1:
+            calc = v["total"] - sum(v[k] for k in faixa if k != falta[0])
+            if faixa[falta[0]][0] <= calc <= faixa[falta[0]][1]:
+                v[falta[0]], v[f"{falta[0]}_calc"] = calc, True
 
 
 def debug_pdf(url):
