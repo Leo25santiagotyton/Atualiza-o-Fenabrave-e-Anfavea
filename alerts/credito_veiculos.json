@@ -2005,13 +2005,12 @@
    "total": 614000,
    "leves": 441000,
    "motos": 143000,
-   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)",
+   "pesados": 30000,
+   "pesados_calc": true
   },
   "2025-01": {
    "total": 563000,
-   "leves": 397000,
-   "motos": 134000,
-   "pesados": 20000,
    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
   },
   "2025-02": {
@@ -2025,7 +2024,9 @@
    "total": 551000,
    "leves": 376000,
    "motos": 150000,
-   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)",
+   "pesados": 25000,
+   "pesados_calc": true
   },
   "2025-04": {
    "total": 567000,
@@ -2036,22 +2037,23 @@
   },
   "2025-05": {
    "total": 602000,
-   "leves": 407000,
-   "motos": 153000,
-   "pesados": 23000,
    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
   },
   "2025-06": {
    "total": 560000,
    "leves": 388000,
    "motos": 147000,
-   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)",
+   "pesados": 25000,
+   "pesados_calc": true
   },
   "2025-07": {
    "total": 639000,
    "leves": 452000,
    "motos": 160000,
-   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)",
+   "pesados": 27000,
+   "pesados_calc": true
   },
   "2025-08": {
    "total": 622000,
@@ -2061,9 +2063,10 @@
   "2025-09": {
    "total": 653000,
    "leves": 448000,
-   "motos": 5000,
    "pesados": 25000,
-   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)",
+   "motos": 180000,
+   "motos_calc": true
   },
   "2025-10": {
    "total": 697000,
@@ -2111,7 +2114,9 @@
    "total": 635000,
    "leves": 441000,
    "motos": 168000,
-   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)",
+   "pesados": 26000,
+   "pesados_calc": true
   },
   "2026-05": {
    "total": 630100,
@@ -2154,8 +2159,8 @@
    "motos": 176000
   }
  },
- "atualizado": "04/11/2026 14:54",
- "atualizadoAt": "2026-11-04T14:54:01-03:00",
+ "atualizado": "04/11/2026 14:55",
+ "atualizadoAt": "2026-11-04T14:55:50-03:00",
  "fontes": {
   "sgs": "https://www3.bcb.gov.br/sgspub/",
   "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
