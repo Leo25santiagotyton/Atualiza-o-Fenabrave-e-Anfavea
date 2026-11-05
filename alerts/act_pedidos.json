@@ -1,8 +1,10 @@
 {
  "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
- "atualizado": "04/11/2026",
+ "atualizado": "05/11/2026",
  "preliminar": {
-  "Classe 8": [],
+  "Classe 8": [
+   "2026-10"
+  ],
   "Classes 5-7": [
    "2026-09"
   ]
@@ -32,7 +34,8 @@
     31751,
     22562,
     16951,
-    18700
+    18700,
+    35000
    ]
   },
   "Classes 5-7": {

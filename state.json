@@ -1,7 +1,11 @@
 {
   "FENABRAVE - Imprensa (releases mensais)": {
-    "hash": "c7dc291abee8c2ef62be8d4abacbd3fce61e298919ce91757a3297c0f33d90d2",
+    "hash": "9e4234935212fb70aef5932f4bfb8a6115e88f7b39a5d53751702fe93a0de98f",
     "items": [
+      {
+        "text": "Emplacamentos de veículos alcançam 2º. maior acumulado da série histórica e Fenabrave reav04/11/2026",
+        "href": "https://www.fenabrave.org.br/portalv2/Noticia/17491"
+      },
       {
         "text": "Emplacamentos de veículos batem recorde histórico em setembro05/10/2026",
         "href": "https://www.fenabrave.org.br/portalv2/Noticia/17490"
@@ -17,10 +21,6 @@
       {
         "text": "Emplacamentos de veículos fecham 1º semestre  com alta acima de 16%02/07/2026",
         "href": "https://www.fenabrave.org.br/portalv2/Noticia/17486"
-      },
-      {
-        "text": "Emplacamentos de veículos mantêm trajetória positiva em maio  e crescimento acumulado é de02/06/2026",
-        "href": "https://www.fenabrave.org.br/portalv2/Noticia/17485"
       }
     ]
   },
@@ -34,6 +34,30 @@
     ]
   },
   "_eventos": [
+    {
+      "id": "198339858c08",
+      "at": "2026-11-05T16:26:48-03:00",
+      "label": "05/11 16:26",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "Classe 8 Out/2026 preliminar: 35.000 pedidos (+43% a/a)",
+      "link": "https://www.fleetequipmentmag.com/july-2026-class-8-orders-act/"
+    },
+    {
+      "id": "9cacab0a4ab3",
+      "at": "2026-11-05T16:26:39-03:00",
+      "label": "05/11 16:26",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "Orders for heavy trucks in North America fell sharply in October - ACT Research",
+      "link": "https://www.marketscreener.com/news/orders-for-heavy-trucks-in-north-america-fell-sharply-in-october-act-research-ce785fded188f12d"
+    },
+    {
+      "id": "65484025b0e0",
+      "at": "2026-11-05T16:26:38-03:00",
+      "label": "05/11 16:26",
+      "fonte": "FENABRAVE",
+      "titulo": "Emplacamentos de veículos alcançam 2º. maior acumulado da série histórica e Fenabrave reav · 04/11/2026",
+      "link": "https://www.fenabrave.org.br/portalv2/Noticia/17491"
+    },
     {
       "id": "6a061a1c6323",
       "at": "2026-10-27T14:24:13-03:00",
@@ -76,8 +100,12 @@
     }
   ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "28d25e5e5030475a29074b04ad770e82f610e9cb8dee52dc4ae0660f70f8d204",
+    "hash": "fdb0e65b52181d4b39a83f8adabbd12fb915041b05b62e414d982d32f52ac380",
     "items": [
+      {
+        "text": "Orders for heavy trucks in North America fell sharply in October - ACT Research",
+        "href": "https://www.marketscreener.com/news/orders-for-heavy-trucks-in-north-america-fell-sharply-in-october-act-research-ce785fded188f12d"
+      },
       {
         "text": "ACT: Final Class 8 orders down in September",
         "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-orders-down-in-september"
@@ -93,10 +121,6 @@
       {
         "text": "Class 8 orders rise in September as EPA27 uncertainty clouds market — Truck News.",
         "href": "https://www.trucknews.com/equipment/class-8-orders-rise-in-september-as-epa27-uncertainty-clouds-market/1003222761/"
-      },
-      {
-        "text": "ACT Research: Regulatory Uncertainty Weighs on September Preliminary Class 8 Net Orders — Equipment Finance Advisor.",
-        "href": "https://www.equipmentfa.com/news/42025/act-research-regulatory-uncertainty-weighs-on-september-preliminary-class-8-net-orders"
       }
     ]
   },
