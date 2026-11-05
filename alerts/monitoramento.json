@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-05T16:26:49-03:00",
- "updatedLabel": "05/11/2026 16:26",
+ "updatedAt": "2026-11-05T16:33:01-03:00",
+ "updatedLabel": "05/11/2026 16:33",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -4267,8 +4267,8 @@
   ]
  },
  "seminovos": {
-  "gerado_em": "2026-11-02T17:42:25-03:00",
-  "dia": "2026-11-02",
+  "gerado_em": "2026-11-05T16:33:01-03:00",
+  "dia": "2026-11-05",
   "lojas": {
    "movida": {
     "cats": {
@@ -4316,7 +4316,7 @@
      }
     },
     "total_site": 5813,
-    "dia": "2026-11-02"
+    "dia": "2026-11-05"
    },
    "localiza": {
     "cats": {
@@ -4364,7 +4364,34 @@
      }
     },
     "total_site": 19851,
-    "dia": "2026-11-02"
+    "dia": "2026-11-05"
+   },
+   "turbi": {
+    "cats": {
+     "Hatch": {
+      "n": 60,
+      "media": 84877,
+      "mediana": 85990,
+      "km": 25506,
+      "ano": 2025.4
+     },
+     "SUV": {
+      "n": 84,
+      "media": 114133,
+      "mediana": 114490,
+      "km": 33338,
+      "ano": 2024.8
+     },
+     "Total": {
+      "n": 144,
+      "media": 101943,
+      "mediana": 99990,
+      "km": 30074,
+      "ano": 2025.1
+     }
+    },
+    "total_site": 144,
+    "dia": "2026-11-05"
    }
   },
   "mensal": [
@@ -4613,6 +4640,32 @@
        "var_cesta": -0.49,
        "cesta_n": 18848
       }
+     },
+     "turbi": {
+      "Hatch": {
+       "media": 84877,
+       "mediana": 85990,
+       "n": 60,
+       "km": 25506,
+       "ano": 2025.4,
+       "dias": 1
+      },
+      "SUV": {
+       "media": 114133,
+       "mediana": 114490,
+       "n": 84,
+       "km": 33338,
+       "ano": 2024.8,
+       "dias": 1
+      },
+      "Total": {
+       "media": 101943,
+       "mediana": 99990,
+       "n": 144,
+       "km": 30074,
+       "ano": 2025.1,
+       "dias": 1
+      }
      }
     }
    }
@@ -4630,6 +4683,10 @@
      "n": 1593,
      "preco": 86074,
      "var": 1.17
+    },
+    "turbi": {
+     "n": 10,
+     "preco": 89290
     }
    },
    {
@@ -4686,6 +4743,10 @@
      "n": 1498,
      "preco": 83535,
      "var": 0.32
+    },
+    "turbi": {
+     "n": 33,
+     "preco": 87475
     }
    },
    {
@@ -4700,6 +4761,10 @@
      "n": 1662,
      "preco": 82666,
      "var": -0.17
+    },
+    "turbi": {
+     "n": 17,
+     "preco": 84519
     }
    },
    {
@@ -4728,6 +4793,10 @@
      "n": 855,
      "preco": 141384,
      "var": -0.11
+    },
+    "turbi": {
+     "n": 37,
+     "preco": 121990
     }
    },
    {
@@ -4770,6 +4839,10 @@
      "n": 673,
      "preco": 143036,
      "var": -0.54
+    },
+    "turbi": {
+     "n": 6,
+     "preco": 128994
     }
    },
    {
@@ -4826,6 +4899,10 @@
      "n": 227,
      "preco": 125217,
      "var": -0.06
+    },
+    "turbi": {
+     "n": 13,
+     "preco": 96990
     }
    },
    {
@@ -4840,6 +4917,10 @@
      "n": 334,
      "preco": 138704,
      "var": -0.47
+    },
+    "turbi": {
+     "n": 3,
+     "preco": 130323
     }
    },
    {
@@ -4854,6 +4935,10 @@
      "n": 413,
      "preco": 123024,
      "var": -2.95
+    },
+    "turbi": {
+     "n": 17,
+     "preco": 108990
     }
    },
    {
@@ -4896,6 +4981,10 @@
      "n": 368,
      "preco": 118971,
      "var": -1.97
+    },
+    "turbi": {
+     "n": 8,
+     "preco": 105990
     }
    },
    {
@@ -5343,9 +5432,28 @@
       }
      }
     }
+   ],
+   "turbi": [
+    {
+     "dia": "2026-11-05",
+     "cats": {
+      "Hatch": {
+       "media": 84877,
+       "n": 60
+      },
+      "SUV": {
+       "media": 114133,
+       "n": 84
+      },
+      "Total": {
+       "media": 101943,
+       "n": 144
+      }
+     }
+    }
    ]
   },
-  "resumo": "Movida: 5.803 carros anunciados, preço médio R$ 89.456, -1,49% no mês na mesma cesta de modelos. Localiza: 19.851 carros anunciados, preço médio R$ 104.176, -0,49% no mês na mesma cesta de modelos.",
+  "resumo": "Movida: 5.803 carros anunciados, preço médio R$ 89.456, -1,49% no mês na mesma cesta de modelos. Localiza: 19.851 carros anunciados, preço médio R$ 104.176, -0,49% no mês na mesma cesta de modelos. Turbi: 144 carros anunciados, preço médio R$ 101.943.",
   "fipe": null
  },
  "usados": {
