@@ -1,5 +1,5 @@
 """
-Radar de seminovos: preços anunciados nas vitrines de seminovos da Movida e da Localiza.
+Radar de seminovos: preços anunciados nas vitrines de seminovos da Movida, da Localiza e da Turbi.
 
 Toda segunda-feira (e quando pedido pelo botão do painel) lê todos os anúncios das duas vitrines (sem login, as mesmas buscas que o site
 faz para quem navega) e guarda, por locadora e por categoria (hatch, sedã, SUV, picape, outros),
@@ -18,6 +18,7 @@ Fontes:
   Movida:   POST https://be-seminovos.movidacloud.com.br/elasticsearch/veiculos  (busca do site
             www.seminovosmovida.com.br, paginada por "from" e "size")
   Localiza: https://seminovos.localiza.com/carros?page=N  (dados da própria página, 23 por página)
+  Turbi:    https://seminovos.turbi.com.br/seminovos?page=N  (lista "initialItems" no payload do Next da página, 18 por página)
 
 Opcional (--com-fipe): Tabela FIPE dos mesmos carros que a Movida anuncia (código FIPE e ano-modelo de cada anúncio, pesados pela
 quantidade à venda), guardada em alerts/seminovos_fipe.json; e o preço pedido pela Movida frente à FIPE.
@@ -47,7 +48,7 @@ RESUMO = ROOT / "alerts" / "seminovos_resumo.json"
 BRT = timezone(timedelta(hours=-3))
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
 CATS = ["Hatch", "Sedã", "SUV", "Picape", "Outros"]
-LOJAS = {"movida": "Movida", "localiza": "Localiza"}
+LOJAS = {"movida": "Movida", "localiza": "Localiza", "turbi": "Turbi"}
 MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
 MAX_DIAS = 400
 
@@ -194,6 +195,48 @@ def localiza(max_paginas=None):
         cat = categoria(x.get("categoriaDescricao"))
         lista.append({"cat": cat, "modelo": chave_modelo(x.get("marcaDescricao"), x.get("modeloFamiliaDescricao"), cat),
                       "ano": x.get("anoModelo"), "km": x.get("odometro"), "preco": float(p), "uf": x.get("siglaEstado")})
+    return lista, total
+
+
+def turbi(max_paginas=None):
+    s = requests.Session()
+    s.headers.update({"User-Agent": UA, "Accept-Language": "pt-BR,pt;q=0.9", "Accept": "text/html"})
+
+    def pagina(n):
+        for tent in range(4):
+            try:
+                r = s.get("https://seminovos.turbi.com.br/seminovos", params={"page": n}, timeout=60)
+                r.raise_for_status()
+                flight = "".join(json.loads('"' + m + '"') for m in re.findall(r'self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)', r.text))
+                i = flight.find('{"initialItems":')
+                d, _ = json.JSONDecoder().raw_decode(flight, i)
+                return d
+            except Exception as e:
+                print(f"::notice::Turbi página {n}: {e}")
+                time.sleep(3 * (tent + 1))
+        return None
+
+    d = pagina(1)
+    if not d:
+        return [], None
+    total, npag = d.get("total"), d.get("totalPages") or 1
+    carros = {x["id"]: x for x in d.get("initialItems") or []}
+    if max_paginas:
+        npag = min(npag, max_paginas)
+    for n in range(2, npag + 1):
+        q = pagina(n)
+        for x in (q or {}).get("initialItems") or []:
+            carros[x["id"]] = x
+        time.sleep(0.3)
+    print(f"Turbi: {len(carros)} de {total} ({npag} páginas)")
+    lista = []
+    for x in carros.values():
+        p = (x.get("priceInCents") or 0) / 100
+        if p < 5000:
+            continue
+        cat = categoria(x.get("type"))
+        lista.append({"cat": cat, "modelo": chave_modelo(x.get("brand"), x.get("model"), cat), "ano": x.get("year"),
+                      "km": x.get("mileageKm"), "preco": float(p), "uf": "SP"})
     return lista, total
 
 
@@ -477,7 +520,7 @@ def main():
     mes = hoje[:7]
     ok = 0
     lista_movida = None
-    for loja, fn in (("movida", movida), ("localiza", localiza)):
+    for loja, fn in (("movida", movida), ("localiza", localiza), ("turbi", turbi)):
         if a.so and a.so != loja:
             continue
         try:

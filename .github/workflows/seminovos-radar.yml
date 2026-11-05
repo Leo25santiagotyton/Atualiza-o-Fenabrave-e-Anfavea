@@ -1,11 +1,16 @@
-name: Radar de seminovos (Movida e Localiza)
+name: Radar de seminovos (Movida, Localiza e Turbi)
 
 # Toda segunda-feira lê os preços anunciados nas vitrines de seminovos da Movida e da Localiza
 # e atualiza o resumo da aba Monitoramento > Radar de seminovos. Segunda, 7h40 de Brasília.
 on:
   schedule:
     - cron: "40 10 * * 1"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      so:
+        description: "Só uma vitrine (movida, localiza ou turbi); vazio = todas"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -33,7 +38,7 @@ jobs:
       - name: Ler as vitrines
         env:
           FIPE_TOKEN: ${{ secrets.FIPE_TOKEN }}
-        run: python seminovos_radar.py && python monitoramento.py
+        run: python seminovos_radar.py ${{ github.event.inputs.so && format('--so {0}', github.event.inputs.so) || '' }} && python monitoramento.py
 
       - name: Salvar
         run: |
