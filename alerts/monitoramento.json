@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-05T16:33:01-03:00",
- "updatedLabel": "05/11/2026 16:33",
+ "updatedAt": "2026-11-05T16:52:52-03:00",
+ "updatedLabel": "05/11/2026 16:52",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -344,6 +344,14 @@
  ],
  "eventos": [
   {
+   "id": "296b00b4475d",
+   "at": "2026-11-05T16:41:04-03:00",
+   "label": "05/11 16:41",
+   "fonte": "FIPE",
+   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
+   "link": "https://veiculos.fipe.org.br/"
+  },
+  {
    "id": "198339858c08",
    "at": "2026-11-05T16:26:48-03:00",
    "label": "05/11 16:26",
@@ -366,14 +374,6 @@
    "fonte": "FENABRAVE",
    "titulo": "Emplacamentos de veículos alcançam 2º. maior acumulado da série histórica e Fenabrave reav · 04/11/2026",
    "link": "https://www.fenabrave.org.br/portalv2/Noticia/17491"
-  },
-  {
-   "id": "296b00b4475d",
-   "at": "2026-11-04T23:46:58-03:00",
-   "label": "04/11 23:46",
-   "fonte": "FIPE",
-   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
-   "link": "https://veiculos.fipe.org.br/"
   },
   {
    "id": "6a061a1c6323",
@@ -902,7 +902,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 7 meses (leves): -4,8%.",
-  "gerado_em": "2026-11-04T23:46:58-03:00",
+  "gerado_em": "2026-11-05T16:41:04-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
@@ -3149,8 +3149,8 @@
     "motos": 176000
    }
   },
-  "atualizado": "04/11/2026 21:51",
-  "atualizadoAt": "2026-11-04T21:51:51-03:00",
+  "atualizado": "05/11/2026 16:52",
+  "atualizadoAt": "2026-11-05T16:52:52-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -4263,6 +4263,15 @@
     "mediana_am": 1.71,
     "media_aa": 23.82,
     "mediana_aa": 22.62
+   },
+   {
+    "ini": "2026-10-15",
+    "fim": "2026-10-21",
+    "n": 40,
+    "media_am": 1.78,
+    "mediana_am": 1.71,
+    "media_aa": 24.0,
+    "mediana_aa": 22.63
    }
   ]
  },
