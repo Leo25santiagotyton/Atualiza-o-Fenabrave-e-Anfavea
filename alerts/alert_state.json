@@ -1,17 +1,10 @@
 {
-  "date": "2026-11-04",
+  "date": "2026-11-05",
   "levels": {
-    "VAMO3": 8,
-    "ARML3": 4,
-    "RENT3": 4,
-    "SIMH3": 4,
+    "AMOB3": 4,
     "JSLG3": 4,
-    "TUPY3": 4,
-    "MOVI3": 4,
-    "RAPT4": 2,
-    "FRAS3": 2,
-    "PRNR3": 2,
-    "RAPT3": 2,
-    "AMOB3": 2
+    "SIMH3": 2,
+    "ARML3": 2,
+    "PRNR3": 2
   }
 }
