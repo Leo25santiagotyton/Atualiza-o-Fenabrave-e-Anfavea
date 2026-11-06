@@ -480,16 +480,20 @@ def monta_resumo(h, hoje):
                     sub_b = {k: v for k, v in cur[loja][1].items() if k.startswith(mk + "|")}
                     row[loja]["var"] = cesta(sub_a, sub_b, min_n=1)[0]
             out["modelos"].append(row)
-        # mesmo modelo e ano-modelo nas duas locadoras: quanto a Movida está acima/abaixo da Localiza
-        if "movida" in cur and "localiza" in cur:
-            cm, cl = cur["movida"][1], cur["localiza"][1]
+        # mesmo modelo e ano-modelo em duas vitrines: quanto a primeira está acima/abaixo da segunda (todas as duplas)
+        def compara(a, b):
+            ca, cb, res = cur[a][1], cur[b][1], []
             for c in CATS + ["Total"]:
                 sw = sl = 0
-                for k, (n1, p1) in cm.items():
-                    if (c == "Total" or k.split("|")[2] == c) and k in cl and n1 >= 2 and cl[k][0] >= 2:
-                        w = min(n1, cl[k][0]); sw += w; sl += w * math.log(p1 / cl[k][1])
+                for k, (n1, p1) in ca.items():
+                    if (c == "Total" or k.split("|")[2] == c) and k in cb and n1 >= 2 and cb[k][0] >= 2:
+                        w = min(n1, cb[k][0]); sw += w; sl += w * math.log(p1 / cb[k][1])
                 if sw:
-                    out["comparacao"].append({"cat": c, "dif": round((math.exp(sl / sw) - 1) * 100, 2), "carros": round(sw)})
+                    res.append({"cat": c, "dif": round((math.exp(sl / sw) - 1) * 100, 2), "carros": round(sw)})
+            return res
+        lojas = [x for x in LOJAS if x in cur]
+        out["comparacoes"] = {f"{a}|{b}": compara(a, b) for i, a in enumerate(lojas) for b in lojas[i + 1:]}
+        out["comparacao"] = out["comparacoes"].get("movida|localiza", [])
     # frase de resumo
     ult = out["mensal"][-1] if out["mensal"] else None
     partes = []

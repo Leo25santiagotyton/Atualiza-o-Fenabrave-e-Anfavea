@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-06T15:02:21-03:00",
+ "updatedAt": "2026-11-06T15:02:55-03:00",
  "updatedLabel": "06/11/2026 15:02",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
@@ -5463,10 +5463,78 @@
    ]
   },
   "resumo": "Movida: 5.803 carros anunciados, preço médio R$ 89.456, -1,49% no mês na mesma cesta de modelos. Localiza: 19.851 carros anunciados, preço médio R$ 104.176, -0,49% no mês na mesma cesta de modelos. Turbi: 144 carros anunciados, preço médio R$ 101.943.",
-  "fipe": null
+  "fipe": null,
+  "comparacoes": {
+   "movida|localiza": [
+    {
+     "cat": "Hatch",
+     "dif": -6.83,
+     "carros": 1566
+    },
+    {
+     "cat": "Sedã",
+     "dif": -9.53,
+     "carros": 775
+    },
+    {
+     "cat": "SUV",
+     "dif": -13.97,
+     "carros": 1248
+    },
+    {
+     "cat": "Picape",
+     "dif": -8.3,
+     "carros": 259
+    },
+    {
+     "cat": "Outros",
+     "dif": -5.1,
+     "carros": 73
+    },
+    {
+     "cat": "Total",
+     "dif": -9.75,
+     "carros": 3921
+    }
+   ],
+   "movida|turbi": [
+    {
+     "cat": "Hatch",
+     "dif": -5.0,
+     "carros": 58
+    },
+    {
+     "cat": "SUV",
+     "dif": -2.19,
+     "carros": 76
+    },
+    {
+     "cat": "Total",
+     "dif": -3.41,
+     "carros": 134
+    }
+   ],
+   "localiza|turbi": [
+    {
+     "cat": "Hatch",
+     "dif": -2.93,
+     "carros": 58
+    },
+    {
+     "cat": "SUV",
+     "dif": 13.31,
+     "carros": 83
+    },
+    {
+     "cat": "Total",
+     "dif": 6.32,
+     "carros": 141
+    }
+   ]
+  }
  },
  "usados": {
-  "updatedAt": "2026-11-06T15:02:21-03:00",
+  "updatedAt": "2026-11-05T21:20:57-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
