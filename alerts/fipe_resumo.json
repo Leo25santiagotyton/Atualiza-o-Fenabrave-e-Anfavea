@@ -91,7 +91,7 @@
     "SUV": -0.23432935452748493,
     "Picape": -0.8735806802877555,
     "Leves": -0.47635071059706213,
-    "Caminhão": -1.3034555709794282,
+    "Caminhão": -1.841837650783007,
     "Moto": -0.4761347577797892
    },
    "n": {
@@ -100,7 +100,7 @@
     "SUV": 5,
     "Picape": 6,
     "Leves": 25,
-    "Caminhão": 3,
+    "Caminhão": 4,
     "Moto": 17
    }
   },
@@ -311,7 +311,7 @@
    "meses": 8
   },
   "Caminhão": {
-   "var": -6.166187074534724,
+   "var": -6.678043326959459,
    "meses": 7
   },
   "Moto": {
@@ -338,7 +338,7 @@
   "Moto": 24
  },
  "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 8 meses (leves): -5,8%.",
- "gerado_em": "2026-11-05T23:47:13-03:00",
+ "gerado_em": "2026-11-06T15:58:02-03:00",
  "maiores_altas": [
   {
    "nome": "Honda CG 160",
