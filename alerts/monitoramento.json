@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-06T15:20:08-03:00",
+ "updatedAt": "2026-11-06T15:20:47-03:00",
  "updatedLabel": "06/11/2026 15:20",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
@@ -6245,8 +6245,8 @@
     }
    ]
   },
-  "resumo": "Vamos: 1.686 carros anunciados, preço médio R$ 294.368. VolksConfia (VW): 85 carros anunciados, preço médio R$ 458.159.",
-  "aviso": "Coleta semanal (segundas) desde nov/26; a variação mês a mês aparece quando houver dois meses de dados (o site das locadoras não mostra preços antigos).",
+  "resumo": "Vamos: 1.686 veículos anunciados, preço médio R$ 294.368. VolksConfia (VW): 85 veículos anunciados, preço médio R$ 458.159.",
+  "aviso": "Coleta semanal (segundas) desde nov/26; a variação mês a mês aparece quando houver dois meses de dados (as vitrines não mostram preços antigos).",
   "fipe": null
  }
 }
