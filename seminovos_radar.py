@@ -276,7 +276,15 @@ def vamos(max_paginas=None):
     m = re.search(r'data-mlc-est-pag[^>]*data-total="(\d+)"', r.text)
     total = int(m.group(1)) if m else None
     # os primeiros cartões vêm no HTML; o resto, no payload do Next (strings com o HTML dos cartões)
-    texto = r.text + "".join(json.loads('"' + m + '"') for m in re.findall(r'self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)', r.text))
+    fl = "".join(json.loads('"' + m + '"') for m in re.findall(r'self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)', r.text))
+    # no payload o HTML dos cartões ainda vem escapado dentro de outra string JSON
+    internas = []
+    for m in re.finditer(r'"((?:[^"\\]|\\.)*?est-card(?:[^"\\]|\\.)*)"', fl):
+        try:
+            internas.append(json.loads('"' + m.group(1) + '"'))
+        except ValueError:
+            pass
+    texto = r.text + "".join(internas)
     carros = {}
     for a in re.findall(r'<article class="est-card"[^>]*>', texto):
         at = dict(re.findall(r'data-([a-z-]+)="([^"]*)"', a))
