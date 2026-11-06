@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-05T21:57:07-03:00",
- "updatedLabel": "05/11/2026 21:57",
+ "updatedAt": "2026-11-06T15:02:55-03:00",
+ "updatedLabel": "06/11/2026 15:02",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -345,8 +345,8 @@
  "eventos": [
   {
    "id": "296b00b4475d",
-   "at": "2026-11-05T16:41:04-03:00",
-   "label": "05/11 16:41",
+   "at": "2026-11-05T23:47:13-03:00",
+   "label": "05/11 23:47",
    "fonte": "FIPE",
    "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
    "link": "https://veiculos.fipe.org.br/"
@@ -651,21 +651,21 @@
     "curto": "ago/26",
     "var": {
      "Hatch": -0.07968589259731429,
-     "Sedã": -0.322934299632438,
-     "SUV": -0.5069936200547964,
-     "Picape": -1.2951969170528321,
-     "Leves": -0.43993657633646377,
-     "Caminhão": -1.6830322203003067,
-     "Moto": -0.3125477100474061
+     "Sedã": -0.9518863484435869,
+     "SUV": -0.23432935452748493,
+     "Picape": -0.8735806802877555,
+     "Leves": -0.47635071059706213,
+     "Caminhão": -1.3034555709794282,
+     "Moto": -0.4761347577797892
     },
     "n": {
      "Hatch": 9,
-     "Sedã": 4,
-     "SUV": 4,
-     "Picape": 4,
-     "Leves": 21,
-     "Caminhão": 1,
-     "Moto": 6
+     "Sedã": 5,
+     "SUV": 5,
+     "Picape": 6,
+     "Leves": 25,
+     "Caminhão": 3,
+     "Moto": 17
     }
    },
    {
@@ -673,22 +673,22 @@
     "mes": "julho/2026",
     "curto": "jul/26",
     "var": {
-     "Hatch": 0.25398371422165056,
-     "Sedã": -0.07593560841971936,
-     "SUV": -0.8996892931923406,
-     "Picape": -0.9192175287513038,
-     "Leves": -0.3116500479525608,
-     "Caminhão": 1.1286997006983768,
-     "Moto": -0.948937627823554
+     "Hatch": 0.12045668328590775,
+     "Sedã": 0.13817703779197554,
+     "SUV": -0.4498280292466572,
+     "Picape": -0.43422659239946704,
+     "Leves": -0.11996806413838712,
+     "Caminhão": 0.19798455559849604,
+     "Moto": -0.9479447482135805
     },
     "n": {
-     "Hatch": 3,
-     "Sedã": 3,
-     "SUV": 2,
-     "Picape": 2,
-     "Leves": 10,
-     "Caminhão": 1,
-     "Moto": 5
+     "Hatch": 8,
+     "Sedã": 5,
+     "SUV": 4,
+     "Picape": 6,
+     "Leves": 23,
+     "Caminhão": 3,
+     "Moto": 13
     }
    },
    {
@@ -696,22 +696,22 @@
     "mes": "junho/2026",
     "curto": "jun/26",
     "var": {
-     "Hatch": 0.09965074137674446,
-     "Sedã": -0.3358967484888953,
-     "SUV": 0.06436050522786729,
-     "Picape": null,
-     "Leves": -0.10816763506774629,
-     "Caminhão": 1.4906371477739988,
-     "Moto": 0.11165479431052283
+     "Hatch": -0.258802861773455,
+     "Sedã": -0.2501190630861627,
+     "SUV": -0.5498081239765695,
+     "Picape": -0.8782331516636432,
+     "Leves": -0.47170807281536886,
+     "Caminhão": 0.9272884209984511,
+     "Moto": -0.14700815016297497
     },
     "n": {
-     "Hatch": 3,
-     "Sedã": 5,
-     "SUV": 3,
-     "Picape": 0,
-     "Leves": 11,
-     "Caminhão": 2,
-     "Moto": 10
+     "Hatch": 9,
+     "Sedã": 6,
+     "SUV": 5,
+     "Picape": 7,
+     "Leves": 27,
+     "Caminhão": 3,
+     "Moto": 12
     }
    },
    {
@@ -719,22 +719,22 @@
     "mes": "maio/2026",
     "curto": "mai/26",
     "var": {
-     "Hatch": -0.6087183164617427,
-     "Sedã": -0.24606806736960918,
-     "SUV": -0.379102677772436,
-     "Picape": null,
-     "Leves": -0.46551711075792923,
-     "Caminhão": null,
-     "Moto": null
+     "Hatch": -0.3928510468998003,
+     "Sedã": -0.17702751457907562,
+     "SUV": -0.40159952850541414,
+     "Picape": -0.5948919560952115,
+     "Leves": -0.41001742345903036,
+     "Caminhão": -1.6775230645400097,
+     "Moto": -0.4062192189507208
     },
     "n": {
-     "Hatch": 7,
-     "Sedã": 3,
-     "SUV": 4,
-     "Picape": 0,
-     "Leves": 14,
-     "Caminhão": 0,
-     "Moto": 0
+     "Hatch": 8,
+     "Sedã": 4,
+     "SUV": 5,
+     "Picape": 6,
+     "Leves": 23,
+     "Caminhão": 3,
+     "Moto": 10
     }
    },
    {
@@ -742,20 +742,20 @@
     "mes": "abril/2026",
     "curto": "abr/26",
     "var": {
-     "Hatch": null,
-     "Sedã": null,
-     "SUV": null,
+     "Hatch": -0.7045335160980493,
+     "Sedã": -1.0484019499238495,
+     "SUV": -1.1917423246366687,
      "Picape": null,
-     "Leves": null,
+     "Leves": -0.928979525900997,
      "Caminhão": null,
      "Moto": null
     },
     "n": {
-     "Hatch": 0,
-     "Sedã": 0,
-     "SUV": 0,
+     "Hatch": 8,
+     "Sedã": 4,
+     "SUV": 5,
      "Picape": 0,
-     "Leves": 0,
+     "Leves": 17,
      "Caminhão": 0,
      "Moto": 0
     }
@@ -855,32 +855,32 @@
   ],
   "acumulado": {
    "Hatch": {
-    "var": -3.338850823775419,
-    "meses": 7
+    "var": -4.283504261836313,
+    "meses": 8
    },
    "Sedã": {
-    "var": -3.9246403440853395,
-    "meses": 7
+    "var": -5.182285361702532,
+    "meses": 8
    },
    "SUV": {
-    "var": -5.612567787959632,
-    "meses": 7
+    "var": -6.654991624640938,
+    "meses": 8
    },
    "Picape": {
-    "var": -5.56928399097103,
-    "meses": 5
-   },
-   "Leves": {
-    "var": -4.765857535105377,
+    "var": -6.100604730498194,
     "meses": 7
    },
+   "Leves": {
+    "var": -5.795127176205361,
+    "meses": 8
+   },
    "Caminhão": {
-    "var": -3.5136466511731967,
-    "meses": 6
+    "var": -6.166187074534724,
+    "meses": 7
    },
    "Moto": {
-    "var": -1.6186211659598992,
-    "meses": 6
+    "var": -2.430819525562433,
+    "meses": 7
    }
   },
   "preco_medio": {
@@ -901,8 +901,8 @@
    "Caminhão": 21,
    "Moto": 24
   },
-  "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 7 meses (leves): -4,8%.",
-  "gerado_em": "2026-11-05T16:41:04-03:00",
+  "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 8 meses (leves): -5,8%.",
+  "gerado_em": "2026-11-05T23:47:13-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
@@ -5463,7 +5463,75 @@
    ]
   },
   "resumo": "Movida: 5.803 carros anunciados, preço médio R$ 89.456, -1,49% no mês na mesma cesta de modelos. Localiza: 19.851 carros anunciados, preço médio R$ 104.176, -0,49% no mês na mesma cesta de modelos. Turbi: 144 carros anunciados, preço médio R$ 101.943.",
-  "fipe": null
+  "fipe": null,
+  "comparacoes": {
+   "movida|localiza": [
+    {
+     "cat": "Hatch",
+     "dif": -6.83,
+     "carros": 1566
+    },
+    {
+     "cat": "Sedã",
+     "dif": -9.53,
+     "carros": 775
+    },
+    {
+     "cat": "SUV",
+     "dif": -13.97,
+     "carros": 1248
+    },
+    {
+     "cat": "Picape",
+     "dif": -8.3,
+     "carros": 259
+    },
+    {
+     "cat": "Outros",
+     "dif": -5.1,
+     "carros": 73
+    },
+    {
+     "cat": "Total",
+     "dif": -9.75,
+     "carros": 3921
+    }
+   ],
+   "movida|turbi": [
+    {
+     "cat": "Hatch",
+     "dif": -5.0,
+     "carros": 58
+    },
+    {
+     "cat": "SUV",
+     "dif": -2.19,
+     "carros": 76
+    },
+    {
+     "cat": "Total",
+     "dif": -3.41,
+     "carros": 134
+    }
+   ],
+   "localiza|turbi": [
+    {
+     "cat": "Hatch",
+     "dif": -2.93,
+     "carros": 58
+    },
+    {
+     "cat": "SUV",
+     "dif": 13.31,
+     "carros": 83
+    },
+    {
+     "cat": "Total",
+     "dif": 6.32,
+     "carros": 141
+    }
+   ]
+  }
  },
  "usados": {
   "updatedAt": "2026-11-05T21:20:57-03:00",
