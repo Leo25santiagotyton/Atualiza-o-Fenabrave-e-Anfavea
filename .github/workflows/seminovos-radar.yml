@@ -1,4 +1,4 @@
-name: Radar de seminovos (Movida, Localiza e Turbi)
+name: Radar de seminovos (Movida, Localiza e Turbi; caminhões Vamos e VolksConfia)
 
 # Toda segunda-feira lê os preços anunciados nas vitrines de seminovos da Movida e da Localiza
 # e atualiza o resumo da aba Monitoramento > Radar de seminovos. Segunda, 7h40 de Brasília.
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       so:
-        description: "Só uma vitrine (movida, localiza ou turbi); vazio = todas"
+        description: "Só uma vitrine (movida, localiza, turbi, vamos, volksconfia) ou 'caminhoes'; vazio = todas"
         required: false
         default: ""
 
@@ -38,22 +38,33 @@ jobs:
       - name: Ler as vitrines
         env:
           FIPE_TOKEN: ${{ secrets.FIPE_TOKEN }}
-        run: python seminovos_radar.py ${{ github.event.inputs.so && format('--so {0}', github.event.inputs.so) || '' }} && python monitoramento.py
+          SO: ${{ github.event.inputs.so }}
+        run: |
+          case "$SO" in
+            vamos|volksconfia) python seminovos_radar.py --segmento caminhoes --so "$SO" ;;
+            caminhoes) python seminovos_radar.py --segmento caminhoes ;;
+            "") python seminovos_radar.py
+                python seminovos_radar.py --segmento caminhoes || echo "::warning::radar de caminhões falhou" ;;
+            *) python seminovos_radar.py --so "$SO" ;;
+          esac
+          python monitoramento.py
 
       - name: Salvar
         run: |
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
-          cp alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json "$RUNNER_TEMP/"
-          git add alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json alerts/monitoramento.json
+          F="alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json alerts/caminhoes_hist.json alerts/caminhoes_resumo.json"
+          F=$(for f in $F; do [ -f "$f" ] && echo "$f"; done)
+          cp $F "$RUNNER_TEMP/"
+          git add $F alerts/monitoramento.json
           git diff --quiet --cached && exit 0
           git commit -qm "Radar de seminovos [skip ci]"
           for i in 1 2 3 4; do
             git push && exit 0
             sleep 5
             git fetch -q origin main && git reset -q --hard origin/main
-            cp "$RUNNER_TEMP/seminovos_hist.json" "$RUNNER_TEMP/seminovos_resumo.json" "$RUNNER_TEMP/seminovos_fipe.json" alerts/ && python monitoramento.py
-            git add alerts/seminovos_hist.json alerts/seminovos_resumo.json alerts/seminovos_fipe.json alerts/monitoramento.json
+            for f in $F; do cp "$RUNNER_TEMP/$(basename $f)" alerts/; done && python monitoramento.py
+            git add $F alerts/monitoramento.json
             git diff --quiet --cached && exit 0
             git commit -qm "Radar de seminovos [skip ci]"
           done
