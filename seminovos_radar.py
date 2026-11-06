@@ -261,36 +261,38 @@ def categoria_pesado(c):
 
 
 def vamos(max_paginas=None):
-    """Vamos Seminovos (vamos.com.br/seminovos): a página traz todo o estoque em cartões com os dados nos atributos."""
-    r = None
-    for tent in range(4):
-        try:
-            r = requests.get("https://vamos.com.br/seminovos", headers={"User-Agent": UA, "Accept-Language": "pt-BR,pt;q=0.9"}, timeout=90)
-            r.raise_for_status()
-            break
-        except Exception as e:
-            print(f"::notice::Vamos: {e}")
-            time.sleep(5 * (tent + 1))
-    if r is None or not r.ok:
+    """Vamos Seminovos (vamos.com.br/seminovos-vamos/pagina/N): 48 cartões por página, com os dados nos atributos."""
+    s = requests.Session()
+    s.headers.update({"User-Agent": UA, "Accept-Language": "pt-BR,pt;q=0.9"})
+
+    def pagina(n):
+        for tent in range(4):
+            try:
+                r = s.get(f"https://vamos.com.br/seminovos-vamos/pagina/{n}", timeout=90)
+                r.raise_for_status()
+                return r.text
+            except Exception as e:
+                print(f"::notice::Vamos página {n}: {e}")
+                time.sleep(5 * (tent + 1))
+        return None
+
+    t = pagina(1)
+    if not t:
         return [], None
-    m = re.search(r'data-mlc-est-pag[^>]*data-total="(\d+)"', r.text)
+    m = re.search(r'data-mlc-est-pag[^>]*data-total="(\d+)"', t)
     total = int(m.group(1)) if m else None
-    # os primeiros cartões vêm no HTML; o resto, no payload do Next (strings com o HTML dos cartões)
-    fl = "".join(json.loads('"' + m + '"') for m in re.findall(r'self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)', r.text))
-    # no payload o HTML dos cartões ainda vem escapado dentro de outra string JSON
-    internas = []
-    for m in re.finditer(r'"((?:[^"\\]|\\.)*?est-card(?:[^"\\]|\\.)*)"', fl):
-        try:
-            internas.append(json.loads('"' + m.group(1) + '"'))
-        except ValueError:
-            pass
-    texto = r.text + "".join(internas)
+    npag = max(int(x) for x in re.findall(r'/seminovos-vamos/pagina/(\d+)', t) or ["1"])
+    if max_paginas:
+        npag = min(npag, max_paginas)
     carros = {}
-    for a in re.findall(r'<article class="est-card"[^>]*>', texto):
-        at = dict(re.findall(r'data-([a-z-]+)="([^"]*)"', a))
-        if at.get("id"):
-            carros[at["id"]] = at
-    print(f"Vamos: {len(carros)} de {total}")
+    for n in range(1, npag + 1):
+        t = t if n == 1 else pagina(n)
+        for a in re.findall(r'<article class="est-card"[^>]*>', t or ""):
+            at = dict(re.findall(r'data-([a-z-]+)="([^"]*)"', a))
+            if at.get("id"):
+                carros[at["id"]] = at
+        time.sleep(0.3)
+    print(f"Vamos: {len(carros)} de {total} ({npag} páginas)")
     lista = []
     for x in carros.values():
         try:
