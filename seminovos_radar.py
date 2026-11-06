@@ -304,7 +304,8 @@ def vamos(max_paginas=None):
         cat = categoria_pesado(x.get("categoria"))
         lista.append({"cat": cat, "modelo": chave_modelo(x.get("marca"), x.get("modelo"), cat),
                       "ano": int(x["ano"]) if (x.get("ano") or "").isdigit() else None,
-                      "km": int(x["km"]) if (x.get("km") or "").isdigit() else None, "preco": p, "uf": None})
+                      "km": int(x["km"]) if (x.get("km") or "").isdigit() and 0 < int(x["km"]) < 3_000_000 else None,  # há km digitado errado
+                      "preco": p, "uf": None})
     return lista, total
 
 
