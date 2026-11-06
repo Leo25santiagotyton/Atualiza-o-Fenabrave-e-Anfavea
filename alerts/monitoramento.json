@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-06T15:02:55-03:00",
- "updatedLabel": "06/11/2026 15:02",
+ "updatedAt": "2026-11-06T15:11:12-03:00",
+ "updatedLabel": "06/11/2026 15:11",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -5534,7 +5534,7 @@
   }
  },
  "usados": {
-  "updatedAt": "2026-11-05T21:20:57-03:00",
+  "updatedAt": "2026-11-06T15:02:21-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
@@ -5735,5 +5735,341 @@
     "fonte": "https://www.fenauto.org.br/news/vendas-de-veiculos-usados-tem-alta"
    }
   ]
+ },
+ "caminhoes": {
+  "gerado_em": "2026-11-06T15:11:12-03:00",
+  "dia": "2026-11-06",
+  "lojas": {
+   "volksconfia": {
+    "cats": {
+     "Cavalo mecânico": {
+      "n": 54,
+      "media": 494067,
+      "mediana": 449500,
+      "km": 333626,
+      "ano": 2022.9
+     },
+     "Caminhão": {
+      "n": 31,
+      "media": 395610,
+      "mediana": 390000,
+      "km": 272384,
+      "ano": 2020.6
+     },
+     "Total": {
+      "n": 85,
+      "media": 458159,
+      "mediana": 420000,
+      "km": 311290,
+      "ano": 2022.1
+     }
+    },
+    "total_site": 85,
+    "dia": "2026-11-06"
+   }
+  },
+  "mensal": [
+   {
+    "mes": "2026-11",
+    "curto": "nov/26",
+    "lojas": {
+     "volksconfia": {
+      "Cavalo mecânico": {
+       "media": 494067,
+       "mediana": 449500,
+       "n": 54,
+       "km": 333626,
+       "ano": 2022.9,
+       "dias": 1
+      },
+      "Caminhão": {
+       "media": 395610,
+       "mediana": 390000,
+       "n": 31,
+       "km": 272384,
+       "ano": 2020.6,
+       "dias": 1
+      },
+      "Total": {
+       "media": 458159,
+       "mediana": 420000,
+       "n": 85,
+       "km": 311290,
+       "ano": 2022.1,
+       "dias": 1
+      }
+     }
+    }
+   }
+  ],
+  "modelos": [
+   {
+    "modelo": "Volkswagen 25 (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 7,
+     "preco": 345000
+    }
+   },
+   {
+    "modelo": "Volvo Fh (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 6,
+     "preco": 780833
+    }
+   },
+   {
+    "modelo": "Volkswagen 11 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 6,
+     "preco": 290617
+    }
+   },
+   {
+    "modelo": "Volvo Fm (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 5,
+     "preco": 670000
+    }
+   },
+   {
+    "modelo": "Volkswagen Meteor (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 5,
+     "preco": 424980
+    }
+   },
+   {
+    "modelo": "Volkswagen 33.480 (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 4,
+     "preco": 522500
+    }
+   },
+   {
+    "modelo": "Scania G (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 4,
+     "preco": 490000
+    }
+   },
+   {
+    "modelo": "Scania R (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 3,
+     "preco": 612667
+    }
+   },
+   {
+    "modelo": "Volkswagen 19 (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 3,
+     "preco": 360000
+    }
+   },
+   {
+    "modelo": "Mercedes-Benz Atego (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 3,
+     "preco": 420000
+    }
+   },
+   {
+    "modelo": "Mercedes-Benz Axor (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 3,
+     "preco": 321667
+    }
+   },
+   {
+    "modelo": "Man Tgx (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 3,
+     "preco": 273333
+    }
+   },
+   {
+    "modelo": "Volvo Fh (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 2,
+     "preco": 817450
+    }
+   },
+   {
+    "modelo": "Volkswagen 25 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 2,
+     "preco": 515000
+    }
+   },
+   {
+    "modelo": "Daf Xf (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 2,
+     "preco": 537400
+    }
+   },
+   {
+    "modelo": "Volkswagen Volkswagen/29.520 (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 2,
+     "preco": 382000
+    }
+   },
+   {
+    "modelo": "Mercedes-Benz Actros (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 2,
+     "preco": 389950
+    }
+   },
+   {
+    "modelo": "Volkswagen 24 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 2,
+     "preco": 390000
+    }
+   },
+   {
+    "modelo": "Volkswagen 30.320 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 530000
+    }
+   },
+   {
+    "modelo": "Volvo Volvo/Fmx (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 1,
+     "preco": 820000
+    }
+   },
+   {
+    "modelo": "Volkswagen 25.480 (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 1,
+     "preco": 470000
+    }
+   },
+   {
+    "modelo": "Volvo Volvo/Fh (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 1,
+     "preco": 630000
+    }
+   },
+   {
+    "modelo": "Volkswagen 17 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 529000
+    }
+   },
+   {
+    "modelo": "Volkswagen 31 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 572000
+    }
+   },
+   {
+    "modelo": "Volkswagen 6 (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 280000
+    }
+   },
+   {
+    "modelo": "Mercedes-Benz Mercedes (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 430000
+    }
+   },
+   {
+    "modelo": "Mercedes-Benz Axor (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 390000
+    }
+   },
+   {
+    "modelo": "Mercedes-Benz Mercedes (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 1,
+     "preco": 390000
+    }
+   },
+   {
+    "modelo": "Volvo Volvo/Fm (Caminhão)",
+    "cat": "Caminhão",
+    "volksconfia": {
+     "n": 1,
+     "preco": 580000
+    }
+   },
+   {
+    "modelo": "Scania P (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 1,
+     "preco": 435000
+    }
+   }
+  ],
+  "comparacao": [],
+  "semanal": {
+   "vamos": [],
+   "volksconfia": [
+    {
+     "dia": "2026-11-06",
+     "cats": {
+      "Cavalo mecânico": {
+       "media": 494067,
+       "n": 54
+      },
+      "Caminhão": {
+       "media": 395610,
+       "n": 31
+      },
+      "Total": {
+       "media": 458159,
+       "n": 85
+      }
+     }
+    }
+   ]
+  },
+  "comparacoes": {},
+  "resumo": "VolksConfia (VW): 85 carros anunciados, preço médio R$ 458.159.",
+  "aviso": "Coleta semanal (segundas) desde nov/26; a variação mês a mês aparece quando houver dois meses de dados (o site das locadoras não mostra preços antigos).",
+  "fipe": null
  }
 }
