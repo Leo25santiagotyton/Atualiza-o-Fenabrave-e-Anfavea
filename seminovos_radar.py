@@ -589,14 +589,14 @@ def monta_resumo(h, hoje):
             t = ult["lojas"].get(loja, {}).get("Total")
             if t:
                 mil = lambda v: f"{v:,}".replace(",", ".")
-                s = f"{nome}: {mil(t['n'])} carros anunciados, preço médio R$ {mil(t['media'])}"
+                s = f"{nome}: {mil(t['n'])} {'veículos' if 'vamos' in LOJAS else 'carros'} anunciados, preço médio R$ {mil(t['media'])}"
                 if t.get("var_cesta") is not None:
                     s += f", {'+' if t['var_cesta'] > 0 else ''}{str(t['var_cesta']).replace('.', ',')}% no mês na mesma cesta de modelos"
                 partes.append(s)
     out["resumo"] = ". ".join(partes) + "." if partes else ""
     if len(meses) < 2:
         out["aviso"] = (f"Coleta semanal (segundas) desde {curto(meses[0]) if meses else 'hoje'}; a variação mês a mês aparece quando houver dois meses "
-                        "de dados (o site das locadoras não mostra preços antigos).")
+                        "de dados (as vitrines não mostram preços antigos).")
     return out
 
 
