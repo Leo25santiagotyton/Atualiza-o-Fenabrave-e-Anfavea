@@ -49,6 +49,13 @@ BRT = timezone(timedelta(hours=-3))
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
 CATS = ["Hatch", "Sedã", "SUV", "Picape", "Outros"]
 LOJAS = {"movida": "Movida", "localiza": "Localiza", "turbi": "Turbi"}
+# segmento de caminhões (--segmento caminhoes): mesmas contas, outras vitrines e categorias
+SEGMENTOS = {
+    "carros": {"hist": HIST, "resumo": RESUMO, "cats": CATS, "lojas": LOJAS},
+    "caminhoes": {"hist": ROOT / "alerts" / "caminhoes_hist.json", "resumo": ROOT / "alerts" / "caminhoes_resumo.json",
+                  "cats": ["Cavalo mecânico", "Caminhão", "Carreta", "Ônibus", "Máquinas"],
+                  "lojas": {"vamos": "Vamos", "volksconfia": "VolksConfia (VW)"}},
+}
 MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
 MAX_DIAS = 400
 
@@ -238,6 +245,73 @@ def turbi(max_paginas=None):
         lista.append({"cat": cat, "modelo": chave_modelo(x.get("brand"), x.get("model"), cat), "ano": x.get("year"),
                       "km": x.get("mileageKm"), "preco": float(p), "uf": "SP"})
     return lista, total
+
+
+def categoria_pesado(c):
+    c = _ascii(c)
+    if "CAVALO" in c:
+        return "Cavalo mecânico"
+    if "CARRETA" in c or "REBOQUE" in c or "IMPLEMENTO" in c:
+        return "Carreta"
+    if "ONIBUS" in c or "MICRO" in c:
+        return "Ônibus"
+    if "MAQUIN" in c or "EQUIPAMENTO" in c or "EMPILHADEIRA" in c or "TRATOR" in c:
+        return "Máquinas"
+    return "Caminhão"
+
+
+def vamos(max_paginas=None):
+    """Vamos Seminovos (vamos.com.br/seminovos): a página traz todo o estoque em cartões com os dados nos atributos."""
+    r = None
+    for tent in range(4):
+        try:
+            r = requests.get("https://vamos.com.br/seminovos", headers={"User-Agent": UA, "Accept-Language": "pt-BR,pt;q=0.9"}, timeout=90)
+            r.raise_for_status()
+            break
+        except Exception as e:
+            print(f"::notice::Vamos: {e}")
+            time.sleep(5 * (tent + 1))
+    if r is None or not r.ok:
+        return [], None
+    m = re.search(r'data-mlc-est-pag[^>]*data-total="(\d+)"', r.text)
+    total = int(m.group(1)) if m else None
+    carros = {}
+    for a in re.findall(r'<article class="est-card"[^>]*>', r.text):
+        at = dict(re.findall(r'data-([a-z-]+)="([^"]*)"', a))
+        if at.get("id"):
+            carros[at["id"]] = at
+    print(f"Vamos: {len(carros)} de {total}")
+    lista = []
+    for x in carros.values():
+        try:
+            p = float(x.get("preco") or 0)
+        except ValueError:
+            continue
+        if p < 5000:
+            continue
+        cat = categoria_pesado(x.get("categoria"))
+        lista.append({"cat": cat, "modelo": chave_modelo(x.get("marca"), x.get("modelo"), cat),
+                      "ano": int(x["ano"]) if (x.get("ano") or "").isdigit() else None,
+                      "km": int(x["km"]) if (x.get("km") or "").isdigit() else None, "preco": p, "uf": None})
+    return lista, total
+
+
+def volksconfia(max_paginas=None):
+    """VolksConfia (seminovos da rede Volkswagen Caminhões e Ônibus, grupo Traton): JSON público do site."""
+    r = requests.get("https://volksconfia.com.br/vehicles.json", headers={"User-Agent": UA}, timeout=60)
+    r.raise_for_status()
+    j = r.json()
+    itens = j if isinstance(j, list) else next((v for v in j.values() if isinstance(v, list)), [])
+    lista = []
+    for x in itens:
+        p = x.get("valor") or 0
+        if p < 5000 or _ascii(x.get("status")) not in ("DISPONIVEL", ""):
+            continue
+        cat = categoria_pesado(x.get("categoria"))
+        lista.append({"cat": cat, "modelo": chave_modelo(x.get("marca"), x.get("modelo"), cat), "ano": x.get("ano_modelo") or x.get("ano"),
+                      "km": x.get("quilometragem"), "preco": float(p), "uf": None, "fipe_valor": x.get("valor_fipe")})
+    print(f"VolksConfia: {len(lista)} de {len(itens)}")
+    return lista, len(lista)
 
 
 # ---------------- FIPE dos carros à venda na Movida ----------------
@@ -514,17 +588,22 @@ def monta_resumo(h, hoje):
 
 
 def main():
+    global HIST, RESUMO, CATS, LOJAS
     ap = argparse.ArgumentParser()
-    ap.add_argument("--so", choices=list(LOJAS))
+    ap.add_argument("--segmento", choices=list(SEGMENTOS), default="carros")
+    ap.add_argument("--so", choices=[k for sg in SEGMENTOS.values() for k in sg["lojas"]])
     ap.add_argument("--max-paginas", type=int)
     ap.add_argument("--com-fipe", action="store_true", help="consulta também a FIPE dos carros da Movida (referência opcional)")
     a = ap.parse_args()
+    sg = SEGMENTOS[a.segmento]
+    HIST, RESUMO, CATS, LOJAS = sg["hist"], sg["resumo"], sg["cats"], sg["lojas"]
     h = json.loads(HIST.read_text(encoding="utf-8")) if HIST.exists() else {"dias": {}, "mensal": {}}
     hoje = datetime.now(BRT).date().isoformat()
     mes = hoje[:7]
     ok = 0
     lista_movida = None
-    for loja, fn in (("movida", movida), ("localiza", localiza), ("turbi", turbi)):
+    coleta = {"movida": movida, "localiza": localiza, "turbi": turbi, "vamos": vamos, "volksconfia": volksconfia}
+    for loja, fn in ((k, coleta[k]) for k in LOJAS):
         if a.so and a.so != loja:
             continue
         try:
