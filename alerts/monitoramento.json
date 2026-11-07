@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-06T21:04:30-03:00",
- "updatedLabel": "06/11/2026 21:04",
+ "updatedAt": "2026-11-07T14:21:54-03:00",
+ "updatedLabel": "07/11/2026 14:21",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -294,7 +294,11 @@
    "url": "https://fred.stlouisfed.org/series/HTRUCKSSAAR",
    "itens": [
     {
-     "text": "Set/2026 · 396,0 mil (anualizado) · m/m -4,1% · a/a +2,3%",
+     "text": "Out/2026 · 461,0 mil (anualizado) · m/m +5,3% · a/a +32,5%",
+     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-10"
+    },
+    {
+     "text": "Set/2026 · 438,0 mil (anualizado) · m/m +6,1% · a/a +13,2%",
      "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-09"
     },
     {
@@ -308,10 +312,6 @@
     {
      "text": "Jun/2026 · 457,0 mil (anualizado) · m/m +5,8% · a/a +3,2%",
      "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-06"
-    },
-    {
-     "text": "Mai/2026 · 432,0 mil (anualizado) · m/m +14,0% · a/a -3,6%",
-     "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-05"
     }
    ]
   },
@@ -344,9 +344,17 @@
  ],
  "eventos": [
   {
+   "id": "94098bf5bd64",
+   "at": "2026-11-07T14:21:46-03:00",
+   "label": "07/11 14:21",
+   "fonte": "FRED · vendas heavy trucks (EUA)",
+   "titulo": "Out/2026 · 461,0 mil (anualizado) · m/m +5,3% · a/a +32,5%",
+   "link": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-10"
+  },
+  {
    "id": "296b00b4475d",
-   "at": "2026-11-06T15:58:02-03:00",
-   "label": "06/11 15:58",
+   "at": "2026-11-06T23:20:40-03:00",
+   "label": "06/11 23:20",
    "fonte": "FIPE",
    "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
    "link": "https://veiculos.fipe.org.br/"
@@ -442,7 +450,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "06/11/2026",
+  "atualizado": "07/11/2026",
   "preliminar": {
    "Classe 8": [
     "2026-10"
@@ -902,7 +910,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 8 meses (leves): -5,8%.",
-  "gerado_em": "2026-11-06T15:58:02-03:00",
+  "gerado_em": "2026-11-06T23:20:40-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
