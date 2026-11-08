@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-08T14:33:49-03:00",
- "updatedLabel": "08/11/2026 14:33",
+ "updatedAt": "2026-11-08T18:38:42-03:00",
+ "updatedLabel": "08/11/2026 18:38",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -345,8 +345,8 @@
  "eventos": [
   {
    "id": "296b00b4475d",
-   "at": "2026-11-07T22:50:06-03:00",
-   "label": "07/11 22:50",
+   "at": "2026-11-08T14:39:00-03:00",
+   "label": "08/11 14:39",
    "fonte": "FIPE",
    "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
    "link": "https://veiculos.fipe.org.br/"
@@ -801,8 +801,8 @@
      "SUV": -0.3753106751399726,
      "Picape": -0.4079293425212738,
      "Leves": -0.45888081021793203,
-     "Caminhão": -2.703024904006912,
-     "Moto": null
+     "Caminhão": -2.293525353663939,
+     "Moto": -0.4796838445338292
     },
     "n": {
      "Hatch": 10,
@@ -810,8 +810,8 @@
      "SUV": 16,
      "Picape": 14,
      "Leves": 49,
-     "Caminhão": 5,
-     "Moto": 0
+     "Caminhão": 6,
+     "Moto": 4
     }
    },
    {
@@ -819,22 +819,22 @@
     "mes": "janeiro/2026",
     "curto": "jan/26",
     "var": {
-     "Hatch": null,
-     "Sedã": null,
-     "SUV": null,
-     "Picape": null,
-     "Leves": null,
-     "Caminhão": null,
-     "Moto": null
+     "Hatch": -1.396853886970073,
+     "Sedã": 0.572936591257367,
+     "SUV": 0.016152479405584508,
+     "Picape": -0.3523146251536269,
+     "Leves": -0.2049731131995025,
+     "Caminhão": -2.353537767608771,
+     "Moto": 0.5758893488379657
     },
     "n": {
-     "Hatch": 0,
-     "Sedã": 0,
-     "SUV": 0,
-     "Picape": 0,
-     "Leves": 0,
-     "Caminhão": 0,
-     "Moto": 0
+     "Hatch": 2,
+     "Sedã": 3,
+     "SUV": 1,
+     "Picape": 1,
+     "Leves": 7,
+     "Caminhão": 1,
+     "Moto": 3
     }
    },
    {
@@ -863,32 +863,32 @@
   ],
   "acumulado": {
    "Hatch": {
-    "var": -4.316087607338082,
-    "meses": 10
+    "var": -5.652652056800022,
+    "meses": 11
    },
    "Sedã": {
-    "var": -5.906466203856942,
-    "meses": 10
+    "var": -5.367369918731724,
+    "meses": 11
    },
    "SUV": {
-    "var": -6.095202950734702,
-    "meses": 10
+    "var": -6.080034997730466,
+    "meses": 11
    },
    "Picape": {
-    "var": -6.287447032815718,
-    "meses": 10
+    "var": -6.617610062523949,
+    "meses": 11
    },
    "Leves": {
-    "var": -5.817563754055854,
-    "meses": 10
+    "var": -6.0106124257163,
+    "meses": 11
    },
    "Caminhão": {
-    "var": -11.928400248810078,
-    "meses": 10
+    "var": -13.639250354992482,
+    "meses": 11
    },
    "Moto": {
-    "var": -2.0994235843884934,
-    "meses": 9
+    "var": -2.0079422938116043,
+    "meses": 11
    }
   },
   "preco_medio": {
@@ -909,8 +909,8 @@
    "Caminhão": 21,
    "Moto": 24
   },
-  "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 10 meses (leves): -5,8%.",
-  "gerado_em": "2026-11-07T22:50:06-03:00",
+  "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 11 meses (leves): -6,0%.",
+  "gerado_em": "2026-11-08T14:39:00-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
