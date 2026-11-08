@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-07T18:23:48-03:00",
- "updatedLabel": "07/11/2026 18:23",
+ "updatedAt": "2026-11-08T14:33:49-03:00",
+ "updatedLabel": "08/11/2026 14:33",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
   "periodo": "Setembro/2026",
@@ -345,8 +345,8 @@
  "eventos": [
   {
    "id": "296b00b4475d",
-   "at": "2026-11-07T14:45:14-03:00",
-   "label": "07/11 14:45",
+   "at": "2026-11-07T22:50:06-03:00",
+   "label": "07/11 22:50",
    "fonte": "FIPE",
    "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
    "link": "https://veiculos.fipe.org.br/"
@@ -450,7 +450,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "07/11/2026",
+  "atualizado": "08/11/2026",
   "preliminar": {
    "Classe 8": [
     "2026-10"
@@ -910,7 +910,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 10 meses (leves): -5,8%.",
-  "gerado_em": "2026-11-07T14:45:14-03:00",
+  "gerado_em": "2026-11-07T22:50:06-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
