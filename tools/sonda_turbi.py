@@ -1,15 +1,44 @@
-"""Sonda Vamos: onde estão os cartões além dos 48 primeiros."""
+"""Sonda temporária: páginas da FENABRAVE e da ANFAVEA (links de PDF)."""
 import re
-import requests
+import sys
+from pathlib import Path
 
-t = requests.get("https://vamos.com.br/seminovos", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/128.0 Safari/537.36"}, timeout=90).text
-pos = [m.start() for m in re.finditer("data-mlc-est-card", t)]
-print("total", len(pos), "len", len(t))
-for i in (0, 47, 48, 49, 200, 1800, len(pos) - 1):
-    if i < len(pos):
-        p = pos[i]
-        print(f"\n--- #{i} @ {p}:", repr(t[p - 250:p + 350]))
-for m in re.finditer(r"<script[^>]*>", t):
-    if m.start() > pos[48] if len(pos) > 48 else False:
-        print("SCRIPT antes do 49:", t[m.start():m.start() + 120])
-        break
+import requests
+from bs4 import BeautifulSoup
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import relatorios_setor as rs  # noqa: E402
+
+s = rs.session()
+try:
+    s.get(rs.FENABRAVE_HOME, timeout=30)
+except Exception as e:
+    print("home", e)
+for url in [rs.FENABRAVE_PAGE, "https://www.fenabrave.org.br/portalv2/Noticia/17491",
+            "https://www.fenabrave.org.br/portalv2/Conteudo/Emplacamentos", rs.ANFAVEA_HOME, rs.ANFAVEA_PAGE]:
+    try:
+        r = s.get(url, timeout=40)
+    except Exception as e:
+        print("ERRO", url, e)
+        continue
+    print("==", url, r.status_code, len(r.text), r.url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    vistos = set()
+    for a in soup.find_all("a", href=True):
+        h = requests.compat.urljoin(url, a["href"])
+        if re.search(r"\.pdf|/files/|upload|informativo|emplac|coletiva|release|carta", h, re.I) and h not in vistos:
+            vistos.add(h)
+            print("  ", " ".join(a.get_text(" ").split())[:80], "|", h)
+    for m in sorted(set(re.findall(r"[\w/:.\-]*20\d\d_\d\d_\d+\.pdf", r.text)))[:40]:
+        print("  raw:", m)
+try:
+    print("latest fenabrave:", rs.fenabrave_latest(s))
+except Exception as e:
+    print("latest fenabrave ERRO", e)
+for mes in range(1, 6):
+    u = f"https://www.fenabrave.org.br/portal/files/2026_10_0{mes}.pdf"
+    try:
+        r = s.get(u, timeout=30)
+        print(u, r.status_code, r.headers.get("content-type"), len(r.content))
+    except Exception as e:
+        print(u, e)
