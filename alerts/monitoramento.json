@@ -1,130 +1,130 @@
 {
- "updatedAt": "2026-11-09T09:06:54-03:00",
- "updatedLabel": "09/11/2026 09:06",
+ "updatedAt": "2026-11-09T16:16:08-03:00",
+ "updatedLabel": "09/11/2026 16:16",
  "fenabrave": {
-  "url": "https://www.fenabrave.org.br/portal/files/2026_09_02.pdf",
-  "periodo": "Setembro/2026",
+  "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
+  "periodo": "Outubro/2026",
   "linhas": [
    {
     "segmento": "Automóveis",
-    "mes": 216366,
-    "mes_ant": 213024,
-    "acum": 1728390,
-    "mes_aa": 178517,
-    "acum_aa": 1411004,
-    "mm": 1.57,
-    "aa": 21.2,
-    "acum_var": 22.49
+    "mes": 205964,
+    "mes_ant": 216381,
+    "acum": 1934322,
+    "mes_aa": 192710,
+    "acum_aa": 1603714,
+    "mm": -4.81,
+    "aa": 6.88,
+    "acum_var": 20.62
    },
    {
     "segmento": "Comerciais leves",
-    "mes": 52355,
-    "mes_ant": 50104,
-    "acum": 428109,
-    "mes_aa": 52813,
-    "acum_aa": 396311,
-    "mm": 4.49,
-    "aa": -0.87,
-    "acum_var": 8.02
+    "mes": 48066,
+    "mes_ant": 52377,
+    "acum": 476183,
+    "mes_aa": 55119,
+    "acum_aa": 451430,
+    "mm": -8.23,
+    "aa": -12.8,
+    "acum_var": 5.48
    },
    {
     "segmento": "Autos + comerciais leves",
-    "mes": 268721,
-    "mes_ant": 263128,
-    "acum": 2156499,
-    "mes_aa": 231330,
-    "acum_aa": 1807315,
-    "mm": 2.13,
-    "aa": 16.16,
-    "acum_var": 19.32
+    "mes": 254030,
+    "mes_ant": 268758,
+    "acum": 2410505,
+    "mes_aa": 247829,
+    "acum_aa": 2055144,
+    "mm": -5.48,
+    "aa": 2.5,
+    "acum_var": 17.29
    },
    {
     "segmento": "Caminhões",
-    "mes": 9845,
-    "mes_ant": 9604,
-    "acum": 78665,
-    "mes_aa": 9591,
-    "acum_aa": 81850,
-    "mm": 2.51,
-    "aa": 2.65,
-    "acum_var": -3.89
+    "mes": 9498,
+    "mes_ant": 9851,
+    "acum": 88170,
+    "mes_aa": 10461,
+    "acum_aa": 92311,
+    "mm": -3.58,
+    "aa": -9.21,
+    "acum_var": -4.49
    },
    {
     "segmento": "Ônibus",
-    "mes": 2744,
-    "mes_ant": 2448,
-    "acum": 20873,
-    "mes_aa": 2317,
-    "acum_aa": 21240,
-    "mm": 12.09,
-    "aa": 18.43,
-    "acum_var": -1.73
+    "mes": 2061,
+    "mes_ant": 2762,
+    "acum": 22952,
+    "mes_aa": 2420,
+    "acum_aa": 23660,
+    "mm": -25.38,
+    "aa": -14.83,
+    "acum_var": -2.99
    },
    {
     "segmento": "Caminhões + ônibus",
-    "mes": 12589,
-    "mes_ant": 12052,
-    "acum": 99538,
-    "mes_aa": 11908,
-    "acum_aa": 103090,
-    "mm": 4.46,
-    "aa": 5.72,
-    "acum_var": -3.45
+    "mes": 11559,
+    "mes_ant": 12613,
+    "acum": 111122,
+    "mes_aa": 12881,
+    "acum_aa": 115971,
+    "mm": -8.36,
+    "aa": -10.26,
+    "acum_var": -4.18
    },
    {
     "segmento": "Subtotal (autoveículos)",
-    "mes": 281310,
-    "mes_ant": 275180,
-    "acum": 2256037,
-    "mes_aa": 243238,
-    "acum_aa": 1910405,
-    "mm": 2.23,
-    "aa": 15.65,
-    "acum_var": 18.09
+    "mes": 265589,
+    "mes_ant": 281371,
+    "acum": 2521627,
+    "mes_aa": 260710,
+    "acum_aa": 2171115,
+    "mm": -5.61,
+    "aa": 1.87,
+    "acum_var": 16.14
    },
    {
     "segmento": "Motos",
-    "mes": 205032,
-    "mes_ant": 205221,
-    "acum": 1783971,
-    "mes_aa": 205873,
-    "acum_aa": 1613818,
-    "mm": -0.09,
-    "aa": -0.41,
-    "acum_var": 10.54
+    "mes": 201821,
+    "mes_ant": 205060,
+    "acum": 1985816,
+    "mes_aa": 209771,
+    "acum_aa": 1823589,
+    "mm": -1.58,
+    "aa": -3.79,
+    "acum_var": 8.9
    },
    {
     "segmento": "Implementos rodoviários",
-    "mes": 6821,
-    "mes_ant": 6567,
-    "acum": 53879,
-    "mes_aa": 5941,
-    "acum_aa": 53695,
-    "mm": 3.87,
-    "aa": 14.81,
-    "acum_var": 0.34
+    "mes": 6049,
+    "mes_ant": 6839,
+    "acum": 59945,
+    "mes_aa": 6470,
+    "acum_aa": 60165,
+    "mm": -11.55,
+    "aa": -6.51,
+    "acum_var": -0.37
    },
    {
     "segmento": "Outros",
-    "mes": 16523,
-    "mes_ant": 16917,
-    "acum": 139581,
-    "mes_aa": 15492,
-    "acum_aa": 122251,
-    "mm": -2.33,
-    "aa": 6.66,
-    "acum_var": 14.18
+    "mes": 15660,
+    "mes_ant": 16543,
+    "acum": 155262,
+    "mes_aa": 16353,
+    "acum_aa": 138604,
+    "mm": -5.34,
+    "aa": -4.24,
+    "acum_var": 12.02
    },
    {
-    "mes": 509686,
-    "mes_ant": 503885,
-    "acum": 4233468,
-    "mes_aa": 470544,
-    "acum_aa": 3700169,
+    "mes": 489119,
+    "mes_ant": 509813,
+    "acum": 4722650,
+    "mes_aa": 493304,
+    "acum_aa": 4193473,
     "segmento": "Total geral",
-    "mm": 1.1512547505879267,
-    "aa": 8.318456934951879,
-    "acum_var": 14.41282817082139
+    "mm": -4.059135408473303,
+    "aa": -0.8483612539123997,
+    "acum_var": 12.619063005771114
    }
   ]
  },
@@ -343,6 +343,14 @@
   }
  ],
  "eventos": [
+  {
+   "id": "712bf3b7e724",
+   "at": "2026-11-09T16:16:01-03:00",
+   "label": "09/11 16:16",
+   "fonte": "FENABRAVE",
+   "titulo": "Emplacamentos de Outubro/2026 — tabela por segmento",
+   "link": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf"
+  },
   {
    "id": "296b00b4475d",
    "at": "2026-11-08T22:53:26-03:00",
@@ -5600,7 +5608,7 @@
   "fipe": null
  },
  "usados": {
-  "updatedAt": "2026-11-06T20:44:29-03:00",
+  "updatedAt": "2026-11-09T16:16:08-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
