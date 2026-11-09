@@ -2159,23 +2159,14 @@
    "motos": 176000
   }
  },
- "atualizado": "06/11/2026 21:04",
- "atualizadoAt": "2026-11-06T21:04:30-03:00",
+ "atualizado": "09/11/2026 19:15",
+ "atualizadoAt": "2026-11-09T19:15:45-03:00",
  "fontes": {
   "sgs": "https://www3.bcb.gov.br/sgspub/",
   "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
   "b3": "https://www.b3.com.br/pt_br/noticias/"
  },
  "diaria": [
-  {
-   "ini": "2026-04-22",
-   "fim": "2026-04-28",
-   "n": 36,
-   "media_am": 1.9,
-   "mediana_am": 1.84,
-   "media_aa": 25.74,
-   "mediana_aa": 24.39
-  },
   {
    "ini": "2026-04-23",
    "fim": "2026-04-29",
@@ -3282,6 +3273,15 @@
    "mediana_am": 1.72,
    "media_aa": 24.11,
    "mediana_aa": 22.68
+  },
+  {
+   "ini": "2026-10-19",
+   "fim": "2026-10-23",
+   "n": 40,
+   "media_am": 1.8,
+   "mediana_am": 1.76,
+   "media_aa": 24.19,
+   "mediana_aa": 23.26
   }
  ]
 }
