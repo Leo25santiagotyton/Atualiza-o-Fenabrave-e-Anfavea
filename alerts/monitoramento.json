@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-09T16:16:08-03:00",
- "updatedLabel": "09/11/2026 16:16",
+ "updatedAt": "2026-11-09T18:18:49-03:00",
+ "updatedLabel": "09/11/2026 18:18",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -4292,130 +4292,130 @@
   ]
  },
  "seminovos": {
-  "gerado_em": "2026-11-09T09:05:09-03:00",
+  "gerado_em": "2026-11-09T18:15:29-03:00",
   "dia": "2026-11-09",
   "lojas": {
    "movida": {
     "cats": {
      "Hatch": {
-      "n": 2644,
-      "media": 69209,
+      "n": 2615,
+      "media": 69160,
       "mediana": 69600,
-      "km": 56147,
+      "km": 56190,
       "ano": 2025.0
      },
      "Sedã": {
-      "n": 1250,
-      "media": 88446,
+      "n": 1236,
+      "media": 88479,
       "mediana": 88000,
-      "km": 51519,
+      "km": 51518,
       "ano": 2025.4
      },
      "SUV": {
-      "n": 1661,
-      "media": 113000,
-      "mediana": 110000,
-      "km": 47248,
+      "n": 1641,
+      "media": 113102,
+      "mediana": 110100,
+      "km": 47065,
       "ano": 2025.1
      },
      "Picape": {
-      "n": 321,
-      "media": 103849,
-      "mediana": 85600,
-      "km": 45609,
+      "n": 324,
+      "media": 104376,
+      "mediana": 86400,
+      "km": 46115,
       "ano": 2025.2
      },
      "Outros": {
-      "n": 96,
-      "media": 114603,
-      "mediana": 113000,
-      "km": 46818,
+      "n": 93,
+      "media": 115085,
+      "mediana": 113900,
+      "km": 46145,
       "ano": 2025.3
      },
      "Total": {
-      "n": 5972,
-      "media": 88007,
-      "mediana": 84600,
-      "km": 51987,
+      "n": 5909,
+      "media": 88058,
+      "mediana": 84400,
+      "km": 51968,
       "ano": 2025.1
      }
     },
-    "total_site": 5979,
+    "total_site": 5914,
     "dia": "2026-11-09"
    },
    "localiza": {
     "cats": {
      "Hatch": {
-      "n": 9419,
-      "media": 79188,
-      "mediana": 79990,
-      "km": 33730,
-      "ano": 2025.6
+      "n": 10253,
+      "media": 79695,
+      "mediana": 80590,
+      "km": 34037,
+      "ano": 2025.7
      },
      "Sedã": {
-      "n": 3229,
-      "media": 104061,
-      "mediana": 93190,
-      "km": 36311,
-      "ano": 2025.4
+      "n": 3449,
+      "media": 103382,
+      "mediana": 92390,
+      "km": 36450,
+      "ano": 2025.5
      },
      "SUV": {
-      "n": 5331,
-      "media": 140765,
-      "mediana": 136790,
-      "km": 34240,
+      "n": 5323,
+      "media": 140415,
+      "mediana": 136390,
+      "km": 34239,
       "ano": 2025.0
      },
      "Picape": {
-      "n": 1295,
-      "media": 114087,
-      "mediana": 107890,
-      "km": 40549,
-      "ano": 2025.2
+      "n": 1309,
+      "media": 114272,
+      "mediana": 107590,
+      "km": 40997,
+      "ano": 2025.1
      },
      "Outros": {
-      "n": 577,
-      "media": 152452,
-      "mediana": 125490,
-      "km": 39459,
+      "n": 588,
+      "media": 152485,
+      "mediana": 123140,
+      "km": 39001,
       "ano": 2025.5
      },
      "Total": {
-      "n": 19851,
-      "media": 104176,
-      "mediana": 90390,
-      "km": 34898,
+      "n": 20922,
+      "media": 103257,
+      "mediana": 89590,
+      "km": 35061,
       "ano": 2025.4
      }
     },
-    "total_site": 19851,
+    "total_site": 20951,
     "dia": "2026-11-09"
    },
    "turbi": {
     "cats": {
      "Hatch": {
-      "n": 58,
-      "media": 84976,
-      "mediana": 85990,
-      "km": 25749,
-      "ano": 2025.4
+      "n": 60,
+      "media": 84823,
+      "mediana": 84990,
+      "km": 25586,
+      "ano": 2025.3
      },
      "SUV": {
       "n": 85,
-      "media": 113931,
+      "media": 113366,
       "mediana": 113990,
       "km": 33189,
       "ano": 2024.8
      },
      "Total": {
-      "n": 143,
-      "media": 102187,
+      "n": 145,
+      "media": 101555,
       "mediana": 99990,
-      "km": 30171,
+      "km": 30043,
       "ano": 2025.0
      }
     },
-    "total_site": 143,
+    "total_site": 145,
     "dia": "2026-11-09"
    }
   },
@@ -4532,151 +4532,151 @@
     "lojas": {
      "movida": {
       "Hatch": {
-       "media": 69302,
+       "media": 69278,
        "mediana": 69700,
-       "n": 2558,
-       "km": 56130,
+       "n": 2544,
+       "km": 56152,
        "ano": 2025.0,
        "dias": 2,
-       "var": -1.64,
-       "var_cesta": -0.96,
-       "cesta_n": 2508
+       "var": -1.68,
+       "var_cesta": -0.99,
+       "cesta_n": 2496
       },
       "Sedã": {
-       "media": 88265,
+       "media": 88282,
        "mediana": 87750,
-       "n": 1216,
-       "km": 51220,
+       "n": 1210,
+       "km": 51219,
        "ano": 2025.4,
        "dias": 2,
-       "var": -1.81,
-       "var_cesta": -2.25,
-       "cesta_n": 1201
+       "var": -1.79,
+       "var_cesta": -2.2,
+       "cesta_n": 1194
       },
       "SUV": {
-       "media": 113740,
-       "mediana": 110950,
-       "n": 1704,
-       "km": 46636,
+       "media": 113790,
+       "mediana": 111000,
+       "n": 1694,
+       "km": 46544,
        "ano": 2025.1,
        "dias": 2,
-       "var": -3.01,
-       "var_cesta": -2.12,
-       "cesta_n": 1632
+       "var": -2.96,
+       "var_cesta": -2.09,
+       "cesta_n": 1622
       },
       "Picape": {
-       "media": 105253,
-       "mediana": 85800,
-       "n": 316,
-       "km": 45572,
+       "media": 105516,
+       "mediana": 86200,
+       "n": 317,
+       "km": 45825,
        "ano": 2025.2,
        "dias": 2,
-       "var": 0.22,
-       "var_cesta": -1.11,
-       "cesta_n": 282
+       "var": 0.47,
+       "var_cesta": -1.0,
+       "cesta_n": 283
       },
       "Outros": {
-       "media": 114150,
-       "mediana": 112675,
-       "n": 93,
-       "km": 46222,
+       "media": 114392,
+       "mediana": 113125,
+       "n": 92,
+       "km": 45885,
        "ano": 2025.3,
        "dias": 2,
-       "var": -4.42,
-       "var_cesta": -1.38,
+       "var": -4.22,
+       "var_cesta": -1.41,
        "cesta_n": 80
       },
       "Total": {
-       "media": 88732,
-       "mediana": 85150,
-       "n": 5888,
-       "km": 51638,
+       "media": 88757,
+       "mediana": 85050,
+       "n": 5856,
+       "km": 51629,
        "ano": 2025.1,
        "dias": 2,
-       "var": -2.76,
-       "var_cesta": -1.58,
-       "cesta_n": 5702
+       "var": -2.73,
+       "var_cesta": -1.57,
+       "cesta_n": 5674
       }
      },
      "localiza": {
       "Hatch": {
-       "media": 79188,
-       "mediana": 79990,
-       "n": 9419,
-       "km": 33730,
-       "ano": 2025.6,
-       "dias": 1,
-       "var": 0.4,
-       "var_cesta": -0.23,
-       "cesta_n": 9006
+       "media": 79442,
+       "mediana": 80290,
+       "n": 9836,
+       "km": 33884,
+       "ano": 2025.7,
+       "dias": 2,
+       "var": 0.72,
+       "var_cesta": -0.08,
+       "cesta_n": 9034
       },
       "Sedã": {
-       "media": 104061,
-       "mediana": 93190,
-       "n": 3229,
-       "km": 36311,
-       "ano": 2025.4,
-       "dias": 1,
-       "var": -1.2,
-       "var_cesta": -0.23,
-       "cesta_n": 2900
+       "media": 103722,
+       "mediana": 92790,
+       "n": 3339,
+       "km": 36380,
+       "ano": 2025.5,
+       "dias": 2,
+       "var": -1.52,
+       "var_cesta": -0.21,
+       "cesta_n": 2903
       },
       "SUV": {
-       "media": 140765,
-       "mediana": 136790,
-       "n": 5331,
+       "media": 140590,
+       "mediana": 136590,
+       "n": 5327,
        "km": 34240,
        "ano": 2025.0,
-       "dias": 1,
-       "var": 0.28,
-       "var_cesta": -1.05,
-       "cesta_n": 5134
+       "dias": 2,
+       "var": 0.15,
+       "var_cesta": -1.22,
+       "cesta_n": 5083
       },
       "Picape": {
-       "media": 114087,
-       "mediana": 107890,
-       "n": 1295,
-       "km": 40549,
+       "media": 114180,
+       "mediana": 107740,
+       "n": 1302,
+       "km": 40773,
        "ano": 2025.2,
-       "dias": 1,
-       "var": 1.45,
-       "var_cesta": -0.38,
-       "cesta_n": 1248
+       "dias": 2,
+       "var": 1.53,
+       "var_cesta": -0.47,
+       "cesta_n": 1244
       },
       "Outros": {
-       "media": 152452,
-       "mediana": 125490,
-       "n": 577,
-       "km": 39459,
+       "media": 152468,
+       "mediana": 124315,
+       "n": 582,
+       "km": 39230,
        "ano": 2025.5,
-       "dias": 1,
-       "var": 1.56,
-       "var_cesta": -0.95,
+       "dias": 2,
+       "var": 1.57,
+       "var_cesta": -1.22,
        "cesta_n": 560
       },
       "Total": {
-       "media": 104176,
-       "mediana": 90390,
-       "n": 19851,
-       "km": 34898,
+       "media": 103716,
+       "mediana": 89990,
+       "n": 20386,
+       "km": 34980,
        "ano": 2025.4,
-       "dias": 1,
-       "var": -0.72,
-       "var_cesta": -0.49,
-       "cesta_n": 18848
+       "dias": 2,
+       "var": -1.16,
+       "var_cesta": -0.47,
+       "cesta_n": 18822
       }
      },
      "turbi": {
       "Hatch": {
-       "media": 84926,
-       "mediana": 85990,
-       "n": 59,
-       "km": 25628,
-       "ano": 2025.4,
+       "media": 84850,
+       "mediana": 85490,
+       "n": 60,
+       "km": 25546,
+       "ano": 2025.3,
        "dias": 2
       },
       "SUV": {
-       "media": 114032,
+       "media": 113750,
        "mediana": 114240,
        "n": 84,
        "km": 33264,
@@ -4684,10 +4684,10 @@
        "dias": 2
       },
       "Total": {
-       "media": 102065,
+       "media": 101749,
        "mediana": 99990,
        "n": 144,
-       "km": 30122,
+       "km": 30058,
        "ano": 2025.0,
        "dias": 2
       }
@@ -4700,14 +4700,14 @@
     "modelo": "Volkswagen Polo (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 670,
-     "preco": 74919,
+     "n": 663,
+     "preco": 74905,
      "var": -0.82
     },
     "localiza": {
-     "n": 1593,
-     "preco": 86074,
-     "var": 1.17
+     "n": 1676,
+     "preco": 86188,
+     "var": 1.36
     },
     "turbi": {
      "n": 10,
@@ -4718,56 +4718,42 @@
     "modelo": "Fiat Argo (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 484,
-     "preco": 72232,
-     "var": -0.48
+     "n": 482,
+     "preco": 72231,
+     "var": -0.47
     },
     "localiza": {
-     "n": 1665,
-     "preco": 77571,
-     "var": -2.11
+     "n": 1782,
+     "preco": 77562,
+     "var": -2.12
     }
    },
    {
     "modelo": "Fiat Mobi (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 328,
-     "preco": 61261,
-     "var": -1.04
+     "n": 330,
+     "preco": 61209,
+     "var": -1.03
     },
     "localiza": {
-     "n": 1648,
-     "preco": 67119,
-     "var": -0.4
-    }
-   },
-   {
-    "modelo": "Renault Kwid (Hatch)",
-    "cat": "Hatch",
-    "movida": {
-     "n": 651,
-     "preco": 55418,
-     "var": -1.18
-    },
-    "localiza": {
-     "n": 1240,
-     "preco": 64886,
-     "var": 0.05
+     "n": 1715,
+     "preco": 67403,
+     "var": -0.21
     }
    },
    {
     "modelo": "Hyundai Hb20 (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 280,
-     "preco": 77052,
-     "var": -1.01
+     "n": 283,
+     "preco": 76760,
+     "var": -1.34
     },
     "localiza": {
-     "n": 1498,
-     "preco": 83535,
-     "var": 0.32
+     "n": 1630,
+     "preco": 83643,
+     "var": 0.45
     },
     "turbi": {
      "n": 32,
@@ -4775,49 +4761,63 @@
     }
    },
    {
+    "modelo": "Renault Kwid (Hatch)",
+    "cat": "Hatch",
+    "movida": {
+     "n": 644,
+     "preco": 55427,
+     "var": -1.18
+    },
+    "localiza": {
+     "n": 1234,
+     "preco": 65121,
+     "var": 0.41
+    }
+   },
+   {
     "modelo": "Chevrolet Onix (Hatch)",
     "cat": "Hatch",
     "movida": {
-     "n": 39,
-     "preco": 73644,
-     "var": -3.06
+     "n": 38,
+     "preco": 73651,
+     "var": -2.92
     },
     "localiza": {
-     "n": 1662,
-     "preco": 82666,
-     "var": -0.17
+     "n": 1687,
+     "preco": 82829,
+     "var": -0.02
     },
     "turbi": {
-     "n": 17,
-     "preco": 84519
+     "n": 18,
+     "preco": 84490
     }
    },
    {
     "modelo": "Chevrolet Onix (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 9,
-     "preco": 84922,
-     "var": -2.58
+     "n": 8,
+     "preco": 85253,
+     "var": -2.1
     },
     "localiza": {
-     "n": 1417,
-     "preco": 92147,
-     "var": -0.05
+     "n": 1466,
+     "preco": 91956,
+     "var": -0.15
     }
    },
    {
     "modelo": "Volkswagen Tcross (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 351,
-     "preco": 115272,
-     "var": -1.03
+     "n": 350,
+     "preco": 115433,
+     "var": -0.93
     },
     "localiza": {
-     "n": 855,
-     "preco": 141384,
-     "var": -0.11
+     "n": 837,
+     "preco": 141220,
+     "var": -0.3
     },
     "turbi": {
      "n": 37,
@@ -4828,42 +4828,42 @@
     "modelo": "Hyundai Hb20S (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 336,
-     "preco": 88749,
-     "var": -1.98
+     "n": 334,
+     "preco": 88886,
+     "var": -1.93
     },
     "localiza": {
-     "n": 805,
-     "preco": 90599,
-     "var": -0.28
+     "n": 830,
+     "preco": 90836,
+     "var": -0.02
     }
    },
    {
     "modelo": "Fiat Strada (Picape)",
     "cat": "Picape",
     "movida": {
-     "n": 99,
-     "preco": 85727,
-     "var": 0.7
+     "n": 101,
+     "preco": 85856,
+     "var": 0.9
     },
     "localiza": {
-     "n": 700,
-     "preco": 98652,
-     "var": -0.55
+     "n": 696,
+     "preco": 98597,
+     "var": -0.62
     }
    },
    {
     "modelo": "Jeep Compass (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 85,
-     "preco": 131972,
-     "var": -2.3
+     "n": 84,
+     "preco": 132039,
+     "var": -2.28
     },
     "localiza": {
-     "n": 673,
-     "preco": 143036,
-     "var": -0.54
+     "n": 674,
+     "preco": 143301,
+     "var": -0.6
     },
     "turbi": {
      "n": 6,
@@ -4874,28 +4874,14 @@
     "modelo": "Volkswagen Virtus (Sedã)",
     "cat": "Sedã",
     "movida": {
-     "n": 326,
-     "preco": 99337,
-     "var": -3.1
+     "n": 322,
+     "preco": 99356,
+     "var": -3.09
     },
     "localiza": {
-     "n": 297,
-     "preco": 113847,
-     "var": -0.11
-    }
-   },
-   {
-    "modelo": "Nissan Kicks (SUV)",
-    "cat": "SUV",
-    "movida": {
-     "n": 124,
-     "preco": 104783,
-     "var": -1.8
-    },
-    "localiza": {
-     "n": 421,
-     "preco": 129947,
-     "var": -1.06
+     "n": 308,
+     "preco": 113783,
+     "var": -0.22
     }
    },
    {
@@ -4903,27 +4889,41 @@
     "cat": "Sedã",
     "movida": {
      "n": 230,
-     "preco": 78975,
+     "preco": 78980,
      "var": -2.24
     },
     "localiza": {
-     "n": 309,
-     "preco": 90776,
-     "var": -0.09
+     "n": 334,
+     "preco": 90724,
+     "var": -0.13
+    }
+   },
+   {
+    "modelo": "Nissan Kicks (SUV)",
+    "cat": "SUV",
+    "movida": {
+     "n": 124,
+     "preco": 104822,
+     "var": -1.77
+    },
+    "localiza": {
+     "n": 436,
+     "preco": 129717,
+     "var": -1.16
     }
    },
    {
     "modelo": "Hyundai Creta (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 140,
-     "preco": 120447,
+     "n": 139,
+     "preco": 120380,
      "var": -1.21
     },
     "localiza": {
-     "n": 334,
-     "preco": 138704,
-     "var": -0.47
+     "n": 340,
+     "preco": 138392,
+     "var": -0.78
     },
     "turbi": {
      "n": 3,
@@ -4934,14 +4934,14 @@
     "modelo": "Volkswagen Nivus (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 234,
-     "preco": 107721,
-     "var": -2.93
+     "n": 232,
+     "preco": 107799,
+     "var": -2.92
     },
     "localiza": {
-     "n": 227,
-     "preco": 125217,
-     "var": -0.06
+     "n": 230,
+     "preco": 124751,
+     "var": -0.28
     },
     "turbi": {
      "n": 14,
@@ -4952,14 +4952,14 @@
     "modelo": "Jeep Renegade (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 38,
-     "preco": 114121,
-     "var": -1.12
+     "n": 37,
+     "preco": 114565,
+     "var": -0.72
     },
     "localiza": {
-     "n": 413,
-     "preco": 123024,
-     "var": -2.95
+     "n": 404,
+     "preco": 122755,
+     "var": -3.2
     },
     "turbi": {
      "n": 17,
@@ -4971,13 +4971,13 @@
     "cat": "SUV",
     "movida": {
      "n": 40,
-     "preco": 152743,
-     "var": -2.78
+     "preco": 153074,
+     "var": -2.64
     },
     "localiza": {
-     "n": 384,
-     "preco": 164535,
-     "var": -1.28
+     "n": 382,
+     "preco": 164566,
+     "var": -1.4
     }
    },
    {
@@ -4989,9 +4989,9 @@
      "var": -3.73
     },
     "localiza": {
-     "n": 320,
-     "preco": 147867,
-     "var": -2.14
+     "n": 309,
+     "preco": 147723,
+     "var": -2.27
     }
    },
    {
@@ -5003,9 +5003,9 @@
      "var": -1.83
     },
     "localiza": {
-     "n": 368,
-     "preco": 118971,
-     "var": -1.97
+     "n": 372,
+     "preco": 119560,
+     "var": -1.4
     },
     "turbi": {
      "n": 8,
@@ -5016,28 +5016,14 @@
     "modelo": "Volkswagen Saveiro (Picape)",
     "cat": "Picape",
     "movida": {
-     "n": 121,
-     "preco": 83237,
-     "var": -1.49
+     "n": 120,
+     "preco": 83307,
+     "var": -1.41
     },
     "localiza": {
-     "n": 202,
-     "preco": 85173,
-     "var": 0.3
-    }
-   },
-   {
-    "modelo": "Volkswagen Tera (SUV)",
-    "cat": "SUV",
-    "movida": {
-     "n": 74,
-     "preco": 110075,
-     "var": -2.57
-    },
-    "localiza": {
-     "n": 233,
-     "preco": 131690,
-     "var": -1.94
+     "n": 206,
+     "preco": 84893,
+     "var": 0.08
     }
    },
    {
@@ -5049,51 +5035,65 @@
      "var": -2.59
     },
     "localiza": {
-     "n": 296,
-     "preco": 123634,
-     "var": -0.14
+     "n": 294,
+     "preco": 123726,
+     "var": -0.02
+    }
+   },
+   {
+    "modelo": "Volkswagen Tera (SUV)",
+    "cat": "SUV",
+    "movida": {
+     "n": 74,
+     "preco": 110075,
+     "var": -2.57
+    },
+    "localiza": {
+     "n": 227,
+     "preco": 129390,
+     "var": -3.65
     }
    },
    {
     "modelo": "Fiat Fiorino (Outros)",
     "cat": "Outros",
     "movida": {
-     "n": 22,
-     "preco": 96805,
-     "var": -0.61
+     "n": 20,
+     "preco": 96439,
+     "var": -0.75
     },
     "localiza": {
-     "n": 231,
-     "preco": 104261,
-     "var": -0.55
+     "n": 234,
+     "preco": 104731,
+     "var": -0.17
     }
    },
    {
     "modelo": "Fiat Pulse (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 94,
-     "preco": 94941,
-     "var": -2.64
+     "n": 93,
+     "preco": 94804,
+     "var": -2.75
     },
     "localiza": {
-     "n": 148,
-     "preco": 111612,
-     "var": 0.01
+     "n": 154,
+     "preco": 112067,
+     "var": 0.61
     }
    },
    {
     "modelo": "Renault Kardian (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 162,
+     "n": 160,
      "preco": 89100,
      "var": -1.33
     },
     "localiza": {
-     "n": 67,
-     "preco": 101390,
-     "var": -0.95
+     "n": 68,
+     "preco": 100390,
+     "var": -1.93
     }
    },
    {
@@ -5105,9 +5105,9 @@
      "var": -1.5
     },
     "localiza": {
-     "n": 169,
-     "preco": 129802,
-     "var": -0.36
+     "n": 168,
+     "preco": 129030,
+     "var": -0.97
     }
    },
    {
@@ -5115,13 +5115,13 @@
     "cat": "Sedã",
     "movida": {
      "n": 216,
-     "preco": 68739,
-     "var": -1.76
+     "preco": 68825,
+     "var": -1.61
     },
     "localiza": {
      "n": 3,
-     "preco": 60323,
-     "var": -5.15
+     "preco": 61623,
+     "var": -3.31
     }
    },
    {
@@ -5133,56 +5133,56 @@
      "var": -1.79
     },
     "localiza": {
-     "n": 179,
-     "preco": 153020,
-     "var": -1.51
+     "n": 186,
+     "preco": 152853,
+     "var": -1.71
     }
    },
    {
     "modelo": "Renault Duster (SUV)",
     "cat": "SUV",
     "movida": {
-     "n": 160,
-     "preco": 98772,
-     "var": -4.46
+     "n": 158,
+     "preco": 98779,
+     "var": -4.45
     },
     "localiza": {
-     "n": 12,
-     "preco": 106265,
-     "var": -3.18
+     "n": 15,
+     "preco": 104520,
+     "var": -4.49
     }
    }
   ],
   "comparacao": [
    {
     "cat": "Hatch",
-    "dif": -6.84,
-    "carros": 1611
+    "dif": -6.68,
+    "carros": 1604
    },
    {
     "cat": "Sedã",
-    "dif": -9.3,
-    "carros": 793
+    "dif": -9.42,
+    "carros": 814
    },
    {
     "cat": "SUV",
-    "dif": -14.03,
-    "carros": 1239
+    "dif": -13.69,
+    "carros": 1237
    },
    {
     "cat": "Picape",
-    "dif": -8.15,
-    "carros": 266
+    "dif": -8.02,
+    "carros": 267
    },
    {
     "cat": "Outros",
-    "dif": -5.44,
-    "carros": 76
+    "dif": -5.02,
+    "carros": 75
    },
    {
     "cat": "Total",
-    "dif": -9.68,
-    "carros": 3986
+    "dif": -9.52,
+    "carros": 3998
    }
   ],
   "semanal": {
@@ -5372,40 +5372,40 @@
      "dia": "2026-11-09",
      "cats": {
       "Hatch": {
-       "media": 69209,
-       "n": 2644,
-       "var": -0.27,
-       "var_cesta": -0.24
+       "media": 69160,
+       "n": 2615,
+       "var": -0.34,
+       "var_cesta": -0.3
       },
       "Sedã": {
-       "media": 88446,
-       "n": 1250,
-       "var": 0.41,
-       "var_cesta": -0.08
+       "media": 88479,
+       "n": 1236,
+       "var": 0.45,
+       "var_cesta": 0.01
       },
       "SUV": {
-       "media": 113000,
-       "n": 1661,
-       "var": -1.29,
-       "var_cesta": -0.38
+       "media": 113102,
+       "n": 1641,
+       "var": -1.2,
+       "var_cesta": -0.3
       },
       "Picape": {
-       "media": 103849,
-       "n": 321,
-       "var": -2.63,
-       "var_cesta": 0.23
+       "media": 104376,
+       "n": 324,
+       "var": -2.14,
+       "var_cesta": 0.37
       },
       "Outros": {
-       "media": 114603,
-       "n": 96,
-       "var": 0.8,
-       "var_cesta": -0.66
+       "media": 115085,
+       "n": 93,
+       "var": 1.22,
+       "var_cesta": -0.67
       },
       "Total": {
-       "media": 88007,
-       "n": 5972,
-       "var": -1.62,
-       "var_cesta": -0.23
+       "media": 88058,
+       "n": 5909,
+       "var": -1.56,
+       "var_cesta": -0.21
       }
      }
     }
@@ -5497,6 +5497,47 @@
        "n": 19851
       }
      }
+    },
+    {
+     "dia": "2026-11-09",
+     "cats": {
+      "Hatch": {
+       "media": 79695,
+       "n": 10253,
+       "var": 0.64,
+       "var_cesta": 0.33
+      },
+      "Sedã": {
+       "media": 103382,
+       "n": 3449,
+       "var": -0.65,
+       "var_cesta": 0.04
+      },
+      "SUV": {
+       "media": 140415,
+       "n": 5323,
+       "var": -0.25,
+       "var_cesta": -0.36
+      },
+      "Picape": {
+       "media": 114272,
+       "n": 1309,
+       "var": 0.16,
+       "var_cesta": -0.14
+      },
+      "Outros": {
+       "media": 152485,
+       "n": 588,
+       "var": 0.02,
+       "var_cesta": -0.49
+      },
+      "Total": {
+       "media": 103257,
+       "n": 20922,
+       "var": -0.88,
+       "var_cesta": 0.05
+      }
+     }
     }
    ],
    "turbi": [
@@ -5521,16 +5562,16 @@
      "dia": "2026-11-09",
      "cats": {
       "Hatch": {
-       "media": 84976,
-       "n": 58
+       "media": 84823,
+       "n": 60
       },
       "SUV": {
-       "media": 113931,
+       "media": 113366,
        "n": 85
       },
       "Total": {
-       "media": 102187,
-       "n": 143
+       "media": 101555,
+       "n": 145
       }
      }
     }
@@ -5540,71 +5581,71 @@
    "movida|localiza": [
     {
      "cat": "Hatch",
-     "dif": -6.84,
-     "carros": 1611
+     "dif": -6.68,
+     "carros": 1604
     },
     {
      "cat": "Sedã",
-     "dif": -9.3,
-     "carros": 793
+     "dif": -9.42,
+     "carros": 814
     },
     {
      "cat": "SUV",
-     "dif": -14.03,
-     "carros": 1239
+     "dif": -13.69,
+     "carros": 1237
     },
     {
      "cat": "Picape",
-     "dif": -8.15,
-     "carros": 266
+     "dif": -8.02,
+     "carros": 267
     },
     {
      "cat": "Outros",
-     "dif": -5.44,
-     "carros": 76
+     "dif": -5.02,
+     "carros": 75
     },
     {
      "cat": "Total",
-     "dif": -9.68,
-     "carros": 3986
+     "dif": -9.52,
+     "carros": 3998
     }
    ],
    "movida|turbi": [
     {
      "cat": "Hatch",
-     "dif": -5.71,
-     "carros": 57
+     "dif": -6.22,
+     "carros": 58
     },
     {
      "cat": "SUV",
-     "dif": -2.41,
+     "dif": -2.46,
      "carros": 76
     },
     {
      "cat": "Total",
-     "dif": -3.83,
+     "dif": -4.11,
      "carros": 134
     }
    ],
    "localiza|turbi": [
     {
      "cat": "Hatch",
-     "dif": -2.89,
-     "carros": 57
+     "dif": -3.02,
+     "carros": 58
     },
     {
      "cat": "SUV",
-     "dif": 13.38,
+     "dif": 13.33,
      "carros": 84
     },
     {
      "cat": "Total",
-     "dif": 6.47,
-     "carros": 140
+     "dif": 6.32,
+     "carros": 142
     }
    ]
   },
-  "resumo": "Movida: 5.888 carros anunciados, preço médio R$ 88.732, -1,58% no mês na mesma cesta de modelos. Localiza: 19.851 carros anunciados, preço médio R$ 104.176, -0,49% no mês na mesma cesta de modelos. Turbi: 144 carros anunciados, preço médio R$ 102.065.",
+  "resumo": "Movida: 5.856 carros anunciados, preço médio R$ 88.757, -1,57% no mês na mesma cesta de modelos. Localiza: 20.386 carros anunciados, preço médio R$ 103.716, -0,47% no mês na mesma cesta de modelos. Turbi: 144 carros anunciados, preço médio R$ 101.749.",
   "fipe": null
  },
  "usados": {
@@ -5811,64 +5852,64 @@
   ]
  },
  "caminhoes": {
-  "gerado_em": "2026-11-09T09:06:54-03:00",
+  "gerado_em": "2026-11-09T18:18:43-03:00",
   "dia": "2026-11-09",
   "lojas": {
    "vamos": {
     "cats": {
      "Cavalo mecânico": {
-      "n": 326,
-      "media": 384471,
+      "n": 381,
+      "media": 383600,
       "mediana": 356299,
-      "km": 374974,
+      "km": 369909,
       "ano": 2021.6
      },
      "Caminhão": {
-      "n": 369,
-      "media": 323814,
-      "mediana": 310000,
-      "km": 149919,
+      "n": 429,
+      "media": 336601,
+      "mediana": 320000,
+      "km": 145973,
       "ano": 2020.6
      },
      "Carreta": {
-      "n": 209,
-      "media": 151508,
+      "n": 232,
+      "media": 154252,
       "mediana": 155000,
-      "km": 3333,
-      "ano": 2018.1
+      "km": 4115,
+      "ano": 2018.4
      },
      "Ônibus": {
-      "n": 18,
-      "media": 756111,
+      "n": 23,
+      "media": 758696,
       "mediana": 480000,
-      "km": 585157,
-      "ano": 2021.3
+      "km": 558808,
+      "ano": 2021.0
      },
      "Máquinas": {
-      "n": 468,
-      "media": 255087,
-      "mediana": 160000,
-      "km": 9100,
-      "ano": 2019.3
+      "n": 535,
+      "media": 243584,
+      "mediana": 150000,
+      "km": 9338,
+      "ano": 2019.2
      },
      "Total": {
-      "n": 1390,
-      "media": 294591,
-      "mediana": 298250,
-      "km": 144616,
-      "ano": 2020.0
+      "n": 1600,
+      "media": 296317,
+      "mediana": 297150,
+      "km": 144297,
+      "ano": 2020.1
      }
     },
-    "total_site": 1724,
+    "total_site": 1719,
     "dia": "2026-11-09"
    },
    "volksconfia": {
     "cats": {
      "Cavalo mecânico": {
-      "n": 56,
-      "media": 497217,
-      "mediana": 452450,
-      "km": 323654,
+      "n": 55,
+      "media": 499167,
+      "mediana": 454900,
+      "km": 323746,
       "ano": 2023.0
      },
      "Caminhão": {
@@ -5879,14 +5920,14 @@
       "ano": 2020.6
      },
      "Total": {
-      "n": 87,
-      "media": 461012,
-      "mediana": 430000,
-      "km": 305385,
+      "n": 86,
+      "media": 461838,
+      "mediana": 432500,
+      "km": 305232,
       "ano": 2022.1
      }
     },
-    "total_site": 87,
+    "total_site": 86,
     "dia": "2026-11-09"
    }
   },
@@ -5897,10 +5938,10 @@
     "lojas": {
      "volksconfia": {
       "Cavalo mecânico": {
-       "media": 495642,
-       "mediana": 450975,
-       "n": 55,
-       "km": 328640,
+       "media": 496617,
+       "mediana": 452200,
+       "n": 54,
+       "km": 328686,
        "ano": 2023.0,
        "dias": 2
       },
@@ -5913,61 +5954,61 @@
        "dias": 2
       },
       "Total": {
-       "media": 459586,
-       "mediana": 425000,
+       "media": 459998,
+       "mediana": 426250,
        "n": 86,
-       "km": 308338,
+       "km": 308261,
        "ano": 2022.1,
        "dias": 2
       }
      },
      "vamos": {
       "Cavalo mecânico": {
-       "media": 383975,
+       "media": 383540,
        "mediana": 356299,
-       "n": 362,
-       "km": 372420,
+       "n": 389,
+       "km": 369887,
        "ano": 2021.6,
        "dias": 2
       },
       "Caminhão": {
-       "media": 328758,
-       "mediana": 315000,
-       "n": 412,
-       "km": 147913,
+       "media": 335152,
+       "mediana": 320000,
+       "n": 442,
+       "km": 145940,
        "ano": 2020.6,
        "dias": 2
       },
       "Carreta": {
-       "media": 151778,
+       "media": 153150,
        "mediana": 155000,
-       "n": 226,
-       "km": 3634,
-       "ano": 2018.2,
+       "n": 238,
+       "km": 4024,
+       "ano": 2018.3,
        "dias": 2
       },
       "Ônibus": {
-       "media": 757404,
+       "media": 758696,
        "mediana": 480000,
-       "n": 20,
-       "km": 571982,
-       "ano": 2021.2,
+       "n": 23,
+       "km": 558808,
+       "ano": 2021.0,
        "dias": 2
       },
       "Máquinas": {
-       "media": 248874,
-       "mediana": 155000,
-       "n": 518,
-       "km": 9068,
+       "media": 243122,
+       "mediana": 150000,
+       "n": 552,
+       "km": 9186,
        "ano": 2019.2,
        "dias": 2
       },
       "Total": {
-       "media": 294480,
-       "mediana": 294125,
-       "n": 1538,
-       "km": 143742,
-       "ano": 2020.0,
+       "media": 295342,
+       "mediana": 293575,
+       "n": 1643,
+       "km": 143582,
+       "ano": 2020.1,
        "dias": 2
       }
      }
@@ -5983,8 +6024,8 @@
      "preco": 321667
     },
     "vamos": {
-     "n": 104,
-     "preco": 312114
+     "n": 111,
+     "preco": 313333
     }
    },
    {
@@ -5995,8 +6036,8 @@
      "preco": 420000
     },
     "vamos": {
-     "n": 66,
-     "preco": 443535
+     "n": 72,
+     "preco": 443007
     }
    },
    {
@@ -6007,8 +6048,8 @@
      "preco": 424980
     },
     "vamos": {
-     "n": 50,
-     "preco": 369901
+     "n": 54,
+     "preco": 369907
     }
    },
    {
@@ -6019,24 +6060,16 @@
      "preco": 490000
     },
     "vamos": {
-     "n": 46,
-     "preco": 449403
+     "n": 48,
+     "preco": 450208
     }
    },
    {
     "modelo": "Volkswagen 25.420 (Cavalo mecânico)",
     "cat": "Cavalo mecânico",
     "vamos": {
-     "n": 46,
-     "preco": 325156
-    }
-   },
-   {
-    "modelo": "Facchini Sr (Carreta)",
-    "cat": "Carreta",
-    "vamos": {
-     "n": 41,
-     "preco": 107339
+     "n": 51,
+     "preco": 324112
     }
    },
    {
@@ -6047,16 +6080,24 @@
      "preco": 390000
     },
     "vamos": {
-     "n": 37,
-     "preco": 271351
+     "n": 40,
+     "preco": 270975
+    }
+   },
+   {
+    "modelo": "Facchini Sr (Carreta)",
+    "cat": "Carreta",
+    "vamos": {
+     "n": 41,
+     "preco": 108121
     }
    },
    {
     "modelo": "Heli Cdd15J (Máquinas)",
     "cat": "Máquinas",
     "vamos": {
-     "n": 32,
-     "preco": 23731
+     "n": 34,
+     "preco": 23739
     }
    },
    {
@@ -6064,7 +6105,15 @@
     "cat": "Carreta",
     "vamos": {
      "n": 32,
-     "preco": 60543
+     "preco": 58188
+    }
+   },
+   {
+    "modelo": "Randon Rodotrem (Carreta)",
+    "cat": "Carreta",
+    "vamos": {
+     "n": 31,
+     "preco": 172540
     }
    },
    {
@@ -6072,15 +6121,23 @@
     "cat": "Máquinas",
     "vamos": {
      "n": 30,
-     "preco": 391817
+     "preco": 384375
     }
    },
    {
-    "modelo": "Randon Rodotrem (Carreta)",
+    "modelo": "Noma Rodotrem (Carreta)",
     "cat": "Carreta",
     "vamos": {
-     "n": 28,
-     "preco": 172237
+     "n": 29,
+     "preco": 180000
+    }
+   },
+   {
+    "modelo": "Volkswagen 26.280 (Caminhão)",
+    "cat": "Caminhão",
+    "vamos": {
+     "n": 27,
+     "preco": 431481
     }
    },
    {
@@ -6088,23 +6145,7 @@
     "cat": "Máquinas",
     "vamos": {
      "n": 26,
-     "preco": 347281
-    }
-   },
-   {
-    "modelo": "Noma Rodotrem (Carreta)",
-    "cat": "Carreta",
-    "vamos": {
-     "n": 26,
-     "preco": 178000
-    }
-   },
-   {
-    "modelo": "Volkswagen 26.280 (Caminhão)",
-    "cat": "Caminhão",
-    "vamos": {
-     "n": 24,
-     "preco": 426250
+     "preco": 342127
     }
    },
    {
@@ -6115,40 +6156,40 @@
      "preco": 290617
     },
     "vamos": {
-     "n": 16,
-     "preco": 343710
-    }
-   },
-   {
-    "modelo": "Volkswagen 9 (Caminhão)",
-    "cat": "Caminhão",
-    "vamos": {
-     "n": 21,
-     "preco": 305387
-    }
-   },
-   {
-    "modelo": "Volkswagen 17.190 (Caminhão)",
-    "cat": "Caminhão",
-    "vamos": {
-     "n": 21,
-     "preco": 366199
-    }
-   },
-   {
-    "modelo": "Hyster H155Ft (Máquinas)",
-    "cat": "Máquinas",
-    "vamos": {
-     "n": 20,
-     "preco": 197671
+     "n": 17,
+     "preco": 343382
     }
    },
    {
     "modelo": "Volvo Fmx (Cavalo mecânico)",
     "cat": "Cavalo mecânico",
     "vamos": {
-     "n": 20,
-     "preco": 732500
+     "n": 22,
+     "preco": 729091
+    }
+   },
+   {
+    "modelo": "Volkswagen 9 (Caminhão)",
+    "cat": "Caminhão",
+    "vamos": {
+     "n": 22,
+     "preco": 302378
+    }
+   },
+   {
+    "modelo": "Hyster H155Ft (Máquinas)",
+    "cat": "Máquinas",
+    "vamos": {
+     "n": 22,
+     "preco": 198012
+    }
+   },
+   {
+    "modelo": "Volkswagen 17.190 (Caminhão)",
+    "cat": "Caminhão",
+    "vamos": {
+     "n": 22,
+     "preco": 357246
     }
    },
    {
@@ -6156,15 +6197,27 @@
     "cat": "Caminhão",
     "vamos": {
      "n": 20,
-     "preco": 109615
+     "preco": 109878
     }
    },
    {
     "modelo": "Volkswagen 15.190 (Caminhão)",
     "cat": "Caminhão",
     "vamos": {
-     "n": 18,
-     "preco": 328690
+     "n": 20,
+     "preco": 323058
+    }
+   },
+   {
+    "modelo": "Volvo Fh (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
+    "volksconfia": {
+     "n": 6,
+     "preco": 780833
+    },
+    "vamos": {
+     "n": 13,
+     "preco": 482885
     }
    },
    {
@@ -6176,18 +6229,6 @@
     }
    },
    {
-    "modelo": "Volvo Fh (Cavalo mecânico)",
-    "cat": "Cavalo mecânico",
-    "volksconfia": {
-     "n": 6,
-     "preco": 780833
-    },
-    "vamos": {
-     "n": 12,
-     "preco": 475435
-    }
-   },
-   {
     "modelo": "Volkswagen 6 (Caminhão)",
     "cat": "Caminhão",
     "volksconfia": {
@@ -6196,7 +6237,7 @@
     },
     "vamos": {
      "n": 16,
-     "preco": 210316
+     "preco": 210056
     }
    },
    {
@@ -6208,15 +6249,31 @@
     },
     "vamos": {
      "n": 14,
-     "preco": 333209
+     "preco": 328263
+    }
+   },
+   {
+    "modelo": "Byd Ecb30B (Máquinas)",
+    "cat": "Máquinas",
+    "vamos": {
+     "n": 14,
+     "preco": 132069
+    }
+   },
+   {
+    "modelo": "Case 8810 (Máquinas)",
+    "cat": "Máquinas",
+    "vamos": {
+     "n": 14,
+     "preco": 472107
     }
    },
    {
     "modelo": "Volkswagen 31.330 (Caminhão)",
     "cat": "Caminhão",
     "vamos": {
-     "n": 13,
-     "preco": 438077
+     "n": 14,
+     "preco": 438889
     }
    },
    {
@@ -6228,31 +6285,11 @@
     }
    },
    {
-    "modelo": "Byd Ecb30B (Máquinas)",
-    "cat": "Máquinas",
-    "vamos": {
-     "n": 13,
-     "preco": 131683
-    }
-   },
-   {
-    "modelo": "Case 8810 (Máquinas)",
-    "cat": "Máquinas",
+    "modelo": "Scania G450 (Cavalo mecânico)",
+    "cat": "Cavalo mecânico",
     "vamos": {
      "n": 12,
-     "preco": 477224
-    }
-   },
-   {
-    "modelo": "Mercedes-Benz Actros (Cavalo mecânico)",
-    "cat": "Cavalo mecânico",
-    "volksconfia": {
-     "n": 2,
-     "preco": 389950
-    },
-    "vamos": {
-     "n": 10,
-     "preco": 375982
+     "preco": 383968
     }
    }
   ],
@@ -6292,28 +6329,28 @@
      "dia": "2026-11-09",
      "cats": {
       "Cavalo mecânico": {
-       "media": 384471,
-       "n": 326
+       "media": 383600,
+       "n": 381
       },
       "Caminhão": {
-       "media": 323814,
-       "n": 369
+       "media": 336601,
+       "n": 429
       },
       "Carreta": {
-       "media": 151508,
-       "n": 209
+       "media": 154252,
+       "n": 232
       },
       "Ônibus": {
-       "media": 756111,
-       "n": 18
+       "media": 758696,
+       "n": 23
       },
       "Máquinas": {
-       "media": 255087,
-       "n": 468
+       "media": 243584,
+       "n": 535
       },
       "Total": {
-       "media": 294591,
-       "n": 1390
+       "media": 296317,
+       "n": 1600
       }
      }
     }
@@ -6340,16 +6377,16 @@
      "dia": "2026-11-09",
      "cats": {
       "Cavalo mecânico": {
-       "media": 497217,
-       "n": 56
+       "media": 499167,
+       "n": 55
       },
       "Caminhão": {
        "media": 395610,
        "n": 31
       },
       "Total": {
-       "media": 461012,
-       "n": 87
+       "media": 461838,
+       "n": 86
       }
      }
     }
@@ -6369,7 +6406,7 @@
     }
    ]
   },
-  "resumo": "Vamos: 1.538 veículos anunciados, preço médio R$ 294.480. VolksConfia (VW): 86 veículos anunciados, preço médio R$ 459.586.",
+  "resumo": "Vamos: 1.643 veículos anunciados, preço médio R$ 295.342. VolksConfia (VW): 86 veículos anunciados, preço médio R$ 459.998.",
   "aviso": "Coleta semanal (segundas) desde nov/26; a variação mês a mês aparece quando houver dois meses de dados (as vitrines não mostram preços antigos).",
   "fipe": null
  }
