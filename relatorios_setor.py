@@ -116,7 +116,7 @@ NUM = r"(-?[\d\.]+(?:,\d+)?|-)"
 
 
 def fenabrave_latest(s):
-    """Último PDF do Informativo: links /portal/files/AAAA_MM_xx.pdf."""
+    """Último PDF do Informativo: links /portal/files/AAAA_MM_xx.pdf (às vezes com sufixo, ex. "2026_10_02 2.pdf")."""
     try:
         s.get(FENABRAVE_HOME, timeout=30)
     except Exception:
@@ -126,11 +126,11 @@ def fenabrave_latest(s):
     soup = BeautifulSoup(r.text, "html.parser")
     best = None
     for a in soup.find_all("a", href=True):
-        m = re.search(r"/portal/files/(\d{4})_(\d{2})_\d+\.pdf$", a["href"], re.I)
+        m = re.search(r"/portal/files/(\d{4})_(\d{2})_[^/]*\.pdf$", a["href"].strip(), re.I)
         if m:
             key = (int(m.group(1)), int(m.group(2)))
             if best is None or key > best[0]:
-                best = (key, requests.compat.urljoin(FENABRAVE_PAGE, a["href"]))
+                best = (key, requests.compat.urljoin(FENABRAVE_PAGE, a["href"].strip()))
     return best[1] if best else None
 
 
@@ -616,6 +616,16 @@ def main():
             print("[OK] ANFAVEA: coletiva já lida.")
     except Exception as exc:
         erros.append(f"ANFAVEA coletiva: {exc}")
+
+    # dados vigentes: avisa quando o painel ficou para trás (FENABRAVE sai até ~5º dia útil, ANFAVEA até ~10)
+    from datetime import date
+    hoje = date.today()
+    esperado = hoje.year * 12 + hoje.month - 1  # mês anterior
+    for fonte, dia_limite in (("fenabrave", 8), ("anfavea", 12)):
+        tem = mes_idx(state.get(fonte, {}).get("periodo"))
+        if hoje.day >= dia_limite and tem < esperado:
+            print(f"[AVISO] {fonte.upper()} defasada: painel com {state.get(fonte, {}).get('periodo')}, "
+                  f"o mês anterior já deveria ter saído.")
 
     if not args.dry_run:
         STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
