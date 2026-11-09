@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-09T18:53:45-03:00",
- "updatedLabel": "09/11/2026 18:53",
+ "updatedAt": "2026-11-09T19:15:45-03:00",
+ "updatedLabel": "09/11/2026 19:15",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -344,20 +344,20 @@
  ],
  "eventos": [
   {
+   "id": "296b00b4475d",
+   "at": "2026-11-09T19:01:15-03:00",
+   "label": "09/11 19:01",
+   "fonte": "FIPE",
+   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
+   "link": "https://veiculos.fipe.org.br/"
+  },
+  {
    "id": "712bf3b7e724",
    "at": "2026-11-09T16:16:01-03:00",
    "label": "09/11 16:16",
    "fonte": "FENABRAVE",
    "titulo": "Emplacamentos de Outubro/2026 — tabela por segmento",
    "link": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf"
-  },
-  {
-   "id": "296b00b4475d",
-   "at": "2026-11-08T22:53:26-03:00",
-   "label": "08/11 22:53",
-   "fonte": "FIPE",
-   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
-   "link": "https://veiculos.fipe.org.br/"
   },
   {
    "id": "94098bf5bd64",
@@ -918,7 +918,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 11 meses (leves): -6,0%.",
-  "gerado_em": "2026-11-08T22:53:26-03:00",
+  "gerado_em": "2026-11-09T19:01:15-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
@@ -3165,23 +3165,14 @@
     "motos": 176000
    }
   },
-  "atualizado": "06/11/2026 21:04",
-  "atualizadoAt": "2026-11-06T21:04:30-03:00",
+  "atualizado": "09/11/2026 19:15",
+  "atualizadoAt": "2026-11-09T19:15:45-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
    "b3": "https://www.b3.com.br/pt_br/noticias/"
   },
   "diaria": [
-   {
-    "ini": "2026-04-22",
-    "fim": "2026-04-28",
-    "n": 36,
-    "media_am": 1.9,
-    "mediana_am": 1.84,
-    "media_aa": 25.74,
-    "mediana_aa": 24.39
-   },
    {
     "ini": "2026-04-23",
     "fim": "2026-04-29",
@@ -4288,6 +4279,15 @@
     "mediana_am": 1.72,
     "media_aa": 24.11,
     "mediana_aa": 22.68
+   },
+   {
+    "ini": "2026-10-19",
+    "fim": "2026-10-23",
+    "n": 40,
+    "media_am": 1.8,
+    "mediana_am": 1.76,
+    "media_aa": 24.19,
+    "mediana_aa": 23.26
    }
   ]
  },
