@@ -2157,25 +2157,23 @@
    "pesados": 26000,
    "total_aa": 2.8,
    "motos": 176000
+  },
+  "2026-10": {
+   "total": 671000,
+   "leves": 466000,
+   "motos": 181000,
+   "pesados": 23000,
+   "fonte": "relatório mensal Trillia/B3 (mil unidades)"
   }
  },
- "atualizado": "09/11/2026 19:15",
- "atualizadoAt": "2026-11-09T19:15:45-03:00",
+ "atualizado": "10/11/2026 16:39",
+ "atualizadoAt": "2026-11-10T16:39:59-03:00",
  "fontes": {
   "sgs": "https://www3.bcb.gov.br/sgspub/",
   "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
   "b3": "https://www.b3.com.br/pt_br/noticias/"
  },
  "diaria": [
-  {
-   "ini": "2026-04-23",
-   "fim": "2026-04-29",
-   "n": 37,
-   "media_am": 1.85,
-   "mediana_am": 1.8,
-   "media_aa": 25.08,
-   "mediana_aa": 23.91
-  },
   {
    "ini": "2026-04-24",
    "fim": "2026-04-30",
@@ -3282,6 +3280,15 @@
    "mediana_am": 1.76,
    "media_aa": 24.19,
    "mediana_aa": 23.26
+  },
+  {
+   "ini": "2026-10-20",
+   "fim": "2026-10-26",
+   "n": 40,
+   "media_am": 1.81,
+   "mediana_am": 1.77,
+   "media_aa": 24.37,
+   "mediana_aa": 23.38
   }
  ]
 }
