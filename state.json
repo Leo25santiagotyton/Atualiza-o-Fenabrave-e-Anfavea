@@ -35,6 +35,30 @@
   },
   "_eventos": [
     {
+      "id": "c60d0b1086fa",
+      "at": "2026-11-10T16:15:51-03:00",
+      "label": "10/11 16:15",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "Classes 5-7 Out/2026 preliminar: 18.000 pedidos (+14% a/a)",
+      "link": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
+    },
+    {
+      "id": "1177177d8ecb",
+      "at": "2026-11-10T16:15:43-03:00",
+      "label": "10/11 16:15",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "ACT Research: Preliminary Class 8 Net Order for October",
+      "link": "https://www.monitordaily.com/act-research-preliminary-class-8-net-order-for-october/"
+    },
+    {
+      "id": "749dc4496ec6",
+      "at": "2026-11-10T16:15:43-03:00",
+      "label": "10/11 16:15",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "ACT: Preliminary Class 8 orders down in October",
+      "link": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
+    },
+    {
       "id": "94098bf5bd64",
       "at": "2026-11-07T14:21:46-03:00",
       "label": "07/11 14:21",
@@ -108,8 +132,16 @@
     }
   ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "fdb0e65b52181d4b39a83f8adabbd12fb915041b05b62e414d982d32f52ac380",
+    "hash": "1f87e9b93e27b2f358ded0c0117b65a054212fb43f76a7b037e4cf502778bf7e",
     "items": [
+      {
+        "text": "ACT: Preliminary Class 8 orders down in October",
+        "href": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
+      },
+      {
+        "text": "ACT Research: Preliminary Class 8 Net Order for October",
+        "href": "https://www.monitordaily.com/act-research-preliminary-class-8-net-order-for-october/"
+      },
       {
         "text": "Orders for heavy trucks in North America fell sharply in October - ACT Research",
         "href": "https://www.marketscreener.com/news/orders-for-heavy-trucks-in-north-america-fell-sharply-in-october-act-research-ce785fded188f12d"
@@ -121,14 +153,6 @@
       {
         "text": "Class 8 Orders Slip as Trailer Demand Builds",
         "href": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
-      },
-      {
-        "text": "New order season sputters to take off in September — Trucks, Parts, Service.",
-        "href": "https://www.truckpartsandservice.com/trucks-trailers/class-7-8/article/15836573/september-truck-orders-dip-as-2027-epa-rules-loom"
-      },
-      {
-        "text": "Class 8 orders rise in September as EPA27 uncertainty clouds market — Truck News.",
-        "href": "https://www.trucknews.com/equipment/class-8-orders-rise-in-september-as-epa27-uncertainty-clouds-market/1003222761/"
       }
     ]
   },
