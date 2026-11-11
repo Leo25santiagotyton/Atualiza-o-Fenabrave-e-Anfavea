@@ -53,6 +53,16 @@ MES_ABREV = {"JAN": 1, "FEV": 2, "MAR": 3, "ABR": 4, "MAI": 5, "JUN": 6,
              "JUL": 7, "AGO": 8, "SET": 9, "OUT": 10, "NOV": 11, "DEZ": 12}
 
 
+# a Carta passou a vir com a capa em espanhol ("RESULTADOS OCTUBRE 2026")
+MESES_ES = {"enero": "janeiro", "febrero": "fevereiro", "marzo": "março", "abril": "abril", "mayo": "maio",
+            "junio": "junho", "julio": "julho", "agosto": "agosto", "septiembre": "setembro",
+            "setiembre": "setembro", "octubre": "outubro", "noviembre": "novembro", "diciembre": "dezembro"}
+
+
+def _mes_pt(nome):
+    return MESES_ES.get((nome or "").lower(), nome or "")
+
+
 # ---------------------------------------------------------------- números
 def num(s):
     """'1.728.390' -> 1728390 ; '1,57' -> 1.57 ; '1513,0' -> 1513.0 ; '-' -> None."""
@@ -276,7 +286,7 @@ def parse_segmentos_anfavea(text):
 def parse_anfavea(pages):
     p1 = pages[0] if pages else ""
     m = re.search(r"Resultados de (\w+) de (\d{4})", p1, re.I) or re.search(r"RESULTADOS\s+(\w+)\s+(\d{4})", p1)
-    periodo = f"{m.group(1).capitalize()}/{m.group(2)}" if m else ""
+    periodo = f"{_mes_pt(m.group(1)).capitalize()}/{m.group(2)}" if m else ""
     seg_page = next((p for p in pages if "Emplacamento total de autoveículos novos" in p), "")
     return {"periodo": periodo, "resumo": parse_resumo_anfavea(p1), "segmentos": parse_segmentos_anfavea(seg_page)}
 
@@ -330,9 +340,10 @@ def html_anfavea(d, url):
 def mes_idx(periodo):
     """'Setembro/2026' -> 2026*12+9 ; vazio -> 0."""
     m = re.match(r"(\w+)/(\d{4})", periodo or "")
-    if not m or m.group(1).lower() not in MESES:
+    mes = _mes_pt(m.group(1)).lower() if m else ""
+    if not m or mes not in MESES:
         return 0
-    return int(m.group(2)) * 12 + MESES.index(m.group(1).lower()) + 1
+    return int(m.group(2)) * 12 + MESES.index(mes) + 1
 
 
 def anfavea_coletiva(s):
