@@ -25,15 +25,39 @@
     ]
   },
   "ANFAVEA - Edições em PDF (Carta da Anfavea)": {
-    "hash": "d2650d80d9bba4ca099472b8e4dc623a2a07f0710a741c84b795e557a2e00503",
+    "hash": "62a2b692344ef879adeb0e57d04d90919ed69841d199948d7af9df13dd81d80b",
     "items": [
       {
-        "text": "Outubro/2026",
-        "href": "https://www.anfavea.com.br/cartas/carta485.pdf"
+        "text": "Novembro/2026",
+        "href": "https://www.anfavea.com.br/cartas/carta486.pdf"
       }
     ]
   },
   "_eventos": [
+    {
+      "id": "ccf22b13dcb0",
+      "at": "2026-11-11T16:12:20-03:00",
+      "label": "11/11 16:12",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "Classe 8 Out/2026 preliminar: 13.500 pedidos (-45% a/a)",
+      "link": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
+    },
+    {
+      "id": "d040c5722d47",
+      "at": "2026-11-11T16:12:11-03:00",
+      "label": "11/11 16:12",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "October Class 8 Orders Down 45%",
+      "link": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
+    },
+    {
+      "id": "8d69301bd945",
+      "at": "2026-11-11T16:12:09-03:00",
+      "label": "11/11 16:12",
+      "fonte": "ANFAVEA",
+      "titulo": "Novembro/2026",
+      "link": "https://www.anfavea.com.br/cartas/carta486.pdf"
+    },
     {
       "id": "c60d0b1086fa",
       "at": "2026-11-10T16:15:51-03:00",
@@ -132,8 +156,12 @@
     }
   ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "1f87e9b93e27b2f358ded0c0117b65a054212fb43f76a7b037e4cf502778bf7e",
+    "hash": "3b5d04716bd18b99f8d448fb76edbd3fddeb0c634ba05a82878fb4d3be0fa396",
     "items": [
+      {
+        "text": "October Class 8 Orders Down 45%",
+        "href": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
+      },
       {
         "text": "ACT: Preliminary Class 8 orders down in October",
         "href": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
@@ -149,10 +177,6 @@
       {
         "text": "ACT: Final Class 8 orders down in September",
         "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-orders-down-in-september"
-      },
-      {
-        "text": "Class 8 Orders Slip as Trailer Demand Builds",
-        "href": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
       }
     ]
   },
