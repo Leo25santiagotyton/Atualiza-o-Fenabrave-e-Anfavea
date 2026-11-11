@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-10T21:37:27-03:00",
- "updatedLabel": "10/11/2026 21:37",
+ "updatedAt": "2026-11-11T11:39:53-03:00",
+ "updatedLabel": "11/11/2026 11:39",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -344,6 +344,14 @@
  ],
  "eventos": [
   {
+   "id": "296b00b4475d",
+   "at": "2026-11-10T23:06:17-03:00",
+   "label": "10/11 23:06",
+   "fonte": "FIPE",
+   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
+   "link": "https://veiculos.fipe.org.br/"
+  },
+  {
    "id": "c60d0b1086fa",
    "at": "2026-11-10T16:15:51-03:00",
    "label": "10/11 16:15",
@@ -366,14 +374,6 @@
    "fonte": "ACT Research · pedidos (EUA)",
    "titulo": "ACT: Preliminary Class 8 orders down in October",
    "link": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
-  },
-  {
-   "id": "296b00b4475d",
-   "at": "2026-11-10T16:09:03-03:00",
-   "label": "10/11 16:09",
-   "fonte": "FIPE",
-   "titulo": "Tabela de novembro/2026 publicada — Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026",
-   "link": "https://veiculos.fipe.org.br/"
   },
   {
    "id": "712bf3b7e724",
@@ -944,7 +944,7 @@
    "Moto": 24
   },
   "resumo": "Na tabela FIPE de novembro/2026, a cesta de veículos leves caiu (-1,08%) frente a outubro/2026. Entre os segmentos, menor queda: Moto (-0,19%); maior queda: SUV (-1,31%). Caminhões: -1,30%. Acumulado em 11 meses (leves): -6,4%.",
-  "gerado_em": "2026-11-10T16:09:03-03:00",
+  "gerado_em": "2026-11-10T23:06:17-03:00",
   "maiores_altas": [
    {
     "nome": "Honda CG 160",
@@ -5673,7 +5673,7 @@
   "fipe": null
  },
  "usados": {
-  "updatedAt": "2026-11-10T21:04:36-03:00",
+  "updatedAt": "2026-11-11T11:39:53-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
