@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-11T13:52:48-03:00",
- "updatedLabel": "11/11/2026 13:52",
+ "updatedAt": "2026-11-11T16:32:25-03:00",
+ "updatedLabel": "11/11/2026 16:32",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -192,7 +192,7 @@
     "acum_var": -5.4
    }
   ],
-  "coletiva_url": "https://anfavea.com.br/site/wp-content/uploads/2026/10/Coletiva-de-Imprensa-Outubro.pdf"
+  "coletiva_url": "https://anfavea.com.br/site/wp-content/uploads/2026/11/Coletiva-de-Imprensa-Novembro-jornalistas.pdf"
  },
  "fontes": [
   {
@@ -200,8 +200,8 @@
    "url": "https://anfavea.com.br/site/conteudos/carta-da-anfavea/",
    "itens": [
     {
-     "text": "Carta 485 · Outubro/2026",
-     "href": "https://www.anfavea.com.br/cartas/carta485.pdf"
+     "text": "Carta 486 · Novembro/2026",
+     "href": "https://www.anfavea.com.br/cartas/carta486.pdf"
     }
    ]
   },
@@ -262,6 +262,10 @@
    "url": "https://www.actresearch.net/resources/trends-headlines",
    "itens": [
     {
+     "text": "October Class 8 Orders Down 45%",
+     "href": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
+    },
+    {
      "text": "ACT: Preliminary Class 8 orders down in October",
      "href": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
     },
@@ -276,15 +280,35 @@
     {
      "text": "ACT: Final Class 8 orders down in September",
      "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-orders-down-in-september"
-    },
-    {
-     "text": "Class 8 Orders Slip as Trailer Demand Builds",
-     "href": "https://www.fleetequipmentmag.com/act-commercial-vehicle-outlook-class-8-trailers/"
     }
    ]
   }
  ],
  "eventos": [
+  {
+   "id": "ccf22b13dcb0",
+   "at": "2026-11-11T16:12:20-03:00",
+   "label": "11/11 16:12",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "Classe 8 Out/2026 preliminar: 13.500 pedidos (-45% a/a)",
+   "link": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
+  },
+  {
+   "id": "d040c5722d47",
+   "at": "2026-11-11T16:12:11-03:00",
+   "label": "11/11 16:12",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "October Class 8 Orders Down 45%",
+   "link": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
+  },
+  {
+   "id": "8d69301bd945",
+   "at": "2026-11-11T16:12:09-03:00",
+   "label": "11/11 16:12",
+   "fonte": "ANFAVEA",
+   "titulo": "Novembro/2026",
+   "link": "https://www.anfavea.com.br/cartas/carta486.pdf"
+  },
   {
    "id": "8a8ff4419e36",
    "at": "2026-11-11T13:44:59-03:00",
@@ -432,7 +456,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "10/11/2026",
+  "atualizado": "11/11/2026",
   "preliminar": {
    "Classe 8": [
     "2026-10"
@@ -468,7 +492,7 @@
      22562,
      16951,
      18700,
-     35000
+     13500
     ]
    },
    "Classes 5-7": {
@@ -3148,8 +3172,8 @@
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    }
   },
-  "atualizado": "10/11/2026 21:37",
-  "atualizadoAt": "2026-11-10T21:37:27-03:00",
+  "atualizado": "11/11/2026 16:32",
+  "atualizadoAt": "2026-11-11T16:32:25-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -4262,6 +4286,15 @@
     "mediana_am": 1.77,
     "media_aa": 24.37,
     "mediana_aa": 23.38
+   },
+   {
+    "ini": "2026-10-21",
+    "fim": "2026-10-27",
+    "n": 40,
+    "media_am": 1.79,
+    "mediana_am": 1.77,
+    "media_aa": 24.18,
+    "mediana_aa": 23.39
    }
   ]
  },
@@ -5623,7 +5656,7 @@
   "fipe": null
  },
  "usados": {
-  "updatedAt": "2026-11-11T11:39:53-03:00",
+  "updatedAt": "2026-11-11T15:43:23-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
