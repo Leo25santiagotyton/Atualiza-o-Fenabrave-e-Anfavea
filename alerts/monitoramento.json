@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-10T21:04:36-03:00",
- "updatedLabel": "10/11/2026 21:04",
+ "updatedAt": "2026-11-10T21:37:27-03:00",
+ "updatedLabel": "10/11/2026 21:37",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -3198,23 +3198,14 @@
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    }
   },
-  "atualizado": "10/11/2026 16:39",
-  "atualizadoAt": "2026-11-10T16:39:59-03:00",
+  "atualizado": "10/11/2026 21:37",
+  "atualizadoAt": "2026-11-10T21:37:27-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
    "b3": "https://www.b3.com.br/pt_br/noticias/"
   },
   "diaria": [
-   {
-    "ini": "2026-04-24",
-    "fim": "2026-04-30",
-    "n": 39,
-    "media_am": 1.85,
-    "mediana_am": 1.83,
-    "media_aa": 25.04,
-    "mediana_aa": 24.29
-   },
    {
     "ini": "2026-04-27",
     "fim": "2026-05-04",
