@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-11T13:44:03-03:00",
- "updatedLabel": "11/11/2026 13:44",
+ "updatedAt": "2026-11-11T13:52:48-03:00",
+ "updatedLabel": "11/11/2026 13:52",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -129,125 +129,67 @@
   ]
  },
  "anfavea": {
-  "carta": 484,
-  "rotulo": null,
-  "url": "https://anfavea.com.br/site/wp-content/uploads/2026/10/Coletiva-de-Imprensa-Outubro.pdf",
-  "periodo": "Setembro/2026",
-  "fonte": "coletiva",
-  "release": "https://anfavea.com.br/site/wp-content/uploads/2026/10/RELEASE-OUTUBRO26-1.pdf",
+  "carta": 486,
+  "url": "https://www.anfavea.com.br/cartas/carta486.pdf",
+  "periodo": "Outubro/2026",
+  "rotulo": "Novembro/2026",
   "resumo": [
    {
     "indicador": "Emplacamento",
-    "mes": 281.4,
-    "mes_ant": 275.1,
-    "mes_aa": 243.2,
-    "acum": 2256.7,
-    "acum_aa": 1910.9,
-    "mm": 2.3,
-    "aa": 15.7,
-    "acum_var": 18.1
+    "mes": 265.5,
+    "mes_ant": 281.4,
+    "mes_aa": 260.7,
+    "acum": 2520.0,
+    "acum_aa": 2170.0,
+    "mm": -5.6,
+    "aa": 1.8,
+    "acum_var": 16.1
    },
    {
     "indicador": "Exportação",
-    "mes": 39.8,
+    "mes": 29.1,
     "mes_ant": 39.8,
-    "mes_aa": 52.5,
-    "acum": 333.9,
-    "acum_aa": 433.8,
-    "mm": 0.1,
-    "aa": -24.2,
-    "acum_var": -23.0
+    "mes_aa": 40.6,
+    "acum": 363.1,
+    "acum_aa": 474.4,
+    "mm": -26.9,
+    "aa": -28.3,
+    "acum_var": -23.5
    },
    {
     "indicador": "Produção",
-    "mes": 268.3,
-    "mes_ant": 271.2,
-    "mes_aa": 243.4,
-    "acum": 2165.8,
-    "acum_aa": 1992.8,
-    "mm": -1.1,
-    "aa": 10.2,
-    "acum_var": 8.7
+    "mes": 254.5,
+    "mes_ant": 268.3,
+    "mes_aa": 247.8,
+    "acum": 2420.0,
+    "acum_aa": 2240.0,
+    "mm": -5.1,
+    "aa": 2.7,
+    "acum_var": 8.0
    }
   ],
   "segmentos": [
    {
-    "segmento": "Total",
-    "mes": 281450,
-    "mes_ant": 275122,
-    "acum": 2256791,
-    "mes_aa": 243250,
-    "acum_aa": 1910957,
-    "mm": 2.3,
-    "aa": 15.7,
-    "acum_var": 18.1
-   },
-   {
-    "segmento": "Automóveis",
-    "mes": 216550,
-    "mes_ant": 213105,
-    "acum": 1729513,
-    "mes_aa": 178550,
-    "acum_aa": 1411607,
-    "mm": 1.6,
-    "aa": 21.3,
-    "acum_var": 22.5
-   },
-   {
-    "segmento": "Comerciais leves",
-    "mes": 52185,
-    "mes_ant": 49986,
-    "acum": 429369,
-    "mes_aa": 52926,
-    "acum_aa": 397588,
-    "mm": 4.4,
-    "aa": -1.4,
-    "acum_var": 8.0
-   },
-   {
     "segmento": "Caminhões",
-    "mes": 10228,
-    "mes_ant": 10008,
-    "acum": 80878,
-    "mes_aa": 9797,
-    "acum_aa": 84049,
-    "mm": 2.2,
-    "aa": 4.4,
-    "acum_var": -3.8
+    "mes": 9915,
+    "mes_ant": 10232,
+    "acum": 90796,
+    "mes_aa": 10665,
+    "acum_aa": 94714,
+    "mm": -3.1,
+    "aa": -7.0,
+    "acum_var": -4.1
    },
    {
     "segmento": "Ônibus",
-    "mes": 2369,
-    "mes_ant": 2023,
-    "acum": 16913,
-    "mes_aa": 1955,
-    "acum_aa": 17691,
-    "mm": 17.1,
-    "aa": 21.2,
-    "acum_var": -4.4
-   }
-  ],
-  "projecoes": [
-   {
-    "indicador": "Emplacamento",
-    "ano_ant": 2690,
-    "anterior": 3014,
-    "nova": 3099,
-    "var": 15.2
-   },
-   {
-    "indicador": "Exportação",
-    "ano_ant": 529,
-    "anterior": 461,
-    "nova": 435,
-    "var": -17.7
-   },
-   {
-    "indicador": "Produção",
-    "ano_ant": 2644,
-    "anterior": 2797,
-    "nova": 2822,
-    "var": 6.7
+    "mes": 1680,
+    "mes_ant": 2369,
+    "acum": 18593,
+    "mes_aa": 1970,
+    "acum_aa": 19660,
+    "mm": -29.1,
+    "aa": -14.7,
+    "acum_var": -5.4
    }
   ],
   "coletiva_url": "https://anfavea.com.br/site/wp-content/uploads/2026/10/Coletiva-de-Imprensa-Outubro.pdf"
@@ -343,6 +285,14 @@
   }
  ],
  "eventos": [
+  {
+   "id": "8a8ff4419e36",
+   "at": "2026-11-11T13:44:59-03:00",
+   "label": "11/11 13:44",
+   "fonte": "ANFAVEA",
+   "titulo": "Carta 486 — resultados de Outubro/2026",
+   "link": "https://www.anfavea.com.br/cartas/carta486.pdf"
+  },
   {
    "id": "296b00b4475d",
    "at": "2026-11-10T23:06:17-03:00",

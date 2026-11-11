@@ -234,9 +234,10 @@ def parse_resumo_anfavea(text):
     acumulado, acumulado ano anterior. Linhas com 3 '%': m/m, a/a, acumulado."""
     mils, pcts = [], []
     for ln in text.splitlines():
-        v = re.findall(MIL, ln)
+        # "2,52 milhões" também casa com "mil": converte para mil unidades
+        v = [num(m.group(1)) * (1000 if m.group(2) else 1) for m in re.finditer(MIL + r"(h)?", ln)]
         if len(v) == 3:
-            mils.append([num(x) for x in v])
+            mils.append(v)
             continue
         p = re.findall(PCT, ln)
         if len(p) == 3:
