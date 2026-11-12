@@ -2166,8 +2166,8 @@
    "fonte": "relatório mensal Trillia/B3 (mil unidades)"
   }
  },
- "atualizado": "11/11/2026 22:53",
- "atualizadoAt": "2026-11-11T22:53:20-03:00",
+ "atualizado": "12/11/2026 16:51",
+ "atualizadoAt": "2026-11-12T16:51:12-03:00",
  "fontes": {
   "sgs": "https://www3.bcb.gov.br/sgspub/",
   "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -3289,6 +3289,15 @@
    "mediana_am": 1.77,
    "media_aa": 24.18,
    "mediana_aa": 23.39
+  },
+  {
+   "ini": "2026-10-22",
+   "fim": "2026-10-28",
+   "n": 40,
+   "media_am": 1.79,
+   "mediana_am": 1.72,
+   "media_aa": 24.14,
+   "mediana_aa": 22.71
   }
  ]
 }
