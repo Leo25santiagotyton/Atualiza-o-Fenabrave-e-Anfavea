@@ -691,6 +691,17 @@
     {
       "data": "2026-05-20",
       "empresa": "Borr Drilling",
+      "evento": "Assembleia Geral Ordinária 2026",
+      "fonte": "https://www.theglobeandmail.com/investing/markets/stocks/BORR/pressreleases/1206674/borr-drilling-sets-may-20-2026-date-for-annual-general-meeting/",
+      "grupo": "Bonds",
+      "short": "Assembleia",
+      "status": "realizado",
+      "ticker": "US100018AC46",
+      "tipo": "assembleia"
+    },
+    {
+      "data": "2026-05-20",
+      "empresa": "Borr Drilling",
       "evento": "Resultados 1T26",
       "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-invitation-webcast-and-conference-call-q1-2026-results-2026-04",
       "grupo": "Bonds",
@@ -699,17 +710,6 @@
       "status": "realizado",
       "ticker": "US100018AC46",
       "tipo": "resultado"
-    },
-    {
-      "data": "2026-05-20",
-      "empresa": "Borr Drilling",
-      "evento": "Assembleia Geral Ordinária 2026",
-      "fonte": "https://www.theglobeandmail.com/investing/markets/stocks/BORR/pressreleases/1206674/borr-drilling-sets-may-20-2026-date-for-annual-general-meeting/",
-      "grupo": "Bonds",
-      "short": "Assembleia",
-      "status": "realizado",
-      "ticker": "US100018AC46",
-      "tipo": "assembleia"
     },
     {
       "data": "2026-05-21",
@@ -1410,7 +1410,7 @@
       "fonte": "https://www.investing.com/equities/armac-locacao-logistica-e-servicos-earnings",
       "grupo": "Ações",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "ARML3",
       "tipo": "resultado"
     },
@@ -1422,7 +1422,7 @@
       "grupo": "Ações",
       "obs": "Calendário de eventos corporativos 2026 (ITR do 3T em 11/11/2026).",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "FRAS3",
       "tipo": "resultado"
     },
@@ -1432,11 +1432,11 @@
       "evento": "ITR 3T26 · calendário anual",
       "fonte": "https://investidor10.com.br/acoes/link_comunicado/JSLG3/46282/",
       "grupo": "Ações",
+      "obs": "Lucro do 3T26 já noticiado no fim de outubro (https://www.cnnbrasil.com.br/infra/jsl-registra-lucro-ajustado-de-r-403-milhoes-no-3o-tri-alta-de-126/); data do ITR mantida.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "JSLG3",
-      "tipo": "resultado",
-      "obs": "Lucro do 3T26 já noticiado no fim de outubro (https://www.cnnbrasil.com.br/infra/jsl-registra-lucro-ajustado-de-r-403-milhoes-no-3o-tri-alta-de-126/); data do ITR mantida."
+      "tipo": "resultado"
     },
     {
       "data": "2026-11-11",
@@ -1446,7 +1446,7 @@
       "grupo": "Ações",
       "obs": "Calendário anual de eventos corporativos 2026; antes estimado em 09/11. O grupo Simpar costuma soltar prévia ~2 semanas antes.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "MOVI3",
       "tipo": "resultado"
     },
@@ -1728,6 +1728,28 @@
       "tipo": "cupom"
     },
     {
+      "data": "2027-03-10",
+      "empresa": "Frasle Mobility",
+      "evento": "Divulgação resultados 4T26/2026",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 11/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "FRAS3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-11",
+      "empresa": "Frasle Mobility",
+      "evento": "Videoconferência de resultados 4T26",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (videoconferência em 12/03/2026).",
+      "short": "Call 4T26",
+      "status": "estimado",
+      "ticker": "FRAS3",
+      "tipo": "teleconferencia"
+    },
+    {
       "data": "2027-03-18",
       "empresa": "Tupy",
       "evento": "Divulgação resultados 4T26/2026",
@@ -1750,6 +1772,50 @@
       "tipo": "teleconferencia"
     },
     {
+      "data": "2027-03-22",
+      "empresa": "Movida",
+      "evento": "Divulgação de resultados 4T26",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 23/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "MOVI3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-23",
+      "empresa": "JSL",
+      "evento": "Divulgação de resultados 4T26/DFP 2026",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 24/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "JSLG3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-24",
+      "empresa": "JSL",
+      "evento": "Teleconferência de resultados 4T26",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (teleconferência em 25/03/2026).",
+      "short": "Call 4T26",
+      "status": "estimado",
+      "ticker": "JSLG3",
+      "tipo": "teleconferencia"
+    },
+    {
+      "data": "2027-03-29",
+      "empresa": "Armac",
+      "evento": "Divulgação resultados 4T26/2026",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 30/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "ARML3",
+      "tipo": "resultado"
+    },
+    {
       "data": "2027-04-11",
       "empresa": "Movida Europe",
       "evento": "Cupom semestral da 7,85% 2029",
@@ -1761,6 +1827,6 @@
       "tipo": "cupom"
     }
   ],
-  "updatedAt": "2026-11-09T19:45:00-03:00",
-  "updatedLabel": "09/11/2026 19:45"
+  "updatedAt": "2026-11-12T12:00:00-03:00",
+  "updatedLabel": "12/11/2026 12:00"
 }
