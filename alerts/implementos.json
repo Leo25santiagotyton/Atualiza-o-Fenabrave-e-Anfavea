@@ -1,0 +1,5133 @@
+{
+ "anfir": {
+  "acum": {
+   "2023-01": {
+    "reb": {
+     "Basculante": 2129,
+     "Porta Conteiner": 168,
+     "Graneleiro / Carga Seca": 1287,
+     "Canavieiro": 56,
+     "Baú Carga Geral": 368,
+     "Carrega Tudo": 217,
+     "Dolly": 1082,
+     "Especial": 114,
+     "Transporte De Toras": 122,
+     "Baú Frigorífico": 134,
+     "Baú Lonado": 405,
+     "Silo": 42,
+     "Tanque Carbono": 371,
+     "Tanque Inox": 44,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 1046,
+     "Baú Alumínio / Frigorífico": 1946,
+     "Baú Lonado": 32,
+     "Basculante": 807,
+     "Betoneira": 99,
+     "Tanque": 442,
+     "Outras / Diversas": 746
+    },
+    "reb_aa": {
+     "Basculante": 2071,
+     "Porta Conteiner": 222,
+     "Graneleiro / Carga Seca": 1085,
+     "Canavieiro": 315,
+     "Baú Carga Geral": 478,
+     "Carrega Tudo": 125,
+     "Dolly": 1119,
+     "Especial": 82,
+     "Transporte De Toras": 249,
+     "Baú Frigorífico": 116,
+     "Baú Lonado": 490,
+     "Silo": 14,
+     "Tanque Carbono": 344,
+     "Tanque Inox": 14,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 1159,
+     "Baú Alumínio / Frigorífico": 1777,
+     "Baú Lonado": 37,
+     "Basculante": 645,
+     "Betoneira": 86,
+     "Tanque": 301,
+     "Outras / Diversas": 932
+    },
+    "reb_total": 6539,
+    "reb_total_aa": 6724,
+    "carr_total": 5118,
+    "carr_total_aa": 4937,
+    "total": 11657,
+    "total_aa": 11661,
+    "exp": 447,
+    "exp_aa": 376,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489653-Desempenho_Jan_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro de 2023"
+   },
+   "2023-02": {
+    "reb": {
+     "Basculante": 4011,
+     "Porta Conteiner": 352,
+     "Graneleiro / Carga Seca": 2538,
+     "Canavieiro": 275,
+     "Baú Carga Geral": 622,
+     "Carrega Tudo": 395,
+     "Dolly": 2020,
+     "Especial": 227,
+     "Transporte De Toras": 230,
+     "Baú Frigorífico": 253,
+     "Baú Lonado": 779,
+     "Silo": 80,
+     "Tanque Carbono": 639,
+     "Tanque Inox": 78,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 2034,
+     "Baú Alumínio / Frigorífico": 3811,
+     "Baú Lonado": 59,
+     "Basculante": 1607,
+     "Betoneira": 195,
+     "Tanque": 826,
+     "Outras / Diversas": 1650
+    },
+    "reb_aa": {
+     "Basculante": 3937,
+     "Porta Conteiner": 477,
+     "Graneleiro / Carga Seca": 1900,
+     "Canavieiro": 596,
+     "Baú Carga Geral": 902,
+     "Carrega Tudo": 243,
+     "Dolly": 2006,
+     "Especial": 188,
+     "Transporte De Toras": 395,
+     "Baú Frigorífico": 271,
+     "Baú Lonado": 972,
+     "Silo": 49,
+     "Tanque Carbono": 755,
+     "Tanque Inox": 34,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 2517,
+     "Baú Alumínio / Frigorífico": 3674,
+     "Baú Lonado": 53,
+     "Basculante": 1254,
+     "Betoneira": 186,
+     "Tanque": 673,
+     "Outras / Diversas": 1882
+    },
+    "reb_total": 12499,
+    "reb_total_aa": 12725,
+    "carr_total": 10182,
+    "carr_total_aa": 10239,
+    "total": 22681,
+    "total_aa": 22964,
+    "exp": 805,
+    "exp_aa": 668,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489671-Desempenho_Jan_Fev_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro e Fevereiro de 2023"
+   },
+   "2023-03": {
+    "reb": {
+     "Basculante": 6185,
+     "Porta Conteiner": 672,
+     "Graneleiro / Carga Seca": 4137,
+     "Canavieiro": 944,
+     "Baú Carga Geral": 1145,
+     "Carrega Tudo": 651,
+     "Dolly": 3026,
+     "Especial": 399,
+     "Transporte De Toras": 578,
+     "Baú Frigorífico": 421,
+     "Baú Lonado": 1264,
+     "Silo": 125,
+     "Tanque Carbono": 1199,
+     "Tanque Inox": 144,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 3432,
+     "Baú Alumínio / Frigorífico": 6404,
+     "Baú Lonado": 121,
+     "Basculante": 2585,
+     "Betoneira": 324,
+     "Tanque": 1262,
+     "Outras / Diversas": 2514
+    },
+    "reb_aa": {
+     "Basculante": 5999,
+     "Porta Conteiner": 762,
+     "Graneleiro / Carga Seca": 2867,
+     "Canavieiro": 1031,
+     "Baú Carga Geral": 1252,
+     "Carrega Tudo": 416,
+     "Dolly": 2994,
+     "Especial": 307,
+     "Transporte De Toras": 732,
+     "Baú Frigorífico": 408,
+     "Baú Lonado": 1426,
+     "Silo": 92,
+     "Tanque Carbono": 1169,
+     "Tanque Inox": 49,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 3953,
+     "Baú Alumínio / Frigorífico": 5830,
+     "Baú Lonado": 69,
+     "Basculante": 2233,
+     "Betoneira": 320,
+     "Tanque": 1108,
+     "Outras / Diversas": 2969
+    },
+    "reb_total": 20890,
+    "reb_total_aa": 19504,
+    "carr_total": 16642,
+    "carr_total_aa": 16482,
+    "total": 37532,
+    "total_aa": 35986,
+    "exp": 1305,
+    "exp_aa": 1134,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489685-Desempenho%20_1Trimestre_2023.pdf",
+    "titulo": "Desempenho do setor - 1º Trimestre de 2023"
+   },
+   "2023-04": {
+    "reb": {
+     "Basculante": 7969,
+     "Porta Conteiner": 821,
+     "Graneleiro / Carga Seca": 5502,
+     "Canavieiro": 1152,
+     "Baú Carga Geral": 1554,
+     "Carrega Tudo": 859,
+     "Dolly": 3875,
+     "Especial": 545,
+     "Transporte De Toras": 716,
+     "Baú Frigorífico": 550,
+     "Baú Lonado": 1574,
+     "Silo": 173,
+     "Tanque Carbono": 1616,
+     "Tanque Inox": 190,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 4440,
+     "Baú Alumínio / Frigorífico": 8325,
+     "Baú Lonado": 143,
+     "Basculante": 3183,
+     "Betoneira": 405,
+     "Tanque": 1576,
+     "Outras / Diversas": 3176
+    },
+    "reb_aa": {
+     "Basculante": 8019,
+     "Porta Conteiner": 1025,
+     "Graneleiro / Carga Seca": 3796,
+     "Canavieiro": 1434,
+     "Baú Carga Geral": 1690,
+     "Carrega Tudo": 566,
+     "Dolly": 3889,
+     "Especial": 437,
+     "Transporte De Toras": 1120,
+     "Baú Frigorífico": 573,
+     "Baú Lonado": 1789,
+     "Silo": 125,
+     "Tanque Carbono": 1546,
+     "Tanque Inox": 59,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 5342,
+     "Baú Alumínio / Frigorífico": 7699,
+     "Baú Lonado": 96,
+     "Basculante": 3090,
+     "Betoneira": 442,
+     "Tanque": 1545,
+     "Outras / Diversas": 3942
+    },
+    "reb_total": 27096,
+    "reb_total_aa": 26068,
+    "carr_total": 21248,
+    "carr_total_aa": 22156,
+    "total": 48344,
+    "total_aa": 48224,
+    "exp": 1621,
+    "exp_aa": 1571,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489699-DADOS%20IMPRENSA%20-%201%C2%BA%20QUADRIMESTRE%202023.pdf",
+    "titulo": "Desempenho do setor - 1º Quadrimestre de 2023"
+   },
+   "2023-05": {
+    "reb": {
+     "Basculante": 9801,
+     "Porta Conteiner": 972,
+     "Graneleiro / Carga Seca": 7253,
+     "Canavieiro": 1297,
+     "Baú Carga Geral": 2101,
+     "Carrega Tudo": 1095,
+     "Dolly": 4727,
+     "Especial": 778,
+     "Transporte De Toras": 1292,
+     "Baú Frigorífico": 684,
+     "Baú Lonado": 2058,
+     "Silo": 263,
+     "Tanque Carbono": 2203,
+     "Tanque Inox": 252,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 5546,
+     "Baú Alumínio / Frigorífico": 10052,
+     "Baú Lonado": 175,
+     "Basculante": 3865,
+     "Betoneira": 487,
+     "Tanque": 1944,
+     "Outras / Diversas": 4250
+    },
+    "reb_aa": {
+     "Basculante": 10048,
+     "Porta Conteiner": 1330,
+     "Graneleiro / Carga Seca": 5054,
+     "Canavieiro": 1511,
+     "Baú Carga Geral": 2127,
+     "Carrega Tudo": 730,
+     "Dolly": 4916,
+     "Especial": 566,
+     "Transporte De Toras": 1694,
+     "Baú Frigorífico": 810,
+     "Baú Lonado": 2270,
+     "Silo": 155,
+     "Tanque Carbono": 1992,
+     "Tanque Inox": 93,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 6960,
+     "Baú Alumínio / Frigorífico": 10256,
+     "Baú Lonado": 129,
+     "Basculante": 4106,
+     "Betoneira": 563,
+     "Tanque": 2070,
+     "Outras / Diversas": 4539
+    },
+    "reb_total": 34776,
+    "reb_total_aa": 33296,
+    "carr_total": 26319,
+    "carr_total_aa": 28623,
+    "total": 61095,
+    "total_aa": 61919,
+    "exp": 2275,
+    "exp_aa": 2041,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489710-Desempenho_Jan_Maio_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Maio de 2023"
+   },
+   "2023-06": {
+    "reb": {
+     "Basculante": 11773,
+     "Porta Conteiner": 1234,
+     "Graneleiro / Carga Seca": 8974,
+     "Canavieiro": 1354,
+     "Baú Carga Geral": 2633,
+     "Carrega Tudo": 1312,
+     "Dolly": 5694,
+     "Especial": 926,
+     "Transporte De Toras": 1468,
+     "Baú Frigorífico": 839,
+     "Baú Lonado": 2513,
+     "Silo": 327,
+     "Tanque Carbono": 2754,
+     "Tanque Inox": 296,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 6555,
+     "Baú Alumínio / Frigorífico": 12161,
+     "Baú Lonado": 194,
+     "Basculante": 4518,
+     "Betoneira": 545,
+     "Tanque": 2383,
+     "Outras / Diversas": 4518
+    },
+    "reb_aa": {
+     "Basculante": 11991,
+     "Porta Conteiner": 1581,
+     "Graneleiro / Carga Seca": 6424,
+     "Canavieiro": 1519,
+     "Baú Carga Geral": 2564,
+     "Carrega Tudo": 951,
+     "Dolly": 5904,
+     "Especial": 675,
+     "Transporte De Toras": 2175,
+     "Baú Frigorífico": 1015,
+     "Baú Lonado": 2747,
+     "Silo": 185,
+     "Tanque Carbono": 2380,
+     "Tanque Inox": 123,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 8331,
+     "Baú Alumínio / Frigorífico": 12399,
+     "Baú Lonado": 166,
+     "Basculante": 5094,
+     "Betoneira": 693,
+     "Tanque": 2593,
+     "Outras / Diversas": 5542
+    },
+    "reb_total": 42097,
+    "reb_total_aa": 40234,
+    "carr_total": 30874,
+    "carr_total_aa": 34818,
+    "total": 72971,
+    "total_aa": 75052,
+    "exp": 2683,
+    "exp_aa": 2459,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489721-Desempenho_Jan_Jun_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Junho de 2023"
+   },
+   "2023-07": {
+    "reb": {
+     "Basculante": 13767,
+     "Porta Conteiner": 1413,
+     "Graneleiro / Carga Seca": 10721,
+     "Canavieiro": 1499,
+     "Baú Carga Geral": 3097,
+     "Carrega Tudo": 1514,
+     "Dolly": 6710,
+     "Especial": 1079,
+     "Transporte De Toras": 1690,
+     "Baú Frigorífico": 979,
+     "Baú Lonado": 2933,
+     "Silo": 372,
+     "Tanque Carbono": 3282,
+     "Tanque Inox": 364,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 7749,
+     "Baú Alumínio / Frigorífico": 13896,
+     "Baú Lonado": 229,
+     "Basculante": 5200,
+     "Betoneira": 622,
+     "Tanque": 2789,
+     "Outras / Diversas": 5135
+    },
+    "reb_aa": {
+     "Basculante": 14053,
+     "Porta Conteiner": 1726,
+     "Graneleiro / Carga Seca": 7812,
+     "Canavieiro": 1532,
+     "Baú Carga Geral": 3150,
+     "Carrega Tudo": 1177,
+     "Dolly": 6979,
+     "Especial": 839,
+     "Transporte De Toras": 2650,
+     "Baú Frigorífico": 1248,
+     "Baú Lonado": 3210,
+     "Silo": 229,
+     "Tanque Carbono": 2784,
+     "Tanque Inox": 144,
+     "Tanque Aluminio": 2
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 9833,
+     "Baú Alumínio / Frigorífico": 14676,
+     "Baú Lonado": 196,
+     "Basculante": 6202,
+     "Betoneira": 819,
+     "Tanque": 3163,
+     "Outras / Diversas": 6539
+    },
+    "reb_total": 49420,
+    "reb_total_aa": 47535,
+    "carr_total": 35620,
+    "carr_total_aa": 41428,
+    "total": 85040,
+    "total_aa": 88963,
+    "exp": 3166,
+    "exp_aa": 2912,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1708096115-Desempenho_Jan_Jul_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Julho de 2023"
+   },
+   "2023-08": {
+    "reb": {
+     "Basculante": 16152,
+     "Porta Conteiner": 1634,
+     "Graneleiro / Carga Seca": 12795,
+     "Canavieiro": 1616,
+     "Baú Carga Geral": 3585,
+     "Carrega Tudo": 1761,
+     "Dolly": 7861,
+     "Especial": 1262,
+     "Transporte De Toras": 1903,
+     "Baú Frigorífico": 1139,
+     "Baú Lonado": 3431,
+     "Silo": 403,
+     "Tanque Carbono": 3994,
+     "Tanque Inox": 437,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 8852,
+     "Baú Alumínio / Frigorífico": 15674,
+     "Baú Lonado": 266,
+     "Basculante": 5981,
+     "Betoneira": 711,
+     "Tanque": 3206,
+     "Outras / Diversas": 6135
+    },
+    "reb_aa": {
+     "Basculante": 16430,
+     "Porta Conteiner": 1914,
+     "Graneleiro / Carga Seca": 9345,
+     "Canavieiro": 1574,
+     "Baú Carga Geral": 3889,
+     "Carrega Tudo": 1417,
+     "Dolly": 8103,
+     "Especial": 1002,
+     "Transporte De Toras": 2887,
+     "Baú Frigorífico": 1408,
+     "Baú Lonado": 3719,
+     "Silo": 264,
+     "Tanque Carbono": 3190,
+     "Tanque Inox": 175,
+     "Tanque Aluminio": 2
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 11219,
+     "Baú Alumínio / Frigorífico": 17068,
+     "Baú Lonado": 214,
+     "Basculante": 7395,
+     "Betoneira": 1044,
+     "Tanque": 3727,
+     "Outras / Diversas": 7738
+    },
+    "reb_total": 57973,
+    "reb_total_aa": 55319,
+    "carr_total": 40825,
+    "carr_total_aa": 48405,
+    "total": 98798,
+    "total_aa": 103724,
+    "exp": 3766,
+    "exp_aa": 3437,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1702489746-Desempenho_Jan_Ago_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Agosto de 2023"
+   },
+   "2023-09": {
+    "reb": {
+     "Basculante": 18199,
+     "Porta Conteiner": 1783,
+     "Graneleiro / Carga Seca": 14931,
+     "Canavieiro": 1698,
+     "Baú Carga Geral": 4078,
+     "Carrega Tudo": 1989,
+     "Dolly": 8953,
+     "Especial": 1410,
+     "Transporte De Toras": 2042,
+     "Baú Frigorífico": 1307,
+     "Baú Lonado": 3912,
+     "Silo": 439,
+     "Tanque Carbono": 4597,
+     "Tanque Inox": 486,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 9994,
+     "Baú Alumínio / Frigorífico": 17459,
+     "Baú Lonado": 289,
+     "Basculante": 6481,
+     "Betoneira": 774,
+     "Tanque": 3566,
+     "Outras / Diversas": 6789
+    },
+    "reb_aa": {
+     "Basculante": 18701,
+     "Porta Conteiner": 2141,
+     "Graneleiro / Carga Seca": 10769,
+     "Canavieiro": 1634,
+     "Baú Carga Geral": 4363,
+     "Carrega Tudo": 1635,
+     "Dolly": 9157,
+     "Especial": 1137,
+     "Transporte De Toras": 3327,
+     "Baú Frigorífico": 1568,
+     "Baú Lonado": 4268,
+     "Silo": 293,
+     "Tanque Carbono": 3480,
+     "Tanque Inox": 188,
+     "Tanque Aluminio": 2
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 13594,
+     "Baú Alumínio / Frigorífico": 18346,
+     "Baú Lonado": 240,
+     "Basculante": 8290,
+     "Betoneira": 1173,
+     "Tanque": 4190,
+     "Outras / Diversas": 8538
+    },
+    "reb_total": 65824,
+    "reb_total_aa": 62663,
+    "carr_total": 45352,
+    "carr_total_aa": 54371,
+    "total": 111176,
+    "total_aa": 117034,
+    "exp": 4204,
+    "exp_aa": 4061,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1708096301-Desempenho_Jan_Set_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Setembro de 2023"
+   },
+   "2023-10": {
+    "reb": {
+     "Basculante": 20579,
+     "Porta Conteiner": 2015,
+     "Graneleiro / Carga Seca": 17179,
+     "Canavieiro": 1758,
+     "Baú Carga Geral": 4817,
+     "Carrega Tudo": 2175,
+     "Dolly": 10276,
+     "Especial": 1581,
+     "Transporte De Toras": 2166,
+     "Baú Frigorífico": 1456,
+     "Baú Lonado": 4465,
+     "Silo": 479,
+     "Tanque Carbono": 5306,
+     "Tanque Inox": 569
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 11075,
+     "Baú Alumínio / Frigorífico": 20125,
+     "Baú Lonado": 312,
+     "Basculante": 7079,
+     "Betoneira": 863,
+     "Tanque": 3921,
+     "Outras / Diversas": 6891
+    },
+    "reb_aa": {
+     "Basculante": 20679,
+     "Porta Conteiner": 2358,
+     "Graneleiro / Carga Seca": 12060,
+     "Canavieiro": 1704,
+     "Baú Carga Geral": 4845,
+     "Carrega Tudo": 1853,
+     "Dolly": 10128,
+     "Especial": 1259,
+     "Transporte De Toras": 3526,
+     "Baú Frigorífico": 1691,
+     "Baú Lonado": 4632,
+     "Silo": 326,
+     "Tanque Carbono": 3731,
+     "Tanque Inox": 214
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 13702,
+     "Baú Alumínio / Frigorífico": 21175,
+     "Baú Lonado": 288,
+     "Basculante": 9193,
+     "Betoneira": 1303,
+     "Tanque": 4618,
+     "Outras / Diversas": 9653
+    },
+    "reb_total": 74821,
+    "reb_total_aa": 69008,
+    "carr_total": 50266,
+    "carr_total_aa": 59932,
+    "total": 125087,
+    "total_aa": 128940,
+    "exp": 4790,
+    "exp_aa": 4520,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1708096387-Desempenho_Jan_Out_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Outubro de 2023"
+   },
+   "2023-11": {
+    "reb": {
+     "Basculante": 22515,
+     "Porta Conteiner": 2247,
+     "Graneleiro / Carga Seca": 19283,
+     "Canavieiro": 1797,
+     "Baú Carga Geral": 5241,
+     "Carrega Tudo": 2380,
+     "Dolly": 11343,
+     "Especial": 1750,
+     "Transporte De Toras": 2384,
+     "Baú Frigorífico": 1615,
+     "Baú Lonado": 4819,
+     "Silo": 523,
+     "Tanque Carbono": 5911,
+     "Tanque Inox": 630,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 12238,
+     "Baú Alumínio / Frigorífico": 22480,
+     "Baú Lonado": 340,
+     "Basculante": 7587,
+     "Betoneira": 962,
+     "Tanque": 4258,
+     "Outras / Diversas": 7574
+    },
+    "reb_aa": {
+     "Basculante": 22595,
+     "Porta Conteiner": 2704,
+     "Graneleiro / Carga Seca": 13248,
+     "Canavieiro": 1713,
+     "Baú Carga Geral": 5235,
+     "Carrega Tudo": 2060,
+     "Dolly": 11073,
+     "Especial": 1407,
+     "Transporte De Toras": 3690,
+     "Baú Frigorífico": 1813,
+     "Baú Lonado": 5029,
+     "Silo": 365,
+     "Tanque Carbono": 4063,
+     "Tanque Inox": 251,
+     "Tanque Aluminio": 2
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 14871,
+     "Baú Alumínio / Frigorífico": 22255,
+     "Baú Lonado": 319,
+     "Basculante": 9971,
+     "Betoneira": 1457,
+     "Tanque": 5035,
+     "Outras / Diversas": 11483
+    },
+    "reb_total": 82438,
+    "reb_total_aa": 75248,
+    "carr_total": 55439,
+    "carr_total_aa": 65391,
+    "total": 137877,
+    "total_aa": 140639,
+    "exp": 5408,
+    "exp_aa": 4996,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1708096469-Desempenho_Jan_Nov_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Novembro de 2023"
+   },
+   "2023-12": {
+    "reb": {
+     "Basculante": 24505,
+     "Porta Conteiner": 2483,
+     "Graneleiro / Carga Seca": 21226,
+     "Canavieiro": 1874,
+     "Baú Carga Geral": 5739,
+     "Carrega Tudo": 2592,
+     "Dolly": 12449,
+     "Especial": 1931,
+     "Transporte De Toras": 2628,
+     "Baú Frigorífico": 1799,
+     "Baú Lonado": 5266,
+     "Silo": 559,
+     "Tanque Carbono": 6559,
+     "Tanque Inox": 712,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 13429,
+     "Baú Alumínio / Frigorífico": 24806,
+     "Baú Lonado": 358,
+     "Basculante": 8224,
+     "Betoneira": 1065,
+     "Tanque": 4631,
+     "Outras / Diversas": 8206
+    },
+    "reb_aa": {
+     "Basculante": 25106,
+     "Porta Conteiner": 3067,
+     "Graneleiro / Carga Seca": 14720,
+     "Canavieiro": 1713,
+     "Baú Carga Geral": 5658,
+     "Carrega Tudo": 2299,
+     "Dolly": 12386,
+     "Especial": 1558,
+     "Transporte De Toras": 3897,
+     "Baú Frigorífico": 2007,
+     "Baú Lonado": 5482,
+     "Silo": 424,
+     "Tanque Carbono": 4522,
+     "Tanque Inox": 302,
+     "Tanque Aluminio": 2
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 16096,
+     "Baú Alumínio / Frigorífico": 25570,
+     "Baú Lonado": 357,
+     "Basculante": 10940,
+     "Betoneira": 1590,
+     "Tanque": 5539,
+     "Outras / Diversas": 11509
+    },
+    "reb_total": 90322,
+    "reb_total_aa": 83143,
+    "carr_total": 60719,
+    "carr_total_aa": 71601,
+    "total": 151041,
+    "total_aa": 154744,
+    "exp": 5798,
+    "exp_aa": 5700,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1708096550-Desempenho_Jan_Dez_2023.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Dezembro de 2023"
+   },
+   "2024-01": {
+    "reb": {
+     "Basculante": 1648,
+     "Porta Conteiner": 229,
+     "Graneleiro / Carga Seca": 1977,
+     "Canavieiro": 319,
+     "Baú Carga Geral": 408,
+     "Carrega Tudo": 172,
+     "Dolly": 989,
+     "Especial": 123,
+     "Transporte De Toras": 128,
+     "Baú Frigorífico": 118,
+     "Baú Lonado": 376,
+     "Silo": 35,
+     "Tanque Carbono": 507,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 1012,
+     "Baú Alumínio / Frigorífico": 1795,
+     "Baú Lonado": 28,
+     "Basculante": 432,
+     "Betoneira": 115,
+     "Tanque": 343,
+     "Outras / Diversas": 488
+    },
+    "reb_aa": {
+     "Basculante": 2129,
+     "Porta Conteiner": 168,
+     "Graneleiro / Carga Seca": 1287,
+     "Canavieiro": 56,
+     "Baú Carga Geral": 368,
+     "Carrega Tudo": 217,
+     "Dolly": 1082,
+     "Especial": 114,
+     "Transporte De Toras": 122,
+     "Baú Frigorífico": 134,
+     "Baú Lonado": 405,
+     "Silo": 42,
+     "Tanque Carbono": 371,
+     "Tanque Inox": 44,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 1046,
+     "Baú Alumínio / Frigorífico": 1946,
+     "Baú Lonado": 32,
+     "Basculante": 807,
+     "Betoneira": 99,
+     "Tanque": 442,
+     "Outras / Diversas": 746
+    },
+    "reb_total": 7075,
+    "reb_total_aa": 6539,
+    "carr_total": 4213,
+    "carr_total_aa": 5118,
+    "total": 11288,
+    "total_aa": 11657,
+    "exp": 292,
+    "exp_aa": 447,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1718127442-Desempenho_Jan_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro de 2024"
+   },
+   "2024-02": {
+    "reb": {
+     "Basculante": 3433,
+     "Porta Conteiner": 473,
+     "Graneleiro / Carga Seca": 3742,
+     "Canavieiro": 683,
+     "Baú Carga Geral": 1018,
+     "Carrega Tudo": 329,
+     "Dolly": 1932,
+     "Especial": 275,
+     "Transporte De Toras": 306,
+     "Baú Frigorífico": 269,
+     "Baú Lonado": 772,
+     "Silo": 78,
+     "Tanque Carbono": 1153,
+     "Tanque Inox": 99,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 1950,
+     "Baú Alumínio / Frigorífico": 3795,
+     "Baú Lonado": 48,
+     "Basculante": 1024,
+     "Betoneira": 235,
+     "Tanque": 712,
+     "Outras / Diversas": 1063
+    },
+    "reb_aa": {
+     "Basculante": 4011,
+     "Porta Conteiner": 352,
+     "Graneleiro / Carga Seca": 2538,
+     "Canavieiro": 275,
+     "Baú Carga Geral": 622,
+     "Carrega Tudo": 395,
+     "Dolly": 2020,
+     "Especial": 227,
+     "Transporte De Toras": 230,
+     "Baú Frigorífico": 253,
+     "Baú Lonado": 779,
+     "Silo": 80,
+     "Tanque Carbono": 639,
+     "Tanque Inox": 78,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 2034,
+     "Baú Alumínio / Frigorífico": 3811,
+     "Baú Lonado": 59,
+     "Basculante": 1607,
+     "Betoneira": 195,
+     "Tanque": 826,
+     "Outras / Diversas": 1650
+    },
+    "reb_total": 14562,
+    "reb_total_aa": 12499,
+    "carr_total": 8827,
+    "carr_total_aa": 10182,
+    "total": 23389,
+    "total_aa": 22681,
+    "exp": 516,
+    "exp_aa": 805,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1757425488-Desempenho_Jan_Fev_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro e Fevereiro de 2024"
+   },
+   "2024-03": {
+    "reb": {
+     "Basculante": 5092,
+     "Porta Conteiner": 818,
+     "Graneleiro / Carga Seca": 5656,
+     "Canavieiro": 1018,
+     "Baú Carga Geral": 1543,
+     "Carrega Tudo": 512,
+     "Dolly": 2821,
+     "Especial": 456,
+     "Transporte De Toras": 511,
+     "Baú Frigorífico": 412,
+     "Baú Lonado": 1226,
+     "Silo": 107,
+     "Tanque Carbono": 1798,
+     "Tanque Inox": 159,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 3238,
+     "Baú Alumínio / Frigorífico": 5806,
+     "Baú Lonado": 69,
+     "Basculante": 1660,
+     "Betoneira": 345,
+     "Tanque": 1083,
+     "Outras / Diversas": 1700
+    },
+    "reb_aa": {
+     "Basculante": 6185,
+     "Porta Conteiner": 672,
+     "Graneleiro / Carga Seca": 4137,
+     "Canavieiro": 944,
+     "Baú Carga Geral": 1145,
+     "Carrega Tudo": 651,
+     "Dolly": 3026,
+     "Especial": 399,
+     "Transporte De Toras": 578,
+     "Baú Frigorífico": 421,
+     "Baú Lonado": 1264,
+     "Silo": 125,
+     "Tanque Carbono": 1199,
+     "Tanque Inox": 144,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 3432,
+     "Baú Alumínio / Frigorífico": 6404,
+     "Baú Lonado": 121,
+     "Basculante": 2585,
+     "Betoneira": 324,
+     "Tanque": 1262,
+     "Outras / Diversas": 2514
+    },
+    "reb_total": 22129,
+    "reb_total_aa": 20890,
+    "carr_total": 13901,
+    "carr_total_aa": 16642,
+    "total": 36030,
+    "total_aa": 37532,
+    "exp": 715,
+    "exp_aa": 1305,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755262868-dados_imprensa_1_trimestre_2024.pdf",
+    "titulo": "Desempenho do setor - 1º Trimestre de 2024"
+   },
+   "2024-04": {
+    "reb": {
+     "Basculante": 6701,
+     "Porta Conteiner": 1260,
+     "Graneleiro / Carga Seca": 7382,
+     "Canavieiro": 1380,
+     "Baú Carga Geral": 2383,
+     "Carrega Tudo": 735,
+     "Dolly": 3616,
+     "Especial": 621,
+     "Transporte De Toras": 750,
+     "Baú Frigorífico": 591,
+     "Baú Lonado": 1765,
+     "Silo": 155,
+     "Tanque Carbono": 2590,
+     "Tanque Inox": 225,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 4542,
+     "Baú Alumínio / Frigorífico": 8225,
+     "Baú Lonado": 97,
+     "Basculante": 2345,
+     "Betoneira": 491,
+     "Tanque": 1531,
+     "Outras / Diversas": 2475
+    },
+    "reb_aa": {
+     "Basculante": 7969,
+     "Porta Conteiner": 821,
+     "Graneleiro / Carga Seca": 5502,
+     "Canavieiro": 1152,
+     "Baú Carga Geral": 1554,
+     "Carrega Tudo": 859,
+     "Dolly": 3875,
+     "Especial": 545,
+     "Transporte De Toras": 716,
+     "Baú Frigorífico": 550,
+     "Baú Lonado": 1574,
+     "Silo": 173,
+     "Tanque Carbono": 1616,
+     "Tanque Inox": 190,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 4440,
+     "Baú Alumínio / Frigorífico": 8325,
+     "Baú Lonado": 143,
+     "Basculante": 3183,
+     "Betoneira": 405,
+     "Tanque": 1576,
+     "Outras / Diversas": 3176
+    },
+    "reb_total": 30154,
+    "reb_total_aa": 27096,
+    "carr_total": 19706,
+    "carr_total_aa": 21248,
+    "total": 49860,
+    "total_aa": 48344,
+    "exp": 970,
+    "exp_aa": 1621,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755263261-Desempenho%20_1Quadrimestre_2024.pdf",
+    "titulo": "Desempenho do setor - 1º Quadrimestre de 2024"
+   },
+   "2024-05": {
+    "reb": {
+     "Basculante": 7991,
+     "Porta Conteiner": 1663,
+     "Graneleiro / Carga Seca": 8842,
+     "Canavieiro": 1556,
+     "Baú Carga Geral": 3091,
+     "Carrega Tudo": 924,
+     "Dolly": 4286,
+     "Especial": 783,
+     "Transporte De Toras": 995,
+     "Baú Frigorífico": 808,
+     "Baú Lonado": 2282,
+     "Silo": 186,
+     "Tanque Carbono": 3275,
+     "Tanque Inox": 285,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 5901,
+     "Baú Alumínio / Frigorífico": 10419,
+     "Baú Lonado": 126,
+     "Basculante": 2987,
+     "Betoneira": 636,
+     "Tanque": 1896,
+     "Outras / Diversas": 3067
+    },
+    "reb_aa": {
+     "Basculante": 9801,
+     "Porta Conteiner": 972,
+     "Graneleiro / Carga Seca": 7253,
+     "Canavieiro": 1297,
+     "Baú Carga Geral": 2101,
+     "Carrega Tudo": 1095,
+     "Dolly": 4727,
+     "Especial": 778,
+     "Transporte De Toras": 1292,
+     "Baú Frigorífico": 684,
+     "Baú Lonado": 2058,
+     "Silo": 263,
+     "Tanque Carbono": 2203,
+     "Tanque Inox": 252,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 5546,
+     "Baú Alumínio / Frigorífico": 10052,
+     "Baú Lonado": 175,
+     "Basculante": 3865,
+     "Betoneira": 487,
+     "Tanque": 1944,
+     "Outras / Diversas": 4250
+    },
+    "reb_total": 36967,
+    "reb_total_aa": 34776,
+    "carr_total": 25032,
+    "carr_total_aa": 26319,
+    "total": 61999,
+    "total_aa": 61095,
+    "exp": 1185,
+    "exp_aa": 2275,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755263540-Desempenho_Jan_Maio_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Maio de 2024"
+   },
+   "2024-06": {
+    "reb": {
+     "Basculante": 9457,
+     "Porta Conteiner": 2195,
+     "Graneleiro / Carga Seca": 10417,
+     "Canavieiro": 1681,
+     "Baú Carga Geral": 4066,
+     "Carrega Tudo": 1135,
+     "Dolly": 4896,
+     "Especial": 1010,
+     "Transporte De Toras": 1291,
+     "Baú Frigorífico": 1027,
+     "Baú Lonado": 2784,
+     "Silo": 235,
+     "Tanque Carbono": 4148,
+     "Tanque Inox": 322,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 7258,
+     "Baú Alumínio / Frigorífico": 12769,
+     "Baú Lonado": 150,
+     "Basculante": 3650,
+     "Betoneira": 821,
+     "Tanque": 2257,
+     "Outras / Diversas": 3780
+    },
+    "reb_aa": {
+     "Basculante": 11773,
+     "Porta Conteiner": 1234,
+     "Graneleiro / Carga Seca": 8974,
+     "Canavieiro": 1354,
+     "Baú Carga Geral": 2633,
+     "Carrega Tudo": 1312,
+     "Dolly": 5694,
+     "Especial": 926,
+     "Transporte De Toras": 1468,
+     "Baú Frigorífico": 839,
+     "Baú Lonado": 2513,
+     "Silo": 327,
+     "Tanque Carbono": 2754,
+     "Tanque Inox": 296,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 6555,
+     "Baú Alumínio / Frigorífico": 12161,
+     "Baú Lonado": 194,
+     "Basculante": 4518,
+     "Betoneira": 545,
+     "Tanque": 2383,
+     "Outras / Diversas": 4518
+    },
+    "reb_total": 44664,
+    "reb_total_aa": 42097,
+    "carr_total": 30685,
+    "carr_total_aa": 30874,
+    "total": 75349,
+    "total_aa": 72971,
+    "exp": 1471,
+    "exp_aa": 2683,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755263797-Desempenho_Jan_Jun_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Junho de 2024"
+   },
+   "2024-07": {
+    "reb": {
+     "Basculante": 10844,
+     "Porta Conteiner": 2668,
+     "Graneleiro / Carga Seca": 11951,
+     "Canavieiro": 1850,
+     "Baú Carga Geral": 5008,
+     "Carrega Tudo": 1429,
+     "Dolly": 5498,
+     "Especial": 1213,
+     "Transporte De Toras": 1571,
+     "Baú Frigorífico": 1251,
+     "Baú Lonado": 3500,
+     "Silo": 305,
+     "Tanque Carbono": 5062,
+     "Tanque Inox": 371,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 8778,
+     "Baú Alumínio / Frigorífico": 15656,
+     "Baú Lonado": 171,
+     "Basculante": 4421,
+     "Betoneira": 973,
+     "Tanque": 2698,
+     "Outras / Diversas": 4660
+    },
+    "reb_aa": {
+     "Basculante": 13767,
+     "Porta Conteiner": 1413,
+     "Graneleiro / Carga Seca": 10721,
+     "Canavieiro": 1499,
+     "Baú Carga Geral": 3097,
+     "Carrega Tudo": 1514,
+     "Dolly": 6710,
+     "Especial": 1079,
+     "Transporte De Toras": 1690,
+     "Baú Frigorífico": 979,
+     "Baú Lonado": 2933,
+     "Silo": 372,
+     "Tanque Carbono": 3282,
+     "Tanque Inox": 364,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 7749,
+     "Baú Alumínio / Frigorífico": 13896,
+     "Baú Lonado": 229,
+     "Basculante": 5200,
+     "Betoneira": 622,
+     "Tanque": 2789,
+     "Outras / Diversas": 5135
+    },
+    "reb_total": 52521,
+    "reb_total_aa": 49420,
+    "carr_total": 37357,
+    "carr_total_aa": 35620,
+    "total": 89878,
+    "total_aa": 85040,
+    "exp": 1811,
+    "exp_aa": 3166,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755264049-Desempenho_Jan_Jul_2024.pdfl.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Julho de 2024"
+   },
+   "2024-08": {
+    "reb": {
+     "Basculante": 12218,
+     "Porta Conteiner": 3180,
+     "Graneleiro / Carga Seca": 13313,
+     "Canavieiro": 1938,
+     "Baú Carga Geral": 6050,
+     "Carrega Tudo": 1709,
+     "Dolly": 6102,
+     "Especial": 1421,
+     "Transporte De Toras": 1821,
+     "Baú Frigorífico": 1485,
+     "Baú Lonado": 4190,
+     "Silo": 353,
+     "Tanque Carbono": 5997,
+     "Tanque Inox": 422,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 10252,
+     "Baú Alumínio / Frigorífico": 18317,
+     "Baú Lonado": 193,
+     "Basculante": 5157,
+     "Betoneira": 1138,
+     "Tanque": 3107,
+     "Outras / Diversas": 5557
+    },
+    "reb_aa": {
+     "Basculante": 16152,
+     "Porta Conteiner": 1634,
+     "Graneleiro / Carga Seca": 12795,
+     "Canavieiro": 1616,
+     "Baú Carga Geral": 3585,
+     "Carrega Tudo": 1761,
+     "Dolly": 7861,
+     "Especial": 1262,
+     "Transporte De Toras": 1903,
+     "Baú Frigorífico": 1139,
+     "Baú Lonado": 3431,
+     "Silo": 403,
+     "Tanque Carbono": 3994,
+     "Tanque Inox": 437,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 8852,
+     "Baú Alumínio / Frigorífico": 15674,
+     "Baú Lonado": 266,
+     "Basculante": 5981,
+     "Betoneira": 711,
+     "Tanque": 3206,
+     "Outras / Diversas": 6135
+    },
+    "reb_total": 60199,
+    "reb_total_aa": 57973,
+    "carr_total": 43721,
+    "carr_total_aa": 40825,
+    "total": 103920,
+    "total_aa": 98798,
+    "exp": 2067,
+    "exp_aa": 3766,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755264244-Desempenho_Jan_Ago_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Agosto de 2024"
+   },
+   "2024-09": {
+    "reb": {
+     "Basculante": 13547,
+     "Porta Conteiner": 3749,
+     "Graneleiro / Carga Seca": 14637,
+     "Canavieiro": 1953,
+     "Baú Carga Geral": 7083,
+     "Carrega Tudo": 1936,
+     "Dolly": 6685,
+     "Especial": 1609,
+     "Transporte De Toras": 2093,
+     "Baú Frigorífico": 1709,
+     "Baú Lonado": 4753,
+     "Silo": 410,
+     "Tanque Carbono": 6792,
+     "Tanque Inox": 473,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 11647,
+     "Baú Alumínio / Frigorífico": 21346,
+     "Baú Lonado": 219,
+     "Basculante": 5926,
+     "Betoneira": 1300,
+     "Tanque": 3573,
+     "Outras / Diversas": 6554
+    },
+    "reb_aa": {
+     "Basculante": 18199,
+     "Porta Conteiner": 1783,
+     "Graneleiro / Carga Seca": 14931,
+     "Canavieiro": 1698,
+     "Baú Carga Geral": 4078,
+     "Carrega Tudo": 1989,
+     "Dolly": 8953,
+     "Especial": 1410,
+     "Transporte De Toras": 2042,
+     "Baú Frigorífico": 1307,
+     "Baú Lonado": 3912,
+     "Silo": 439,
+     "Tanque Carbono": 4597,
+     "Tanque Inox": 486,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 9994,
+     "Baú Alumínio / Frigorífico": 17459,
+     "Baú Lonado": 289,
+     "Basculante": 6481,
+     "Betoneira": 774,
+     "Tanque": 3566,
+     "Outras / Diversas": 6789
+    },
+    "reb_total": 67429,
+    "reb_total_aa": 65824,
+    "carr_total": 50565,
+    "carr_total_aa": 45352,
+    "total": 117994,
+    "total_aa": 111176,
+    "exp": 2361,
+    "exp_aa": 4204,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755264399-Desempenho_Jan_Set_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Setembro de 2024"
+   },
+   "2024-10": {
+    "reb": {
+     "Basculante": 14794,
+     "Porta Conteiner": 4311,
+     "Graneleiro / Carga Seca": 16158,
+     "Canavieiro": 1973,
+     "Baú Carga Geral": 8191,
+     "Carrega Tudo": 2191,
+     "Dolly": 7222,
+     "Especial": 1803,
+     "Transporte De Toras": 2377,
+     "Baú Frigorífico": 1941,
+     "Baú Lonado": 5478,
+     "Silo": 474,
+     "Tanque Carbono": 7671,
+     "Tanque Inox": 533,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 13311,
+     "Baú Alumínio / Frigorífico": 24794,
+     "Baú Lonado": 257,
+     "Basculante": 6716,
+     "Betoneira": 1495,
+     "Tanque": 4065,
+     "Outras / Diversas": 7621
+    },
+    "reb_aa": {
+     "Basculante": 20579,
+     "Porta Conteiner": 2015,
+     "Graneleiro / Carga Seca": 17179,
+     "Canavieiro": 1758,
+     "Baú Carga Geral": 4817,
+     "Carrega Tudo": 2175,
+     "Dolly": 10276,
+     "Especial": 1581,
+     "Transporte De Toras": 2166,
+     "Baú Frigorífico": 1456,
+     "Baú Lonado": 4465,
+     "Silo": 479,
+     "Tanque Carbono": 5306,
+     "Tanque Inox": 569,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 11075,
+     "Baú Alumínio / Frigorífico": 20125,
+     "Baú Lonado": 312,
+     "Basculante": 7079,
+     "Betoneira": 863,
+     "Tanque": 3921,
+     "Outras / Diversas": 6891
+    },
+    "reb_total": 75117,
+    "reb_total_aa": 74821,
+    "carr_total": 58259,
+    "carr_total_aa": 50266,
+    "total": 133376,
+    "total_aa": 125087,
+    "exp": 2706,
+    "exp_aa": 4790,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755264462-Desempenho_Jan_Out_2024.pd.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Outubro de 2024"
+   },
+   "2024-11": {
+    "reb": {
+     "Basculante": 15947,
+     "Porta Conteiner": 4870,
+     "Graneleiro / Carga Seca": 17386,
+     "Canavieiro": 2021,
+     "Baú Carga Geral": 9227,
+     "Carrega Tudo": 2413,
+     "Dolly": 7741,
+     "Especial": 1986,
+     "Transporte De Toras": 2420,
+     "Baú Frigorífico": 2146,
+     "Baú Lonado": 6100,
+     "Silo": 528,
+     "Tanque Carbono": 8423,
+     "Tanque Inox": 578,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 14686,
+     "Baú Alumínio / Frigorífico": 27402,
+     "Baú Lonado": 301,
+     "Basculante": 7318,
+     "Betoneira": 1650,
+     "Tanque": 4534,
+     "Outras / Diversas": 8492
+    },
+    "reb_aa": {
+     "Basculante": 22515,
+     "Porta Conteiner": 2247,
+     "Graneleiro / Carga Seca": 19283,
+     "Canavieiro": 1797,
+     "Baú Carga Geral": 5241,
+     "Carrega Tudo": 2380,
+     "Dolly": 11343,
+     "Especial": 1750,
+     "Transporte De Toras": 2384,
+     "Baú Frigorífico": 1615,
+     "Baú Lonado": 4819,
+     "Silo": 523,
+     "Tanque Carbono": 5911,
+     "Tanque Inox": 630,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 12238,
+     "Baú Alumínio / Frigorífico": 22480,
+     "Baú Lonado": 340,
+     "Basculante": 7587,
+     "Betoneira": 962,
+     "Tanque": 4258,
+     "Outras / Diversas": 7574
+    },
+    "reb_total": 81786,
+    "reb_total_aa": 82438,
+    "carr_total": 64383,
+    "carr_total_aa": 55439,
+    "total": 146169,
+    "total_aa": 137877,
+    "exp": 3067,
+    "exp_aa": 5408,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755264532-Desempenho_Jan_Nov_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Novembro de 2024"
+   },
+   "2024-12": {
+    "reb": {
+     "Basculante": 17141,
+     "Porta Conteiner": 5316,
+     "Graneleiro / Carga Seca": 18632,
+     "Canavieiro": 2176,
+     "Baú Carga Geral": 10218,
+     "Carrega Tudo": 2612,
+     "Dolly": 8341,
+     "Especial": 2193,
+     "Transporte De Toras": 2554,
+     "Baú Frigorífico": 2377,
+     "Baú Lonado": 6675,
+     "Silo": 580,
+     "Tanque Carbono": 9160,
+     "Tanque Inox": 624,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 16069,
+     "Baú Alumínio / Frigorífico": 30062,
+     "Baú Lonado": 340,
+     "Basculante": 8033,
+     "Betoneira": 1843,
+     "Tanque": 4931,
+     "Outras / Diversas": 9326
+    },
+    "reb_aa": {
+     "Basculante": 24505,
+     "Porta Conteiner": 2483,
+     "Graneleiro / Carga Seca": 21226,
+     "Canavieiro": 1874,
+     "Baú Carga Geral": 5739,
+     "Carrega Tudo": 2592,
+     "Dolly": 12449,
+     "Especial": 1931,
+     "Transporte De Toras": 2628,
+     "Baú Frigorífico": 1799,
+     "Baú Lonado": 5266,
+     "Silo": 559,
+     "Tanque Carbono": 6559,
+     "Tanque Inox": 712,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 13429,
+     "Baú Alumínio / Frigorífico": 24806,
+     "Baú Lonado": 358,
+     "Basculante": 8224,
+     "Betoneira": 1065,
+     "Tanque": 4631,
+     "Outras / Diversas": 8206
+    },
+    "reb_total": 88599,
+    "reb_total_aa": 90322,
+    "carr_total": 70604,
+    "carr_total_aa": 60719,
+    "total": 159203,
+    "total_aa": 151041,
+    "exp": 3456,
+    "exp_aa": 5798,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1755264580-Desempenho_Jan_Dez_2024.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Dezembro de 2024"
+   },
+   "2025-01": {
+    "reb": {
+     "Basculante": 1179,
+     "Porta Conteiner": 506,
+     "Graneleiro / Carga Seca": 1182,
+     "Canavieiro": 127,
+     "Baú Carga Geral": 787,
+     "Carrega Tudo": 209,
+     "Dolly": 582,
+     "Especial": 185,
+     "Transporte De Toras": 48,
+     "Baú Frigorífico": 136,
+     "Baú Lonado": 587,
+     "Silo": 41,
+     "Tanque Carbono": 598,
+     "Tanque Inox": 24,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 1176,
+     "Baú Alumínio / Frigorífico": 2222,
+     "Baú Lonado": 46,
+     "Basculante": 618,
+     "Betoneira": 95,
+     "Tanque": 460,
+     "Outras / Diversas": 653
+    },
+    "reb_aa": {
+     "Basculante": 1648,
+     "Porta Conteiner": 229,
+     "Graneleiro / Carga Seca": 1977,
+     "Canavieiro": 319,
+     "Baú Carga Geral": 408,
+     "Carrega Tudo": 172,
+     "Dolly": 989,
+     "Especial": 123,
+     "Transporte De Toras": 128,
+     "Baú Frigorífico": 118,
+     "Baú Lonado": 376,
+     "Silo": 35,
+     "Tanque Carbono": 507,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 1012,
+     "Baú Alumínio / Frigorífico": 1795,
+     "Baú Lonado": 28,
+     "Basculante": 432,
+     "Betoneira": 115,
+     "Tanque": 343,
+     "Outras / Diversas": 488
+    },
+    "reb_total": 6191,
+    "reb_total_aa": 7075,
+    "carr_total": 5270,
+    "carr_total_aa": 4213,
+    "total": 11461,
+    "total_aa": 11288,
+    "exp": 220,
+    "exp_aa": 292,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691544-1739805908-Desempenho_Jan_2025..pdf",
+    "titulo": "Desempenho do setor - Janeiro de 2025"
+   },
+   "2025-02": {
+    "reb": {
+     "Basculante": 2134,
+     "Porta Conteiner": 875,
+     "Graneleiro / Carga Seca": 2356,
+     "Canavieiro": 488,
+     "Baú Carga Geral": 1686,
+     "Carrega Tudo": 416,
+     "Dolly": 1053,
+     "Especial": 355,
+     "Transporte De Toras": 172,
+     "Baú Frigorífico": 342,
+     "Baú Lonado": 1230,
+     "Silo": 108,
+     "Tanque Carbono": 1128,
+     "Tanque Inox": 56,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 2550,
+     "Baú Alumínio / Frigorífico": 4749,
+     "Baú Lonado": 92,
+     "Basculante": 1297,
+     "Betoneira": 245,
+     "Tanque": 870,
+     "Outras / Diversas": 1559
+    },
+    "reb_aa": {
+     "Basculante": 3433,
+     "Porta Conteiner": 473,
+     "Graneleiro / Carga Seca": 3742,
+     "Canavieiro": 683,
+     "Baú Carga Geral": 1018,
+     "Carrega Tudo": 329,
+     "Dolly": 1932,
+     "Especial": 275,
+     "Transporte De Toras": 306,
+     "Baú Frigorífico": 269,
+     "Baú Lonado": 772,
+     "Silo": 78,
+     "Tanque Carbono": 1153,
+     "Tanque Inox": 99,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 1950,
+     "Baú Alumínio / Frigorífico": 3795,
+     "Baú Lonado": 48,
+     "Basculante": 1024,
+     "Betoneira": 235,
+     "Tanque": 712,
+     "Outras / Diversas": 1063
+    },
+    "reb_total": 12399,
+    "reb_total_aa": 14562,
+    "carr_total": 11362,
+    "carr_total_aa": 8827,
+    "total": 23761,
+    "total_aa": 23389,
+    "exp": 578,
+    "exp_aa": 516,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691574-1755264956-Desempenho_Jan_Fev_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro e Fevereiro de 2025"
+   },
+   "2025-03": {
+    "reb": {
+     "Basculante": 3087,
+     "Porta Conteiner": 1269,
+     "Graneleiro / Carga Seca": 3393,
+     "Canavieiro": 862,
+     "Baú Carga Geral": 2596,
+     "Carrega Tudo": 617,
+     "Dolly": 1520,
+     "Especial": 575,
+     "Transporte De Toras": 310,
+     "Baú Frigorífico": 494,
+     "Baú Lonado": 1846,
+     "Silo": 153,
+     "Tanque Carbono": 1592,
+     "Tanque Inox": 109,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 3977,
+     "Baú Alumínio / Frigorífico": 7127,
+     "Baú Lonado": 116,
+     "Basculante": 1995,
+     "Betoneira": 444,
+     "Tanque": 1298,
+     "Outras / Diversas": 2348
+    },
+    "reb_aa": {
+     "Basculante": 5092,
+     "Porta Conteiner": 818,
+     "Graneleiro / Carga Seca": 5656,
+     "Canavieiro": 1018,
+     "Baú Carga Geral": 1543,
+     "Carrega Tudo": 512,
+     "Dolly": 2821,
+     "Especial": 456,
+     "Transporte De Toras": 511,
+     "Baú Frigorífico": 412,
+     "Baú Lonado": 1226,
+     "Silo": 107,
+     "Tanque Carbono": 1798,
+     "Tanque Inox": 159,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 3238,
+     "Baú Alumínio / Frigorífico": 5806,
+     "Baú Lonado": 69,
+     "Basculante": 1660,
+     "Betoneira": 345,
+     "Tanque": 1083,
+     "Outras / Diversas": 1700
+    },
+    "reb_total": 18423,
+    "reb_total_aa": 22129,
+    "carr_total": 17305,
+    "carr_total_aa": 13901,
+    "total": 35728,
+    "total_aa": 36030,
+    "exp": 895,
+    "exp_aa": 744,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691591-1755265337-dados_imprensa_1_trimestre_2025.pdf",
+    "titulo": "Desempenho do setor - 1º Trimestre de 2025"
+   },
+   "2025-04": {
+    "reb": {
+     "Basculante": 4122,
+     "Porta Conteiner": 1686,
+     "Graneleiro / Carga Seca": 4501,
+     "Canavieiro": 1049,
+     "Baú Carga Geral": 3493,
+     "Carrega Tudo": 835,
+     "Dolly": 2025,
+     "Especial": 809,
+     "Transporte De Toras": 412,
+     "Baú Frigorífico": 665,
+     "Baú Lonado": 2372,
+     "Silo": 207,
+     "Tanque Carbono": 2071,
+     "Tanque Inox": 144,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 5438,
+     "Baú Alumínio / Frigorífico": 9722,
+     "Baú Lonado": 152,
+     "Basculante": 2692,
+     "Betoneira": 640,
+     "Tanque": 1724,
+     "Outras / Diversas": 3245
+    },
+    "reb_aa": {
+     "Basculante": 6701,
+     "Porta Conteiner": 1260,
+     "Graneleiro / Carga Seca": 7382,
+     "Canavieiro": 1380,
+     "Baú Carga Geral": 2383,
+     "Carrega Tudo": 735,
+     "Dolly": 3616,
+     "Especial": 621,
+     "Transporte De Toras": 750,
+     "Baú Frigorífico": 591,
+     "Baú Lonado": 1765,
+     "Silo": 155,
+     "Tanque Carbono": 2590,
+     "Tanque Inox": 225,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 4542,
+     "Baú Alumínio / Frigorífico": 8225,
+     "Baú Lonado": 97,
+     "Basculante": 2345,
+     "Betoneira": 491,
+     "Tanque": 1531,
+     "Outras / Diversas": 2475
+    },
+    "reb_total": 24391,
+    "reb_total_aa": 30154,
+    "carr_total": 23613,
+    "carr_total_aa": 19706,
+    "total": 48004,
+    "total_aa": 49860,
+    "exp": 1271,
+    "exp_aa": 1003,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691606-1755265489-Desempenho%20_1Quadrimestre_2025.pdf",
+    "titulo": "Desempenho do setor - 1º Quadrimestre de 2025"
+   },
+   "2025-05": {
+    "reb": {
+     "Basculante": 5076,
+     "Porta Conteiner": 2173,
+     "Graneleiro / Carga Seca": 5436,
+     "Canavieiro": 1066,
+     "Baú Carga Geral": 4382,
+     "Carrega Tudo": 1058,
+     "Dolly": 2466,
+     "Especial": 1061,
+     "Transporte De Toras": 645,
+     "Baú Frigorífico": 862,
+     "Baú Lonado": 3113,
+     "Silo": 271,
+     "Tanque Carbono": 2513,
+     "Tanque Inox": 179,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 6895,
+     "Baú Alumínio / Frigorífico": 12590,
+     "Baú Lonado": 180,
+     "Basculante": 3318,
+     "Betoneira": 788,
+     "Tanque": 2159,
+     "Outras / Diversas": 4261
+    },
+    "reb_aa": {
+     "Basculante": 7991,
+     "Porta Conteiner": 1663,
+     "Graneleiro / Carga Seca": 8842,
+     "Canavieiro": 1556,
+     "Baú Carga Geral": 3091,
+     "Carrega Tudo": 924,
+     "Dolly": 4286,
+     "Especial": 783,
+     "Transporte De Toras": 995,
+     "Baú Frigorífico": 808,
+     "Baú Lonado": 2282,
+     "Silo": 186,
+     "Tanque Carbono": 3275,
+     "Tanque Inox": 285,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 5901,
+     "Baú Alumínio / Frigorífico": 10419,
+     "Baú Lonado": 126,
+     "Basculante": 2987,
+     "Betoneira": 636,
+     "Tanque": 1896,
+     "Outras / Diversas": 3067
+    },
+    "reb_total": 30301,
+    "reb_total_aa": 36967,
+    "carr_total": 30191,
+    "carr_total_aa": 25032,
+    "total": 60492,
+    "total_aa": 61999,
+    "exp": 1666,
+    "exp_aa": 1220,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1780058463-Desempenho_Jan_Maio_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Maio de 2025"
+   },
+   "2025-06": {
+    "reb": {
+     "Basculante": 5892,
+     "Porta Conteiner": 2501,
+     "Graneleiro / Carga Seca": 6457,
+     "Canavieiro": 1121,
+     "Baú Carga Geral": 5447,
+     "Carrega Tudo": 1275,
+     "Dolly": 2827,
+     "Especial": 1311,
+     "Transporte De Toras": 861,
+     "Baú Frigorífico": 1061,
+     "Baú Lonado": 3544,
+     "Silo": 328,
+     "Tanque Carbono": 2985,
+     "Tanque Inox": 217,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 8314,
+     "Baú Alumínio / Frigorífico": 15203,
+     "Baú Lonado": 201,
+     "Basculante": 3996,
+     "Betoneira": 925,
+     "Tanque": 2582,
+     "Outras / Diversas": 5131
+    },
+    "reb_aa": {
+     "Basculante": 9457,
+     "Porta Conteiner": 2195,
+     "Graneleiro / Carga Seca": 10417,
+     "Canavieiro": 1681,
+     "Baú Carga Geral": 4066,
+     "Carrega Tudo": 1135,
+     "Dolly": 4896,
+     "Especial": 1010,
+     "Transporte De Toras": 1291,
+     "Baú Frigorífico": 1027,
+     "Baú Lonado": 2784,
+     "Silo": 235,
+     "Tanque Carbono": 4148,
+     "Tanque Inox": 322,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 7258,
+     "Baú Alumínio / Frigorífico": 12769,
+     "Baú Lonado": 150,
+     "Basculante": 3650,
+     "Betoneira": 821,
+     "Tanque": 2257,
+     "Outras / Diversas": 3780
+    },
+    "reb_total": 35827,
+    "reb_total_aa": 44664,
+    "carr_total": 36352,
+    "carr_total_aa": 30685,
+    "total": 72179,
+    "total_aa": 75349,
+    "exp": 2132,
+    "exp_aa": 1506,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691640-1755265743-Desempenho_Jan_Jun_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Junho de 2025"
+   },
+   "2025-07": {
+    "reb": {
+     "Basculante": 6944,
+     "Porta Conteiner": 2919,
+     "Graneleiro / Carga Seca": 7454,
+     "Canavieiro": 1219,
+     "Baú Carga Geral": 6650,
+     "Carrega Tudo": 1518,
+     "Dolly": 3308,
+     "Especial": 1603,
+     "Transporte De Toras": 1135,
+     "Baú Frigorífico": 1259,
+     "Baú Lonado": 4049,
+     "Silo": 389,
+     "Tanque Carbono": 3378,
+     "Tanque Inox": 271,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 9827,
+     "Baú Alumínio / Frigorífico": 18523,
+     "Baú Lonado": 257,
+     "Basculante": 4836,
+     "Betoneira": 1056,
+     "Tanque": 3068,
+     "Outras / Diversas": 6345
+    },
+    "reb_aa": {
+     "Basculante": 10844,
+     "Porta Conteiner": 2668,
+     "Graneleiro / Carga Seca": 11951,
+     "Canavieiro": 1850,
+     "Baú Carga Geral": 5008,
+     "Carrega Tudo": 1429,
+     "Dolly": 5498,
+     "Especial": 1213,
+     "Transporte De Toras": 1571,
+     "Baú Frigorífico": 1251,
+     "Baú Lonado": 3500,
+     "Silo": 305,
+     "Tanque Carbono": 5062,
+     "Tanque Inox": 371,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 8778,
+     "Baú Alumínio / Frigorífico": 15656,
+     "Baú Lonado": 171,
+     "Basculante": 4421,
+     "Betoneira": 973,
+     "Tanque": 2698,
+     "Outras / Diversas": 4660
+    },
+    "reb_total": 42096,
+    "reb_total_aa": 52521,
+    "carr_total": 43912,
+    "carr_total_aa": 37357,
+    "total": 86008,
+    "total_aa": 89878,
+    "exp": 2623,
+    "exp_aa": 1811,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691658-1755265874-Desempenho_Jan_Jul_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Julho de 2025"
+   },
+   "2025-08": {
+    "reb": {
+     "Basculante": 7958,
+     "Porta Conteiner": 3334,
+     "Graneleiro / Carga Seca": 8447,
+     "Canavieiro": 1240,
+     "Baú Carga Geral": 7737,
+     "Carrega Tudo": 1747,
+     "Dolly": 3768,
+     "Especial": 1865,
+     "Transporte De Toras": 1234,
+     "Baú Frigorífico": 1417,
+     "Baú Lonado": 4519,
+     "Silo": 422,
+     "Tanque Carbono": 3725,
+     "Tanque Inox": 318,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 11354,
+     "Baú Alumínio / Frigorífico": 20945,
+     "Baú Lonado": 297,
+     "Basculante": 5639,
+     "Betoneira": 1232,
+     "Tanque": 3563,
+     "Outras / Diversas": 7436
+    },
+    "reb_aa": {
+     "Basculante": 12218,
+     "Porta Conteiner": 3180,
+     "Graneleiro / Carga Seca": 13313,
+     "Canavieiro": 1938,
+     "Baú Carga Geral": 6050,
+     "Carrega Tudo": 1709,
+     "Dolly": 6102,
+     "Especial": 1421,
+     "Transporte De Toras": 1821,
+     "Baú Frigorífico": 1485,
+     "Baú Lonado": 4190,
+     "Silo": 353,
+     "Tanque Carbono": 5997,
+     "Tanque Inox": 422,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 10252,
+     "Baú Alumínio / Frigorífico": 18317,
+     "Baú Lonado": 193,
+     "Basculante": 5157,
+     "Betoneira": 1138,
+     "Tanque": 3107,
+     "Outras / Diversas": 5557
+    },
+    "reb_total": 47731,
+    "reb_total_aa": 60199,
+    "carr_total": 50466,
+    "carr_total_aa": 43721,
+    "total": 98197,
+    "total_aa": 103920,
+    "exp": 3067,
+    "exp_aa": 2067,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691675-1758890170-Desempenho_Jan_Ago_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Agosto de 2025"
+   },
+   "2025-09": {
+    "reb": {
+     "Basculante": 9033,
+     "Porta Conteiner": 3731,
+     "Graneleiro / Carga Seca": 9564,
+     "Canavieiro": 1270,
+     "Baú Carga Geral": 8852,
+     "Carrega Tudo": 1965,
+     "Dolly": 4238,
+     "Especial": 2102,
+     "Transporte De Toras": 1475,
+     "Baú Frigorífico": 1590,
+     "Baú Lonado": 4993,
+     "Silo": 467,
+     "Tanque Carbono": 4015,
+     "Tanque Inox": 362,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 12865,
+     "Baú Alumínio / Frigorífico": 23962,
+     "Baú Lonado": 346,
+     "Basculante": 6503,
+     "Betoneira": 1358,
+     "Tanque": 4120,
+     "Outras / Diversas": 8544
+    },
+    "reb_aa": {
+     "Basculante": 13547,
+     "Porta Conteiner": 3749,
+     "Graneleiro / Carga Seca": 14637,
+     "Canavieiro": 1953,
+     "Baú Carga Geral": 7083,
+     "Carrega Tudo": 1936,
+     "Dolly": 6685,
+     "Especial": 1609,
+     "Transporte De Toras": 2093,
+     "Baú Frigorífico": 1709,
+     "Baú Lonado": 4753,
+     "Silo": 410,
+     "Tanque Carbono": 6792,
+     "Tanque Inox": 473,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 11647,
+     "Baú Alumínio / Frigorífico": 21346,
+     "Baú Lonado": 219,
+     "Basculante": 5926,
+     "Betoneira": 1300,
+     "Tanque": 3573,
+     "Outras / Diversas": 6554
+    },
+    "reb_total": 53657,
+    "reb_total_aa": 67429,
+    "carr_total": 57698,
+    "carr_total_aa": 50565,
+    "total": 111355,
+    "total_aa": 117994,
+    "exp": 3559,
+    "exp_aa": 2361,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691696-1760355122-Desempenho_Jan_Set_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Setembro de 2025"
+   },
+   "2025-10": {
+    "reb": {
+     "Basculante": 10088,
+     "Porta Conteiner": 4165,
+     "Graneleiro / Carga Seca": 10789,
+     "Canavieiro": 1309,
+     "Baú Carga Geral": 9991,
+     "Carrega Tudo": 2162,
+     "Dolly": 4747,
+     "Especial": 2377,
+     "Transporte De Toras": 1865,
+     "Baú Frigorífico": 1806,
+     "Baú Lonado": 5452,
+     "Silo": 527,
+     "Tanque Carbono": 4421,
+     "Tanque Inox": 416,
+     "Tanque Aluminio": 2
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 14496,
+     "Baú Alumínio / Frigorífico": 27351,
+     "Baú Lonado": 401,
+     "Basculante": 7300,
+     "Betoneira": 1445,
+     "Tanque": 4625,
+     "Outras / Diversas": 9600
+    },
+    "reb_aa": {
+     "Basculante": 14794,
+     "Porta Conteiner": 4311,
+     "Graneleiro / Carga Seca": 16158,
+     "Canavieiro": 1973,
+     "Baú Carga Geral": 8191,
+     "Carrega Tudo": 2191,
+     "Dolly": 7222,
+     "Especial": 1803,
+     "Transporte De Toras": 2377,
+     "Baú Frigorífico": 1941,
+     "Baú Lonado": 5478,
+     "Silo": 474,
+     "Tanque Carbono": 7671,
+     "Tanque Inox": 533,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 13311,
+     "Baú Alumínio / Frigorífico": 24794,
+     "Baú Lonado": 257,
+     "Basculante": 6716,
+     "Betoneira": 1495,
+     "Tanque": 4065,
+     "Outras / Diversas": 7621
+    },
+    "reb_total": 60117,
+    "reb_total_aa": 75117,
+    "carr_total": 65218,
+    "carr_total_aa": 58259,
+    "total": 125335,
+    "total_aa": 133376,
+    "exp": 4128,
+    "exp_aa": 2706,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691711-1764273503-Desempenho_Jan_Out_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Outubro de 2025"
+   },
+   "2025-11": {
+    "reb": {
+     "Basculante": 11080,
+     "Porta Conteiner": 4554,
+     "Graneleiro / Carga Seca": 11809,
+     "Canavieiro": 1355,
+     "Baú Carga Geral": 11115,
+     "Carrega Tudo": 2341,
+     "Dolly": 5170,
+     "Especial": 2607,
+     "Transporte De Toras": 2025,
+     "Baú Frigorífico": 1951,
+     "Baú Lonado": 5787,
+     "Silo": 573,
+     "Tanque Carbono": 4754,
+     "Tanque Inox": 451,
+     "Tanque Aluminio": 2
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 15800,
+     "Baú Alumínio / Frigorífico": 30510,
+     "Baú Lonado": 456,
+     "Basculante": 7928,
+     "Betoneira": 1571,
+     "Tanque": 5017,
+     "Outras / Diversas": 10457
+    },
+    "reb_aa": {
+     "Basculante": 15947,
+     "Porta Conteiner": 4870,
+     "Graneleiro / Carga Seca": 17386,
+     "Canavieiro": 2021,
+     "Baú Carga Geral": 9227,
+     "Carrega Tudo": 2413,
+     "Dolly": 7741,
+     "Especial": 1986,
+     "Transporte De Toras": 2420,
+     "Baú Frigorífico": 2146,
+     "Baú Lonado": 6100,
+     "Silo": 528,
+     "Tanque Carbono": 8423,
+     "Tanque Inox": 578,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 14686,
+     "Baú Alumínio / Frigorífico": 27402,
+     "Baú Lonado": 301,
+     "Basculante": 7318,
+     "Betoneira": 1650,
+     "Tanque": 4534,
+     "Outras / Diversas": 8492
+    },
+    "reb_total": 65574,
+    "reb_total_aa": 81786,
+    "carr_total": 71739,
+    "carr_total_aa": 64383,
+    "total": 137313,
+    "total_aa": 146169,
+    "exp": 4577,
+    "exp_aa": 3067,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1769691728-1767781588-Desempenho_Jan_Nov_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Novembro de 2025"
+   },
+   "2025-12": {
+    "reb": {
+     "Basculante": 12105,
+     "Porta Conteiner": 4890,
+     "Graneleiro / Carga Seca": 12833,
+     "Canavieiro": 1535,
+     "Baú Carga Geral": 12125,
+     "Carrega Tudo": 2517,
+     "Dolly": 5629,
+     "Especial": 2824,
+     "Transporte De Toras": 2144,
+     "Baú Frigorífico": 2139,
+     "Baú Lonado": 6142,
+     "Silo": 608,
+     "Tanque Carbono": 5028,
+     "Tanque Inox": 478,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 17172,
+     "Baú Alumínio / Frigorífico": 33262,
+     "Baú Lonado": 498,
+     "Basculante": 8700,
+     "Betoneira": 1696,
+     "Tanque": 5448,
+     "Outras / Diversas": 11433
+    },
+    "reb_aa": {
+     "Basculante": 17141,
+     "Porta Conteiner": 5316,
+     "Graneleiro / Carga Seca": 18632,
+     "Canavieiro": 2176,
+     "Baú Carga Geral": 10218,
+     "Carrega Tudo": 2612,
+     "Dolly": 8341,
+     "Especial": 2193,
+     "Transporte De Toras": 2554,
+     "Baú Frigorífico": 2377,
+     "Baú Lonado": 6675,
+     "Silo": 580,
+     "Tanque Carbono": 9160,
+     "Tanque Inox": 624,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 16069,
+     "Baú Alumínio / Frigorífico": 30062,
+     "Baú Lonado": 340,
+     "Basculante": 8033,
+     "Betoneira": 1843,
+     "Tanque": 4931,
+     "Outras / Diversas": 9326
+    },
+    "reb_total": 70997,
+    "reb_total_aa": 88599,
+    "carr_total": 78209,
+    "carr_total_aa": 70604,
+    "total": 149206,
+    "total_aa": 159203,
+    "exp": 5093,
+    "exp_aa": 3456,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1774878580-Desempenho_Jan_Dez_2025.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Dezembro de 2025"
+   },
+   "2026-01": {
+    "reb": {
+     "Basculante": 804,
+     "Porta Conteiner": 313,
+     "Graneleiro / Carga Seca": 850,
+     "Canavieiro": 132,
+     "Baú Carga Geral": 723,
+     "Carrega Tudo": 139,
+     "Dolly": 366,
+     "Especial": 159,
+     "Transporte De Toras": 79,
+     "Baú Frigorífico": 90,
+     "Baú Lonado": 377,
+     "Silo": 31,
+     "Tanque Carbono": 223,
+     "Tanque Inox": 49,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 1005,
+     "Baú Alumínio / Frigorífico": 1833,
+     "Baú Lonado": 27,
+     "Basculante": 536,
+     "Betoneira": 86,
+     "Tanque": 327,
+     "Outras / Diversas": 611
+    },
+    "reb_aa": {
+     "Basculante": 1179,
+     "Porta Conteiner": 512,
+     "Graneleiro / Carga Seca": 1176,
+     "Canavieiro": 127,
+     "Baú Carga Geral": 779,
+     "Carrega Tudo": 209,
+     "Dolly": 582,
+     "Especial": 185,
+     "Transporte De Toras": 48,
+     "Baú Frigorífico": 136,
+     "Baú Lonado": 595,
+     "Silo": 41,
+     "Tanque Carbono": 598,
+     "Tanque Inox": 24,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 1176,
+     "Baú Alumínio / Frigorífico": 2222,
+     "Baú Lonado": 46,
+     "Basculante": 618,
+     "Betoneira": 95,
+     "Tanque": 460,
+     "Outras / Diversas": 653
+    },
+    "reb_total": 4335,
+    "reb_total_aa": 6191,
+    "carr_total": 4425,
+    "carr_total_aa": 5270,
+    "total": 8760,
+    "total_aa": 11461,
+    "exp": 333,
+    "exp_aa": 220,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1771593638-Desempenho_Jan_2026..pdf",
+    "titulo": "Desempenho do setor - Janeiro de 2026"
+   },
+   "2026-02": {
+    "reb": {
+     "Basculante": 1676,
+     "Porta Conteiner": 677,
+     "Graneleiro / Carga Seca": 1904,
+     "Canavieiro": 404,
+     "Baú Carga Geral": 1590,
+     "Carrega Tudo": 287,
+     "Dolly": 773,
+     "Especial": 380,
+     "Transporte De Toras": 106,
+     "Baú Frigorífico": 226,
+     "Baú Lonado": 685,
+     "Silo": 76,
+     "Tanque Carbono": 461,
+     "Tanque Inox": 97,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 2014,
+     "Baú Alumínio / Frigorífico": 3825,
+     "Baú Lonado": 62,
+     "Basculante": 1161,
+     "Betoneira": 203,
+     "Tanque": 739,
+     "Outras / Diversas": 1284
+    },
+    "reb_aa": {
+     "Basculante": 2134,
+     "Porta Conteiner": 901,
+     "Graneleiro / Carga Seca": 2330,
+     "Canavieiro": 488,
+     "Baú Carga Geral": 1669,
+     "Carrega Tudo": 416,
+     "Dolly": 1053,
+     "Especial": 355,
+     "Transporte De Toras": 172,
+     "Baú Frigorífico": 342,
+     "Baú Lonado": 1247,
+     "Silo": 109,
+     "Tanque Carbono": 1128,
+     "Tanque Inox": 56,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 2550,
+     "Baú Alumínio / Frigorífico": 4749,
+     "Baú Lonado": 92,
+     "Basculante": 1297,
+     "Betoneira": 245,
+     "Tanque": 870,
+     "Outras / Diversas": 1559
+    },
+    "reb_total": 9342,
+    "reb_total_aa": 12400,
+    "carr_total": 9288,
+    "carr_total_aa": 11362,
+    "total": 18630,
+    "total_aa": 23762,
+    "exp": 581,
+    "exp_aa": 578,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1776081782-Desempenho_Jan_Fev_2026.pdf",
+    "titulo": "Desempenho do setor - Janeiro e Fevereiro de 2026"
+   },
+   "2026-03": {
+    "reb": {
+     "Basculante": 2823,
+     "Porta Conteiner": 1041,
+     "Graneleiro / Carga Seca": 3181,
+     "Canavieiro": 829,
+     "Baú Carga Geral": 2603,
+     "Carrega Tudo": 469,
+     "Dolly": 1368,
+     "Especial": 650,
+     "Transporte De Toras": 292,
+     "Baú Frigorífico": 407,
+     "Baú Lonado": 1013,
+     "Silo": 146,
+     "Tanque Carbono": 777,
+     "Tanque Inox": 133,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 3234,
+     "Baú Alumínio / Frigorífico": 6350,
+     "Baú Lonado": 120,
+     "Basculante": 1766,
+     "Betoneira": 328,
+     "Tanque": 1131,
+     "Outras / Diversas": 2180
+    },
+    "reb_aa": {
+     "Basculante": 3087,
+     "Porta Conteiner": 1269,
+     "Graneleiro / Carga Seca": 3393,
+     "Canavieiro": 862,
+     "Baú Carga Geral": 2596,
+     "Carrega Tudo": 617,
+     "Dolly": 1520,
+     "Especial": 575,
+     "Transporte De Toras": 310,
+     "Baú Frigorífico": 494,
+     "Baú Lonado": 1846,
+     "Silo": 153,
+     "Tanque Carbono": 1592,
+     "Tanque Inox": 109,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 3977,
+     "Baú Alumínio / Frigorífico": 7127,
+     "Baú Lonado": 116,
+     "Basculante": 1995,
+     "Betoneira": 444,
+     "Tanque": 1298,
+     "Outras / Diversas": 2348
+    },
+    "reb_total": 15732,
+    "reb_total_aa": 18423,
+    "carr_total": 15109,
+    "carr_total_aa": 17305,
+    "total": 30841,
+    "total_aa": 35728,
+    "exp": 1045,
+    "exp_aa": 895,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1776081987-dados_imprensa_1_trimestre_2026.pdf",
+    "titulo": "Desempenho do setor - 1º Trimestre de 2026"
+   },
+   "2026-04": {
+    "reb": {
+     "Basculante": 3806,
+     "Porta Conteiner": 1468,
+     "Graneleiro / Carga Seca": 4209,
+     "Canavieiro": 966,
+     "Baú Carga Geral": 3570,
+     "Carrega Tudo": 635,
+     "Dolly": 1853,
+     "Especial": 918,
+     "Transporte De Toras": 481,
+     "Baú Frigorífico": 578,
+     "Baú Lonado": 1330,
+     "Silo": 187,
+     "Tanque Carbono": 1087,
+     "Tanque Inox": 179,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 4545,
+     "Baú Alumínio / Frigorífico": 9083,
+     "Baú Lonado": 154,
+     "Basculante": 2491,
+     "Betoneira": 510,
+     "Tanque": 1541,
+     "Outras / Diversas": 3017
+    },
+    "reb_aa": {
+     "Basculante": 4122,
+     "Porta Conteiner": 1686,
+     "Graneleiro / Carga Seca": 4501,
+     "Canavieiro": 1049,
+     "Baú Carga Geral": 3493,
+     "Carrega Tudo": 835,
+     "Dolly": 2025,
+     "Especial": 809,
+     "Transporte De Toras": 412,
+     "Baú Frigorífico": 665,
+     "Baú Lonado": 2372,
+     "Silo": 207,
+     "Tanque Carbono": 2071,
+     "Tanque Inox": 144,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 5438,
+     "Baú Alumínio / Frigorífico": 9722,
+     "Baú Lonado": 152,
+     "Basculante": 2692,
+     "Betoneira": 640,
+     "Tanque": 1724,
+     "Outras / Diversas": 3245
+    },
+    "reb_total": 21267,
+    "reb_total_aa": 24391,
+    "carr_total": 21341,
+    "carr_total_aa": 23613,
+    "total": 42608,
+    "total_aa": 48004,
+    "exp": 1537,
+    "exp_aa": 1271,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1779719844-Desempenho%20_1Quadrimestre_2026.pdf",
+    "titulo": "Desempenho do setor - 1º Quadrimestre de 2026"
+   },
+   "2026-05": {
+    "reb": {
+     "Basculante": 4646,
+     "Porta Conteiner": 1847,
+     "Graneleiro / Carga Seca": 5132,
+     "Canavieiro": 1046,
+     "Baú Carga Geral": 4676,
+     "Carrega Tudo": 790,
+     "Dolly": 2234,
+     "Especial": 1150,
+     "Transporte De Toras": 681,
+     "Baú Frigorífico": 692,
+     "Baú Lonado": 1709,
+     "Silo": 233,
+     "Tanque Carbono": 1354,
+     "Tanque Inox": 225,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 5841,
+     "Baú Alumínio / Frigorífico": 12028,
+     "Baú Lonado": 185,
+     "Basculante": 3252,
+     "Betoneira": 705,
+     "Tanque": 2023,
+     "Outras / Diversas": 3969
+    },
+    "reb_aa": {
+     "Basculante": 5076,
+     "Porta Conteiner": 2173,
+     "Graneleiro / Carga Seca": 5436,
+     "Canavieiro": 1066,
+     "Baú Carga Geral": 4382,
+     "Carrega Tudo": 1058,
+     "Dolly": 2466,
+     "Especial": 1061,
+     "Transporte De Toras": 645,
+     "Baú Frigorífico": 862,
+     "Baú Lonado": 3113,
+     "Silo": 271,
+     "Tanque Carbono": 2513,
+     "Tanque Inox": 179,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 6895,
+     "Baú Alumínio / Frigorífico": 12590,
+     "Baú Lonado": 180,
+     "Basculante": 3318,
+     "Betoneira": 788,
+     "Tanque": 2159,
+     "Outras / Diversas": 4261
+    },
+    "reb_total": 26415,
+    "reb_total_aa": 30301,
+    "carr_total": 28003,
+    "carr_total_aa": 30191,
+    "total": 54418,
+    "total_aa": 60492,
+    "exp": 2000,
+    "exp_aa": 1666,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1783704231-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20MAIO%202026.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Maio de 2026"
+   },
+   "2026-06": {
+    "reb": {
+     "Basculante": 5775,
+     "Porta Conteiner": 2277,
+     "Graneleiro / Carga Seca": 6339,
+     "Canavieiro": 1059,
+     "Baú Carga Geral": 5793,
+     "Carrega Tudo": 972,
+     "Dolly": 2846,
+     "Especial": 1381,
+     "Transporte De Toras": 843,
+     "Baú Frigorífico": 853,
+     "Baú Lonado": 2098,
+     "Silo": 277,
+     "Tanque Carbono": 1668,
+     "Tanque Inox": 271,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 7077,
+     "Baú Alumínio / Frigorífico": 14789,
+     "Baú Lonado": 225,
+     "Basculante": 4084,
+     "Betoneira": 841,
+     "Tanque": 2434,
+     "Outras / Diversas": 4834
+    },
+    "reb_aa": {
+     "Basculante": 5892,
+     "Porta Conteiner": 2501,
+     "Graneleiro / Carga Seca": 6457,
+     "Canavieiro": 1121,
+     "Baú Carga Geral": 5447,
+     "Carrega Tudo": 1275,
+     "Dolly": 2827,
+     "Especial": 1311,
+     "Transporte De Toras": 861,
+     "Baú Frigorífico": 1061,
+     "Baú Lonado": 3544,
+     "Silo": 328,
+     "Tanque Carbono": 2985,
+     "Tanque Inox": 217,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 8314,
+     "Baú Alumínio / Frigorífico": 15203,
+     "Baú Lonado": 201,
+     "Basculante": 3996,
+     "Betoneira": 925,
+     "Tanque": 2582,
+     "Outras / Diversas": 5131
+    },
+    "reb_total": 32452,
+    "reb_total_aa": 35827,
+    "carr_total": 34284,
+    "carr_total_aa": 36352,
+    "total": 66736,
+    "total_aa": 72179,
+    "exp": 2623,
+    "exp_aa": 2132,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1783947735-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20JUNHO%202026.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Junho de 2026"
+   },
+   "2026-07": {
+    "reb": {
+     "Basculante": 7162,
+     "Porta Conteiner": 2848,
+     "Graneleiro / Carga Seca": 7761,
+     "Canavieiro": 1077,
+     "Baú Carga Geral": 7278,
+     "Carrega Tudo": 1216,
+     "Dolly": 3621,
+     "Especial": 1705,
+     "Transporte De Toras": 1135,
+     "Baú Frigorífico": 1086,
+     "Baú Lonado": 2737,
+     "Silo": 352,
+     "Tanque Carbono": 2086,
+     "Tanque Inox": 334,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 8446,
+     "Baú Alumínio / Frigorífico": 18305,
+     "Baú Lonado": 270,
+     "Basculante": 4843,
+     "Betoneira": 1004,
+     "Tanque": 2908,
+     "Outras / Diversas": 5735
+    },
+    "reb_aa": {
+     "Basculante": 6944,
+     "Porta Conteiner": 3034,
+     "Graneleiro / Carga Seca": 7339,
+     "Canavieiro": 1219,
+     "Baú Carga Geral": 6494,
+     "Carrega Tudo": 1519,
+     "Dolly": 3308,
+     "Especial": 1603,
+     "Transporte De Toras": 1135,
+     "Baú Frigorífico": 1259,
+     "Baú Lonado": 4209,
+     "Silo": 390,
+     "Tanque Carbono": 3378,
+     "Tanque Inox": 271,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 9827,
+     "Baú Alumínio / Frigorífico": 18523,
+     "Baú Lonado": 257,
+     "Basculante": 4836,
+     "Betoneira": 1056,
+     "Tanque": 3068,
+     "Outras / Diversas": 6345
+    },
+    "reb_total": 40398,
+    "reb_total_aa": 42102,
+    "carr_total": 41511,
+    "carr_total_aa": 43912,
+    "total": 81909,
+    "total_aa": 86014,
+    "exp": 3087,
+    "exp_aa": 2623,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1786641738-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20JULHO%202026.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Julho de 2026"
+   },
+   "2026-08": {
+    "reb": {
+     "Basculante": 8249,
+     "Porta Conteiner": 3308,
+     "Graneleiro / Carga Seca": 8940,
+     "Canavieiro": 1191,
+     "Baú Carga Geral": 8474,
+     "Carrega Tudo": 1383,
+     "Dolly": 4163,
+     "Especial": 1973,
+     "Transporte De Toras": 1365,
+     "Baú Frigorífico": 1293,
+     "Baú Lonado": 3280,
+     "Silo": 429,
+     "Tanque Carbono": 2541,
+     "Tanque Inox": 370,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 9749,
+     "Baú Alumínio / Frigorífico": 21660,
+     "Baú Lonado": 310,
+     "Basculante": 5578,
+     "Betoneira": 1194,
+     "Tanque": 3326,
+     "Outras / Diversas": 6737
+    },
+    "reb_aa": {
+     "Basculante": 7958,
+     "Porta Conteiner": 3334,
+     "Graneleiro / Carga Seca": 8447,
+     "Canavieiro": 1240,
+     "Baú Carga Geral": 7737,
+     "Carrega Tudo": 1747,
+     "Dolly": 3768,
+     "Especial": 1865,
+     "Transporte De Toras": 1234,
+     "Baú Frigorífico": 1417,
+     "Baú Lonado": 4519,
+     "Silo": 422,
+     "Tanque Carbono": 3725,
+     "Tanque Inox": 318,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 11354,
+     "Baú Alumínio / Frigorífico": 20945,
+     "Baú Lonado": 297,
+     "Basculante": 5639,
+     "Betoneira": 1232,
+     "Tanque": 3563,
+     "Outras / Diversas": 7436
+    },
+    "reb_total": 46959,
+    "reb_total_aa": 47731,
+    "carr_total": 48554,
+    "carr_total_aa": 50466,
+    "total": 95513,
+    "total_aa": 98197,
+    "exp": 3561,
+    "exp_aa": 3067,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1790095737-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20AGOSTO%202026.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Agosto de 2026"
+   },
+   "2026-09": {
+    "reb": {
+     "Basculante": 9299,
+     "Porta Conteiner": 3821,
+     "Graneleiro / Carga Seca": 10180,
+     "Canavieiro": 1218,
+     "Baú Carga Geral": 9850,
+     "Carrega Tudo": 1543,
+     "Dolly": 4720,
+     "Especial": 2198,
+     "Transporte De Toras": 1723,
+     "Baú Frigorífico": 1527,
+     "Baú Lonado": 3798,
+     "Silo": 503,
+     "Tanque Carbono": 2983,
+     "Tanque Inox": 411,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 11052,
+     "Baú Alumínio / Frigorífico": 25019,
+     "Baú Lonado": 355,
+     "Basculante": 6399,
+     "Betoneira": 1366,
+     "Tanque": 3835,
+     "Outras / Diversas": 7915
+    },
+    "reb_aa": {
+     "Basculante": 9033,
+     "Porta Conteiner": 3731,
+     "Graneleiro / Carga Seca": 9564,
+     "Canavieiro": 1270,
+     "Baú Carga Geral": 8852,
+     "Carrega Tudo": 1965,
+     "Dolly": 4238,
+     "Especial": 2102,
+     "Transporte De Toras": 1475,
+     "Baú Frigorífico": 1590,
+     "Baú Lonado": 4993,
+     "Silo": 467,
+     "Tanque Carbono": 4015,
+     "Tanque Inox": 362,
+     "Tanque Aluminio": 0
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 12865,
+     "Baú Alumínio / Frigorífico": 23962,
+     "Baú Lonado": 346,
+     "Basculante": 6503,
+     "Betoneira": 1358,
+     "Tanque": 4120,
+     "Outras / Diversas": 8544
+    },
+    "reb_total": 53774,
+    "reb_total_aa": 53657,
+    "carr_total": 55941,
+    "carr_total_aa": 57698,
+    "total": 109715,
+    "total_aa": 111355,
+    "exp": 4114,
+    "exp_aa": 3559,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1792592316-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20SETEMBRO%202026.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Setembro de 2026"
+   }
+  },
+  "ultimo": "2026-09",
+  "titulo": "Desempenho do setor - Janeiro a Setembro de 2026",
+  "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1792592316-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20SETEMBRO%202026.pdf",
+  "meses": [
+   {
+    "mes": "2023-01",
+    "reb": 6539,
+    "carr": 5118,
+    "total": 11657,
+    "exp": 447,
+    "familias": {
+     "Basculante": 2129,
+     "Porta Conteiner": 168,
+     "Graneleiro / Carga Seca": 1287,
+     "Canavieiro": 56,
+     "Baú Carga Geral": 368,
+     "Carrega Tudo": 217,
+     "Dolly": 1082,
+     "Especial": 114,
+     "Transporte De Toras": 122,
+     "Baú Frigorífico": 134,
+     "Baú Lonado": 405,
+     "Silo": 42,
+     "Tanque Carbono": 371,
+     "Tanque Inox": 44,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-02",
+    "reb": 5960,
+    "carr": 5064,
+    "total": 11024,
+    "exp": 358,
+    "familias": {
+     "Basculante": 1882,
+     "Porta Conteiner": 184,
+     "Graneleiro / Carga Seca": 1251,
+     "Canavieiro": 219,
+     "Baú Carga Geral": 254,
+     "Carrega Tudo": 178,
+     "Dolly": 938,
+     "Especial": 113,
+     "Transporte De Toras": 108,
+     "Baú Frigorífico": 119,
+     "Baú Lonado": 374,
+     "Silo": 38,
+     "Tanque Carbono": 268,
+     "Tanque Inox": 34,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-03",
+    "reb": 8391,
+    "carr": 6460,
+    "total": 14851,
+    "exp": 500,
+    "familias": {
+     "Basculante": 2174,
+     "Porta Conteiner": 320,
+     "Graneleiro / Carga Seca": 1599,
+     "Canavieiro": 669,
+     "Baú Carga Geral": 523,
+     "Carrega Tudo": 256,
+     "Dolly": 1006,
+     "Especial": 172,
+     "Transporte De Toras": 348,
+     "Baú Frigorífico": 168,
+     "Baú Lonado": 485,
+     "Silo": 45,
+     "Tanque Carbono": 560,
+     "Tanque Inox": 66,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-04",
+    "reb": 6206,
+    "carr": 4606,
+    "total": 10812,
+    "exp": 316,
+    "familias": {
+     "Basculante": 1784,
+     "Porta Conteiner": 149,
+     "Graneleiro / Carga Seca": 1365,
+     "Canavieiro": 208,
+     "Baú Carga Geral": 409,
+     "Carrega Tudo": 208,
+     "Dolly": 849,
+     "Especial": 146,
+     "Transporte De Toras": 138,
+     "Baú Frigorífico": 129,
+     "Baú Lonado": 310,
+     "Silo": 48,
+     "Tanque Carbono": 417,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-05",
+    "reb": 7680,
+    "carr": 5071,
+    "total": 12751,
+    "exp": 654,
+    "familias": {
+     "Basculante": 1832,
+     "Porta Conteiner": 151,
+     "Graneleiro / Carga Seca": 1751,
+     "Canavieiro": 145,
+     "Baú Carga Geral": 547,
+     "Carrega Tudo": 236,
+     "Dolly": 852,
+     "Especial": 233,
+     "Transporte De Toras": 576,
+     "Baú Frigorífico": 134,
+     "Baú Lonado": 484,
+     "Silo": 90,
+     "Tanque Carbono": 587,
+     "Tanque Inox": 62,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-06",
+    "reb": 7321,
+    "carr": 4555,
+    "total": 11876,
+    "exp": 408,
+    "familias": {
+     "Basculante": 1972,
+     "Porta Conteiner": 262,
+     "Graneleiro / Carga Seca": 1721,
+     "Canavieiro": 57,
+     "Baú Carga Geral": 532,
+     "Carrega Tudo": 217,
+     "Dolly": 967,
+     "Especial": 148,
+     "Transporte De Toras": 176,
+     "Baú Frigorífico": 155,
+     "Baú Lonado": 455,
+     "Silo": 64,
+     "Tanque Carbono": 551,
+     "Tanque Inox": 44,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-07",
+    "reb": 7323,
+    "carr": 4746,
+    "total": 12069,
+    "exp": 483,
+    "familias": {
+     "Basculante": 1994,
+     "Porta Conteiner": 179,
+     "Graneleiro / Carga Seca": 1747,
+     "Canavieiro": 145,
+     "Baú Carga Geral": 464,
+     "Carrega Tudo": 202,
+     "Dolly": 1016,
+     "Especial": 153,
+     "Transporte De Toras": 222,
+     "Baú Frigorífico": 140,
+     "Baú Lonado": 420,
+     "Silo": 45,
+     "Tanque Carbono": 528,
+     "Tanque Inox": 68,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-08",
+    "reb": 8553,
+    "carr": 5205,
+    "total": 13758,
+    "exp": 600,
+    "familias": {
+     "Basculante": 2385,
+     "Porta Conteiner": 221,
+     "Graneleiro / Carga Seca": 2074,
+     "Canavieiro": 117,
+     "Baú Carga Geral": 488,
+     "Carrega Tudo": 247,
+     "Dolly": 1151,
+     "Especial": 183,
+     "Transporte De Toras": 213,
+     "Baú Frigorífico": 160,
+     "Baú Lonado": 498,
+     "Silo": 31,
+     "Tanque Carbono": 712,
+     "Tanque Inox": 73,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-09",
+    "reb": 7851,
+    "carr": 4527,
+    "total": 12378,
+    "exp": 438,
+    "familias": {
+     "Basculante": 2047,
+     "Porta Conteiner": 149,
+     "Graneleiro / Carga Seca": 2136,
+     "Canavieiro": 82,
+     "Baú Carga Geral": 493,
+     "Carrega Tudo": 228,
+     "Dolly": 1092,
+     "Especial": 148,
+     "Transporte De Toras": 139,
+     "Baú Frigorífico": 168,
+     "Baú Lonado": 481,
+     "Silo": 36,
+     "Tanque Carbono": 603,
+     "Tanque Inox": 49,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-10",
+    "reb": 8997,
+    "carr": 4914,
+    "total": 13911,
+    "exp": 586,
+    "familias": {
+     "Basculante": 2380,
+     "Porta Conteiner": 232,
+     "Graneleiro / Carga Seca": 2248,
+     "Canavieiro": 60,
+     "Baú Carga Geral": 739,
+     "Carrega Tudo": 186,
+     "Dolly": 1323,
+     "Especial": 171,
+     "Transporte De Toras": 124,
+     "Baú Frigorífico": 149,
+     "Baú Lonado": 553,
+     "Silo": 40,
+     "Tanque Carbono": 709,
+     "Tanque Inox": 83
+    }
+   },
+   {
+    "mes": "2023-11",
+    "reb": 7617,
+    "carr": 5173,
+    "total": 12790,
+    "exp": 618,
+    "familias": {
+     "Basculante": 1936,
+     "Porta Conteiner": 232,
+     "Graneleiro / Carga Seca": 2104,
+     "Canavieiro": 39,
+     "Baú Carga Geral": 424,
+     "Carrega Tudo": 205,
+     "Dolly": 1067,
+     "Especial": 169,
+     "Transporte De Toras": 218,
+     "Baú Frigorífico": 159,
+     "Baú Lonado": 354,
+     "Silo": 44,
+     "Tanque Carbono": 605,
+     "Tanque Inox": 61,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2023-12",
+    "reb": 7884,
+    "carr": 5280,
+    "total": 13164,
+    "exp": 390,
+    "familias": {
+     "Basculante": 1990,
+     "Porta Conteiner": 236,
+     "Graneleiro / Carga Seca": 1943,
+     "Canavieiro": 77,
+     "Baú Carga Geral": 498,
+     "Carrega Tudo": 212,
+     "Dolly": 1106,
+     "Especial": 181,
+     "Transporte De Toras": 244,
+     "Baú Frigorífico": 184,
+     "Baú Lonado": 447,
+     "Silo": 36,
+     "Tanque Carbono": 648,
+     "Tanque Inox": 82,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-01",
+    "reb": 7075,
+    "carr": 4213,
+    "total": 11288,
+    "exp": 292,
+    "familias": {
+     "Basculante": 1648,
+     "Porta Conteiner": 229,
+     "Graneleiro / Carga Seca": 1977,
+     "Canavieiro": 319,
+     "Baú Carga Geral": 408,
+     "Carrega Tudo": 172,
+     "Dolly": 989,
+     "Especial": 123,
+     "Transporte De Toras": 128,
+     "Baú Frigorífico": 118,
+     "Baú Lonado": 376,
+     "Silo": 35,
+     "Tanque Carbono": 507,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-02",
+    "reb": 7487,
+    "carr": 4614,
+    "total": 12101,
+    "exp": 224,
+    "familias": {
+     "Basculante": 1785,
+     "Porta Conteiner": 244,
+     "Graneleiro / Carga Seca": 1765,
+     "Canavieiro": 364,
+     "Baú Carga Geral": 610,
+     "Carrega Tudo": 157,
+     "Dolly": 943,
+     "Especial": 152,
+     "Transporte De Toras": 178,
+     "Baú Frigorífico": 151,
+     "Baú Lonado": 396,
+     "Silo": 43,
+     "Tanque Carbono": 646,
+     "Tanque Inox": 53,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-03",
+    "reb": 7567,
+    "carr": 5074,
+    "total": 12641,
+    "exp": 199,
+    "familias": {
+     "Basculante": 1659,
+     "Porta Conteiner": 345,
+     "Graneleiro / Carga Seca": 1914,
+     "Canavieiro": 335,
+     "Baú Carga Geral": 525,
+     "Carrega Tudo": 183,
+     "Dolly": 889,
+     "Especial": 181,
+     "Transporte De Toras": 205,
+     "Baú Frigorífico": 143,
+     "Baú Lonado": 454,
+     "Silo": 29,
+     "Tanque Carbono": 645,
+     "Tanque Inox": 60,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-04",
+    "reb": 8025,
+    "carr": 5805,
+    "total": 13830,
+    "exp": 255,
+    "familias": {
+     "Basculante": 1609,
+     "Porta Conteiner": 442,
+     "Graneleiro / Carga Seca": 1726,
+     "Canavieiro": 362,
+     "Baú Carga Geral": 840,
+     "Carrega Tudo": 223,
+     "Dolly": 795,
+     "Especial": 165,
+     "Transporte De Toras": 239,
+     "Baú Frigorífico": 179,
+     "Baú Lonado": 539,
+     "Silo": 48,
+     "Tanque Carbono": 792,
+     "Tanque Inox": 66,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-05",
+    "reb": 6813,
+    "carr": 5326,
+    "total": 12139,
+    "exp": 215,
+    "familias": {
+     "Basculante": 1290,
+     "Porta Conteiner": 403,
+     "Graneleiro / Carga Seca": 1460,
+     "Canavieiro": 176,
+     "Baú Carga Geral": 708,
+     "Carrega Tudo": 189,
+     "Dolly": 670,
+     "Especial": 162,
+     "Transporte De Toras": 245,
+     "Baú Frigorífico": 217,
+     "Baú Lonado": 517,
+     "Silo": 31,
+     "Tanque Carbono": 685,
+     "Tanque Inox": 60,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-06",
+    "reb": 7697,
+    "carr": 5653,
+    "total": 13350,
+    "exp": 286,
+    "familias": {
+     "Basculante": 1466,
+     "Porta Conteiner": 532,
+     "Graneleiro / Carga Seca": 1575,
+     "Canavieiro": 125,
+     "Baú Carga Geral": 975,
+     "Carrega Tudo": 211,
+     "Dolly": 610,
+     "Especial": 227,
+     "Transporte De Toras": 296,
+     "Baú Frigorífico": 219,
+     "Baú Lonado": 502,
+     "Silo": 49,
+     "Tanque Carbono": 873,
+     "Tanque Inox": 37,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-07",
+    "reb": 7857,
+    "carr": 6672,
+    "total": 14529,
+    "exp": 340,
+    "familias": {
+     "Basculante": 1387,
+     "Porta Conteiner": 473,
+     "Graneleiro / Carga Seca": 1534,
+     "Canavieiro": 169,
+     "Baú Carga Geral": 942,
+     "Carrega Tudo": 294,
+     "Dolly": 602,
+     "Especial": 203,
+     "Transporte De Toras": 280,
+     "Baú Frigorífico": 224,
+     "Baú Lonado": 716,
+     "Silo": 70,
+     "Tanque Carbono": 914,
+     "Tanque Inox": 49,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-08",
+    "reb": 7678,
+    "carr": 6364,
+    "total": 14042,
+    "exp": 256,
+    "familias": {
+     "Basculante": 1374,
+     "Porta Conteiner": 512,
+     "Graneleiro / Carga Seca": 1362,
+     "Canavieiro": 88,
+     "Baú Carga Geral": 1042,
+     "Carrega Tudo": 280,
+     "Dolly": 604,
+     "Especial": 208,
+     "Transporte De Toras": 250,
+     "Baú Frigorífico": 234,
+     "Baú Lonado": 690,
+     "Silo": 48,
+     "Tanque Carbono": 935,
+     "Tanque Inox": 51,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-09",
+    "reb": 7230,
+    "carr": 6844,
+    "total": 14074,
+    "exp": 294,
+    "familias": {
+     "Basculante": 1329,
+     "Porta Conteiner": 569,
+     "Graneleiro / Carga Seca": 1324,
+     "Canavieiro": 15,
+     "Baú Carga Geral": 1033,
+     "Carrega Tudo": 227,
+     "Dolly": 583,
+     "Especial": 188,
+     "Transporte De Toras": 272,
+     "Baú Frigorífico": 224,
+     "Baú Lonado": 563,
+     "Silo": 57,
+     "Tanque Carbono": 795,
+     "Tanque Inox": 51,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-10",
+    "reb": 7688,
+    "carr": 7694,
+    "total": 15382,
+    "exp": 345,
+    "familias": {
+     "Basculante": 1247,
+     "Porta Conteiner": 562,
+     "Graneleiro / Carga Seca": 1521,
+     "Canavieiro": 20,
+     "Baú Carga Geral": 1108,
+     "Carrega Tudo": 255,
+     "Dolly": 537,
+     "Especial": 194,
+     "Transporte De Toras": 284,
+     "Baú Frigorífico": 232,
+     "Baú Lonado": 725,
+     "Silo": 64,
+     "Tanque Carbono": 879,
+     "Tanque Inox": 60,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-11",
+    "reb": 6669,
+    "carr": 6124,
+    "total": 12793,
+    "exp": 361,
+    "familias": {
+     "Basculante": 1153,
+     "Porta Conteiner": 559,
+     "Graneleiro / Carga Seca": 1228,
+     "Canavieiro": 48,
+     "Baú Carga Geral": 1036,
+     "Carrega Tudo": 222,
+     "Dolly": 519,
+     "Especial": 183,
+     "Transporte De Toras": 43,
+     "Baú Frigorífico": 205,
+     "Baú Lonado": 622,
+     "Silo": 54,
+     "Tanque Carbono": 752,
+     "Tanque Inox": 45,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2024-12",
+    "reb": 6813,
+    "carr": 6221,
+    "total": 13034,
+    "exp": 389,
+    "familias": {
+     "Basculante": 1194,
+     "Porta Conteiner": 446,
+     "Graneleiro / Carga Seca": 1246,
+     "Canavieiro": 155,
+     "Baú Carga Geral": 991,
+     "Carrega Tudo": 199,
+     "Dolly": 600,
+     "Especial": 207,
+     "Transporte De Toras": 134,
+     "Baú Frigorífico": 231,
+     "Baú Lonado": 575,
+     "Silo": 52,
+     "Tanque Carbono": 737,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-01",
+    "reb": 6191,
+    "carr": 5270,
+    "total": 11461,
+    "exp": 220,
+    "familias": {
+     "Basculante": 1179,
+     "Porta Conteiner": 506,
+     "Graneleiro / Carga Seca": 1182,
+     "Canavieiro": 127,
+     "Baú Carga Geral": 787,
+     "Carrega Tudo": 209,
+     "Dolly": 582,
+     "Especial": 185,
+     "Transporte De Toras": 48,
+     "Baú Frigorífico": 136,
+     "Baú Lonado": 587,
+     "Silo": 41,
+     "Tanque Carbono": 598,
+     "Tanque Inox": 24,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-02",
+    "reb": 6208,
+    "carr": 6092,
+    "total": 12300,
+    "exp": 358,
+    "familias": {
+     "Basculante": 955,
+     "Porta Conteiner": 369,
+     "Graneleiro / Carga Seca": 1174,
+     "Canavieiro": 361,
+     "Baú Carga Geral": 899,
+     "Carrega Tudo": 207,
+     "Dolly": 471,
+     "Especial": 170,
+     "Transporte De Toras": 124,
+     "Baú Frigorífico": 206,
+     "Baú Lonado": 643,
+     "Silo": 67,
+     "Tanque Carbono": 530,
+     "Tanque Inox": 32,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-03",
+    "reb": 6024,
+    "carr": 5943,
+    "total": 11967,
+    "exp": 317,
+    "familias": {
+     "Basculante": 953,
+     "Porta Conteiner": 394,
+     "Graneleiro / Carga Seca": 1037,
+     "Canavieiro": 374,
+     "Baú Carga Geral": 910,
+     "Carrega Tudo": 201,
+     "Dolly": 467,
+     "Especial": 220,
+     "Transporte De Toras": 138,
+     "Baú Frigorífico": 152,
+     "Baú Lonado": 616,
+     "Silo": 45,
+     "Tanque Carbono": 464,
+     "Tanque Inox": 53,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-04",
+    "reb": 5968,
+    "carr": 6308,
+    "total": 12276,
+    "exp": 376,
+    "familias": {
+     "Basculante": 1035,
+     "Porta Conteiner": 417,
+     "Graneleiro / Carga Seca": 1108,
+     "Canavieiro": 187,
+     "Baú Carga Geral": 897,
+     "Carrega Tudo": 218,
+     "Dolly": 505,
+     "Especial": 234,
+     "Transporte De Toras": 102,
+     "Baú Frigorífico": 171,
+     "Baú Lonado": 526,
+     "Silo": 54,
+     "Tanque Carbono": 479,
+     "Tanque Inox": 35,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-05",
+    "reb": 5910,
+    "carr": 6578,
+    "total": 12488,
+    "exp": 395,
+    "familias": {
+     "Basculante": 954,
+     "Porta Conteiner": 487,
+     "Graneleiro / Carga Seca": 935,
+     "Canavieiro": 17,
+     "Baú Carga Geral": 889,
+     "Carrega Tudo": 223,
+     "Dolly": 441,
+     "Especial": 252,
+     "Transporte De Toras": 233,
+     "Baú Frigorífico": 197,
+     "Baú Lonado": 741,
+     "Silo": 64,
+     "Tanque Carbono": 442,
+     "Tanque Inox": 35,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-06",
+    "reb": 5526,
+    "carr": 6161,
+    "total": 11687,
+    "exp": 466,
+    "familias": {
+     "Basculante": 816,
+     "Porta Conteiner": 328,
+     "Graneleiro / Carga Seca": 1021,
+     "Canavieiro": 55,
+     "Baú Carga Geral": 1065,
+     "Carrega Tudo": 217,
+     "Dolly": 361,
+     "Especial": 250,
+     "Transporte De Toras": 216,
+     "Baú Frigorífico": 199,
+     "Baú Lonado": 431,
+     "Silo": 57,
+     "Tanque Carbono": 472,
+     "Tanque Inox": 38,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-07",
+    "reb": 6269,
+    "carr": 7560,
+    "total": 13829,
+    "exp": 491,
+    "familias": {
+     "Basculante": 1052,
+     "Porta Conteiner": 418,
+     "Graneleiro / Carga Seca": 997,
+     "Canavieiro": 98,
+     "Baú Carga Geral": 1203,
+     "Carrega Tudo": 243,
+     "Dolly": 481,
+     "Especial": 292,
+     "Transporte De Toras": 274,
+     "Baú Frigorífico": 198,
+     "Baú Lonado": 505,
+     "Silo": 61,
+     "Tanque Carbono": 393,
+     "Tanque Inox": 54,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-08",
+    "reb": 5635,
+    "carr": 6554,
+    "total": 12189,
+    "exp": 444,
+    "familias": {
+     "Basculante": 1014,
+     "Porta Conteiner": 415,
+     "Graneleiro / Carga Seca": 993,
+     "Canavieiro": 21,
+     "Baú Carga Geral": 1087,
+     "Carrega Tudo": 229,
+     "Dolly": 460,
+     "Especial": 262,
+     "Transporte De Toras": 99,
+     "Baú Frigorífico": 158,
+     "Baú Lonado": 470,
+     "Silo": 33,
+     "Tanque Carbono": 347,
+     "Tanque Inox": 47,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-09",
+    "reb": 5926,
+    "carr": 7232,
+    "total": 13158,
+    "exp": 492,
+    "familias": {
+     "Basculante": 1075,
+     "Porta Conteiner": 397,
+     "Graneleiro / Carga Seca": 1117,
+     "Canavieiro": 30,
+     "Baú Carga Geral": 1115,
+     "Carrega Tudo": 218,
+     "Dolly": 470,
+     "Especial": 237,
+     "Transporte De Toras": 241,
+     "Baú Frigorífico": 173,
+     "Baú Lonado": 474,
+     "Silo": 45,
+     "Tanque Carbono": 290,
+     "Tanque Inox": 44,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-10",
+    "reb": 6460,
+    "carr": 7520,
+    "total": 13980,
+    "exp": 569,
+    "familias": {
+     "Basculante": 1055,
+     "Porta Conteiner": 434,
+     "Graneleiro / Carga Seca": 1225,
+     "Canavieiro": 39,
+     "Baú Carga Geral": 1139,
+     "Carrega Tudo": 197,
+     "Dolly": 509,
+     "Especial": 275,
+     "Transporte De Toras": 390,
+     "Baú Frigorífico": 216,
+     "Baú Lonado": 459,
+     "Silo": 60,
+     "Tanque Carbono": 406,
+     "Tanque Inox": 54,
+     "Tanque Aluminio": 2
+    }
+   },
+   {
+    "mes": "2025-11",
+    "reb": 5457,
+    "carr": 6521,
+    "total": 11978,
+    "exp": 449,
+    "familias": {
+     "Basculante": 992,
+     "Porta Conteiner": 389,
+     "Graneleiro / Carga Seca": 1020,
+     "Canavieiro": 46,
+     "Baú Carga Geral": 1124,
+     "Carrega Tudo": 179,
+     "Dolly": 423,
+     "Especial": 230,
+     "Transporte De Toras": 160,
+     "Baú Frigorífico": 145,
+     "Baú Lonado": 335,
+     "Silo": 46,
+     "Tanque Carbono": 333,
+     "Tanque Inox": 35,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2025-12",
+    "reb": 5423,
+    "carr": 6470,
+    "total": 11893,
+    "exp": 516,
+    "familias": {
+     "Basculante": 1025,
+     "Porta Conteiner": 336,
+     "Graneleiro / Carga Seca": 1024,
+     "Canavieiro": 180,
+     "Baú Carga Geral": 1010,
+     "Carrega Tudo": 176,
+     "Dolly": 459,
+     "Especial": 217,
+     "Transporte De Toras": 119,
+     "Baú Frigorífico": 188,
+     "Baú Lonado": 355,
+     "Silo": 35,
+     "Tanque Carbono": 274,
+     "Tanque Inox": 27,
+     "Tanque Aluminio": -2
+    }
+   },
+   {
+    "mes": "2026-01",
+    "reb": 4335,
+    "carr": 4425,
+    "total": 8760,
+    "exp": 333,
+    "familias": {
+     "Basculante": 804,
+     "Porta Conteiner": 313,
+     "Graneleiro / Carga Seca": 850,
+     "Canavieiro": 132,
+     "Baú Carga Geral": 723,
+     "Carrega Tudo": 139,
+     "Dolly": 366,
+     "Especial": 159,
+     "Transporte De Toras": 79,
+     "Baú Frigorífico": 90,
+     "Baú Lonado": 377,
+     "Silo": 31,
+     "Tanque Carbono": 223,
+     "Tanque Inox": 49,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-02",
+    "reb": 5007,
+    "carr": 4863,
+    "total": 9870,
+    "exp": 248,
+    "familias": {
+     "Basculante": 872,
+     "Porta Conteiner": 364,
+     "Graneleiro / Carga Seca": 1054,
+     "Canavieiro": 272,
+     "Baú Carga Geral": 867,
+     "Carrega Tudo": 148,
+     "Dolly": 407,
+     "Especial": 221,
+     "Transporte De Toras": 27,
+     "Baú Frigorífico": 136,
+     "Baú Lonado": 308,
+     "Silo": 45,
+     "Tanque Carbono": 238,
+     "Tanque Inox": 48,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-03",
+    "reb": 6390,
+    "carr": 5821,
+    "total": 12211,
+    "exp": 464,
+    "familias": {
+     "Basculante": 1147,
+     "Porta Conteiner": 364,
+     "Graneleiro / Carga Seca": 1277,
+     "Canavieiro": 425,
+     "Baú Carga Geral": 1013,
+     "Carrega Tudo": 182,
+     "Dolly": 595,
+     "Especial": 270,
+     "Transporte De Toras": 186,
+     "Baú Frigorífico": 181,
+     "Baú Lonado": 328,
+     "Silo": 70,
+     "Tanque Carbono": 316,
+     "Tanque Inox": 36,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-04",
+    "reb": 5535,
+    "carr": 6232,
+    "total": 11767,
+    "exp": 492,
+    "familias": {
+     "Basculante": 983,
+     "Porta Conteiner": 427,
+     "Graneleiro / Carga Seca": 1028,
+     "Canavieiro": 137,
+     "Baú Carga Geral": 967,
+     "Carrega Tudo": 166,
+     "Dolly": 485,
+     "Especial": 268,
+     "Transporte De Toras": 189,
+     "Baú Frigorífico": 171,
+     "Baú Lonado": 317,
+     "Silo": 41,
+     "Tanque Carbono": 310,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-05",
+    "reb": 5148,
+    "carr": 6662,
+    "total": 11810,
+    "exp": 463,
+    "familias": {
+     "Basculante": 840,
+     "Porta Conteiner": 379,
+     "Graneleiro / Carga Seca": 923,
+     "Canavieiro": 80,
+     "Baú Carga Geral": 1106,
+     "Carrega Tudo": 155,
+     "Dolly": 381,
+     "Especial": 232,
+     "Transporte De Toras": 200,
+     "Baú Frigorífico": 114,
+     "Baú Lonado": 379,
+     "Silo": 46,
+     "Tanque Carbono": 267,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-06",
+    "reb": 6037,
+    "carr": 6281,
+    "total": 12318,
+    "exp": 623,
+    "familias": {
+     "Basculante": 1129,
+     "Porta Conteiner": 430,
+     "Graneleiro / Carga Seca": 1207,
+     "Canavieiro": 13,
+     "Baú Carga Geral": 1117,
+     "Carrega Tudo": 182,
+     "Dolly": 612,
+     "Especial": 231,
+     "Transporte De Toras": 162,
+     "Baú Frigorífico": 161,
+     "Baú Lonado": 389,
+     "Silo": 44,
+     "Tanque Carbono": 314,
+     "Tanque Inox": 46,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-07",
+    "reb": 7946,
+    "carr": 7227,
+    "total": 15173,
+    "exp": 464,
+    "familias": {
+     "Basculante": 1387,
+     "Porta Conteiner": 571,
+     "Graneleiro / Carga Seca": 1422,
+     "Canavieiro": 18,
+     "Baú Carga Geral": 1485,
+     "Carrega Tudo": 244,
+     "Dolly": 775,
+     "Especial": 324,
+     "Transporte De Toras": 292,
+     "Baú Frigorífico": 233,
+     "Baú Lonado": 639,
+     "Silo": 75,
+     "Tanque Carbono": 418,
+     "Tanque Inox": 63,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-08",
+    "reb": 6561,
+    "carr": 7043,
+    "total": 13604,
+    "exp": 474,
+    "familias": {
+     "Basculante": 1087,
+     "Porta Conteiner": 460,
+     "Graneleiro / Carga Seca": 1179,
+     "Canavieiro": 114,
+     "Baú Carga Geral": 1196,
+     "Carrega Tudo": 167,
+     "Dolly": 542,
+     "Especial": 268,
+     "Transporte De Toras": 230,
+     "Baú Frigorífico": 207,
+     "Baú Lonado": 543,
+     "Silo": 77,
+     "Tanque Carbono": 455,
+     "Tanque Inox": 36,
+     "Tanque Aluminio": 0
+    }
+   },
+   {
+    "mes": "2026-09",
+    "reb": 6815,
+    "carr": 7387,
+    "total": 14202,
+    "exp": 553,
+    "familias": {
+     "Basculante": 1050,
+     "Porta Conteiner": 513,
+     "Graneleiro / Carga Seca": 1240,
+     "Canavieiro": 27,
+     "Baú Carga Geral": 1376,
+     "Carrega Tudo": 160,
+     "Dolly": 557,
+     "Especial": 225,
+     "Transporte De Toras": 358,
+     "Baú Frigorífico": 234,
+     "Baú Lonado": 518,
+     "Silo": 74,
+     "Tanque Carbono": 442,
+     "Tanque Inox": 41,
+     "Tanque Aluminio": 0
+    }
+   }
+  ],
+  "fonte": "https://anfir.org.br/dados-do-setor.php",
+  "novo_em": "2026-11-13T09:42:00-03:00"
+ },
+ "comex": {
+  "atualizado": "2026-11-06",
+  "ultimo": "2026-10",
+  "ncms": {
+   "87162000": "Agrícolas (autocarregáveis etc.)",
+   "87163100": "Reboques-cisterna (tanque)",
+   "87163900": "Outros p/ transporte de mercadorias",
+   "87164000": "Outros reboques e semirreboques"
+  },
+  "meses": [
+   {
+    "mes": "2023-01",
+    "exp_fob": 10133539.0,
+    "exp_kg": 2386027.0,
+    "imp_fob": 2873246.0,
+    "imp_kg": 152535.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8829103.0,
+      "imp_fob": 2765613.0
+     },
+     "87163100": {
+      "exp_fob": 948461.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 308501.0,
+      "imp_fob": 1168.0
+     },
+     "87164000": {
+      "exp_fob": 47474.0,
+      "imp_fob": 106465.0
+     }
+    }
+   },
+   {
+    "mes": "2023-02",
+    "exp_fob": 8415337.0,
+    "exp_kg": 2119676.0,
+    "imp_fob": 655536.0,
+    "imp_kg": 48650.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 7007215.0,
+      "imp_fob": 655536.0
+     },
+     "87163100": {
+      "exp_fob": 808711.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 577312.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 22099.0,
+      "imp_fob": 0
+     }
+    }
+   },
+   {
+    "mes": "2023-03",
+    "exp_fob": 12540836.0,
+    "exp_kg": 3004713.0,
+    "imp_fob": 24732.0,
+    "imp_kg": 7171.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 9296925.0,
+      "imp_fob": 0
+     },
+     "87163100": {
+      "exp_fob": 2611901.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 589644.0,
+      "imp_fob": 13265.0
+     },
+     "87164000": {
+      "exp_fob": 42366.0,
+      "imp_fob": 11467.0
+     }
+    }
+   },
+   {
+    "mes": "2023-04",
+    "exp_fob": 7988901.0,
+    "exp_kg": 1902918.0,
+    "imp_fob": 382970.0,
+    "imp_kg": 111563.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 5921713.0,
+      "imp_fob": 317691.0
+     },
+     "87163100": {
+      "exp_fob": 1756854.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 280408.0,
+      "imp_fob": 34200.0
+     },
+     "87164000": {
+      "exp_fob": 29926.0,
+      "imp_fob": 31079.0
+     }
+    }
+   },
+   {
+    "mes": "2023-05",
+    "exp_fob": 13997909.0,
+    "exp_kg": 3319762.0,
+    "imp_fob": 329852.0,
+    "imp_kg": 210220.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 12741855.0,
+      "imp_fob": 318019.0
+     },
+     "87163100": {
+      "exp_fob": 758615.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 417258.0,
+      "imp_fob": 1175.0
+     },
+     "87164000": {
+      "exp_fob": 80181.0,
+      "imp_fob": 10658.0
+     }
+    }
+   },
+   {
+    "mes": "2023-06",
+    "exp_fob": 12975036.0,
+    "exp_kg": 2882289.0,
+    "imp_fob": 5112.0,
+    "imp_kg": 1097.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8322623.0,
+      "imp_fob": 3926.0
+     },
+     "87163100": {
+      "exp_fob": 3486461.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 767493.0,
+      "imp_fob": 1186.0
+     },
+     "87164000": {
+      "exp_fob": 398459.0,
+      "imp_fob": 0
+     }
+    }
+   },
+   {
+    "mes": "2023-07",
+    "exp_fob": 10738115.0,
+    "exp_kg": 2554842.0,
+    "imp_fob": 237798.0,
+    "imp_kg": 51781.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 9131675.0,
+      "imp_fob": 135163.0
+     },
+     "87163100": {
+      "exp_fob": 877239.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 719410.0,
+      "imp_fob": 16044.0
+     },
+     "87164000": {
+      "exp_fob": 9791.0,
+      "imp_fob": 86591.0
+     }
+    }
+   },
+   {
+    "mes": "2023-08",
+    "exp_fob": 11442700.0,
+    "exp_kg": 2773641.0,
+    "imp_fob": 366559.0,
+    "imp_kg": 45684.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 9611134.0,
+      "imp_fob": 146939.0
+     },
+     "87163100": {
+      "exp_fob": 989036.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 572397.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 270133.0,
+      "imp_fob": 219620.0
+     }
+    }
+   },
+   {
+    "mes": "2023-09",
+    "exp_fob": 8734162.0,
+    "exp_kg": 2155520.0,
+    "imp_fob": 312571.0,
+    "imp_kg": 57502.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8083395.0,
+      "imp_fob": 234323.0
+     },
+     "87163100": {
+      "exp_fob": 492557.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 130317.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 27893.0,
+      "imp_fob": 78248.0
+     }
+    }
+   },
+   {
+    "mes": "2023-10",
+    "exp_fob": 13021642.0,
+    "exp_kg": 3306143.0,
+    "imp_fob": 900628.0,
+    "imp_kg": 137878.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 11474415.0,
+      "imp_fob": 700637.0
+     },
+     "87162000": {
+      "exp_fob": 899889.0,
+      "imp_fob": 111062.0
+     },
+     "87163100": {
+      "exp_fob": 607608.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 39730.0,
+      "imp_fob": 88929.0
+     }
+    }
+   },
+   {
+    "mes": "2023-11",
+    "exp_fob": 13061611.0,
+    "exp_kg": 2913773.0,
+    "imp_fob": 100727.0,
+    "imp_kg": 13340.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10958714.0,
+      "imp_fob": 63755.0
+     },
+     "87163100": {
+      "exp_fob": 1408524.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 529128.0,
+      "imp_fob": 9833.0
+     },
+     "87164000": {
+      "exp_fob": 165245.0,
+      "imp_fob": 27139.0
+     }
+    }
+   },
+   {
+    "mes": "2023-12",
+    "exp_fob": 10360527.0,
+    "exp_kg": 2453460.0,
+    "imp_fob": 2909341.0,
+    "imp_kg": 438543.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8171996.0,
+      "imp_fob": 2231640.0
+     },
+     "87163100": {
+      "exp_fob": 1055647.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 863355.0,
+      "imp_fob": 300.0
+     },
+     "87164000": {
+      "exp_fob": 269529.0,
+      "imp_fob": 677401.0
+     }
+    }
+   },
+   {
+    "mes": "2024-01",
+    "exp_fob": 8415475.0,
+    "exp_kg": 1959110.0,
+    "imp_fob": 3558512.0,
+    "imp_kg": 276169.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 6465692.0,
+      "imp_fob": 3462686.0
+     },
+     "87162000": {
+      "exp_fob": 1300970.0,
+      "imp_fob": 37429.0
+     },
+     "87163100": {
+      "exp_fob": 644499.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 4314.0,
+      "imp_fob": 58397.0
+     }
+    }
+   },
+   {
+    "mes": "2024-02",
+    "exp_fob": 5969235.0,
+    "exp_kg": 1402521.0,
+    "imp_fob": 798061.0,
+    "imp_kg": 173771.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 4481181.0,
+      "imp_fob": 757458.0
+     },
+     "87162000": {
+      "exp_fob": 821985.0,
+      "imp_fob": 4370.0
+     },
+     "87163100": {
+      "exp_fob": 657100.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 8969.0,
+      "imp_fob": 36233.0
+     }
+    }
+   },
+   {
+    "mes": "2024-03",
+    "exp_fob": 6229455.0,
+    "exp_kg": 1631656.0,
+    "imp_fob": 140690.0,
+    "imp_kg": 22040.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 4676738.0,
+      "imp_fob": 90176.0
+     },
+     "87163100": {
+      "exp_fob": 839859.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 702421.0,
+      "imp_fob": 32514.0
+     },
+     "87164000": {
+      "exp_fob": 10437.0,
+      "imp_fob": 18000.0
+     }
+    }
+   },
+   {
+    "mes": "2024-04",
+    "exp_fob": 7097168.0,
+    "exp_kg": 1937128.0,
+    "imp_fob": 131252.0,
+    "imp_kg": 33015.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 5694690.0,
+      "imp_fob": 44420.0
+     },
+     "87163100": {
+      "exp_fob": 966770.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 423519.0,
+      "imp_fob": 47042.0
+     },
+     "87164000": {
+      "exp_fob": 12189.0,
+      "imp_fob": 39790.0
+     }
+    }
+   },
+   {
+    "mes": "2024-05",
+    "exp_fob": 7691967.0,
+    "exp_kg": 1876229.0,
+    "imp_fob": 155230.0,
+    "imp_kg": 35375.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 4898386.0,
+      "imp_fob": 48459.0
+     },
+     "87163100": {
+      "exp_fob": 1953716.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 833550.0,
+      "imp_fob": 70356.0
+     },
+     "87164000": {
+      "exp_fob": 6315.0,
+      "imp_fob": 36415.0
+     }
+    }
+   },
+   {
+    "mes": "2024-06",
+    "exp_fob": 7722616.0,
+    "exp_kg": 2219424.0,
+    "imp_fob": 2367386.0,
+    "imp_kg": 461872.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 6080127.0,
+      "imp_fob": 2302626.0
+     },
+     "87162000": {
+      "exp_fob": 992187.0,
+      "imp_fob": 14115.0
+     },
+     "87163100": {
+      "exp_fob": 627701.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 22601.0,
+      "imp_fob": 50645.0
+     }
+    }
+   },
+   {
+    "mes": "2024-07",
+    "exp_fob": 8718163.0,
+    "exp_kg": 2353843.0,
+    "imp_fob": 1872280.0,
+    "imp_kg": 492371.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 7428118.0,
+      "imp_fob": 1783615.0
+     },
+     "87163100": {
+      "exp_fob": 916800.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 347029.0,
+      "imp_fob": 53850.0
+     },
+     "87164000": {
+      "exp_fob": 26216.0,
+      "imp_fob": 34815.0
+     }
+    }
+   },
+   {
+    "mes": "2024-08",
+    "exp_fob": 8255341.0,
+    "exp_kg": 2019863.0,
+    "imp_fob": 314878.0,
+    "imp_kg": 65706.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 6721288.0,
+      "imp_fob": 280789.0
+     },
+     "87163100": {
+      "exp_fob": 622318.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 508803.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 402932.0,
+      "imp_fob": 34089.0
+     }
+    }
+   },
+   {
+    "mes": "2024-09",
+    "exp_fob": 8659021.0,
+    "exp_kg": 2203389.0,
+    "imp_fob": 33194.0,
+    "imp_kg": 3759.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 6771902.0,
+      "imp_fob": 0
+     },
+     "87163100": {
+      "exp_fob": 1417660.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 446704.0,
+      "imp_fob": 6006.0
+     },
+     "87164000": {
+      "exp_fob": 22755.0,
+      "imp_fob": 27188.0
+     }
+    }
+   },
+   {
+    "mes": "2024-10",
+    "exp_fob": 12230100.0,
+    "exp_kg": 2817005.0,
+    "imp_fob": 598083.0,
+    "imp_kg": 115855.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8267801.0,
+      "imp_fob": 254206.0
+     },
+     "87163100": {
+      "exp_fob": 2871673.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 1045983.0,
+      "imp_fob": 634.0
+     },
+     "87164000": {
+      "exp_fob": 44643.0,
+      "imp_fob": 343243.0
+     }
+    }
+   },
+   {
+    "mes": "2024-11",
+    "exp_fob": 9671564.0,
+    "exp_kg": 2486270.0,
+    "imp_fob": 1029206.0,
+    "imp_kg": 169606.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 6936414.0,
+      "imp_fob": 808316.0
+     },
+     "87163100": {
+      "exp_fob": 2131848.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 549360.0,
+      "imp_fob": 220890.0
+     },
+     "87164000": {
+      "exp_fob": 53942.0,
+      "imp_fob": 0
+     }
+    }
+   },
+   {
+    "mes": "2024-12",
+    "exp_fob": 11440406.0,
+    "exp_kg": 2867704.0,
+    "imp_fob": 452246.0,
+    "imp_kg": 98620.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 7955281.0,
+      "imp_fob": 343852.0
+     },
+     "87163100": {
+      "exp_fob": 2802612.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 666178.0,
+      "imp_fob": 90945.0
+     },
+     "87164000": {
+      "exp_fob": 16335.0,
+      "imp_fob": 17449.0
+     }
+    }
+   },
+   {
+    "mes": "2025-01",
+    "exp_fob": 5725531.0,
+    "exp_kg": 1558907.0,
+    "imp_fob": 140825.0,
+    "imp_kg": 51097.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 4104706.0,
+      "imp_fob": 37295.0
+     },
+     "87163100": {
+      "exp_fob": 1121472.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 485779.0,
+      "imp_fob": 78978.0
+     },
+     "87164000": {
+      "exp_fob": 13574.0,
+      "imp_fob": 24552.0
+     }
+    }
+   },
+   {
+    "mes": "2025-02",
+    "exp_fob": 8369616.0,
+    "exp_kg": 2346891.0,
+    "imp_fob": 586856.0,
+    "imp_kg": 224675.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 6570724.0,
+      "imp_fob": 505681.0
+     },
+     "87163100": {
+      "exp_fob": 1176311.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 608644.0,
+      "imp_fob": 47699.0
+     },
+     "87164000": {
+      "exp_fob": 13937.0,
+      "imp_fob": 33476.0
+     }
+    }
+   },
+   {
+    "mes": "2025-03",
+    "exp_fob": 9287976.0,
+    "exp_kg": 2426162.0,
+    "imp_fob": 1257034.0,
+    "imp_kg": 193318.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 7314821.0,
+      "imp_fob": 1228132.0
+     },
+     "87163100": {
+      "exp_fob": 1244683.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 725420.0,
+      "imp_fob": 874.0
+     },
+     "87164000": {
+      "exp_fob": 3052.0,
+      "imp_fob": 28028.0
+     }
+    }
+   },
+   {
+    "mes": "2025-04",
+    "exp_fob": 11129402.0,
+    "exp_kg": 2941637.0,
+    "imp_fob": 245258.0,
+    "imp_kg": 59872.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8038534.0,
+      "imp_fob": 88155.0
+     },
+     "87163100": {
+      "exp_fob": 2197441.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 885751.0,
+      "imp_fob": 38914.0
+     },
+     "87164000": {
+      "exp_fob": 7676.0,
+      "imp_fob": 118189.0
+     }
+    }
+   },
+   {
+    "mes": "2025-05",
+    "exp_fob": 10721436.0,
+    "exp_kg": 2972057.0,
+    "imp_fob": 875275.0,
+    "imp_kg": 285440.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 8412328.0,
+      "imp_fob": 821452.0
+     },
+     "87163100": {
+      "exp_fob": 2065892.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 235162.0,
+      "imp_fob": 48217.0
+     },
+     "87164000": {
+      "exp_fob": 8054.0,
+      "imp_fob": 5606.0
+     }
+    }
+   },
+   {
+    "mes": "2025-06",
+    "exp_fob": 12098957.0,
+    "exp_kg": 3414631.0,
+    "imp_fob": 531771.0,
+    "imp_kg": 88627.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 9089495.0,
+      "imp_fob": 511900.0
+     },
+     "87163100": {
+      "exp_fob": 2242381.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 763756.0,
+      "imp_fob": 19116.0
+     },
+     "87164000": {
+      "exp_fob": 3325.0,
+      "imp_fob": 755.0
+     }
+    }
+   },
+   {
+    "mes": "2025-07",
+    "exp_fob": 13050493.0,
+    "exp_kg": 3585179.0,
+    "imp_fob": 69540.0,
+    "imp_kg": 5529.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10717741.0,
+      "imp_fob": 35945.0
+     },
+     "87163100": {
+      "exp_fob": 1435786.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 871844.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 25122.0,
+      "imp_fob": 33595.0
+     }
+    }
+   },
+   {
+    "mes": "2025-08",
+    "exp_fob": 12497931.0,
+    "exp_kg": 3453608.0,
+    "imp_fob": 956324.0,
+    "imp_kg": 231707.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10430276.0,
+      "imp_fob": 866025.0
+     },
+     "87163100": {
+      "exp_fob": 1166420.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 895567.0,
+      "imp_fob": 31570.0
+     },
+     "87164000": {
+      "exp_fob": 5668.0,
+      "imp_fob": 58729.0
+     }
+    }
+   },
+   {
+    "mes": "2025-09",
+    "exp_fob": 14314035.0,
+    "exp_kg": 3660048.0,
+    "imp_fob": 474238.0,
+    "imp_kg": 53714.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 11089814.0,
+      "imp_fob": 406003.0
+     },
+     "87163100": {
+      "exp_fob": 2724467.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 489857.0,
+      "imp_fob": 68235.0
+     },
+     "87164000": {
+      "exp_fob": 9897.0,
+      "imp_fob": 0
+     }
+    }
+   },
+   {
+    "mes": "2025-10",
+    "exp_fob": 15777406.0,
+    "exp_kg": 4091590.0,
+    "imp_fob": 161456.0,
+    "imp_kg": 11315.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 11651793.0,
+      "imp_fob": 78157.0
+     },
+     "87163100": {
+      "exp_fob": 3288675.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 788605.0,
+      "imp_fob": 13680.0
+     },
+     "87164000": {
+      "exp_fob": 48333.0,
+      "imp_fob": 69619.0
+     }
+    }
+   },
+   {
+    "mes": "2025-11",
+    "exp_fob": 12723738.0,
+    "exp_kg": 3408337.0,
+    "imp_fob": 191669.0,
+    "imp_kg": 54531.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10398150.0,
+      "imp_fob": 29659.0
+     },
+     "87163100": {
+      "exp_fob": 1786617.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 508124.0,
+      "imp_fob": 119170.0
+     },
+     "87164000": {
+      "exp_fob": 30847.0,
+      "imp_fob": 42840.0
+     }
+    }
+   },
+   {
+    "mes": "2025-12",
+    "exp_fob": 14609157.0,
+    "exp_kg": 3911442.0,
+    "imp_fob": 300619.0,
+    "imp_kg": 141814.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 11583751.0,
+      "imp_fob": 151658.0
+     },
+     "87163100": {
+      "exp_fob": 1879786.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 1101789.0,
+      "imp_fob": 95447.0
+     },
+     "87164000": {
+      "exp_fob": 43831.0,
+      "imp_fob": 53514.0
+     }
+    }
+   },
+   {
+    "mes": "2026-01",
+    "exp_fob": 10163895.0,
+    "exp_kg": 2659431.0,
+    "imp_fob": 123624.0,
+    "imp_kg": 49646.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 7737623.0,
+      "imp_fob": 72493.0
+     },
+     "87162000": {
+      "exp_fob": 1567874.0,
+      "imp_fob": 46600.0
+     },
+     "87163100": {
+      "exp_fob": 834824.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 23574.0,
+      "imp_fob": 4531.0
+     }
+    }
+   },
+   {
+    "mes": "2026-02",
+    "exp_fob": 13988772.0,
+    "exp_kg": 3656715.0,
+    "imp_fob": 333078.0,
+    "imp_kg": 119817.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 9019693.0,
+      "imp_fob": 287887.0
+     },
+     "87162000": {
+      "exp_fob": 3944996.0,
+      "imp_fob": 11787.0
+     },
+     "87163100": {
+      "exp_fob": 986231.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 37852.0,
+      "imp_fob": 33404.0
+     }
+    }
+   },
+   {
+    "mes": "2026-03",
+    "exp_fob": 17251875.0,
+    "exp_kg": 4700989.0,
+    "imp_fob": 396334.0,
+    "imp_kg": 108564.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 11347542.0,
+      "imp_fob": 272476.0
+     },
+     "87162000": {
+      "exp_fob": 3708094.0,
+      "imp_fob": 12915.0
+     },
+     "87163100": {
+      "exp_fob": 2156768.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 39471.0,
+      "imp_fob": 110943.0
+     }
+    }
+   },
+   {
+    "mes": "2026-04",
+    "exp_fob": 13473884.0,
+    "exp_kg": 3895022.0,
+    "imp_fob": 516458.0,
+    "imp_kg": 178563.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10407233.0,
+      "imp_fob": 460208.0
+     },
+     "87163100": {
+      "exp_fob": 2322697.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 715945.0,
+      "imp_fob": 11400.0
+     },
+     "87164000": {
+      "exp_fob": 28009.0,
+      "imp_fob": 44850.0
+     }
+    }
+   },
+   {
+    "mes": "2026-05",
+    "exp_fob": 13392491.0,
+    "exp_kg": 3880397.0,
+    "imp_fob": 96924.0,
+    "imp_kg": 12742.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10568160.0,
+      "imp_fob": 34000.0
+     },
+     "87163100": {
+      "exp_fob": 1964673.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 824852.0,
+      "imp_fob": 13682.0
+     },
+     "87164000": {
+      "exp_fob": 34806.0,
+      "imp_fob": 49242.0
+     }
+    }
+   },
+   {
+    "mes": "2026-06",
+    "exp_fob": 15583617.0,
+    "exp_kg": 4082716.0,
+    "imp_fob": 390346.0,
+    "imp_kg": 113871.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 12025836.0,
+      "imp_fob": 249112.0
+     },
+     "87163100": {
+      "exp_fob": 2888300.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 568911.0,
+      "imp_fob": 117625.0
+     },
+     "87164000": {
+      "exp_fob": 100570.0,
+      "imp_fob": 23609.0
+     }
+    }
+   },
+   {
+    "mes": "2026-07",
+    "exp_fob": 13400278.0,
+    "exp_kg": 3850715.0,
+    "imp_fob": 339678.0,
+    "imp_kg": 99618.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 10201224.0,
+      "imp_fob": 158285.0
+     },
+     "87163100": {
+      "exp_fob": 1933771.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 1139050.0,
+      "imp_fob": 102154.0
+     },
+     "87164000": {
+      "exp_fob": 126233.0,
+      "imp_fob": 79239.0
+     }
+    }
+   },
+   {
+    "mes": "2026-08",
+    "exp_fob": 16012206.0,
+    "exp_kg": 4087846.0,
+    "imp_fob": 171599.0,
+    "imp_kg": 31615.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 9594446.0,
+      "imp_fob": 76892.0
+     },
+     "87163100": {
+      "exp_fob": 4718307.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 1609607.0,
+      "imp_fob": 38800.0
+     },
+     "87164000": {
+      "exp_fob": 89846.0,
+      "imp_fob": 55907.0
+     }
+    }
+   },
+   {
+    "mes": "2026-09",
+    "exp_fob": 18618839.0,
+    "exp_kg": 5351448.0,
+    "imp_fob": 344117.0,
+    "imp_kg": 113504.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 14148259.0,
+      "imp_fob": 306349.0
+     },
+     "87162000": {
+      "exp_fob": 2804758.0,
+      "imp_fob": 4500.0
+     },
+     "87163100": {
+      "exp_fob": 1600809.0,
+      "imp_fob": 0
+     },
+     "87164000": {
+      "exp_fob": 65013.0,
+      "imp_fob": 33268.0
+     }
+    }
+   },
+   {
+    "mes": "2026-10",
+    "exp_fob": 23135201.0,
+    "exp_kg": 6196856.0,
+    "imp_fob": 829939.0,
+    "imp_kg": 130097.0,
+    "ncm": {
+     "87163900": {
+      "exp_fob": 17016899.0,
+      "imp_fob": 724573.0
+     },
+     "87163100": {
+      "exp_fob": 3658610.0,
+      "imp_fob": 0
+     },
+     "87162000": {
+      "exp_fob": 2364840.0,
+      "imp_fob": 133.0
+     },
+     "87164000": {
+      "exp_fob": 94852.0,
+      "imp_fob": 105233.0
+     }
+    }
+   }
+  ]
+ },
+ "gerado_em": "2026-11-13T09:42:02-03:00"
+}
