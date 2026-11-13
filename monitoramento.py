@@ -25,6 +25,7 @@ CRED = ROOT / "alerts" / "credito_veiculos.json"  # crédito para veículos (cre
 SEMI = ROOT / "alerts" / "seminovos_resumo.json"  # radar de seminovos Movida, Localiza e Turbi (seminovos_radar.py)
 CAMIN = ROOT / "alerts" / "caminhoes_resumo.json"  # caminhões seminovos Vamos e VolksConfia (seminovos_radar.py --segmento caminhoes)
 USADOS = ROOT / "alerts" / "usados_fenauto.json"  # mercado de usados e seminovos, press releases da FENAUTO (fenauto_usados.py)
+IMPL = ROOT / "alerts" / "implementos.json"  # implementos rodoviários: ANFIR e Comex Stat de reboques/semirreboques (implementos.py)
 ACT = ROOT / "alerts" / "act_pedidos.json"  # pedidos de caminhões nos EUA por classe (planilha da ACT, atualizada à mão)
 BRT = timezone(timedelta(hours=-3))
 MAX_EVENTOS = 40
@@ -82,6 +83,33 @@ def _evento_fipe(f):
              "link": "https://veiculos.fipe.org.br/"}]
 
 
+def _slim_impl(im):
+    """Painel: sem o detalhe por família de cada acumulado (só o último e o do mesmo período do ano anterior)."""
+    if not im:
+        return None
+    out = dict(im)
+    a = dict(im.get("anfir") or {})
+    acum = a.pop("acum", {}) or {}
+    if a.get("ultimo") in acum:
+        a["atual"] = acum[a["ultimo"]]
+    out["anfir"] = a
+    return out
+
+
+def _evento_anfir(im):
+    """Aviso de relatório novo da ANFIR (um por período), com a hora em que o implementos.py viu."""
+    a = (im or {}).get("anfir") or {}
+    ult, quando = a.get("ultimo"), a.get("novo_em")
+    if not ult or not quando:
+        return []
+    m = next((x for x in a.get("meses", []) if x["mes"] == ult), {})
+    at = datetime.fromisoformat(quando)
+    titulo = (a.get("titulo") or f"Emplacamentos até {ult}") + (
+        f" — reboques e semirreboques no mês: {m['reb']:,}".replace(",", ".") if m.get("reb") is not None else "")
+    return [{"id": hashlib.sha1(f"ANFIR|{ult}".encode()).hexdigest()[:12], "at": at.isoformat(timespec="seconds"),
+             "label": at.strftime("%d/%m %H:%M"), "fonte": "ANFIR", "titulo": titulo, "link": a.get("url") or ""}]
+
+
 def write():
     d = _read(OUT)
     setor = _read(SETOR)
@@ -101,8 +129,9 @@ def write():
     now = datetime.now(BRT)
     d.update(updatedAt=now.isoformat(timespec="seconds"), updatedLabel=now.strftime("%d/%m/%Y %H:%M"),
              fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes, act=_read(ACT) or None, fipe=_read(FIPE) or None,
-             credito=_read(CRED) or None, seminovos=_read(SEMI) or None, caminhoes=_read(CAMIN) or None, usados=_read(USADOS) or None)
-    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []) + _evento_fipe(d.get("fipe")))}
+             credito=_read(CRED) or None, seminovos=_read(SEMI) or None, caminhoes=_read(CAMIN) or None, usados=_read(USADOS) or None,
+             implementos=_slim_impl(_read(IMPL)))
+    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []) + _evento_fipe(d.get("fipe")) + _evento_anfir(_read(IMPL)))}
     d["eventos"] = sorted(ev.values(), key=lambda e: e["at"], reverse=True)[:MAX_EVENTOS]
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
