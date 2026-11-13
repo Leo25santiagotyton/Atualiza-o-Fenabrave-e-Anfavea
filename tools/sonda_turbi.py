@@ -1,5 +1,4 @@
-"""Sonda temporária: ANFIR (implementos rodoviários) e Comex Stat (NCM 8716 reboques/semirreboques)."""
-import json
+"""Sonda temporária: ANFIR dados do setor e notícias."""
 import re
 import sys
 from pathlib import Path
@@ -12,34 +11,23 @@ from monitor import BROWSER_HEADERS  # noqa: E402
 
 s = requests.Session()
 s.headers.update(BROWSER_HEADERS)
-for url in ["https://www.anfir.org.br/", "https://anfir.org.br/estatisticas/", "https://www.anfir.org.br/estatisticas",
-            "https://anfir.org.br/emplacamentos/", "https://anfir.org.br/noticias/"]:
+for url in ["https://anfir.org.br/dados-do-setor.php", "https://anfir.org.br/noticias.php",
+            "https://anfir.org.br/noticia.php?noticia=3638", "https://anfir.org.br/noticia.php?noticia=3637"]:
     try:
         r = s.get(url, timeout=40)
     except Exception as e:
         print("ERRO", url, e); continue
-    print("==", url, r.status_code, len(r.text), r.url)
+    print("==", url, r.status_code, len(r.text), r.url, r.headers.get("content-type"))
+    soup = BeautifulSoup(r.text, "html.parser")
     vistos = set()
-    for a in BeautifulSoup(r.text, "html.parser").find_all("a", href=True):
-        h = requests.compat.urljoin(r.url, a["href"]); t = " ".join(a.get_text(" ").split())[:90]
-        if re.search(r"estat|emplac|\.pdf|\.xls|dados|mercado|reboque|resultado|balan|noticia", h + " " + t, re.I) and h not in vistos:
-            vistos.add(h); print("  ", t, "|", h)
-
-# Comex Stat API
-api = "https://api-comexstat.mdic.gov.br"
-for path in ["/general/dates/updated", "/tables/ncm?search=8716"]:
-    try:
-        r = requests.get(api + path, timeout=40, headers={"Accept": "application/json"})
-        print("==", path, r.status_code, r.text[:1500])
-    except Exception as e:
-        print("ERRO", path, e)
-body = {"flow": "export", "monthDetail": True, "period": {"from": "2025-01", "to": "2026-12"},
-        "filters": [{"filter": "ncm", "values": ["87163100", "87163900", "87164000", "87162000"]}],
-        "details": ["ncm"], "metrics": ["metricFOB", "metricKG", "metricStatistic"]}
-for flow in ("export", "import"):
-    body["flow"] = flow
-    try:
-        r = requests.post(api + "/general", json=body, timeout=60, headers={"Accept": "application/json"})
-        print("== general", flow, r.status_code, r.text[:2500])
-    except Exception as e:
-        print("ERRO general", flow, e)
+    for a in soup.find_all("a", href=True):
+        h = requests.compat.urljoin(r.url, a["href"]); t = " ".join(a.get_text(" ").split())[:100]
+        if h not in vistos and not re.search(r"facebook|instagram|linkedin|youtube|twitter|whatsapp|#$", h):
+            vistos.add(h); print("  A", t, "|", h)
+    for tag in soup.find_all(["iframe", "embed", "object", "img"]):
+        src = tag.get("src") or tag.get("data") or ""
+        if re.search(r"pdf|xls|grafico|dados|estat|power|tableau|emplac", src, re.I):
+            print("  SRC", tag.name, src)
+    txt = " ".join(soup.get_text(" ").split())
+    i = txt.find("mplacamento")
+    print("  TXT", txt[max(0, i - 600): i + 2500] if i >= 0 else txt[:1500])
