@@ -31,6 +31,7 @@ from bs4 import BeautifulSoup
 from monitor import BROWSER_HEADERS
 
 OUT = Path(__file__).parent / "alerts" / "implementos.json"
+SHARE = Path(__file__).parent / "dados" / "implementos_share.json"  # market share por fabricante (Randon RI), atualizado à mão
 BRT = timezone(timedelta(hours=-3))
 ANFIR_PAGE = "https://anfir.org.br/dados-do-setor.php"
 COMEX_API = "https://api-comexstat.mdic.gov.br"
@@ -203,6 +204,8 @@ def main():
         out["comex"] = comex()
     except Exception as exc:  # noqa: BLE001
         erros.append(f"Comex Stat: {exc}")
+    if SHARE.exists():
+        out["share"] = json.loads(SHARE.read_text(encoding="utf-8"))
     out["gerado_em"] = datetime.now(BRT).isoformat(timespec="seconds")
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")

@@ -1,0 +1,31 @@
+{
+ "titulo": "Market share em semirreboques · emplacamentos no Brasil",
+ "fonte": "Randoncorp, Apresentação Institucional / Videoconferência de Resultados 2T26, slide \"Histórico Market Share\" (p. 45) e \"Market Share Trimestral\" (p. 44)",
+ "url": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/f53a3946-7943-c73b-c0a8-2edfab47c536?origin=2",
+ "ri": "https://ri.randoncorp.com/informacoes-aos-investidores/central-de-resultados/",
+ "base": "% sobre emplacamentos de semirreboques no Brasil (RENAVAM), como a Randon divulga; os concorrentes aparecem anônimos (Player 2 a 5).",
+ "periodos": ["2021", "2022", "2023", "2024", "2025", "1S26"],
+ "mercado": [90323, 82837, 90284, 88549, 70922, 32396],
+ "fabricantes": [158, 184, 196, 189, 202, 177],
+ "players": [
+  {"nome": "Randon", "share": [31, 30, 29, 25, 26, 26], "nota": "Randoncorp (RAPT4)"},
+  {"nome": "Player 2", "share": [25, 24, 22, 24, 21, 22], "nota": "não identificado pela Randon; pelo tamanho, o segundo maior fabricante do país"},
+  {"nome": "Player 3", "share": [13, 14, 14, 12, 12, 11], "nota": "não identificado pela Randon; a Librelato divulgou 14,2% em 2022 e 13,9% em 2023, o que bate com esta série (inferência)"},
+  {"nome": "Player 4", "share": [2, 7, 8, 9, 10, 10], "nota": "não identificado pela Randon"},
+  {"nome": "Player 5", "share": [6, 3, 2, 2, 1, 0], "nota": "não identificado pela Randon"},
+  {"nome": "Outros", "share": [23, 23, 25, 28, 31, 31], "nota": "demais fabricantes"}
+ ],
+ "randon_volumes": {
+  "titulo": "Randon · semirreboques vendidos no Brasil (unidades)",
+  "periodos": ["2T25", "1T26", "2T26"],
+  "unidades": [3445, 4391, 4429],
+  "fonte": "Randoncorp, Videoconferência de Resultados 2T26, p. 45 (Volumes e Receita Líquida – Montadora)"
+ },
+ "outras_fontes": [
+  {"texto": "Randon: 22.226 implementos rebocados licenciados no RENAVAM em 2024, 25,07% do mercado (Prêmio Lótus 2025, Frota&Cia)", "url": "https://frotacia.com.br/premio-lotus-2025-revela-os-campeoes-de-vendas-em-implementos-rodoviarios/"},
+  {"texto": "Librelato: 14,2% de market share em 2022", "url": "https://truckandbusbuilder.com/article/2023/03/04/with-revenues-up-20-in-2022-trailer-builder-librelato-invests-in-its-future"},
+  {"texto": "Librelato: 13,9% de market share em 2023 (apresentação institucional da empresa)", "url": "https://librelato.com.br/"},
+  {"texto": "Ranking mundial GlobalTrailer jul/24–jun/25 (produção, inclui exportação e carrocerias sobre chassi): Facchini 30.772, Randon 28.191, Librelato 11.163, Guerra 9.500", "url": "https://frotanews.com.br/top-20-implementos-randon-facchini-guerra/"}
+ ],
+ "atualizado_em": "2026-11-13"
+}
