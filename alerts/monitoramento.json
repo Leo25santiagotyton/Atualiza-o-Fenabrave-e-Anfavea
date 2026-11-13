@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-13T11:45:59-03:00",
- "updatedLabel": "13/11/2026 11:45",
+ "updatedAt": "2026-11-13T16:35:42-03:00",
+ "updatedLabel": "13/11/2026 16:35",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -488,7 +488,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "12/11/2026",
+  "atualizado": "13/11/2026",
   "preliminar": {
    "Classe 8": [
     "2026-10"
@@ -3204,8 +3204,8 @@
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    }
   },
-  "atualizado": "12/11/2026 22:01",
-  "atualizadoAt": "2026-11-12T22:01:49-03:00",
+  "atualizado": "13/11/2026 16:35",
+  "atualizadoAt": "2026-11-13T16:35:42-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
@@ -4336,6 +4336,15 @@
     "mediana_am": 1.72,
     "media_aa": 24.14,
     "mediana_aa": 22.71
+   },
+   {
+    "ini": "2026-10-23",
+    "fim": "2026-10-29",
+    "n": 39,
+    "media_am": 1.78,
+    "mediana_am": 1.7,
+    "media_aa": 24.01,
+    "mediana_aa": 22.48
    }
   ]
  },
@@ -5697,7 +5706,7 @@
   "fipe": null
  },
  "usados": {
-  "updatedAt": "2026-11-13T11:45:55-03:00",
+  "updatedAt": "2026-11-13T15:33:43-03:00",
   "fonte": "FENAUTO (press releases)",
   "meses": [
    {
@@ -8773,7 +8782,7 @@
     }
    ]
   },
-  "gerado_em": "2026-11-13T11:45:59-03:00",
+  "gerado_em": "2026-11-13T15:33:50-03:00",
   "share": {
    "titulo": "Market share em semirreboques · emplacamentos no Brasil",
    "fonte": "Randoncorp, Apresentação Institucional / Videoconferência de Resultados 2T26, slide \"Histórico Market Share\" (p. 45) e \"Market Share Trimestral\" (p. 44)",
