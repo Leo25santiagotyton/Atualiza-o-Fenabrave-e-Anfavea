@@ -1,17 +1,27 @@
-"""Sonda temporária: Open-Meteo histórico (ERA5) e sazonal (ECMWF SEAS5)."""
-import json
-import requests
+"""Sonda temporária: páginas de implementos (ranking por marca) no Informativo da FENABRAVE."""
+import io
+import sys
+from pathlib import Path
 
-r = requests.get("https://archive-api.open-meteo.com/v1/archive", params={"latitude": "-22.78,-12.7", "longitude": "-43.3,-38.3",
-                 "start_date": "2015-01-01", "end_date": "2026-11-10", "daily": "precipitation_sum", "timezone": "America/Sao_Paulo"}, timeout=120)
-print("ARCHIVE", r.status_code, len(r.content), r.text[:300])
+import pdfplumber
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import relatorios_setor as rs  # noqa: E402
+
+s = rs.session()
 try:
-    js = r.json(); js = js if isinstance(js, list) else [js]
-    t = js[0]["daily"]["time"]; v = js[0]["daily"]["precipitation_sum"]; print("ARCH last", t[-8:], v[-8:])
-except Exception as e:
-    print("ARCH parse", e)
-for params in [{"daily": "precipitation_sum", "forecast_days": 183}, {"monthly": "precipitation_sum"}, {"monthly": "precipitation_mean,precipitation_anomaly"}]:
-    r = requests.get("https://seasonal-api.open-meteo.com/v1/seasonal", params={"latitude": "-22.78,-12.7", "longitude": "-43.3,-38.3", "timezone": "America/Sao_Paulo", **params}, timeout=120)
-    print("SEASONAL", params, r.status_code, len(r.content), r.text[:1500])
-r = requests.get("https://climate-api.open-meteo.com/v1/climate", params={"latitude": "-22.78", "longitude": "-43.3", "start_date": "2026-11-01", "end_date": "2027-04-30", "models": "EC_Earth3P_HR", "daily": "precipitation_sum"}, timeout=120)
-print("CLIMATE", r.status_code, r.text[:200])
+    s.get(rs.FENABRAVE_HOME, timeout=30)
+except Exception as e:  # noqa: BLE001
+    print("home", e)
+url = rs.fenabrave_latest(s)
+print("URL", url)
+r = s.get(url, timeout=90)
+print("PDF", r.status_code, len(r.content))
+with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+    print("pages", len(pdf.pages))
+    for i, pg in enumerate(pdf.pages):
+        t = pg.extract_text() or ""
+        up = t.upper()
+        if any(k in up for k in ("RANDON", "LIBRELATO", "FACCHINI", "IMPLEMENTO", "REBOQUE", "SEMIRREBOQUE", "SEMI-REBOQUE")):
+            print(f"===== page {i + 1}")
+            print(t[:4000])
