@@ -451,12 +451,14 @@ def write_panel_file():
         FICHAS_FILE.write_text(ftext)
         print(f"[INFO] fichas do painel: {len(ftext.encode()) // 1024} KB ({len(fichas)} papéis).")
 
-    for keep_trades, keep_pu in ((60, 60), (40, 40), (25, 25), (15, 15), (10, 10), (5, 5)):
+    # por último encurta o histórico de taxas (series) para caber no limite do banco
+    for keep_trades, keep_pu, keep_ser in ((60, 60, 0), (40, 40, 0), (25, 25, 0), (15, 15, 0), (10, 10, 0),
+                                           (5, 5, 0), (10, 10, 30), (5, 5, 30), (5, 5, 23)):
         papers = []
         for p in full["papers"]:
             q = {k: p[k] for k in ("code", "name", "issuer", "ticker", "index", "section", "maturity", "ntnbRef", "anbima", "status", "kind", "devedor", "securitizadora")
                  if k in p}
-            q["series"] = [[s[0]] + [_r(x, 4) for x in s[1:]] for s in p.get("series", [])]
+            q["series"] = [[s[0]] + [_r(x, 4) for x in s[1:]] for s in p.get("series", [])][-keep_ser:]
             q["trades"] = [[t[0]] + [_r(x, 2) for x in t[1:]] for t in p.get("trades", [])][-keep_trades:]
             q["puCurve"] = [[x[0], _r(x[1], 2)] for x in p.get("puCurve", [])][-keep_pu:]
             # CRI/CRA levam a ficha no arquivo principal (a taxa de emissão é usada nas abas);
