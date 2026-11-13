@@ -25,6 +25,7 @@ CRED = ROOT / "alerts" / "credito_veiculos.json"  # crédito para veículos (cre
 SEMI = ROOT / "alerts" / "seminovos_resumo.json"  # radar de seminovos Movida, Localiza e Turbi (seminovos_radar.py)
 CAMIN = ROOT / "alerts" / "caminhoes_resumo.json"  # caminhões seminovos Vamos e VolksConfia (seminovos_radar.py --segmento caminhoes)
 USADOS = ROOT / "alerts" / "usados_fenauto.json"  # mercado de usados e seminovos, press releases da FENAUTO (fenauto_usados.py)
+CHUVA = ROOT / "alerts" / "chuva_priner.json"  # chuva × Priner, visão mensal (chuva_priner.py)
 IMPL = ROOT / "alerts" / "implementos.json"  # implementos rodoviários: ANFIR e Comex Stat de reboques/semirreboques (implementos.py)
 ACT = ROOT / "alerts" / "act_pedidos.json"  # pedidos de caminhões nos EUA por classe (planilha da ACT, atualizada à mão)
 BRT = timezone(timedelta(hours=-3))
@@ -110,6 +111,67 @@ def _evento_anfir(im):
              "label": at.strftime("%d/%m %H:%M"), "fonte": "ANFIR", "titulo": titulo, "link": a.get("url") or ""}]
 
 
+MES_PT = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
+
+
+def _ml(ym):
+    return f"{MES_PT[int(ym[5:7]) - 1]}/{ym[2:4]}"
+
+
+def _pct(a, b):
+    return f"{(a / b - 1) * 100:+.1f}%".replace(".", ",") if a is not None and b else "–"
+
+
+def _eventos_mensais(cred, chuva, vistos, agora):
+    """Avisos de dado mensal novo (crédito auto B3/Trillia e BC, chuva mensal nos pontos da Priner).
+    A hora do aviso é a da primeira vez em que o mês apareceu (guardada em `vistos`)."""
+    out = []
+
+    def ev(chave, fonte, titulo, link):
+        eid = hashlib.sha1(chave.encode()).hexdigest()[:12]
+        at = datetime.fromisoformat(vistos.setdefault(eid, agora.isoformat(timespec="seconds")))
+        out.append({"id": eid, "at": at.isoformat(timespec="seconds"), "label": at.strftime("%d/%m %H:%M"),
+                    "fonte": fonte, "titulo": titulo, "link": link})
+
+    b3 = (cred or {}).get("b3") or {}
+    if b3:
+        ym = max(b3)
+        v, aa = b3[ym], b3.get(f"{int(ym[:4]) - 1}{ym[4:]}") or {}
+        tipos = " · ".join(f"{n} {v[k] / 1000:,.0f} mil".replace(",", ".") for k, n in (("leves", "leves"), ("motos", "motos"), ("pesados", "pesados")) if v.get(k))
+        ev(f"CRED-B3|{ym}", "Crédito auto · B3/Trillia",
+           f"{_ml(ym)}: " + f"{v.get('total', 0) / 1000:,.0f}".replace(",", ".") + f" mil veículos financiados ({_pct(v.get('total'), aa.get('total'))} a/a)" + (f" — {tipos}" if tipos else ""),
+           v.get("url") or "https://www.b3.com.br/pt_br/noticias/")
+    m = (cred or {}).get("mensal") or {}
+    if m.get("meses"):
+        ym = m["meses"][-1]
+        i_aa = m["meses"].index(f"{int(ym[:4]) - 1}{ym[4:]}") if f"{int(ym[:4]) - 1}{ym[4:]}" in m["meses"] else None
+        cp = (m.get("conc_pf") or [None])[-1]
+        cpa = m["conc_pf"][i_aa] if i_aa is not None and m.get("conc_pf") else None
+        tx, inad = (m.get("taxa_pf") or [None])[-1], (m.get("inad_pf") or [None])[-1]
+        partes = []
+        if cp is not None:
+            partes.append(f"concessões PF R$ {cp / 1000:.1f} bi ({_pct(cp, cpa)} a/a)".replace(".", ","))
+        if tx is not None:
+            partes.append(f"taxa PF {tx:.1f}".replace(".", ",") + "% a.a.")
+        if inad is not None:
+            partes.append(f"inadimplência PF {inad:.2f}%".replace(".", ","))
+        ev(f"CRED-BC|{ym}", "Crédito auto · Banco Central", f"{_ml(ym)}: " + " · ".join(partes), "https://www3.bcb.gov.br/sgspub/")
+    mens = (chuva or {}).get("mensal") or {}
+    sites = (chuva or {}).get("sites") or []
+    if mens.get("meses") and len(mens.get("sites", [])) == len(sites):
+        ym, mes = mens["meses"][-1], int(mens["meses"][-1][5:7])
+        t = w = tn = 0.0
+        for s, ms in zip(sites, mens["sites"]):
+            v, nm, p = ms["hist"][-1], ms["normal"][mes - 1], s.get("peso", 1)
+            if v is not None and nm is not None:
+                t, tn, w = t + v * p, tn + nm * p, w + p
+        if w:
+            ev(f"CHUVA|{ym}", "Chuva × Priner",
+               f"{_ml(ym)} fechou com {t / w:.0f} mm em média nos pontos da Priner (ponderado pela relevância), {_pct(t, tn)} contra o normal do mês",
+               "https://open-meteo.com/")
+    return out
+
+
 def write():
     d = _read(OUT)
     setor = _read(SETOR)
@@ -131,7 +193,10 @@ def write():
              fenabrave=setor.get("fenabrave"), anfavea=setor.get("anfavea"), fontes=fontes, act=_read(ACT) or None, fipe=_read(FIPE) or None,
              credito=_read(CRED) or None, seminovos=_read(SEMI) or None, caminhoes=_read(CAMIN) or None, usados=_read(USADOS) or None,
              implementos=_slim_impl(_read(IMPL)))
-    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []) + _evento_fipe(d.get("fipe")) + _evento_anfir(_read(IMPL)))}
+    vistos = d.get("_vistos") or {}
+    mensais = _eventos_mensais(_read(CRED), _read(CHUVA), vistos, now)
+    d["_vistos"] = vistos
+    ev = {e["id"]: e for e in (setor.get("_eventos", []) + mon.get("_eventos", []) + _evento_fipe(d.get("fipe")) + _evento_anfir(_read(IMPL)) + mensais)}
     d["eventos"] = sorted(ev.values(), key=lambda e: e["at"], reverse=True)[:MAX_EVENTOS]
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")

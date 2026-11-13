@@ -24,13 +24,13 @@ jobs:
           python-version: "3.11"
       - run: pip install requests
       - name: Previsão de chuva
-        run: python chuva_priner.py
+        run: python chuva_priner.py && python monitoramento.py
       - name: Salvar
         run: |
           git config user.name "monitor-bot"
           git config user.email "monitor-bot@users.noreply.github.com"
           cp alerts/chuva_priner.json alerts/chuva_mensal_cache.json "$RUNNER_TEMP/"
-          git add alerts/chuva_priner.json alerts/chuva_mensal_cache.json
+          git add alerts/chuva_priner.json alerts/chuva_mensal_cache.json alerts/monitoramento.json
           git diff --quiet --cached && exit 0
           git commit -qm "Chuva × Priner: previsão atualizada [skip ci]"
           for i in 1 2 3 4; do
@@ -38,7 +38,8 @@ jobs:
             sleep 5
             git fetch -q origin main && git reset -q --hard origin/main
             cp "$RUNNER_TEMP/chuva_priner.json" "$RUNNER_TEMP/chuva_mensal_cache.json" alerts/
-            git add alerts/chuva_priner.json alerts/chuva_mensal_cache.json
+            python monitoramento.py
+            git add alerts/chuva_priner.json alerts/chuva_mensal_cache.json alerts/monitoramento.json
             git diff --quiet --cached && exit 0
             git commit -qm "Chuva × Priner: previsão atualizada [skip ci]"
           done
