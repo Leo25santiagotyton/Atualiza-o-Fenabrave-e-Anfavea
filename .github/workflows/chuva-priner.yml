@@ -1,0 +1,45 @@
+name: Chuva × Priner (previsão Open-Meteo)
+
+# Previsão de chuva na grade do Brasil e nos endereços da Priner, 2× ao dia (6h e 18h de Brasília),
+# depois das rodadas novas dos modelos globais.
+on:
+  schedule:
+    - cron: "0 9,21 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chuva-priner
+  cancel-in-progress: false
+
+jobs:
+  chuva:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+      - name: Previsão de chuva
+        run: python chuva_priner.py
+      - name: Salvar
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "monitor-bot@users.noreply.github.com"
+          cp alerts/chuva_priner.json "$RUNNER_TEMP/"
+          git add alerts/chuva_priner.json
+          git diff --quiet --cached && exit 0
+          git commit -qm "Chuva × Priner: previsão atualizada [skip ci]"
+          for i in 1 2 3 4; do
+            git push && exit 0
+            sleep 5
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/chuva_priner.json" alerts/
+            git add alerts/chuva_priner.json
+            git diff --quiet --cached && exit 0
+            git commit -qm "Chuva × Priner: previsão atualizada [skip ci]"
+          done
+          exit 1
