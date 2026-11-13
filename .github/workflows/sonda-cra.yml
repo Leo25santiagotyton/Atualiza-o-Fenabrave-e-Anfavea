@@ -13,3 +13,9 @@ jobs:
           python-version: "3.11"
       - run: pip install -r requirements.txt
       - run: python tools/sonda_turbi.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sonda
+          path: sonda_out/
+          if-no-files-found: ignore

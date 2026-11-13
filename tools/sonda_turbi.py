@@ -1,49 +1,19 @@
-"""Sonda temporária: materiais de RI da Randoncorp (release/teaser/apresentação) e market share de semirreboques."""
+"""Sonda temporária: imagem dos slides de market share da apresentação institucional da Randoncorp."""
 import io
-import re
-import sys
+import json
 from pathlib import Path
 
 import pdfplumber
 import requests
-from bs4 import BeautifulSoup
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from monitor import BROWSER_HEADERS  # noqa: E402
-
-s = requests.Session()
-s.headers.update(BROWSER_HEADERS)
-pdfs = []
-for url in ["https://ri.randoncorp.com/", "https://ri.randoncorp.com/informacoes-financeiras/central-de-resultados/",
-            "https://ri.randoncorp.com/central-de-resultados/", "https://ri.randoncorp.com/en/financial-information/results-center/"]:
-    try:
-        r = s.get(url, timeout=40)
-    except Exception as e:  # noqa: BLE001
-        print("ERRO", url, e)
-        continue
-    print("==", url, r.status_code, len(r.text), r.url)
-    for a in BeautifulSoup(r.text, "html.parser").find_all("a", href=True):
-        h = requests.compat.urljoin(r.url, a["href"])
-        t = " ".join(a.get_text(" ").split())[:90]
-        if re.search(r"mziq|\.pdf|release|teaser|apresenta|resultado|central", h + " " + t, re.I):
-            print("  ", t, "|", h)
-            if "mziq" in h or h.lower().endswith(".pdf"):
-                pdfs.append((t, h))
-seen = set()
-for t, u in pdfs:
-    if u in seen or len(seen) >= 10:
-        continue
-    seen.add(u)
-    try:
-        r = s.get(u, timeout=90)
-        if b"%PDF" not in r.content[:1024]:
-            print("NAO-PDF", u, r.status_code, r.headers.get("content-type"))
-            continue
-        with pdfplumber.open(io.BytesIO(r.content)) as pdf:
-            print("#### PDF", t, u, len(pdf.pages), "páginas")
-            for i, pg in enumerate(pdf.pages[:60]):
-                tx = pg.extract_text() or ""
-                for m in re.finditer(r"(market share|participa[çc][ãa]o de mercado|share de mercado|Market Share)", tx, re.I):
-                    print(f"  p{i + 1}:", " ".join(tx[max(0, m.start() - 500): m.start() + 600].split()))
-    except Exception as e:  # noqa: BLE001
-        print("ERRO PDF", u, e)
+OUT = Path("sonda_out")
+OUT.mkdir(exist_ok=True)
+URL = "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/f53a3946-7943-c73b-c0a8-2edfab47c536?origin=2"
+r = requests.get(URL, timeout=120, headers={"User-Agent": "Mozilla/5.0"})
+with pdfplumber.open(io.BytesIO(r.content)) as pdf:
+    for n in (44, 45):
+        pg = pdf.pages[n - 1]
+        pg.to_image(resolution=110).save(OUT / f"randon_p{n}.png")
+        words = [{"t": w["text"], "x": round(w["x0"]), "y": round(w["top"])} for w in pg.extract_words()]
+        (OUT / f"randon_p{n}.json").write_text(json.dumps(words, ensure_ascii=False))
+        print("ok", n, len(words))
