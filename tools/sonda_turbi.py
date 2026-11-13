@@ -16,4 +16,5 @@ with pdfplumber.open(io.BytesIO(r.content)) as pdf:
         pg.to_image(resolution=110).save(OUT / f"randon_p{n}.png")
         words = [{"t": w["text"], "x": round(w["x0"]), "y": round(w["top"])} for w in pg.extract_words()]
         (OUT / f"randon_p{n}.json").write_text(json.dumps(words, ensure_ascii=False))
+        print(f"WORDS{n}", json.dumps(words, ensure_ascii=False))
         print("ok", n, len(words))
