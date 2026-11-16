@@ -239,17 +239,6 @@
     },
     {
       "data": "2026-03-23",
-      "empresa": "Movida",
-      "evento": "Divulgação de resultados 4T25 (noite)",
-      "fonte": "https://www.infomoney.com.br/mercados/movida-movi3-resultados-quarto-trimestre-2025/",
-      "grupo": "Ações",
-      "short": "4T25",
-      "status": "realizado",
-      "ticker": "MOVI3",
-      "tipo": "resultado"
-    },
-    {
-      "data": "2026-03-23",
       "empresa": "Constellation",
       "evento": "Resultados 4T25/FY25",
       "fonte": "https://www.inderes.fi/en/releases/cosh-constellation-reports-fourth-quarter-and-full-year-2025-financial-statements-and-earnings-release",
@@ -260,14 +249,14 @@
       "tipo": "resultado"
     },
     {
-      "data": "2026-03-24",
-      "empresa": "JSL",
-      "evento": "Divulgação de resultados 4T25/DFP 2025 (noite)",
-      "fonte": "https://www.infomoney.com.br/mercados/jsl-jslg3-resultados-quarto-trimestre-2025/",
+      "data": "2026-03-23",
+      "empresa": "Movida",
+      "evento": "Divulgação de resultados 4T25 (noite)",
+      "fonte": "https://www.infomoney.com.br/mercados/movida-movi3-resultados-quarto-trimestre-2025/",
       "grupo": "Ações",
       "short": "4T25",
       "status": "realizado",
-      "ticker": "JSLG3",
+      "ticker": "MOVI3",
       "tipo": "resultado"
     },
     {
@@ -281,6 +270,17 @@
       "status": "realizado",
       "ticker": "USL1965HAH32",
       "tipo": "teleconferencia"
+    },
+    {
+      "data": "2026-03-24",
+      "empresa": "JSL",
+      "evento": "Divulgação de resultados 4T25/DFP 2025 (noite)",
+      "fonte": "https://www.infomoney.com.br/mercados/jsl-jslg3-resultados-quarto-trimestre-2025/",
+      "grupo": "Ações",
+      "short": "4T25",
+      "status": "realizado",
+      "ticker": "JSLG3",
+      "tipo": "resultado"
     },
     {
       "data": "2026-03-25",
@@ -420,6 +420,17 @@
     },
     {
       "data": "2026-04-30",
+      "empresa": "Localiza",
+      "evento": "AGOE 2026",
+      "fonte": "https://tribunademinas.com.br/servicos/editais/19-05-2026/ata-da-reuniao-da-assembleia-geral-ordinaria-realizada-em-30-de-abril-de-2026.html",
+      "grupo": "Ações",
+      "short": "AGO/AGE",
+      "status": "realizado",
+      "ticker": "RENT3",
+      "tipo": "assembleia"
+    },
+    {
+      "data": "2026-04-30",
       "empresa": "Movida",
       "evento": "AGOE 2026",
       "fonte": "https://api.mziq.com/mzfilemanager/v2/d/437bf607-6e35-4ac9-973f-608b2497e42d/cdb890d7-c87b-3f73-f0dd-c9e84a7de1e8?origin=2",
@@ -428,17 +439,6 @@
       "short": "AGO/AGE",
       "status": "realizado",
       "ticker": "MOVI3",
-      "tipo": "assembleia"
-    },
-    {
-      "data": "2026-04-30",
-      "empresa": "Localiza",
-      "evento": "AGOE 2026",
-      "fonte": "https://tribunademinas.com.br/servicos/editais/19-05-2026/ata-da-reuniao-da-assembleia-geral-ordinaria-realizada-em-30-de-abril-de-2026.html",
-      "grupo": "Ações",
-      "short": "AGO/AGE",
-      "status": "realizado",
-      "ticker": "RENT3",
       "tipo": "assembleia"
     },
     {
@@ -566,17 +566,6 @@
     },
     {
       "data": "2026-05-07",
-      "empresa": "Randoncorp",
-      "evento": "Divulgação resultados 1T26 (ITR)",
-      "fonte": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/2085120c-523f-117e-89e7-30b1ed6c8b2c?origin=1",
-      "grupo": "Ações",
-      "short": "1T26",
-      "status": "realizado",
-      "ticker": "RAPT4",
-      "tipo": "resultado"
-    },
-    {
-      "data": "2026-05-07",
       "empresa": "Localiza",
       "evento": "Divulgação de resultados 1T26 (após o fechamento)",
       "fonte": "https://ri.localiza.com/popup_home/divulgacao-de-resultados-2t25-2-2-2/",
@@ -584,6 +573,17 @@
       "short": "1T26",
       "status": "realizado",
       "ticker": "RENT3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2026-05-07",
+      "empresa": "Randoncorp",
+      "evento": "Divulgação resultados 1T26 (ITR)",
+      "fonte": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/2085120c-523f-117e-89e7-30b1ed6c8b2c?origin=1",
+      "grupo": "Ações",
+      "short": "1T26",
+      "status": "realizado",
+      "ticker": "RAPT4",
       "tipo": "resultado"
     },
     {
@@ -599,18 +599,6 @@
     },
     {
       "data": "2026-05-08",
-      "empresa": "Randoncorp",
-      "evento": "Videoconferência de resultados 1T26",
-      "fonte": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/071a99b3-bf33-8ada-11db-9c7fba1549e1?origin=2",
-      "grupo": "Ações",
-      "hora": "11:00",
-      "short": "Call 1T26",
-      "status": "realizado",
-      "ticker": "RAPT4",
-      "tipo": "teleconferencia"
-    },
-    {
-      "data": "2026-05-08",
       "empresa": "Localiza",
       "evento": "Webinar de resultados 1T26",
       "fonte": "https://acionista.com.br/localiza-rent3-webcast-1t26/",
@@ -619,6 +607,18 @@
       "short": "Call 1T26",
       "status": "realizado",
       "ticker": "RENT3",
+      "tipo": "teleconferencia"
+    },
+    {
+      "data": "2026-05-08",
+      "empresa": "Randoncorp",
+      "evento": "Videoconferência de resultados 1T26",
+      "fonte": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/071a99b3-bf33-8ada-11db-9c7fba1549e1?origin=2",
+      "grupo": "Ações",
+      "hora": "11:00",
+      "short": "Call 1T26",
+      "status": "realizado",
+      "ticker": "RAPT4",
       "tipo": "teleconferencia"
     },
     {
@@ -781,17 +781,6 @@
     },
     {
       "data": "2026-06-15",
-      "empresa": "Simpar",
-      "evento": "Pagamento de dividendos R$ 0,1713/ação",
-      "fonte": "https://investidor10.com.br/acoes/simh3/",
-      "grupo": "Ações",
-      "short": "Proventos",
-      "status": "realizado",
-      "ticker": "SIMH3",
-      "tipo": "dividendos"
-    },
-    {
-      "data": "2026-06-15",
       "empresa": "Foresea Holding",
       "evento": "Cupom trimestral da 7,5% 2030",
       "fonte": "https://investors.foresea.com/investors/senior-secured-notes/",
@@ -800,6 +789,17 @@
       "status": "realizado",
       "ticker": "US262051AA36",
       "tipo": "cupom"
+    },
+    {
+      "data": "2026-06-15",
+      "empresa": "Simpar",
+      "evento": "Pagamento de dividendos R$ 0,1713/ação",
+      "fonte": "https://investidor10.com.br/acoes/simh3/",
+      "grupo": "Ações",
+      "short": "Proventos",
+      "status": "realizado",
+      "ticker": "SIMH3",
+      "tipo": "dividendos"
     },
     {
       "data": "2026-06-19",
@@ -973,6 +973,17 @@
     },
     {
       "data": "2026-08-11",
+      "empresa": "Armac",
+      "evento": "Divulgação resultados 2T26 (+ projeção receita 2026 R$ 2,41 bi)",
+      "fonte": "https://www.infomoney.com.br/mercados/armac-tem-lucro-liquido-ajustado-de-r101-mi-no-2o-tri/",
+      "grupo": "Ações",
+      "short": "2T26",
+      "status": "realizado",
+      "ticker": "ARML3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2026-08-11",
       "empresa": "Automob",
       "evento": "Divulgação de resultados 2T26",
       "fonte": "https://www.infomoney.com.br/mercados/automob-amplia-prejuizo-ajustado-para-r875-mi-no-2o-tri/",
@@ -984,13 +995,14 @@
     },
     {
       "data": "2026-08-11",
-      "empresa": "Armac",
-      "evento": "Divulgação resultados 2T26 (+ projeção receita 2026 R$ 2,41 bi)",
-      "fonte": "https://www.infomoney.com.br/mercados/armac-tem-lucro-liquido-ajustado-de-r101-mi-no-2o-tri/",
-      "grupo": "Ações",
+      "empresa": "Borr Drilling",
+      "evento": "Resultados 2T26",
+      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-announces-second-quarter-2026-results-2026-08-11",
+      "grupo": "Bonds",
+      "hora": "após fech. NYSE",
       "short": "2T26",
       "status": "realizado",
-      "ticker": "ARML3",
+      "ticker": "US100018AC46",
       "tipo": "resultado"
     },
     {
@@ -1029,18 +1041,6 @@
     },
     {
       "data": "2026-08-11",
-      "empresa": "Borr Drilling",
-      "evento": "Resultados 2T26",
-      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-announces-second-quarter-2026-results-2026-08-11",
-      "grupo": "Bonds",
-      "hora": "após fech. NYSE",
-      "short": "2T26",
-      "status": "realizado",
-      "ticker": "US100018AC46",
-      "tipo": "resultado"
-    },
-    {
-      "data": "2026-08-11",
       "empresa": "Vamos",
       "evento": "Divulgação de resultados 2T26 (noite)",
       "fonte": "https://www.infomoney.com.br/mercados/vamos-vamo3-resultados-segundo-trimestre-2026/",
@@ -1059,6 +1059,18 @@
       "short": "Call 2T26",
       "status": "realizado",
       "ticker": "ARML3",
+      "tipo": "teleconferencia"
+    },
+    {
+      "data": "2026-08-12",
+      "empresa": "Borr Drilling",
+      "evento": "Teleconferência 2T26",
+      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-invitation-webcast-and-conference-call-q2-2026-results-2026-07",
+      "grupo": "Bonds",
+      "hora": "09:00 NY",
+      "short": "Call 2T26",
+      "status": "realizado",
+      "ticker": "US100018AC46",
       "tipo": "teleconferencia"
     },
     {
@@ -1084,18 +1096,6 @@
       "status": "realizado",
       "ticker": "SIMH3",
       "tipo": "resultado"
-    },
-    {
-      "data": "2026-08-12",
-      "empresa": "Borr Drilling",
-      "evento": "Teleconferência 2T26",
-      "fonte": "https://www.nasdaq.com/press-release/borr-drilling-limited-invitation-webcast-and-conference-call-q2-2026-results-2026-07",
-      "grupo": "Bonds",
-      "hora": "09:00 NY",
-      "short": "Call 2T26",
-      "status": "realizado",
-      "ticker": "US100018AC46",
-      "tipo": "teleconferencia"
     },
     {
       "data": "2026-08-12",
@@ -1458,7 +1458,7 @@
       "grupo": "Ações",
       "obs": "Data ajustada: antes estimada em 10/11 (pelo 3T25). Números do 3T26 já noticiados em 03-04/11 (https://br.advfn.com/jornal/2026/11/automob-diminui-prejuizo-para-r-56-4-milhoes-e-melhora-desempenho-operacional); data do ITR mantida.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "AMOB3",
       "tipo": "resultado"
     },
@@ -1470,7 +1470,7 @@
       "grupo": "Ações",
       "obs": "Calendário de eventos corporativos 2026 (videoconferência de resultados 3T26).",
       "short": "Call 3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "FRAS3",
       "tipo": "teleconferencia"
     },
@@ -1481,7 +1481,7 @@
       "fonte": "https://investidor10.com.br/acoes/link_comunicado/JSLG3/46282/",
       "grupo": "Ações",
       "short": "Call 3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "JSLG3",
       "tipo": "teleconferencia"
     },
@@ -1492,7 +1492,7 @@
       "fonte": "https://investidor10.com.br/acoes/link_comunicado/MOVI3/46225/",
       "grupo": "Ações",
       "short": "Call 3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "MOVI3",
       "tipo": "teleconferencia"
     },
@@ -1504,7 +1504,7 @@
       "grupo": "Ações",
       "obs": "Data ajustada: antes estimada em 05/11 (pelo 3T25).",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "PRNR3",
       "tipo": "resultado"
     },
@@ -1515,7 +1515,7 @@
       "fonte": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/2085120c-523f-117e-89e7-30b1ed6c8b2c?origin=1",
       "grupo": "Ações",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "RAPT4",
       "tipo": "resultado"
     },
@@ -1527,7 +1527,7 @@
       "grupo": "Ações",
       "obs": "No 2T a companhia antecipou a data do calendário; pode mudar. Números completos do 3T26 já divulgados após o pregão de 29/10, com teleconferência em 30/10 (https://bmcnews.com.br/mercados/lucro-da-vamos-cresce-199-1-no-3o-trimestre-para-r-150-9-milhoes/); agendas semanais ainda listam 12/11.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "VAMO3",
       "tipo": "resultado"
     },
@@ -1538,7 +1538,7 @@
       "fonte": "https://api.mziq.com/mzfilemanager/v2/d/a8409c46-1419-4694-b935-b868e0b64e35/2085120c-523f-117e-89e7-30b1ed6c8b2c?origin=1",
       "grupo": "Ações",
       "short": "Call 3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "RAPT4",
       "tipo": "teleconferencia"
     },
@@ -1550,20 +1550,9 @@
       "grupo": "Ações",
       "obs": "Calendário anual de eventos corporativos 2026; antes estimado em 11/11. Números do 3T26 já noticiados no início de novembro (https://www.infomoney.com.br/mercados/simpar-simh3-resultados-terceiro-trimestre-2026/); data do ITR mantida.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "SIMH3",
       "tipo": "resultado"
-    },
-    {
-      "data": "2026-11-18",
-      "empresa": "Localiza",
-      "evento": "Pagamento de JCP R$ 614,9 mi (R$ 0,5566/ação; data-com 25/09)",
-      "fonte": "https://br.advfn.com/jornal/2026/09/localiza-aprova-r-614-9-milhoes-em-jcp-veja-data-de-corte-e-pagamento",
-      "grupo": "Ações",
-      "short": "Proventos",
-      "status": "confirmado",
-      "ticker": "RENT3",
-      "tipo": "dividendos"
     },
     {
       "data": "2026-11-18",
@@ -1588,6 +1577,17 @@
       "status": "confirmado",
       "ticker": "USL1965HAH32",
       "tipo": "resultado"
+    },
+    {
+      "data": "2026-11-18",
+      "empresa": "Localiza",
+      "evento": "Pagamento de JCP R$ 614,9 mi (R$ 0,5566/ação; data-com 25/09)",
+      "fonte": "https://br.advfn.com/jornal/2026/09/localiza-aprova-r-614-9-milhoes-em-jcp-veja-data-de-corte-e-pagamento",
+      "grupo": "Ações",
+      "short": "Proventos",
+      "status": "confirmado",
+      "ticker": "RENT3",
+      "tipo": "dividendos"
     },
     {
       "data": "2026-12-03",
@@ -1623,6 +1623,18 @@
       "short": "Proventos",
       "status": "confirmado",
       "ticker": "JSLG3",
+      "tipo": "dividendos"
+    },
+    {
+      "data": "2026-12-30",
+      "empresa": "Armac",
+      "evento": "Pagamento de dividendos intermediários · parcela R$ 63,6 mi (até 30/12)",
+      "fonte": "https://visnoinvest.com.br/news/16407/armac-arml3-aprova-nova-recompra-de-ate-155-mi-de-acoes",
+      "grupo": "Ações",
+      "obs": "Prazo-limite de pagamento aprovado pelo conselho em 10/11/2026. AGE (data ainda não divulgada) vai deliberar a prorrogação do pagamento dos JCP de R$ 85,2 mi brutos e do saldo dos dividendos.",
+      "short": "Proventos",
+      "status": "confirmado",
+      "ticker": "ARML3",
       "tipo": "dividendos"
     },
     {
@@ -1750,6 +1762,39 @@
       "tipo": "teleconferencia"
     },
     {
+      "data": "2027-03-11",
+      "empresa": "Priner",
+      "evento": "Divulgação resultados 4T26/2026",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 12/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "PRNR3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-11",
+      "empresa": "Randoncorp",
+      "evento": "Divulgação resultados 4T26/DFP 2026",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 12/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "RAPT4",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-12",
+      "empresa": "Randoncorp",
+      "evento": "Videoconferência de resultados 4T26",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (videoconferência em 13/03/2026).",
+      "short": "Call 4T26",
+      "status": "estimado",
+      "ticker": "RAPT4",
+      "tipo": "teleconferencia"
+    },
+    {
       "data": "2027-03-18",
       "empresa": "Tupy",
       "evento": "Divulgação resultados 4T26/2026",
@@ -1805,6 +1850,28 @@
       "tipo": "teleconferencia"
     },
     {
+      "data": "2027-03-26",
+      "empresa": "Automob",
+      "evento": "Divulgação de resultados 4T26",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 27/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "AMOB3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-26",
+      "empresa": "Vamos",
+      "evento": "Divulgação de resultados 4T26",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 27/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "VAMO3",
+      "tipo": "resultado"
+    },
+    {
       "data": "2027-03-29",
       "empresa": "Armac",
       "evento": "Divulgação resultados 4T26/2026",
@@ -1813,6 +1880,17 @@
       "short": "4T26",
       "status": "estimado",
       "ticker": "ARML3",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-29",
+      "empresa": "Simpar",
+      "evento": "Divulgação de resultados 4T26/DFP 2026",
+      "grupo": "Ações",
+      "obs": "Estimado pelo 4T25 (divulgação em 30/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "SIMH3",
       "tipo": "resultado"
     },
     {
@@ -1827,6 +1905,6 @@
       "tipo": "cupom"
     }
   ],
-  "updatedAt": "2026-11-12T12:00:00-03:00",
-  "updatedLabel": "12/11/2026 12:00"
+  "updatedAt": "2026-11-16T19:45:00-03:00",
+  "updatedLabel": "16/11/2026 19:45"
 }
