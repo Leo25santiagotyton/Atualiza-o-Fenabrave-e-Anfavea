@@ -223,6 +223,7 @@ def main():
            "sem_pdf": sorted(sem_pdf),
            "fonte": FENABRAVE_PAGE,
            "gerado_em": datetime.now(BRT).isoformat(timespec="seconds")}
+    out["updatedAt"] = out["gerado_em"]
     if novos or not OUT.exists() or args.refazer:
         OUT.parent.mkdir(exist_ok=True)
         OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
