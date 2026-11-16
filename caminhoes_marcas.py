@@ -133,12 +133,17 @@ def ler_pdf(s, url):
             return textos[i]
 
         # o ranking costuma ficar no último terço; procura de trás para a frente
-        rk = next((i for i in range(n - 1, -1, -1)
-                   if re.search(r"Ranking por marca", txt(i), re.I) and re.search(r"CAMINH", txt(i))), None)
+        rk, mes, acum = None, {}, {}
+        for i in range(n - 1, -1, -1):
+            if re.search(r"Ranking por marca", txt(i), re.I) and re.search(r"CAMINH", txt(i)):
+                m1, a1 = parse_ranking(txt(i))
+                if len(m1) > len(mes):
+                    rk, mes, acum = i, m1, a1
+                if len(m1) >= 5:
+                    break
         if rk is None:
             return None
         per = periodo(txt(rk))
-        mes, acum = parse_ranking(txt(rk))
         paginas = [txt(i) for i in range(rk + 1, min(n, rk + 5))
                    if re.search(r"Modelos mais emplacados", txt(i), re.I)
                    and re.search(r"(Semi-?Leve|Semi-?pesado|Pesado|M[ée]dio)", txt(i), re.I)]
@@ -183,7 +188,7 @@ def main():
     novos = 0
     for k in sorted(candidatos):
         urls = candidatos[k] if isinstance(candidatos[k], list) else [candidatos[k]]
-        if k in meses and meses[k].get("url") in urls:
+        if k in meses and meses[k].get("url") in urls and len(meses[k].get("marcas", {})) >= 5:
             continue
         d = None
         for u in urls:
@@ -202,7 +207,8 @@ def main():
                 print(f"[AVISO] {k}: não li o ranking de caminhões em {urls[0]}")
             continue
         per = d.pop("periodo") or k
-        if not d["marcas"]:
+        if len(d["marcas"]) < 5:
+            meses.pop(per, None)
             print(f"[AVISO] {per}: ranking sem marcas ({d['url']})")
             continue
         meses[per] = {"mes": per, **d, "total": sum(v for v in d["marcas"].values() if v)}
