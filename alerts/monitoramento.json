@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-16T18:35:46-03:00",
- "updatedLabel": "16/11/2026 18:35",
+ "updatedAt": "2026-11-16T18:56:41-03:00",
+ "updatedLabel": "16/11/2026 18:56",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -3204,32 +3204,14 @@
     "fonte": "relatório mensal Trillia/B3 (mil unidades)"
    }
   },
-  "atualizado": "13/11/2026 21:52",
-  "atualizadoAt": "2026-11-13T21:52:26-03:00",
+  "atualizado": "16/11/2026 18:56",
+  "atualizadoAt": "2026-11-16T18:56:40-03:00",
   "fontes": {
    "sgs": "https://www3.bcb.gov.br/sgspub/",
    "diaria": "https://www.bcb.gov.br/estatisticas/txjuros",
    "b3": "https://www.b3.com.br/pt_br/noticias/"
   },
   "diaria": [
-   {
-    "ini": "2026-04-28",
-    "fim": "2026-05-05",
-    "n": 40,
-    "media_am": 1.89,
-    "mediana_am": 1.83,
-    "media_aa": 25.57,
-    "mediana_aa": 24.31
-   },
-   {
-    "ini": "2026-04-29",
-    "fim": "2026-05-06",
-    "n": 41,
-    "media_am": 1.89,
-    "mediana_am": 1.81,
-    "media_aa": 25.59,
-    "mediana_aa": 24.02
-   },
    {
     "ini": "2026-04-30",
     "fim": "2026-05-07",
@@ -4336,6 +4318,15 @@
     "mediana_am": 1.7,
     "media_aa": 24.01,
     "mediana_aa": 22.48
+   },
+   {
+    "ini": "2026-10-26",
+    "fim": "2026-10-30",
+    "n": 41,
+    "media_am": 1.78,
+    "mediana_am": 1.68,
+    "media_aa": 24.01,
+    "mediana_aa": 22.14
    }
   ]
  },
