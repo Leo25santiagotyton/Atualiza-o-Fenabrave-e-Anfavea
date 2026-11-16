@@ -44,6 +44,10 @@ jobs:
         continue-on-error: true
         run: python implementos.py && python monitoramento.py
 
+      - name: Caminhões por marca e modelo (FENABRAVE)
+        continue-on-error: true
+        run: python caminhoes_marcas.py
+
       - name: Salvar relatórios enviados
         if: always()
         run: |
@@ -52,8 +56,9 @@ jobs:
           cp alerts/setor_state.json "$RUNNER_TEMP/setor_state.json"
           cp alerts/usados_fenauto.json "$RUNNER_TEMP/" 2>/dev/null || true
           cp alerts/implementos.json "$RUNNER_TEMP/" 2>/dev/null || true
+          cp alerts/caminhoes_marcas.json "$RUNNER_TEMP/" 2>/dev/null || true
           git add alerts/setor_state.json alerts/monitoramento.json 2>/dev/null || true
-          git add alerts/usados_fenauto.json alerts/implementos.json 2>/dev/null || true
+          git add alerts/usados_fenauto.json alerts/implementos.json alerts/caminhoes_marcas.json 2>/dev/null || true
           git diff --quiet --cached && exit 0
           git commit -qm "Relatórios FENABRAVE/ANFAVEA enviados [skip ci]"
           # se outro workflow gravou antes, refaz o monitoramento.json sobre o main novo (sem conflito)
@@ -64,9 +69,10 @@ jobs:
             cp "$RUNNER_TEMP/setor_state.json" alerts/setor_state.json
             cp "$RUNNER_TEMP/usados_fenauto.json" alerts/ 2>/dev/null || true
             cp "$RUNNER_TEMP/implementos.json" alerts/ 2>/dev/null || true
+            cp "$RUNNER_TEMP/caminhoes_marcas.json" alerts/ 2>/dev/null || true
             python monitoramento.py
             git add alerts/setor_state.json alerts/monitoramento.json
-            git add alerts/usados_fenauto.json alerts/implementos.json 2>/dev/null || true
+            git add alerts/usados_fenauto.json alerts/implementos.json alerts/caminhoes_marcas.json 2>/dev/null || true
             git diff --quiet --cached && exit 0
             git commit -qm "Relatórios FENABRAVE/ANFAVEA enviados [skip ci]"
           done
