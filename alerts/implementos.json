@@ -2878,11 +2878,75 @@
     "exp_aa": 3559,
     "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1792592316-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20SETEMBRO%202026.pdf",
     "titulo": "Desempenho do setor - Janeiro a Setembro de 2026"
+   },
+   "2026-10": {
+    "reb": {
+     "Basculante": 10121,
+     "Porta Conteiner": 4202,
+     "Graneleiro / Carga Seca": 11275,
+     "Canavieiro": 1223,
+     "Baú Carga Geral": 11101,
+     "Carrega Tudo": 1709,
+     "Dolly": 5150,
+     "Especial": 2469,
+     "Transporte De Toras": 2114,
+     "Baú Frigorífico": 1708,
+     "Baú Lonado": 4268,
+     "Silo": 558,
+     "Tanque Carbono": 3454,
+     "Tanque Inox": 441,
+     "Tanque Aluminio": 0
+    },
+    "carr": {
+     "Graneleiro / Carga Seca": 12244,
+     "Baú Alumínio / Frigorífico": 28153,
+     "Baú Lonado": 404,
+     "Basculante": 7103,
+     "Betoneira": 1502,
+     "Tanque": 4330,
+     "Outras / Diversas": 8898
+    },
+    "reb_aa": {
+     "Basculante": 10088,
+     "Porta Conteiner": 4165,
+     "Graneleiro / Carga Seca": 10789,
+     "Canavieiro": 1309,
+     "Baú Carga Geral": 9991,
+     "Carrega Tudo": 2162,
+     "Dolly": 4747,
+     "Especial": 2377,
+     "Transporte De Toras": 1865,
+     "Baú Frigorífico": 1806,
+     "Baú Lonado": 5452,
+     "Silo": 527,
+     "Tanque Carbono": 4421,
+     "Tanque Inox": 416,
+     "Tanque Aluminio": 2
+    },
+    "carr_aa": {
+     "Graneleiro / Carga Seca": 14496,
+     "Baú Alumínio / Frigorífico": 27351,
+     "Baú Lonado": 401,
+     "Basculante": 7300,
+     "Betoneira": 1445,
+     "Tanque": 4625,
+     "Outras / Diversas": 9600
+    },
+    "reb_total": 59793,
+    "reb_total_aa": 60117,
+    "carr_total": 62634,
+    "carr_total_aa": 65218,
+    "total": 122427,
+    "total_aa": 125335,
+    "exp": 4784,
+    "exp_aa": 4128,
+    "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1795007986-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20OUTUBRO%202026.pdf",
+    "titulo": "Desempenho do setor - Janeiro a Outubro de 2026"
    }
   },
-  "ultimo": "2026-09",
-  "titulo": "Desempenho do setor - Janeiro a Setembro de 2026",
-  "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1792592316-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20SETEMBRO%202026.pdf",
+  "ultimo": "2026-10",
+  "titulo": "Desempenho do setor - Janeiro a Outubro de 2026",
+  "url": "https://anfir.org.br/ADM/VIEW/ARQUIVO/ESTATISTICA/1795007986-DADOS%20IMPRENSA%20-%20JANEIRO%20A%20OUTUBRO%202026.pdf",
   "meses": [
    {
     "mes": "2023-01",
@@ -3962,10 +4026,34 @@
      "Tanque Inox": 41,
      "Tanque Aluminio": 0
     }
+   },
+   {
+    "mes": "2026-10",
+    "reb": 6019,
+    "carr": 6693,
+    "total": 12712,
+    "exp": 670,
+    "familias": {
+     "Basculante": 822,
+     "Porta Conteiner": 381,
+     "Graneleiro / Carga Seca": 1095,
+     "Canavieiro": 5,
+     "Baú Carga Geral": 1251,
+     "Carrega Tudo": 166,
+     "Dolly": 430,
+     "Especial": 271,
+     "Transporte De Toras": 391,
+     "Baú Frigorífico": 181,
+     "Baú Lonado": 470,
+     "Silo": 55,
+     "Tanque Carbono": 471,
+     "Tanque Inox": 30,
+     "Tanque Aluminio": 0
+    }
    }
   ],
   "fonte": "https://anfir.org.br/dados-do-setor.php",
-  "novo_em": "2026-11-13T09:42:00-03:00"
+  "novo_em": "2026-11-18T16:25:18-03:00"
  },
  "comex": {
   "atualizado": "2026-11-06",
@@ -5129,7 +5217,7 @@
    }
   ]
  },
- "gerado_em": "2026-11-17T23:55:56-03:00",
+ "gerado_em": "2026-11-18T16:25:20-03:00",
  "share": {
   "titulo": "Market share em semirreboques · emplacamentos no Brasil",
   "fonte": "Randoncorp, Apresentação Institucional / Videoconferência de Resultados 2T26, slide \"Histórico Market Share\" (p. 45) e \"Market Share Trimestral\" (p. 44)",
