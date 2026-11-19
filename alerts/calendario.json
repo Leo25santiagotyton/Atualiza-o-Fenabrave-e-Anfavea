@@ -1560,11 +1560,12 @@
       "evento": "Resultados 3T26 · calendário financeiro 2026",
       "fonte": "https://www.inderes.fi/en/releases/borr-financial-calendar-16",
       "grupo": "Bonds",
-      "obs": "Release costuma sair após o fechamento da NYSE, com call no dia seguinte (~19/11, a confirmar).",
+      "obs": "Release após o fechamento da NYSE; call em 19/11.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "US100018AC46",
-      "tipo": "resultado"
+      "tipo": "resultado",
+      "hora": "após fech. NYSE"
     },
     {
       "data": "2026-11-18",
@@ -1574,7 +1575,7 @@
       "grupo": "Bonds",
       "obs": "Data do calendário financeiro da companhia (Q3 Quarterly Report em 18/11/2026); antes estimada em 25/11.",
       "short": "3T26",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "USL1965HAH32",
       "tipo": "resultado"
     },
@@ -1585,9 +1586,21 @@
       "fonte": "https://br.advfn.com/jornal/2026/09/localiza-aprova-r-614-9-milhoes-em-jcp-veja-data-de-corte-e-pagamento",
       "grupo": "Ações",
       "short": "Proventos",
-      "status": "confirmado",
+      "status": "realizado",
       "ticker": "RENT3",
       "tipo": "dividendos"
+    },
+    {
+      "data": "2026-11-19",
+      "empresa": "Borr Drilling",
+      "evento": "Teleconferência 3T26",
+      "fonte": "https://www.placera.se/pressmeddelanden/borr-drilling-borr-drilling-limited-invitation-to-webcast-and-conference-call-for-q3-2026-results-20261113",
+      "grupo": "Bonds",
+      "hora": "09:00 NY",
+      "short": "Call 3T26",
+      "status": "realizado",
+      "ticker": "US100018AC46",
+      "tipo": "teleconferencia"
     },
     {
       "data": "2026-12-03",
@@ -1706,6 +1719,30 @@
       "tipo": "cupom"
     },
     {
+      "data": "2027-02-17",
+      "empresa": "Borr Drilling",
+      "evento": "Resultados 4T26/FY26",
+      "grupo": "Bonds",
+      "hora": "após fech. NYSE",
+      "obs": "Estimado pelo 4T25 (divulgação em 18/02/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "US100018AC46",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-02-18",
+      "empresa": "Borr Drilling",
+      "evento": "Teleconferência 4T26",
+      "grupo": "Bonds",
+      "hora": "09:00 NY",
+      "obs": "Estimado pelo 4T25 (teleconferência em 19/02/2026).",
+      "short": "Call 4T26",
+      "status": "estimado",
+      "ticker": "US100018AC46",
+      "tipo": "teleconferencia"
+    },
+    {
       "data": "2027-02-25",
       "empresa": "Localiza",
       "evento": "Divulgação de resultados 4T26",
@@ -1818,6 +1855,17 @@
     },
     {
       "data": "2027-03-22",
+      "empresa": "Constellation",
+      "evento": "Resultados 4T26/FY26",
+      "grupo": "Bonds",
+      "obs": "Estimado pelo 4T25 (divulgação em 23/03/2026).",
+      "short": "4T26",
+      "status": "estimado",
+      "ticker": "USL1965HAH32",
+      "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-22",
       "empresa": "Movida",
       "evento": "Divulgação de resultados 4T26",
       "grupo": "Ações",
@@ -1826,6 +1874,18 @@
       "status": "estimado",
       "ticker": "MOVI3",
       "tipo": "resultado"
+    },
+    {
+      "data": "2027-03-23",
+      "empresa": "Constellation",
+      "evento": "Teleconferência 4T26",
+      "grupo": "Bonds",
+      "hora": "10:00",
+      "obs": "Estimado pelo 4T25 (teleconferência em 24/03/2026).",
+      "short": "Call 4T26",
+      "status": "estimado",
+      "ticker": "USL1965HAH32",
+      "tipo": "teleconferencia"
     },
     {
       "data": "2027-03-23",
@@ -1905,6 +1965,6 @@
       "tipo": "cupom"
     }
   ],
-  "updatedAt": "2026-11-16T19:45:00-03:00",
-  "updatedLabel": "16/11/2026 19:45"
+  "updatedAt": "2026-11-19T19:45:00-03:00",
+  "updatedLabel": "19/11/2026 19:45"
 }
