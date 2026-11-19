@@ -35,6 +35,22 @@
   },
   "_eventos": [
     {
+      "id": "b10f27d6d38b",
+      "at": "2026-11-19T16:54:20-03:00",
+      "label": "19/11 16:54",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "ACT Research Flags Supply Constraints as Truck Orders Slow, Trailer Demand Rises",
+      "link": "https://www.fleetequipmentmag.com/act-research-october-2026-truck-market-outlook/"
+    },
+    {
+      "id": "106d875de32b",
+      "at": "2026-11-19T16:54:20-03:00",
+      "label": "19/11 16:54",
+      "fonte": "ACT Research · pedidos (EUA)",
+      "titulo": "ACT: Final Class 8 order numbers down 44% in October y/y",
+      "link": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-order-numbers-down-44-in-october-y-y"
+    },
+    {
       "id": "ccf22b13dcb0",
       "at": "2026-11-11T16:12:20-03:00",
       "label": "11/11 16:12",
@@ -156,8 +172,16 @@
     }
   ],
   "ACT Research - pedidos de caminhões (EUA)": {
-    "hash": "3b5d04716bd18b99f8d448fb76edbd3fddeb0c634ba05a82878fb4d3be0fa396",
+    "hash": "ea013b366489aa0aa576e52d9bb831e7465db7771aae82b8222178f94187ce37",
     "items": [
+      {
+        "text": "ACT: Final Class 8 order numbers down 44% in October y/y",
+        "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-order-numbers-down-44-in-october-y-y"
+      },
+      {
+        "text": "ACT Research Flags Supply Constraints as Truck Orders Slow, Trailer Demand Rises",
+        "href": "https://www.fleetequipmentmag.com/act-research-october-2026-truck-market-outlook/"
+      },
       {
         "text": "October Class 8 Orders Down 45%",
         "href": "https://www.fleetequipmentmag.com/october-2026-class-8-orders-act/"
@@ -169,14 +193,6 @@
       {
         "text": "ACT Research: Preliminary Class 8 Net Order for October",
         "href": "https://www.monitordaily.com/act-research-preliminary-class-8-net-order-for-october/"
-      },
-      {
-        "text": "Orders for heavy trucks in North America fell sharply in October - ACT Research",
-        "href": "https://www.marketscreener.com/news/orders-for-heavy-trucks-in-north-america-fell-sharply-in-october-act-research-ce785fded188f12d"
-      },
-      {
-        "text": "ACT: Final Class 8 orders down in September",
-        "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-orders-down-in-september"
       }
     ]
   },
