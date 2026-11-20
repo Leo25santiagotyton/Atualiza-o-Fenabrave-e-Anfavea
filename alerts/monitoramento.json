@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-20T16:07:57-03:00",
- "updatedLabel": "20/11/2026 16:07",
+ "updatedAt": "2026-11-20T16:34:45-03:00",
+ "updatedLabel": "20/11/2026 16:34",
  "fenabrave": {
   "url": "https://www.fenabrave.org.br/portal/files/2026_10_02 2.pdf",
   "periodo": "Outubro/2026",
@@ -262,6 +262,10 @@
    "url": "https://www.actresearch.net/resources/trends-headlines",
    "itens": [
     {
+     "text": "ACT Flags Supply Constraints as Truck Orders Slow",
+     "href": "https://www.aftermarketnews.com/act-research-october-2026-truck-market-outlook/"
+    },
+    {
      "text": "ACT: Final Class 8 order numbers down 44% in October y/y",
      "href": "https://www.thetrucker.com/trucking-news/business/act-final-class-8-order-numbers-down-44-in-october-y-y"
     },
@@ -276,15 +280,19 @@
     {
      "text": "ACT: Preliminary Class 8 orders down in October",
      "href": "https://www.thetrucker.com/trucking-news/business/act-preliminary-class-8-orders-down-in-october"
-    },
-    {
-     "text": "ACT Research: Preliminary Class 8 Net Order for October",
-     "href": "https://www.monitordaily.com/act-research-preliminary-class-8-net-order-for-october/"
     }
    ]
   }
  ],
  "eventos": [
+  {
+   "id": "24e304aeb963",
+   "at": "2026-11-20T16:34:38-03:00",
+   "label": "20/11 16:34",
+   "fonte": "ACT Research · pedidos (EUA)",
+   "titulo": "ACT Flags Supply Constraints as Truck Orders Slow",
+   "link": "https://www.aftermarketnews.com/act-research-october-2026-truck-market-outlook/"
+  },
   {
    "id": "b10f27d6d38b",
    "at": "2026-11-19T16:54:20-03:00",
@@ -504,7 +512,7 @@
  ],
  "act": {
   "fonte": "ACT Research (notícias de pedidos mensais; planilha ACT_Research_August.xlsx como base)",
-  "atualizado": "19/11/2026",
+  "atualizado": "20/11/2026",
   "preliminar": {
    "Classe 8": [
     "2026-10"
