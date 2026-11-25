@@ -35,6 +35,14 @@
   },
   "_eventos": [
     {
+      "id": "da145a59584c",
+      "at": "2026-11-25T17:59:34-03:00",
+      "label": "25/11 17:59",
+      "fonte": "FRED · vendas heavy trucks (EUA)",
+      "titulo": "Out/2026 · 513,0 mil (anualizado) · m/m +17,1% · a/a +47,4%",
+      "link": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-10"
+    },
+    {
       "id": "24e304aeb963",
       "at": "2026-11-20T16:34:38-03:00",
       "label": "20/11 16:34",
@@ -205,10 +213,10 @@
     ]
   },
   "FRED - vendas de caminhões pesados (EUA)": {
-    "hash": "331566bf3d1ba4e81bd54751e7902e3cded4f3b9510495d9da06abca333563e3",
+    "hash": "97a61bef960f0a3f22a6890b5def111e7033ba43b8e04617f4e7cc8494ceec25",
     "items": [
       {
-        "text": "Out/2026 · 461,0 mil (anualizado) · m/m +5,3% · a/a +32,5%",
+        "text": "Out/2026 · 513,0 mil (anualizado) · m/m +17,1% · a/a +47,4%",
         "href": "https://fred.stlouisfed.org/series/HTRUCKSSAAR#2026-10"
       },
       {
